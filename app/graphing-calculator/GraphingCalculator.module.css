@@ -1,619 +1,86 @@
-.page {
-  min-height: 100vh;
-  padding: 18px 0 78px;
-  background:
-    radial-gradient(circle at 86% 0%, rgba(82, 119, 255, 0.16), transparent 24%),
-    #f4f7fc;
-  color: #14203a;
-}
-
-.container {
-  width: min(1180px, calc(100% - 36px));
-  margin: 0 auto;
-}
-
-.header {
-  min-height: 62px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.brand {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  color: #14203a;
-  font-size: 1.2rem;
-  font-weight: 850;
-  letter-spacing: -0.04em;
-  text-decoration: none;
-}
-
-.brandMark {
-  width: 35px;
-  height: 35px;
-  display: grid;
-  place-items: center;
-  border-radius: 10px;
-  background: #3157e8;
-  color: white;
-  font-size: 1.3rem;
-}
-
-.nav {
-  display: flex;
-  gap: 20px;
-}
-
-.nav a {
-  color: #61708a;
-  font-size: 0.88rem;
-  font-weight: 780;
-  text-decoration: none;
-}
-
-.nav a:hover {
-  color: #3157e8;
-}
-
-.intro {
-  max-width: 720px;
-  padding: 58px 0 38px;
-}
-
-.intro p,
-.panelHeading p,
-.graphToolbar p,
-.learningSection > div > p {
-  margin: 0;
-  color: #3157e8;
-  font-size: 0.69rem;
-  font-weight: 850;
-  letter-spacing: 0.14em;
-}
-
-.intro h1 {
-  max-width: 680px;
-  margin: 15px 0 0;
-  font-size: clamp(2.5rem, 5vw, 4.45rem);
-  letter-spacing: -0.065em;
-  line-height: 0.98;
-}
-
-.intro span {
-  display: block;
-  max-width: 625px;
-  margin-top: 21px;
-  color: #65748e;
-  font-size: 1rem;
-  line-height: 1.7;
-}
-
-.workspace {
-  display: grid;
-  grid-template-columns: 326px minmax(0, 1fr);
-  gap: 20px;
-  align-items: start;
-}
-
-.controlPanel,
-.graphPanel {
-  border: 1px solid #dbe4f1;
-  border-radius: 22px;
-  background: #ffffff;
-  box-shadow: 0 18px 48px rgba(25, 48, 96, 0.08);
-}
-
-.controlPanel {
-  padding: 20px;
-}
-
-.panelHeading,
-.graphToolbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 14px;
-}
-
-.panelHeading h2,
-.graphToolbar h2 {
-  margin: 7px 0 0;
-  font-size: 1.35rem;
-  letter-spacing: -0.045em;
-}
-
-.addButton {
-  padding: 9px 11px;
-  border: 1px solid #c7d5fb;
-  border-radius: 9px;
-  background: #eaf0ff;
-  color: #3157e8;
-  cursor: pointer;
-  font: inherit;
-  font-size: 0.8rem;
-  font-weight: 850;
-}
-
-.addButton:hover {
-  background: #dce6ff;
-}
-
-.equationList {
-  display: grid;
-  gap: 11px;
-  margin-top: 20px;
-}
-
-.equationRow {
-  position: relative;
-  display: grid;
-  grid-template-columns: 25px 29px minmax(0, 1fr) 22px;
-  align-items: center;
-  gap: 7px;
-  padding: 9px;
-  border: 1px solid #dfe7f2;
-  border-radius: 12px;
-  background: #fbfcff;
-}
-
-.visibilityButton,
-.removeButton {
-  border: 0;
-  background: transparent;
-  cursor: pointer;
-}
-
-.visibilityButton {
-  width: 25px;
-  height: 25px;
-  display: grid;
-  place-items: center;
-  border-radius: 7px;
-}
-
-.visibleDot,
-.hiddenDot {
-  width: 11px;
-  height: 11px;
-  border-radius: 50%;
-  background: var(--equation-color);
-}
-
-.hiddenDot {
-  background: #c0cad9;
-}
-
-.equationLabel {
-  color: #44556f;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 0.82rem;
-  font-weight: 850;
-}
-
-.equationInput,
-.invalidInput {
-  width: 100%;
-  min-width: 0;
-  border: 0;
-  outline: 0;
-  background: transparent;
-  color: #17243a;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 0.86rem;
-  font-weight: 700;
-}
-
-.invalidInput {
-  color: #c2394b;
-}
-
-.removeButton {
-  color: #8795aa;
-  font-size: 1.2rem;
-  line-height: 1;
-}
-
-.removeButton:hover {
-  color: #c2394b;
-}
-
-.equationError {
-  grid-column: 1 / -1;
-  margin: 1px 0 0;
-  color: #c2394b;
-  font-size: 0.72rem;
-  font-weight: 700;
-}
-
-.toolGroup {
-  display: grid;
-  gap: 9px;
-  margin-top: 18px;
-  padding-top: 18px;
-  border-top: 1px solid #e3e9f2;
-}
-
-.toolButton {
-  width: 100%;
-  padding: 11px 12px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border: 1px solid #e0e7f2;
-  border-radius: 10px;
-  background: #ffffff;
-  color: #4c5d77;
-  cursor: pointer;
-  font: inherit;
-  font-size: 0.82rem;
-  font-weight: 720;
-}
-
-.toolButton strong {
-  color: #3157e8;
-  font-size: 0.76rem;
-}
-
-.toolButton:hover {
-  border-color: #bdccf5;
-  background: #f3f6ff;
-}
-
-.windowSettings {
-  margin-top: 10px;
-  padding: 12px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  border-radius: 12px;
-  background: #eef3ff;
-}
-
-.windowSettings label {
-  display: grid;
-  gap: 5px;
-  color: #5f6f89;
-  font-size: 0.68rem;
-  font-weight: 800;
-}
-
-.windowSettings input {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #cad7f2;
-  border-radius: 8px;
-  outline: 0;
-  background: white;
-  color: #17243a;
-  font: inherit;
-  font-size: 0.79rem;
-}
-
-.graphPanel {
-  overflow: hidden;
-}
-
-.graphToolbar {
-  padding: 20px 22px 15px;
-}
-
-.statusBadge {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  color: #65748d;
-  font-size: 0.74rem;
-  font-weight: 750;
-  white-space: nowrap;
-}
-
-.statusBadge span {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #23aa73;
-  box-shadow: 0 0 0 4px #e7f8f0;
-}
-
-.viewTabs {
-  min-height: 48px;
-  padding: 0 22px;
-  display: flex;
-  align-items: stretch;
-  gap: 5px;
-  border-top: 1px solid #e4e9f2;
-  border-bottom: 1px solid #e4e9f2;
-}
-
-.tab,
-.activeTab,
-.graphActions button {
-  border: 0;
-  background: transparent;
-  cursor: pointer;
-  font: inherit;
-}
-
-.tab,
-.activeTab {
-  padding: 0 12px;
-  color: #718099;
-  font-size: 0.8rem;
-  font-weight: 820;
-}
-
-.activeTab {
-  border-bottom: 2px solid #3157e8;
-  color: #3157e8;
-}
-
-.graphActions {
-  margin-left: auto;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.graphActions button {
-  padding: 6px 8px;
-  border-radius: 7px;
-  color: #5a6a84;
-  font-size: 0.72rem;
-  font-weight: 780;
-}
-
-.graphActions button:hover {
-  background: #eef3ff;
-  color: #3157e8;
-}
-
-.canvasShell {
-  position: relative;
-  height: clamp(360px, 52vw, 540px);
-  min-height: 360px;
-  background: #ffffff;
-}
-
-.canvas {
-  width: 100%;
-  height: 100%;
-  display: block;
-  cursor: crosshair;
-  touch-action: none;
-}
-
-.canvasHint {
-  position: absolute;
-  right: 12px;
-  bottom: 11px;
-  margin: 0;
-  padding: 6px 8px;
-  border: 1px solid #e2e8f2;
-  border-radius: 7px;
-  background: rgba(255, 255, 255, 0.9);
-  color: #687891;
-  font-size: 0.68rem;
-  font-weight: 700;
-}
-
-.tableWrap {
-  min-height: clamp(360px, 52vw, 540px);
-  overflow: auto;
-}
-
-.tableWrap table {
-  width: 100%;
-  border-collapse: collapse;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 0.82rem;
-}
-
-.tableWrap th,
-.tableWrap td {
-  padding: 12px 14px;
-  border-right: 1px solid #e3e9f2;
-  border-bottom: 1px solid #e3e9f2;
-  text-align: right;
-}
-
-.tableWrap th {
-  position: sticky;
-  top: 0;
-  background: #f4f7fc;
-  color: #53637d;
-  font-weight: 850;
-}
-
-.tableWrap th:first-child,
-.tableWrap td:first-child {
-  background: #fafcff;
-  color: #3157e8;
-  font-weight: 850;
-}
-
-.tracePanel {
-  padding: 15px 22px 18px;
-  display: grid;
-  grid-template-columns: auto minmax(140px, 1fr) auto;
-  gap: 14px;
-  align-items: center;
-  border-top: 1px solid #e4e9f2;
-  background: #fbfcff;
-}
-
-.tracePanel p {
-  margin: 0;
-  color: #7787a0;
-  font-size: 0.63rem;
-  font-weight: 850;
-  letter-spacing: 0.12em;
-}
-
-.tracePanel strong {
-  display: block;
-  margin-top: 4px;
-  color: #17243a;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 0.85rem;
-}
-
-.tracePanel input[type="range"] {
-  width: 100%;
-  accent-color: #3157e8;
-}
-
-.traceValues {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  gap: 8px 11px;
-  color: #566780;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 0.72rem;
-  font-weight: 750;
-}
-
-.traceValues span {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.traceValues i {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-}
-
-.learningSection {
-  margin-top: 26px;
-  padding: 30px;
-  display: grid;
-  grid-template-columns: 1fr 0.85fr;
-  gap: 40px;
-  border: 1px solid #dbe4f1;
-  border-radius: 20px;
-  background: #eaf0ff;
-}
-
-.learningSection h2 {
-  max-width: 650px;
-  margin: 12px 0 0;
-  font-size: clamp(1.45rem, 2.5vw, 2.2rem);
-  letter-spacing: -0.05em;
-  line-height: 1.1;
-}
-
-.learningSection > p {
-  margin: 0;
-  align-self: end;
-  color: #5f6f89;
-  font-size: 0.91rem;
-  line-height: 1.7;
-}
-
-@media (max-width: 920px) {
-  .workspace {
-    grid-template-columns: 1fr;
-  }
-
-  .controlPanel {
-    max-width: none;
-  }
-
-  .equationList {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .learningSection {
-    grid-template-columns: 1fr;
-    gap: 18px;
-  }
-}
-
-@media (max-width: 640px) {
-  .page {
-    padding-top: 8px;
-  }
-
-  .container {
-    width: min(100% - 20px, 1180px);
-  }
-
-  .header {
-    min-height: 55px;
-  }
-
-  .nav {
-    gap: 12px;
-  }
-
-  .intro {
-    padding: 35px 0 28px;
-  }
-
-  .intro h1 {
-    font-size: 2.45rem;
-  }
-
-  .intro span {
-    font-size: 0.91rem;
-  }
-
-  .controlPanel {
-    padding: 16px;
-    border-radius: 18px;
-  }
-
-  .equationList {
-    grid-template-columns: 1fr;
-  }
-
-  .graphToolbar {
-    padding: 17px 16px 13px;
-  }
-
-  .statusBadge {
-    display: none;
-  }
-
-  .viewTabs {
-    padding: 0 10px;
-  }
-
-  .tab,
-  .activeTab {
-    padding: 0 8px;
-  }
-
-  .graphActions button {
-    padding: 6px 5px;
-    font-size: 0.67rem;
-  }
-
-  .canvasShell {
-    height: 390px;
-    min-height: 390px;
-  }
-
-  .canvasHint {
-    display: none;
-  }
-
-  .tracePanel {
-    padding: 13px 15px 15px;
-    grid-template-columns: 1fr;
-    gap: 10px;
-  }
-
-  .traceValues {
-    justify-content: flex-start;
-  }
-
-  .learningSection {
-    padding: 22px;
-    border-radius: 18px;
-  }
-}
+.page { min-height:100vh; padding:0 0 78px; background:radial-gradient(circle at 86% 0%,rgba(82,119,255,.16),transparent 24%),#f4f7fc; color:#14203a; }
+.container { width:min(1180px,calc(100% - 36px)); margin:0 auto; }
+.intro { max-width:760px; padding:58px 0 38px; }
+.intro p,.panelHeading p,.graphToolbar p,.learningSection > div > p { margin:0; color:#3157e8; font-size:.69rem; font-weight:850; letter-spacing:.14em; }
+.intro h1 { max-width:700px; margin:15px 0 0; font-size:clamp(2.45rem,5vw,4.35rem); letter-spacing:-.065em; line-height:.98; }
+.intro span { display:block; max-width:670px; margin-top:21px; color:#65748e; font-size:1rem; line-height:1.7; }
+.workspace { display:grid; grid-template-columns:326px minmax(0,1fr); gap:20px; align-items:start; }
+.controlPanel,.graphPanel { border:1px solid #dbe4f1; border-radius:22px; background:#fff; box-shadow:0 18px 48px rgba(25,48,96,.08); }
+.controlPanel { padding:20px; }
+.panelHeading,.graphToolbar { display:flex; align-items:center; justify-content:space-between; gap:14px; }
+.panelHeading h2,.graphToolbar h2 { margin:7px 0 0; font-size:1.35rem; letter-spacing:-.045em; }
+.panelActions { display:flex; align-items:center; gap:7px; }
+.resetListButton { padding:9px 10px; border:1px solid #d6e0f1; border-radius:9px; background:#fff; color:#5d6e88; cursor:pointer; font:inherit; font-size:.76rem; font-weight:850; }
+.resetListButton:hover { border-color:#b8c8f3; color:#3157e8; background:#f5f8ff; }
+.addButton { padding:9px 11px; border:1px solid #c7d5fb; border-radius:9px; background:#eaf0ff; color:#3157e8; cursor:pointer; font:inherit; font-size:.8rem; font-weight:850; }
+.addButton:hover { background:#dce6ff; }
+.inputGuide { margin:16px 0 0; color:#65758f; font-size:.76rem; line-height:1.6; }
+.inputGuide code { color:#3157e8; font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.74rem; font-weight:800; }
+.templateRow { margin-top:12px; display:flex; flex-wrap:wrap; gap:6px; }
+.templateRow button { padding:6px 8px; border:1px solid #d6e1f5; border-radius:7px; background:#fbfcff; color:#4e6180; cursor:pointer; font:inherit; font-size:.68rem; font-weight:800; }
+.templateRow button:hover { background:#eaf0ff; color:#3157e8; }
+.equationList { display:grid; gap:11px; margin-top:18px; }
+.equationRow { position:relative; display:grid; grid-template-columns:25px 32px minmax(0,1fr) 22px; align-items:center; gap:7px; padding:9px; border:1px solid #dfe7f2; border-radius:12px; background:#fbfcff; }
+.visibilityButton,.removeButton { border:0; background:transparent; cursor:pointer; }
+.visibilityButton { width:25px; height:25px; display:grid; place-items:center; border-radius:7px; }
+.visibleDot,.hiddenDot { width:11px; height:11px; border-radius:50%; background:var(--equation-color); }
+.hiddenDot { background:#c0cad9; }
+.equationLabel { color:#44556f; font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.76rem; font-weight:850; }
+.equationInput,.invalidInput { width:100%; min-width:0; border:0; outline:0; background:transparent; color:#17243a; font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.82rem; font-weight:700; }
+.invalidInput { color:#c2394b; }
+.removeButton { color:#8795aa; font-size:1.2rem; line-height:1; }
+.removeButton:hover { color:#c2394b; }
+.equationError { grid-column:1/-1; margin:1px 0 0; color:#c2394b; font-size:.72rem; font-weight:700; }
+.toolGroup { display:grid; gap:9px; margin-top:18px; padding-top:18px; border-top:1px solid #e3e9f2; }
+.toolButton { width:100%; padding:11px 12px; display:flex; align-items:center; justify-content:space-between; border:1px solid #e0e7f2; border-radius:10px; background:#fff; color:#4c5d77; cursor:pointer; font:inherit; font-size:.82rem; font-weight:720; }
+.toolButton strong { color:#3157e8; font-size:.76rem; }
+.toolButton:hover { border-color:#bdccf5; background:#f3f6ff; }
+.windowSettings { margin-top:10px; padding:12px; display:grid; grid-template-columns:1fr 1fr; gap:10px; border-radius:12px; background:#eef3ff; }
+.windowSettings label { display:grid; gap:5px; color:#5f6f89; font-size:.68rem; font-weight:800; }
+.windowSettings input { width:100%; padding:8px; border:1px solid #cad7f2; border-radius:8px; outline:0; background:#fff; color:#17243a; font:inherit; font-size:.79rem; }
+.graphPanel { overflow:hidden; }
+.graphToolbar { padding:20px 22px 15px; }
+.statusBadge { display:inline-flex; align-items:center; gap:7px; max-width:250px; color:#65748d; font-size:.74rem; font-weight:750; text-align:right; line-height:1.4; }
+.statusBadge span { flex:0 0 auto; width:8px; height:8px; border-radius:50%; background:#23aa73; box-shadow:0 0 0 4px #e7f8f0; }
+.viewTabs { min-height:48px; padding:0 22px; display:flex; align-items:stretch; gap:5px; border-top:1px solid #e4e9f2; border-bottom:1px solid #e4e9f2; }
+.tab,.activeTab,.graphActions button { border:0; background:transparent; cursor:pointer; font:inherit; }
+.tab,.activeTab { padding:0 12px; color:#718099; font-size:.8rem; font-weight:820; }
+.activeTab { border-bottom:2px solid #3157e8; color:#3157e8; }
+.graphActions { margin-left:auto; display:flex; align-items:center; gap:5px; }
+.graphActions button { padding:6px 8px; border-radius:7px; color:#5a6a84; font-size:.72rem; font-weight:780; }
+.graphActions button:hover { background:#eef3ff; color:#3157e8; }
+.canvasShell { position:relative; height:clamp(360px,52vw,540px); min-height:360px; background:#fff; }
+.canvas { width:100%; height:100%; display:block; cursor:crosshair; touch-action:none; }
+.canvasHint { position:absolute; right:12px; bottom:11px; margin:0; padding:6px 8px; border:1px solid #e2e8f2; border-radius:7px; background:rgba(255,255,255,.9); color:#687891; font-size:.68rem; font-weight:700; }
+.tableWrap { min-height:clamp(360px,52vw,540px); overflow:auto; }
+.tableWrap table { width:100%; border-collapse:collapse; font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.82rem; }
+.tableWrap th,.tableWrap td { padding:12px 14px; border-right:1px solid #e3e9f2; border-bottom:1px solid #e3e9f2; text-align:right; white-space:nowrap; }
+.tableWrap th { position:sticky; top:0; background:#f4f7fc; color:#53637d; font-weight:850; }
+.tableWrap th:first-child,.tableWrap td:first-child { background:#fafcff; color:#3157e8; font-weight:850; }
+.tracePanel { padding:15px 22px 18px; display:grid; grid-template-columns:auto minmax(140px,1fr) auto; gap:14px; align-items:center; border-top:1px solid #e4e9f2; background:#fbfcff; }
+.tracePanel p { margin:0; color:#7787a0; font-size:.63rem; font-weight:850; letter-spacing:.12em; }
+.tracePanel strong { display:block; margin-top:4px; color:#17243a; font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.85rem; }
+.tracePanel input[type="range"] { width:100%; accent-color:#3157e8; }
+.traceValues { display:flex; flex-wrap:wrap; justify-content:flex-end; gap:8px 11px; color:#566780; font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.72rem; font-weight:750; }
+.traceValues span { display:inline-flex; align-items:center; gap:5px; }
+.traceValues i { width:8px; height:8px; border-radius:50%; }
+.learningSection { margin-top:26px; padding:30px; display:grid; grid-template-columns:1fr .85fr; gap:40px; border:1px solid #dbe4f1; border-radius:20px; background:#eaf0ff; }
+.learningSection h2 { max-width:650px; margin:12px 0 0; font-size:clamp(1.45rem,2.5vw,2.2rem); letter-spacing:-.05em; line-height:1.1; }
+.learningSection > p { margin:0; align-self:end; color:#5f6f89; font-size:.91rem; line-height:1.7; }
+@media (max-width:920px) { .workspace { grid-template-columns:1fr; } .controlPanel { max-width:none; } .equationList { grid-template-columns:1fr 1fr; } .learningSection { grid-template-columns:1fr; gap:18px; } }
+@media (max-width:640px) { .page { padding-top:0; } .panelActions { gap:5px; } .addButton,.resetListButton { padding:8px 8px; font-size:.7rem; } .container { width:min(100% - 20px,1180px); } .intro { padding:35px 0 28px; } .intro h1 { font-size:2.3rem; } .intro span { font-size:.91rem; } .controlPanel { padding:16px; border-radius:18px; } .equationList { grid-template-columns:1fr; } .graphToolbar { padding:17px 16px 13px; align-items:flex-start; } .statusBadge { display:none; } .viewTabs { padding:0 10px; overflow-x:auto; } .tab,.activeTab { flex:0 0 auto; padding:0 8px; } .graphActions { flex:0 0 auto; } .graphActions button { padding:6px 5px; font-size:.67rem; white-space:nowrap; } .canvasShell { height:330px; min-height:330px; } .canvasHint { display:none; } .tracePanel { padding:13px 15px 15px; grid-template-columns:1fr; gap:10px; } .traceValues { justify-content:flex-start; } .learningSection { padding:22px; border-radius:18px; } }
+@media (max-width:380px) { .templateRow button { font-size:.63rem; padding:5px 6px; } .graphActions button { font-size:.62rem; } .canvasShell { height:305px; min-height:305px; } }
+/* V2 graphing controls and analysis */
+.colorPicker{width:24px;height:24px;padding:0;border:0;border-radius:7px;background:transparent;cursor:pointer}.equationRow{grid-template-columns:25px 32px 24px minmax(0,1fr) 22px}.analysisPanel{min-height:clamp(360px,52vw,540px);padding:21px;display:grid;align-content:start;gap:20px;background:#fff}.analysisPanel section{padding:15px;border:1px solid #dfe7f2;border-radius:13px;background:#fbfcff}.analysisHeading{display:flex;align-items:start;justify-content:space-between;gap:14px}.analysisHeading p{margin:0;color:#3157e8;font-size:.68rem;font-weight:850;letter-spacing:.12em}.analysisHeading span{max-width:260px;color:#71819a;font-size:.72rem;line-height:1.45;text-align:right}.analysisRow{margin-top:11px;padding-top:11px;display:grid;grid-template-columns:minmax(100px,.3fr) minmax(0,1fr);gap:12px;border-top:1px solid #e4eaf3;color:#62738d;font:700 .78rem/1.55 ui-monospace,SFMono-Regular,Menlo,monospace}.analysisRow b{color:#1e304f}.analysisRow i{display:inline-block;width:8px;height:8px;margin-right:7px;border-radius:50%}.analysisEmpty{margin:13px 0 0;color:#73839c;font-size:.8rem;line-height:1.55}@media(max-width:640px){.equationRow{grid-template-columns:25px 30px 22px minmax(0,1fr) 20px}.colorPicker{width:21px;height:21px}.analysisPanel{min-height:330px;padding:15px}.analysisHeading{display:grid;gap:5px}.analysisHeading span{text-align:left}.analysisRow{grid-template-columns:1fr;gap:5px}}
+
+
+/* V4 mobile layout polish */
+@media(max-width:640px){.page{padding-bottom:48px}.workspace{gap:14px}.controlPanel,.graphPanel{border-radius:17px}.panelHeading{gap:12px}.panelActions{width:100%;display:grid;grid-template-columns:1fr 1fr}.panelActions button{min-height:40px}.graphActions{padding-left:4px}.tableWrap{max-width:100%}.canvasShell{height:320px;min-height:320px}}
+@media(max-width:360px){.panelActions{grid-template-columns:1fr}.canvasShell{height:290px;min-height:290px}}
+
+
+/* V5 tool-first mobile graph layout */
+.editEquationsLink{display:none;padding:6px 8px;border-radius:7px;color:#3157e8;font-size:.72rem;font-weight:820;text-decoration:none}@media(max-width:920px){.graphPanel{order:1}.controlPanel{order:2}}@media(max-width:640px){.intro{padding:30px 0 20px}.intro h1{font-size:2.12rem}.graphToolbar{padding:16px 16px 12px}.graphToolbar h2{font-size:1.23rem}.statusBadge{display:none}.viewTabs{min-height:46px;padding:0 10px}.tab,.activeTab{padding:0 9px;font-size:.76rem}.graphActions{gap:1px}.graphActions button{display:none}.editEquationsLink{display:inline-flex;align-items:center}.canvasShell{height:min(52svh,390px);min-height:300px}.canvasHint{display:none}.tracePanel{padding:12px 15px 14px;grid-template-columns:1fr;gap:9px}.traceValues{justify-content:flex-start}.controlPanel{padding:16px}.equationList{grid-template-columns:1fr}}
+
+/* V8 mobile graph-first workspace */
+@media(max-width:640px){.page{padding-bottom:42px}.container{width:min(100% - 20px,1180px)}.intro{padding:20px 0 14px;text-align:left}.intro h1{font-size:clamp(1.72rem,8vw,2.15rem);line-height:1.04}.intro span{margin-top:9px;font-size:.84rem;line-height:1.55}.workspace{display:flex;flex-direction:column;gap:12px}.graphPanel{order:1;border-radius:16px}.controlPanel{order:2;padding:15px;border-radius:16px}.graphToolbar{padding:12px 14px}.graphToolbar h2{font-size:1.1rem}.canvasWrap{min-height:295px}.panelHeading{align-items:center}.inputGuide{margin-top:11px}.templateRow{overflow-x:auto;flex-wrap:nowrap;padding-bottom:2px;scrollbar-width:none}.templateRow button{flex:0 0 auto}.equationList{max-height:292px;overflow-y:auto;padding-right:2px}}

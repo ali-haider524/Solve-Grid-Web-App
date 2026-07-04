@@ -25,24 +25,12 @@ const math = create(all, {
 });
 
 const allowedIdentifiers = new Set([
-  "sin",
-  "cos",
-  "tan",
-  "asin",
-  "acos",
-  "atan",
-  "sqrt",
-  "log",
-  "ln",
-  "abs",
-  "pi",
-  "e",
-  "ans",
-  "a",
-  "b",
-  "c",
-  "x",
-  "y",
+  "sin", "cos", "tan", "asin", "acos", "atan",
+  "sinh", "cosh", "tanh",
+  "sqrt", "nthroot", "log", "ln", "abs",
+  "floor", "ceil", "round", "sign",
+  "fact", "ncr", "npr", "gcd", "lcm",
+  "pi", "e", "ans", "a", "b", "c", "x", "y",
 ]);
 
 const defaultVariables: MathVariables = {
@@ -237,7 +225,65 @@ function createCalculatorScope(options: CalculationOptions) {
     },
 
     abs: (value: unknown) => Math.abs(toRealNumber(value, "abs")),
+    floor: (value: unknown) => Math.floor(toRealNumber(value, "floor")),
+    ceil: (value: unknown) => Math.ceil(toRealNumber(value, "ceil")),
+    round: (value: unknown) => Math.round(toRealNumber(value, "round")),
+    sign: (value: unknown) => Math.sign(toRealNumber(value, "sign")),
+    sinh: (value: unknown) => Math.sinh(toRealNumber(value, "sinh")),
+    cosh: (value: unknown) => Math.cosh(toRealNumber(value, "cosh")),
+    tanh: (value: unknown) => Math.tanh(toRealNumber(value, "tanh")),
+    nthroot: (value: unknown, root: unknown) => {
+      const realValue = toRealNumber(value, "nthroot");
+      const realRoot = toRealNumber(root, "nthroot");
+      if (realRoot === 0) throw new Error("nthroot cannot use zero as the root.");
+      if (realValue < 0 && !Number.isInteger(realRoot)) throw new Error("A negative value needs an integer root.");
+      return realValue < 0 ? -((-realValue) ** (1 / realRoot)) : realValue ** (1 / realRoot);
+    },
+    fact: (value: unknown) => factorial(toRealNumber(value, "fact")),
+    ncr: (n: unknown, r: unknown) => combinations(toRealNumber(n, "ncr"), toRealNumber(r, "ncr")),
+    npr: (n: unknown, r: unknown) => permutations(toRealNumber(n, "npr"), toRealNumber(r, "npr")),
+    gcd: (left: unknown, right: unknown) => greatestCommonDivisor(toRealNumber(left, "gcd"), toRealNumber(right, "gcd")),
+    lcm: (left: unknown, right: unknown) => leastCommonMultiple(toRealNumber(left, "lcm"), toRealNumber(right, "lcm")),
   };
+}
+
+function factorial(value: number) {
+  if (!Number.isInteger(value) || value < 0 || value > 170) throw new Error("fact needs a whole number from 0 to 170.");
+  let total = 1;
+  for (let number = 2; number <= value; number += 1) total *= number;
+  return total;
+}
+
+function validateCountingInputs(n: number, r: number, name: string) {
+  if (!Number.isInteger(n) || !Number.isInteger(r) || n < 0 || r < 0 || r > n || n > 170) throw new Error(`${name} needs whole numbers where 0 ≤ r ≤ n ≤ 170.`);
+}
+
+function combinations(n: number, r: number) {
+  validateCountingInputs(n, r, "ncr");
+  const selected = Math.min(r, n - r);
+  let total = 1;
+  for (let index = 1; index <= selected; index += 1) total = (total * (n - selected + index)) / index;
+  return total;
+}
+
+function permutations(n: number, r: number) {
+  validateCountingInputs(n, r, "npr");
+  let total = 1;
+  for (let index = 0; index < r; index += 1) total *= n - index;
+  return total;
+}
+
+function greatestCommonDivisor(left: number, right: number) {
+  if (!Number.isInteger(left) || !Number.isInteger(right)) throw new Error("gcd needs whole numbers.");
+  let a = Math.abs(left); let b = Math.abs(right);
+  while (b !== 0) [a, b] = [b, a % b];
+  return a;
+}
+
+function leastCommonMultiple(left: number, right: number) {
+  if (!Number.isInteger(left) || !Number.isInteger(right)) throw new Error("lcm needs whole numbers.");
+  if (left === 0 || right === 0) return 0;
+  return Math.abs((left / greatestCommonDivisor(left, right)) * right);
 }
 
 function toRadians(

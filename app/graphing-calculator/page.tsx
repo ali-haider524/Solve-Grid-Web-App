@@ -1,12 +1,18 @@
-import type { Metadata } from "next";
+import SiteFooter from "../../components/SiteFooter";
+import ToolCrossLinks from "../../components/ToolCrossLinks";
+import ToolSchema from "../../components/ToolSchema";
+import { createToolMetadata } from "../../lib/seo";
 import GraphingCalculator from "./GraphingCalculator";
 
-export const metadata: Metadata = {
-  title: "Free Online Graphing Calculator | SolveGrid",
-  description:
-    "Plot equations, inspect tables, trace values, and explore functions with SolveGrid's free online graphing calculator.",
-};
+export const metadata = createToolMetadata("graphing-calculator");
 
 export default function GraphingCalculatorPage() {
-  return <GraphingCalculator />;
+  return (
+    <>
+      <ToolSchema slug="graphing-calculator" />
+      <GraphingCalculator />
+      <ToolCrossLinks currentSlug="graphing-calculator" />
+      <SiteFooter />
+    </>
+  );
 }

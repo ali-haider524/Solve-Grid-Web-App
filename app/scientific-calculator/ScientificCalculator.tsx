@@ -1,5 +1,9 @@
 "use client";
 
+import Link from "next/link";
+import ToolHeader from "../../components/ToolHeader";
+import { getToolPath, tools } from "../../lib/tools";
+
 import { useState } from "react";
 import styles from "./ScientificCalculator.module.css";
 import {
@@ -82,6 +86,8 @@ const constants = [
   { id: "h", symbol: "h", name: "Planck constant", value: "6.62607015e-34" },
 ];
 
+const connectedTools = tools.filter((tool) => tool.slug !== "scientific-calculator");
+
 export default function ScientificCalculator() {
   const [expression, setExpression] = useState("");
   const [result, setResult] = useState("0");
@@ -142,6 +148,7 @@ export default function ScientificCalculator() {
       const calculation = calculateExpression(expression, {
         angleMode,
         ans: lastAnswer,
+        variables: memory,
       });
 
       const formattedResult = formatForDisplay(calculation.value, notation);
@@ -284,21 +291,8 @@ export default function ScientificCalculator() {
   }
 
   return (
-    <main className={styles.page}>
-      <header className={styles.siteHeader}>
-        <a className={styles.brand} href="/">
-          <span className={styles.brandMark}>∑</span>
-          <span>SolveGrid</span>
-        </a>
-
-        <button
-          className={styles.historyToggle}
-          onClick={() => setOverlay((current) => (current === "history" ? "none" : "history"))}
-          type="button"
-        >
-          History <span>{history.length}</span>
-        </button>
-      </header>
+    <main id="main-content" className={styles.page}>
+      <ToolHeader active="engineering" />
 
       <section className={styles.calculatorStage}>
         <article className={styles.device} aria-label="SolveGrid S1 Scientific Calculator">
@@ -307,10 +301,19 @@ export default function ScientificCalculator() {
               <p>SOLVEGRID S1</p>
               <h1>Scientific / Engineering</h1>
             </div>
-            <div className={styles.statusLights} aria-label="Current calculator settings">
-              <span>{angleMode}</span>
-              <span>{notation}</span>
-              <span>REAL</span>
+            <div className={styles.deviceMeta}>
+              <div className={styles.statusLights} aria-label="Current calculator settings">
+                <span>{angleMode}</span>
+                <span>{notation}</span>
+                <span>REAL</span>
+              </div>
+              <button
+                className={styles.historyToggle}
+                onClick={() => setOverlay((current) => (current === "history" ? "none" : "history"))}
+                type="button"
+              >
+                History <span>{history.length}</span>
+              </button>
             </div>
           </div>
 
@@ -376,7 +379,7 @@ export default function ScientificCalculator() {
           </section>
 
           <p className={errorMessage ? styles.errorMessage : styles.helperMessage}>
-            {errorMessage || (shiftActive ? "SHIFT is active. Choose a key with a small upper label." : "MODE changes settings. TOOLS opens advanced workspaces.")}
+            {errorMessage || (shiftActive ? "SHIFT is active. Choose a key with a small upper label." : "Type fact(5), ncr(8,2), gcd(48,18), or open TOOLS for connected workspaces.")}
           </p>
 
           <div className={styles.keypad} aria-label="Scientific engineering calculator keypad">
@@ -477,10 +480,11 @@ function DisplayOverlay({
           <button className={styles.toolActive} type="button" onClick={onClose}>CALC <span>current</span></button>
           <button type="button" onClick={() => onSelectTool("constants")}>CONST <span>values</span></button>
           <button type="button" onClick={() => onSelectTool("variables")}>VARS <span>memory</span></button>
-          <button type="button" onClick={() => onSelectTool("matrix")}>MATRIX <span>grid</span></button>
-          <button type="button" onClick={() => onSelectTool("statistics")}>STATS <span>data</span></button>
-          <button type="button" onClick={() => onSelectTool("table")}>TABLE <span>x-y</span></button>
-          <button type="button" onClick={() => onSelectTool("convert")}>CONVERT <span>units</span></button>
+          {connectedTools.map((tool) => (
+            <Link href={getToolPath(tool)} key={tool.slug}>
+              {tool.shortName.toUpperCase()} <span>{tool.category}</span>
+            </Link>
+          ))}
         </div>
       </div>
     );

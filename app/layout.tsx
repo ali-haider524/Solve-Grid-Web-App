@@ -1,8 +1,13 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
-import { siteDescription, siteName, siteUrl } from "../lib/site";
+import { contactEmail, siteDescription, siteName, siteUrl } from "../lib/site";
 
 const googleVerification = process.env.GOOGLE_SITE_VERIFICATION;
+
+export const viewport: Viewport = {
+  themeColor: "#3157e8",
+  colorScheme: "light",
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -50,9 +55,33 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const siteSchema = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        name: siteName,
+        url: siteUrl,
+        ...(contactEmail ? { email: contactEmail } : {}),
+      },
+      {
+        "@type": "WebSite",
+        name: siteName,
+        url: siteUrl,
+        description: siteDescription,
+      },
+    ],
+  };
+
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(siteSchema) }}
+        />
+        {children}
+      </body>
     </html>
   );
 }

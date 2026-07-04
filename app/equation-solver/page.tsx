@@ -1,15 +1,18 @@
-import type { Metadata } from "next";
+import SiteFooter from "../../components/SiteFooter";
+import ToolCrossLinks from "../../components/ToolCrossLinks";
+import ToolSchema from "../../components/ToolSchema";
+import { createToolMetadata } from "../../lib/seo";
 import EquationSolver from "./EquationSolver";
 
-export const metadata: Metadata = {
-  title: "Free Equation Solver – Linear, Quadratic, Cubic & Systems",
-  description:
-    "Solve linear, quadratic, cubic, two-variable, and three-variable equations online with clear answers and calculation steps.",
-  alternates: {
-    canonical: "/equation-solver",
-  },
-};
+export const metadata = createToolMetadata("equation-solver");
 
 export default function EquationSolverPage() {
-  return <EquationSolver />;
+  return (
+    <>
+      <ToolSchema slug="equation-solver" />
+      <EquationSolver />
+      <ToolCrossLinks currentSlug="equation-solver" />
+      <SiteFooter />
+    </>
+  );
 }

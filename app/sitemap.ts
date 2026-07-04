@@ -1,39 +1,6 @@
 import type { MetadataRoute } from "next";
+import { guideSlugs } from "../lib/guides";
 import { siteUrl } from "../lib/site";
-
-export default function sitemap(): MetadataRoute.Sitemap {
-  const lastModified = new Date();
-
-  return [
-    {
-      url: siteUrl,
-      lastModified,
-      changeFrequency: "weekly",
-      priority: 1,
-    },
-    {
-      url: `${siteUrl}/scientific-calculator`,
-      lastModified,
-      changeFrequency: "weekly",
-      priority: 0.9,
-    },
-    {
-      url: `${siteUrl}/graphing-calculator`,
-      lastModified,
-      changeFrequency: "weekly",
-      priority: 0.9,
-    },
-    {
-      url: `${siteUrl}/equation-solver`,
-      lastModified,
-      changeFrequency: "weekly",
-      priority: 0.9,
-    },
-    {
-      url: `${siteUrl}/polynomial-solver`,
-      lastModified,
-      changeFrequency: "weekly",
-      priority: 0.9,
-    },
-  ];
-}
+import { toolCategories, tools, type ToolCategory } from "../lib/tools";
+const trustPages=["about","contact","privacy-policy","terms-of-use","disclaimer"];
+export default function sitemap():MetadataRoute.Sitemap{const siteRoutes:MetadataRoute.Sitemap=[{url:siteUrl,changeFrequency:"weekly",priority:1},{url:`${siteUrl}/tools`,changeFrequency:"weekly",priority:.95},{url:`${siteUrl}/guides`,changeFrequency:"weekly",priority:.84},...(Object.keys(toolCategories) as ToolCategory[]).map((category)=>({url:`${siteUrl}/${toolCategories[category].slug}`,changeFrequency:"weekly" as const,priority:.88}))];const toolRoutes:MetadataRoute.Sitemap=tools.map((tool)=>({url:`${siteUrl}/${tool.slug}`,changeFrequency:"weekly" as const,priority:tool.priority}));const guideRoutes:MetadataRoute.Sitemap=guideSlugs.map((slug)=>({url:`${siteUrl}/guides/${slug}`,changeFrequency:"monthly" as const,priority:.72}));const trustRoutes:MetadataRoute.Sitemap=trustPages.map((slug)=>({url:`${siteUrl}/${slug}`,changeFrequency:"yearly" as const,priority:.35}));return[...siteRoutes,...toolRoutes,...guideRoutes,...trustRoutes]}

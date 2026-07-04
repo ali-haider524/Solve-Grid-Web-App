@@ -1,5 +1,6 @@
 "use client";
 
+import ToolHeader from "../../components/ToolHeader";
 import { useMemo, useState } from "react";
 import styles from "./PolynomialSolver.module.css";
 
@@ -111,20 +112,9 @@ export default function PolynomialSolver() {
   ).length;
 
   return (
-    <main className={styles.page}>
+    <main id="main-content" className={styles.page}>
+      <ToolHeader active="math" />
       <div className={styles.container}>
-        <header className={styles.header}>
-          <a className={styles.brand} href="/">
-            <span className={styles.brandMark}>∑</span>
-            <span>SolveGrid</span>
-          </a>
-
-          <nav className={styles.nav} aria-label="Polynomial solver navigation">
-            <a href="/equation-solver">Equation Solver</a>
-            <a href="/graphing-calculator">Graphing</a>
-          </nav>
-        </header>
-
         <section className={styles.hero}>
           <p>POLYNOMIAL ROOT SOLVER</p>
           <h1>Find roots beyond cubic equations.</h1>

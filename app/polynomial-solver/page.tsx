@@ -1,15 +1,18 @@
-import type { Metadata } from "next";
+import SiteFooter from "../../components/SiteFooter";
+import ToolCrossLinks from "../../components/ToolCrossLinks";
+import ToolSchema from "../../components/ToolSchema";
+import { createToolMetadata } from "../../lib/seo";
 import PolynomialSolver from "./PolynomialSolver";
 
-export const metadata: Metadata = {
-  title: "Polynomial Solver Online – Find Roots of Degree 1 to 10 | SolveGrid",
-  description:
-    "Solve polynomial equations online from degree 1 to 10. Find real and complex roots from coefficients with a clear numerical-result workspace.",
-  alternates: {
-    canonical: "/polynomial-solver",
-  },
-};
+export const metadata = createToolMetadata("polynomial-solver");
 
 export default function PolynomialSolverPage() {
-  return <PolynomialSolver />;
+  return (
+    <>
+      <ToolSchema slug="polynomial-solver" />
+      <PolynomialSolver />
+      <ToolCrossLinks currentSlug="polynomial-solver" />
+      <SiteFooter />
+    </>
+  );
 }

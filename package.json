@@ -4,9 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "eslint"
+    "verify:tools": "node scripts/verify-tool-registry.mjs",
+    "lint": "eslint",
+    "build": "npm run verify:tools && next build",
+    "check": "npm run verify:tools && npm run lint && npm run build",
+    "start": "next start"
   },
   "dependencies": {
     "mathjs": "^15.2.0",

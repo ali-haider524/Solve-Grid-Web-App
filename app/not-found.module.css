@@ -1,0 +1,9 @@
+.page { min-height: 100vh; display: flex; flex-direction: column; background: #f4f7fc; color: #152033; }
+.card { width: min(760px, calc(100% - 40px)); margin: auto; padding: 72px 0; text-align: center; }
+.card p { margin: 0; color: #3157e8; font-size: .72rem; font-weight: 850; letter-spacing: .14em; }
+.card h1 { max-width: 650px; margin: 15px auto 0; font-size: clamp(2.4rem, 6vw, 4.8rem); letter-spacing: -.07em; line-height: .96; }
+.card > span { display: block; max-width: 570px; margin: 22px auto 0; color: #65748e; font-size: 1rem; line-height: 1.75; }
+.card div { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 30px; }
+.card a { padding: 12px 15px; border: 1px solid #c8d7fa; border-radius: 10px; background: #fff; color: #3157e8; font-size: .86rem; font-weight: 850; }
+.card a:first-child { background: #3157e8; color: #fff; }
+@media (max-width: 560px) { .card { width: min(100% - 28px, 760px); padding: 56px 0; text-align: left; } .card h1 { margin-left: 0; } .card > span { margin-left: 0; } .card div { justify-content: flex-start; } }
