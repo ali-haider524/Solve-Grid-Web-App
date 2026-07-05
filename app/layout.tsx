@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { contactEmail, siteDescription, siteName, siteUrl } from "../lib/site";
+import Script from "next/script";
 
 const googleVerification = process.env.GOOGLE_SITE_VERIFICATION;
 
@@ -95,6 +96,21 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(siteSchema) }}
         />
         {children}
+
+        <Script
+        src="https://www.googletagmanager.com/gtag/js?id=G-QDSPD4TGQN"
+         strategy="afterInteractive"
+       />
+
+       <Script id="google-analytics" strategy="afterInteractive">
+      {`
+         window.dataLayer = window.dataLayer || [];
+         function gtag(){window.dataLayer.push(arguments);}
+         gtag('js', new Date());
+
+         gtag('config', 'G-QDSPD4TGQN');
+       `}
+       </Script>
       </body>
     </html>
   );
