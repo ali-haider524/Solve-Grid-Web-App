@@ -17,6 +17,18 @@ export const metadata: Metadata = {
   },
   description: siteDescription,
   applicationName: siteName,
+  category: "Education",
+  referrer: "strict-origin-when-cross-origin",
+  formatDetection: {
+    telephone: false,
+    address: false,
+    email: false,
+  },
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/favicon.ico",
+  },
   alternates: {
     canonical: "/",
   },
@@ -33,6 +45,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
+    locale: "en_US",
     siteName,
     title: "SolveGrid | Free Online Math & Engineering Tools",
     description: siteDescription,
@@ -69,6 +82,7 @@ export default function RootLayout({
         name: siteName,
         url: siteUrl,
         description: siteDescription,
+        inLanguage: "en",
       },
     ],
   };

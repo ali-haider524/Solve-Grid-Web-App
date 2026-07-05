@@ -6,9 +6,10 @@
     "dev": "next dev",
     "verify:tools": "node scripts/verify-tool-registry.mjs",
     "lint": "eslint",
-    "build": "npm run verify:tools && next build",
-    "check": "npm run verify:tools && npm run lint && npm run build",
-    "start": "next start"
+    "build": "npm run verify:tools && npm run verify:launch && next build",
+    "check": "npm run lint && npm run build",
+    "start": "next start",
+    "verify:launch": "node scripts/verify-launch-readiness.mjs"
   },
   "dependencies": {
     "mathjs": "^15.2.0",

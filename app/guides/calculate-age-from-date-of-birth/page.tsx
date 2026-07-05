@@ -1,4 +1,11 @@
 import GuideArticle from "../../../components/GuideArticle";
+import { createStaticPageMetadata } from "../../../lib/seo";
+
+export const metadata = createStaticPageMetadata(
+  "How to Calculate Age From Date of Birth",
+  "Learn how calendar age is calculated in years, months, and days using a date of birth and a reference date.",
+  "/guides/calculate-age-from-date-of-birth",
+);
 
 export default function CalculateAgeGuide() {
   return (

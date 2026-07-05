@@ -6,6 +6,7 @@ import styles from "./SiteFooter.module.css";
 const trustLinks = [
   { href: "/about", label: "About SolveGrid" },
   { href: "/contact", label: "Contact" },
+  { href: "/methodology", label: "Methods & Accuracy" },
   { href: "/privacy-policy", label: "Privacy Policy" },
   { href: "/terms-of-use", label: "Terms of Use" },
   { href: "/disclaimer", label: "Disclaimer" },

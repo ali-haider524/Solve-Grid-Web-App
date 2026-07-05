@@ -4,7 +4,129 @@ import SiteFooter from "./SiteFooter";
 import styles from "./GuideArticle.module.css";
 import { siteName, siteUrl } from "../lib/site";
 
-type GuideLink = { label:string; href:string; description:string };
-type GuideProps = { title:string; eyebrow:string; description:string; slug:string; steps:Array<{title:string;body:string}>; formula?:string; example?:string; toolLinks:GuideLink[] };
+type GuideLink = {
+  label: string;
+  href: string;
+  description: string;
+};
 
-export default function GuideArticle({title,eyebrow,description,slug,steps,formula,example,toolLinks}:GuideProps){const data={"@context":"https://schema.org","@type":"Article",headline:title,description,mainEntityOfPage:`${siteUrl}/guides/${slug}`,publisher:{"@type":"Organization",name:siteName}};return <main id="main-content" className={styles.page}><script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(data)}}/><ToolHeader/><article className={styles.article}><nav className={styles.breadcrumbs} aria-label="Breadcrumb"><Link href="/">Home</Link><span>›</span><Link href="/guides">Guides</Link><span>›</span><span aria-current="page">{title}</span></nav><header className={styles.hero}><p>{eyebrow}</p><h1>{title}</h1><span>{description}</span></header><section className={styles.layout}><div className={styles.content}>{formula?<section className={styles.formula}><p>FORMULA</p><code>{formula}</code></section>:null}{example?<section className={styles.example}><p>WORKED EXAMPLE</p><span>{example}</span></section>:null}<section className={styles.steps}><p>STEP BY STEP</p>{steps.map((step,index)=><article key={step.title}><span>{String(index+1).padStart(2,"0")}</span><div><h2>{step.title}</h2><p>{step.body}</p></div></article>)}</section></div><aside className={styles.toolPanel}><p>TRY THE CALCULATION</p><h2>Use a working SolveGrid tool.</h2><div>{toolLinks.map(tool=><Link href={tool.href} key={tool.href}><strong>{tool.label}</strong><span>{tool.description}</span><b>Open →</b></Link>)}</div></aside></section></article><SiteFooter/></main>}
+type GuideProps = {
+  title: string;
+  eyebrow: string;
+  description: string;
+  slug: string;
+  steps: Array<{ title: string; body: string }>;
+  formula?: string;
+  example?: string;
+  toolLinks: GuideLink[];
+};
+
+export default function GuideArticle({
+  title,
+  eyebrow,
+  description,
+  slug,
+  steps,
+  formula,
+  example,
+  toolLinks,
+}: GuideProps) {
+  const articleUrl = `${siteUrl}/guides/${slug}`;
+  const data = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Article",
+        headline: title,
+        description,
+        mainEntityOfPage: articleUrl,
+        inLanguage: "en",
+        isAccessibleForFree: true,
+        publisher: {
+          "@type": "Organization",
+          name: siteName,
+          url: siteUrl,
+        },
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: siteUrl },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Guides",
+            item: `${siteUrl}/guides`,
+          },
+          { "@type": "ListItem", position: 3, name: title, item: articleUrl },
+        ],
+      },
+    ],
+  };
+
+  return (
+    <main id="main-content" className={styles.page}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+      />
+      <ToolHeader active="guides" />
+      <article className={styles.article}>
+        <nav className={styles.breadcrumbs} aria-label="Breadcrumb">
+          <Link href="/">Home</Link>
+          <span>›</span>
+          <Link href="/guides">Guides</Link>
+          <span>›</span>
+          <span aria-current="page">{title}</span>
+        </nav>
+        <header className={styles.hero}>
+          <p>{eyebrow}</p>
+          <h1>{title}</h1>
+          <span>{description}</span>
+        </header>
+        <section className={styles.layout}>
+          <div className={styles.content}>
+            {formula ? (
+              <section className={styles.formula}>
+                <p>FORMULA</p>
+                <code>{formula}</code>
+              </section>
+            ) : null}
+            {example ? (
+              <section className={styles.example}>
+                <p>WORKED EXAMPLE</p>
+                <span>{example}</span>
+              </section>
+            ) : null}
+            <section className={styles.steps}>
+              <p>STEP BY STEP</p>
+              {steps.map((step, index) => (
+                <article key={step.title}>
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  <div>
+                    <h2>{step.title}</h2>
+                    <p>{step.body}</p>
+                  </div>
+                </article>
+              ))}
+            </section>
+          </div>
+          <aside className={styles.toolPanel}>
+            <p>TRY THE CALCULATION</p>
+            <h2>Use a working SolveGrid tool.</h2>
+            <div>
+              {toolLinks.map((tool) => (
+                <Link href={tool.href} key={tool.href}>
+                  <strong>{tool.label}</strong>
+                  <span>{tool.description}</span>
+                  <b>Open →</b>
+                </Link>
+              ))}
+            </div>
+          </aside>
+        </section>
+      </article>
+      <SiteFooter />
+    </main>
+  );
+}
