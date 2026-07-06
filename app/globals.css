@@ -252,3 +252,16 @@ canvas, img, svg { max-width: 100%; }
 
 .home-page .research-spotlight{width:min(1180px,calc(100% - 40px));margin:20px auto 0;padding:clamp(25px,4vw,43px);display:flex;align-items:end;justify-content:space-between;gap:22px;border:1px solid #cbd9f5;border-radius:22px;background:linear-gradient(135deg,#eff4ff,#fff);box-shadow:0 10px 26px rgba(30,53,100,.05)}.home-page .research-spotlight h2{max-width:620px;margin:8px 0 0;color:#152742;font-size:clamp(1.6rem,3vw,2.65rem);letter-spacing:-.06em;line-height:1.06}.home-page .research-spotlight p:not(.eyebrow){max-width:690px;margin:12px 0 0;color:#667791;font-size:.9rem;line-height:1.65}.home-page .research-spotlight>a{flex:0 0 auto;padding:11px 13px;border-radius:10px;background:#3157e8;color:#fff;font-size:.8rem;font-weight:850;white-space:nowrap;box-shadow:0 8px 16px rgba(49,87,232,.16)}.home-page .research-spotlight>a:hover{background:#2447c9}
 @media(max-width:640px){.home-page .research-spotlight{width:min(100% - 28px,1180px);margin-top:14px;padding:21px 19px;align-items:flex-start;flex-direction:column;gap:16px;border-radius:18px}.home-page .research-spotlight h2{font-size:1.65rem}.home-page .research-spotlight>a{width:100%;text-align:center}}
+
+/* Methods & Accuracy homepage link: small visual emphasis without changing layout. */
+.home-page .how-list a {
+  color: var(--blue);
+  font-weight: 850;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.home-page .how-list a:hover {
+  color: var(--blue-dark);
+}
