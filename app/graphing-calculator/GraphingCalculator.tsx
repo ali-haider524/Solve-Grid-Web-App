@@ -373,10 +373,12 @@ export default function GraphingCalculator() {
       <div className={styles.container}>
         <section className={styles.intro}>
           <p>FREE ONLINE GRAPHING CALCULATOR</p>
-          <h1>Graph more than one equation in one workspace.</h1>
+          <h1>Graph equations online, compare functions, and inspect values.</h1>
           <span>
-            Plot lines, polynomials, trigonometric functions, roots, logarithms,
-            absolute values, rational functions, and vertical lines directly in your browser.
+            Plot up to eight lines, polynomials, trigonometric functions, roots,
+            logarithms, absolute values, rational functions, and vertical lines.
+            Then use the graph, table, trace, and analysis views to understand how
+            the functions behave in the current window.
           </span>
         </section>
 
@@ -514,6 +516,7 @@ export default function GraphingCalculator() {
             <div className={styles.viewTabs}>
               <button className={viewMode === "graph" ? styles.activeTab : styles.tab} onClick={() => setViewMode("graph")} type="button">Graph</button>
               <button className={viewMode === "table" ? styles.activeTab : styles.tab} onClick={() => setViewMode("table")} type="button">Table</button>
+              <button className={viewMode === "analysis" ? styles.activeTab : styles.tab} onClick={() => setViewMode("analysis")} type="button">Analysis</button>
               <div className={styles.graphActions}>
                 <a className={styles.editEquationsLink} href="#equations">Equations</a>
                 <button onClick={() => zoomGraph(0.65)} type="button">Zoom in</button>
@@ -596,13 +599,175 @@ export default function GraphingCalculator() {
         <section className={styles.learningSection}>
           <div>
             <p>BUILT FOR REAL MATH WORK</p>
-            <h2>Plot several functions together, compare curves, and inspect their values.</h2>
+            <h2>Use one graphing calculator to compare equations, tables, roots, and intersections.</h2>
           </div>
           <p>
-            G1 supports up to eight standard functions and vertical lines in one view. Use the
-            Equation Solver for roots and systems, Statistics Calculator for data summaries,
-            and Matrix Calculator for linear algebra without crowding this graph workspace.
+            Add up to eight functions or vertical lines, then move between Graph, Table, and
+            Analysis views. Use the Equation Solver when you need an algebraic solution,
+            the Polynomial Solver for higher-degree roots, and the Statistics Calculator for
+            raw-data summaries and regression.
           </p>
+        </section>
+
+        <section className={styles.graphingGuide} aria-labelledby="graphing-guide-title">
+          <header className={styles.guideHeader}>
+            <div>
+              <p>HOW THIS GRAPHING CALCULATOR HELPS</p>
+              <h2 id="graphing-guide-title">Choose the view that answers your math question.</h2>
+            </div>
+            <span>
+              A graph is most useful when you know what you are looking for: the shape of a
+              function, a value at a chosen x-coordinate, an x-intercept, or the point where
+              two equations meet.
+            </span>
+          </header>
+
+          <div className={styles.featureGrid}>
+            <article>
+              <b>01</b>
+              <h3>Plot multiple equations</h3>
+              <p>
+                Enter one relationship per line, including <code>y = 2x + 1</code>,
+                <code>y = x^2 - 4</code>, or a vertical line such as <code>x = 3</code>.
+                Keep lines visible to compare them in the same coordinate window.
+              </p>
+            </article>
+            <article>
+              <b>02</b>
+              <h3>Inspect a value table</h3>
+              <p>
+                Switch to Table view to see calculated y-values around the current trace
+                position. This is useful when a curve is close to an axis or when you want
+                to compare function outputs at the same x-values.
+              </p>
+            </article>
+            <article>
+              <b>03</b>
+              <h3>Trace points on a curve</h3>
+              <p>
+                Tap or click the graph, or move the trace slider, to inspect the current
+                x-value and the visible function values at that point.
+              </p>
+            </article>
+            <article>
+              <b>04</b>
+              <h3>Estimate roots and intersections</h3>
+              <p>
+                Open Analysis to find approximate x-intercepts and crossing points for the
+                visible functions inside the current graph window.
+              </p>
+            </article>
+            <article>
+              <b>05</b>
+              <h3>Adjust the graph window</h3>
+              <p>
+                Change x-min, x-max, y-min, and y-max when an important part of a curve is
+                outside the view, appears too flat, or needs a closer comparison.
+              </p>
+            </article>
+            <article>
+              <b>06</b>
+              <h3>Use degrees or radians</h3>
+              <p>
+                Choose the correct angle mode before graphing sine, cosine, tangent, or
+                inverse trigonometric functions. A correct expression can look wrong when
+                the angle mode does not match the question.
+              </p>
+            </article>
+          </div>
+
+          <div className={styles.methodGrid}>
+            <article>
+              <p>STEP 1</p>
+              <h3>Enter a clear expression</h3>
+              <span>
+                Use <code>x^2</code> for a square, <code>sqrt(x)</code> for a square root,
+                <code>sin(x)</code> for sine, and parentheses to make grouping clear.
+              </span>
+            </article>
+            <article>
+              <p>STEP 2</p>
+              <h3>Choose a sensible window</h3>
+              <span>
+                Begin with the default view, then zoom or edit the window. For trigonometry
+                in degree mode, a wider x-range such as −360 to 360 can reveal a full cycle.
+              </span>
+            </article>
+            <article>
+              <p>STEP 3</p>
+              <h3>Read graph, table, and analysis together</h3>
+              <span>
+                Use the graph to understand shape, the table to compare exact sampled values,
+                and Analysis to estimate roots and intersections in the selected window.
+              </span>
+            </article>
+            <article>
+              <p>STEP 4</p>
+              <h3>Verify important answers</h3>
+              <span>
+                Graph analysis is numerical and window-dependent. For an exact algebraic
+                answer, check the result with the Equation Solver or Polynomial Solver.
+              </span>
+            </article>
+          </div>
+
+          <div className={styles.exampleHeader}>
+            <div>
+              <p>WORKED GRAPHING EXAMPLES</p>
+              <h2>Three ways to use the same workspace.</h2>
+            </div>
+            <span>These examples use only features that are available on this page.</span>
+          </div>
+
+          <div className={styles.exampleGrid}>
+            <article>
+              <span>EXAMPLE 1</span>
+              <h3>Compare a line and a parabola</h3>
+              <p className={styles.equationLine}>y = x² − 4 &nbsp; and &nbsp; y = 2x + 1</p>
+              <p>
+                Enter both equations, keep the default graph window, and open Analysis.
+                The curves cross at approximately <strong>(−1.449, −1.899)</strong> and
+                <strong>(3.449, 7.899)</strong>. Use Table view near either x-value to check
+                that both outputs are close.
+              </p>
+            </article>
+            <article>
+              <span>EXAMPLE 2</span>
+              <h3>See where a square-root graph begins</h3>
+              <p className={styles.equationLine}>y = sqrt(x) &nbsp; and &nbsp; y = x / 2</p>
+              <p>
+                The square-root function is only defined for x values of zero or greater in
+                this real-number workspace. The visible intersections are
+                <strong>(0, 0)</strong> and <strong>(4, 2)</strong>, which the graph and
+                table help you verify.
+              </p>
+            </article>
+            <article>
+              <span>EXAMPLE 3</span>
+              <h3>Compare a trig function with a target value</h3>
+              <p className={styles.equationLine}>y = sin(x) &nbsp; and &nbsp; y = 0.5</p>
+              <p>
+                Switch to DEG mode and set the x-window to roughly −360 through 360. Analysis
+                shows the repeating places where sine reaches 0.5; within one cycle they occur
+                near <strong>30°</strong> and <strong>150°</strong>.
+              </p>
+            </article>
+          </div>
+
+          <aside className={styles.accuracyNote}>
+            <div>
+              <p>ABOUT ROOTS AND INTERSECTIONS</p>
+              <h3>Use the graph to explore; use an algebra tool to confirm.</h3>
+            </div>
+            <p>
+              Roots and intersections shown in Analysis are numerical estimates based on the
+              visible graph window and sampling. They are useful for checking a function,
+              choosing a starting point, and understanding a curve. For an equation that needs
+              an exact or higher-precision solution, continue with the
+              <a href="/equation-solver"> Equation Solver</a> or
+              <a href="/polynomial-solver"> Polynomial Solver</a>.
+            </p>
+          </aside>
         </section>
       </div>
     </main>

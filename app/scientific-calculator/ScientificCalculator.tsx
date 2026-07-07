@@ -13,7 +13,8 @@ import {
 } from "../../lib/math-core";
 
 type DisplayNotation = "NORM" | "SCI" | "ENG";
-type Overlay = "none" | "mode" | "tools" | "variables" | "constants" | "history" | "notice";
+type Overlay =
+  "none" | "mode" | "tools" | "variables" | "constants" | "history" | "notice";
 type MemoryName = "A" | "B" | "C" | "X" | "Y";
 type MemoryAction = "recall" | "store";
 
@@ -28,28 +29,116 @@ type CalculatorKey = {
   hint?: string;
   value?: string;
   shiftedValue?: string;
-  action?: "shift" | "mode" | "tools" | "variables" | "clear" | "delete" | "equals";
+  action?:
+    "shift" | "mode" | "tools" | "variables" | "clear" | "delete" | "equals";
   tone: "control" | "function" | "number" | "operator" | "danger" | "equals";
 };
 
 const calculatorKeys: CalculatorKey[] = [
-  { id: "shift", label: "SHIFT", hint: "2nd", action: "shift", tone: "control" },
+  {
+    id: "shift",
+    label: "SHIFT",
+    hint: "2nd",
+    action: "shift",
+    tone: "control",
+  },
   { id: "mode", label: "MODE", hint: "setup", action: "mode", tone: "control" },
-  { id: "tools", label: "TOOLS", hint: "menu", action: "tools", tone: "control" },
-  { id: "variables", label: "VAR", hint: "store", action: "variables", tone: "control" },
+  {
+    id: "tools",
+    label: "TOOLS",
+    hint: "menu",
+    action: "tools",
+    tone: "control",
+  },
+  {
+    id: "variables",
+    label: "VAR",
+    hint: "store",
+    action: "variables",
+    tone: "control",
+  },
   { id: "clear", label: "AC", hint: "clear", action: "clear", tone: "danger" },
 
-  { id: "sin", label: "sin", hint: "sin⁻¹", value: "sin(", shiftedValue: "asin(", tone: "function" },
-  { id: "cos", label: "cos", hint: "cos⁻¹", value: "cos(", shiftedValue: "acos(", tone: "function" },
-  { id: "tan", label: "tan", hint: "tan⁻¹", value: "tan(", shiftedValue: "atan(", tone: "function" },
-  { id: "log", label: "log", hint: "10ˣ", value: "log(", shiftedValue: "10^(", tone: "function" },
-  { id: "ln", label: "ln", hint: "eˣ", value: "ln(", shiftedValue: "2.718281828459045^(", tone: "function" },
+  {
+    id: "sin",
+    label: "sin",
+    hint: "sin⁻¹",
+    value: "sin(",
+    shiftedValue: "asin(",
+    tone: "function",
+  },
+  {
+    id: "cos",
+    label: "cos",
+    hint: "cos⁻¹",
+    value: "cos(",
+    shiftedValue: "acos(",
+    tone: "function",
+  },
+  {
+    id: "tan",
+    label: "tan",
+    hint: "tan⁻¹",
+    value: "tan(",
+    shiftedValue: "atan(",
+    tone: "function",
+  },
+  {
+    id: "log",
+    label: "log",
+    hint: "10ˣ",
+    value: "log(",
+    shiftedValue: "10^(",
+    tone: "function",
+  },
+  {
+    id: "ln",
+    label: "ln",
+    hint: "eˣ",
+    value: "ln(",
+    shiftedValue: "2.718281828459045^(",
+    tone: "function",
+  },
 
-  { id: "square", label: "x²", hint: "√", value: "^2", shiftedValue: "sqrt(", tone: "function" },
-  { id: "power", label: "xʸ", hint: "1/x", value: "^", shiftedValue: "1/(", tone: "function" },
-  { id: "root", label: "√", hint: "abs", value: "sqrt(", shiftedValue: "abs(", tone: "function" },
-  { id: "pi", label: "π", hint: "Ans", value: "pi", shiftedValue: "ans", tone: "function" },
-  { id: "delete", label: "DEL", hint: "back", action: "delete", tone: "function" },
+  {
+    id: "square",
+    label: "x²",
+    hint: "√",
+    value: "^2",
+    shiftedValue: "sqrt(",
+    tone: "function",
+  },
+  {
+    id: "power",
+    label: "xʸ",
+    hint: "1/x",
+    value: "^",
+    shiftedValue: "1/(",
+    tone: "function",
+  },
+  {
+    id: "root",
+    label: "√",
+    hint: "abs",
+    value: "sqrt(",
+    shiftedValue: "abs(",
+    tone: "function",
+  },
+  {
+    id: "pi",
+    label: "π",
+    hint: "Ans",
+    value: "pi",
+    shiftedValue: "ans",
+    tone: "function",
+  },
+  {
+    id: "delete",
+    label: "DEL",
+    hint: "back",
+    action: "delete",
+    tone: "function",
+  },
 
   { id: "seven", label: "7", value: "7", tone: "number" },
   { id: "eight", label: "8", value: "8", tone: "number" },
@@ -66,7 +155,14 @@ const calculatorKeys: CalculatorKey[] = [
   { id: "one", label: "1", value: "1", tone: "number" },
   { id: "two", label: "2", value: "2", tone: "number" },
   { id: "three", label: "3", value: "3", tone: "number" },
-  { id: "open", label: "(", hint: "mod", value: "(", shiftedValue: "%", tone: "function" },
+  {
+    id: "open",
+    label: "(",
+    hint: "mod",
+    value: "(",
+    shiftedValue: "%",
+    tone: "function",
+  },
   { id: "close", label: ")", hint: "comma", value: ")", tone: "function" },
 
   { id: "zero", label: "0", value: "0", tone: "number" },
@@ -86,7 +182,16 @@ const constants = [
   { id: "h", symbol: "h", name: "Planck constant", value: "6.62607015e-34" },
 ];
 
-const connectedTools = tools.filter((tool) => tool.slug !== "scientific-calculator");
+const quickExamples = [
+  { label: "Powers and roots", expression: "sqrt(81) + 2^5" },
+  { label: "Combinations", expression: "ncr(8,2)" },
+  { label: "Integer tools", expression: "gcd(48,18)" },
+  { label: "Scientific form", expression: "2.5e3 / 4" },
+];
+
+const connectedTools = tools.filter(
+  (tool) => tool.slug !== "scientific-calculator",
+);
 
 export default function ScientificCalculator() {
   const [expression, setExpression] = useState("");
@@ -110,14 +215,18 @@ export default function ScientificCalculator() {
   });
 
   function appendToExpression(value: string) {
-    const continuesAnswer = ["+", "-", "*", "/", "^", "%", "^2"].includes(value);
+    const continuesAnswer = ["+", "-", "*", "/", "^", "%", "^2"].includes(
+      value,
+    );
 
     setExpression((currentExpression) => {
       if (!justEvaluated) {
         return `${currentExpression}${value}`;
       }
 
-      return continuesAnswer ? `${formatForDisplay(lastAnswer, notation)}${value}` : value;
+      return continuesAnswer
+        ? `${formatForDisplay(lastAnswer, notation)}${value}`
+        : value;
     });
 
     setErrorMessage("");
@@ -126,6 +235,15 @@ export default function ScientificCalculator() {
 
   function clearCalculator() {
     setExpression("");
+    setResult("0");
+    setErrorMessage("");
+    setJustEvaluated(false);
+    setShiftActive(false);
+    setOverlay("none");
+  }
+
+  function loadExample(expressionValue: string) {
+    setExpression(expressionValue);
     setResult("0");
     setErrorMessage("");
     setJustEvaluated(false);
@@ -159,14 +277,18 @@ export default function ScientificCalculator() {
       setJustEvaluated(true);
       setShiftActive(false);
       setOverlay("none");
-      setHistory((currentHistory) => [
-        { expression, result: formattedResult },
-        ...currentHistory,
-      ].slice(0, 10));
+      setHistory((currentHistory) =>
+        [{ expression, result: formattedResult }, ...currentHistory].slice(
+          0,
+          10,
+        ),
+      );
     } catch (error) {
       setResult("Error");
       setErrorMessage(
-        error instanceof Error ? error.message : "Unable to calculate this expression.",
+        error instanceof Error
+          ? error.message
+          : "Unable to calculate this expression.",
       );
       setJustEvaluated(false);
     }
@@ -213,7 +335,8 @@ export default function ScientificCalculator() {
       return;
     }
 
-    const nextValue = shiftActive && key.shiftedValue ? key.shiftedValue : key.value;
+    const nextValue =
+      shiftActive && key.shiftedValue ? key.shiftedValue : key.value;
 
     if (nextValue) {
       appendToExpression(nextValue);
@@ -233,7 +356,10 @@ export default function ScientificCalculator() {
     }
   }
 
-  function selectTool(tool: "constants" | "variables" | "matrix" | "statistics" | "table" | "convert") {
+  function selectTool(
+    tool:
+      "constants" | "variables" | "matrix" | "statistics" | "table" | "convert",
+  ) {
     if (tool === "constants") {
       setOverlay("constants");
       return;
@@ -252,7 +378,9 @@ export default function ScientificCalculator() {
       convert: "Unit conversion workspace",
     };
 
-    setNotice(`${labels[tool]} belongs to its own SolveGrid tool, so it can use a proper editable grid instead of a tiny calculator screen.`);
+    setNotice(
+      `${labels[tool]} belongs to its own SolveGrid tool, so it can use a proper editable grid instead of a tiny calculator screen.`,
+    );
     setOverlay("notice");
   }
 
@@ -294,28 +422,56 @@ export default function ScientificCalculator() {
     <main id="main-content" className={styles.page}>
       <ToolHeader active="engineering" />
 
-      <section className={styles.calculatorStage}>
-        <article className={styles.device} aria-label="SolveGrid S1 Scientific Calculator">
-          <div className={styles.deviceHeader}>
+      <section
+        className={styles.intro}
+        aria-labelledby="scientific-calculator-title"
+      >
+        <p>FREE ONLINE SCIENTIFIC CALCULATOR</p>
+        <h1 id="scientific-calculator-title">
+          Scientific Calculator Online
+        </h1>
+        <span>
+          Evaluate expressions, trigonometry, roots, logarithms, factorials,
+          combinations, number theory functions, scientific notation, and
+          reusable variables directly in your browser.
+        </span>
+      </section>
+
+      <section
+        className={styles.calculatorStage}
+        aria-label="Scientific calculator workspace"
+      >
+        <article
+          className={styles.device}
+          aria-label="SolveGrid Scientific Calculator"
+        >
+          <header className={styles.deviceHeader}>
             <div>
-              <p>SOLVEGRID S1</p>
-              <h1>Scientific / Engineering</h1>
+              <p>SCIENTIFIC WORKSPACE</p>
+              <h2>Scientific calculator</h2>
             </div>
             <div className={styles.deviceMeta}>
-              <div className={styles.statusLights} aria-label="Current calculator settings">
+              <div
+                className={styles.statusLights}
+                aria-label="Current calculator settings"
+              >
                 <span>{angleMode}</span>
                 <span>{notation}</span>
                 <span>REAL</span>
               </div>
               <button
                 className={styles.historyToggle}
-                onClick={() => setOverlay((current) => (current === "history" ? "none" : "history"))}
+                onClick={() =>
+                  setOverlay((current) =>
+                    current === "history" ? "none" : "history",
+                  )
+                }
                 type="button"
               >
                 History <span>{history.length}</span>
               </button>
             </div>
-          </div>
+          </header>
 
           <section className={styles.display}>
             {overlay === "none" ? (
@@ -347,7 +503,7 @@ export default function ScientificCalculator() {
                       clearCalculator();
                     }
                   }}
-                  placeholder="sin(30) + sqrt(81)"
+                  placeholder="Example: sqrt(81) + 2^5"
                   spellCheck={false}
                   inputMode="decimal"
                 />
@@ -378,11 +534,22 @@ export default function ScientificCalculator() {
             )}
           </section>
 
-          <p className={errorMessage ? styles.errorMessage : styles.helperMessage}>
-            {errorMessage || (shiftActive ? "SHIFT is active. Choose a key with a small upper label." : "Type fact(5), ncr(8,2), gcd(48,18), or open TOOLS for connected workspaces.")}
+          <p
+            className={
+              errorMessage ? styles.errorMessage : styles.helperMessage
+            }
+            aria-live="polite"
+          >
+            {errorMessage ||
+              (shiftActive
+                ? "SHIFT is active. Choose a key with a small upper label."
+                : "Use the keypad or type directly. Press Enter or = to evaluate the expression.")}
           </p>
 
-          <div className={styles.keypad} aria-label="Scientific engineering calculator keypad">
+          <div
+            className={styles.keypad}
+            aria-label="Scientific engineering calculator keypad"
+          >
             {calculatorKeys.map((key) => (
               <button
                 className={`${styles.key} ${styles[key.tone]} ${key.id === "shift" && shiftActive ? styles.shiftPressed : ""}`}
@@ -396,6 +563,192 @@ export default function ScientificCalculator() {
             ))}
           </div>
         </article>
+      </section>
+
+      <section
+        className={styles.quickExamplesPanel}
+        aria-label="Quick scientific calculator examples"
+      >
+        <p>QUICK INPUTS</p>
+        <div>
+          {quickExamples.map((example) => (
+            <button
+              key={example.label}
+              onClick={() => loadExample(example.expression)}
+              type="button"
+            >
+              <strong>{example.label}</strong>
+              <code>{example.expression}</code>
+            </button>
+          ))}
+        </div>
+      </section>
+
+      <section
+        className={styles.learningSection}
+        aria-labelledby="scientific-calculator-guide-title"
+      >
+        <header className={styles.learningHeader}>
+          <p>HOW THIS SCIENTIFIC CALCULATOR HELPS</p>
+          <h2 id="scientific-calculator-guide-title">
+            Use the right function, setting, and notation for the problem.
+          </h2>
+          <span>
+            The calculator is designed for focused numeric work. Enter a
+            calculation, check the selected mode, read the result, then move to
+            a dedicated SolveGrid workspace when the task needs a graph, matrix,
+            data analysis, or unit conversion.
+          </span>
+        </header>
+
+        <div className={styles.featureGrid}>
+          <article>
+            <p>TRIGONOMETRY</p>
+            <h3>Degrees and radians</h3>
+            <span>
+              Use sin, cos, tan, and their inverse functions. Choose DEG for
+              degree-based questions and RAD for radian-based questions before
+              evaluating.
+            </span>
+          </article>
+          <article>
+            <p>POWERS AND LOGS</p>
+            <h3>Roots, exponents, and logarithms</h3>
+            <span>
+              Evaluate powers, square roots, logarithms, natural logarithms,
+              absolute value, and exponential expressions in one line.
+            </span>
+          </article>
+          <article>
+            <p>COUNTING AND INTEGER TOOLS</p>
+            <h3>Factorials, combinations, and GCD</h3>
+            <span>
+              Use functions such as fact(), ncr(), npr(), gcd(), and lcm() for
+              counting problems and integer calculations.
+            </span>
+          </article>
+          <article>
+            <p>ENGINEERING FORMAT</p>
+            <h3>Scientific and engineering notation</h3>
+            <span>
+              Enter values such as 2.5e3. Use MODE to display results in normal,
+              scientific, or engineering notation.
+            </span>
+          </article>
+          <article>
+            <p>MEMORY AND CONSTANTS</p>
+            <h3>Reuse answers and values</h3>
+            <span>
+              Use Ans for the last result, store values in A, B, C, X, or Y, and
+              insert selected constants from the TOOLS menu.
+            </span>
+          </article>
+          <article>
+            <p>HISTORY</p>
+            <h3>Review recent calculations</h3>
+            <span>
+              Open History to restore a recent expression and result. This is
+              useful when comparing a sequence of calculations.
+            </span>
+          </article>
+        </div>
+
+        <div className={styles.learningColumns}>
+          <article className={styles.workflowCard}>
+            <p>QUICK START</p>
+            <h2>How to use the calculator</h2>
+            <ol>
+              <li>
+                <strong>Enter an expression.</strong>
+                <span>
+                  Use the keypad or type directly. Write multiplication as{" "}
+                  <code>*</code>, division as <code>/</code>, and exponents as{" "}
+                  <code>^</code>.
+                </span>
+              </li>
+              <li>
+                <strong>Set the correct angle mode.</strong>
+                <span>
+                  Open MODE before trigonometry. For example,{" "}
+                  <code>sin(30)</code> equals 0.5 only when the calculator is
+                  set to DEG.
+                </span>
+              </li>
+              <li>
+                <strong>Evaluate and check.</strong>
+                <span>
+                  Press Enter or =. Read the expression again, especially
+                  brackets, powers, negative signs, and units outside the
+                  calculator.
+                </span>
+              </li>
+              <li>
+                <strong>Choose an output format.</strong>
+                <span>
+                  Use NORM for everyday output, SCI for powers of ten, and ENG
+                  for exponents in multiples of three.
+                </span>
+              </li>
+            </ol>
+          </article>
+
+          <article className={styles.examplesCard}>
+            <p>WORKED INPUT EXAMPLES</p>
+            <h2>Expressions you can try</h2>
+            <div>
+              <button
+                onClick={() => loadExample("sqrt(81) + 2^5")}
+                type="button"
+              >
+                <code>sqrt(81) + 2^5</code>
+                <span>Root and exponent → 41</span>
+              </button>
+              <button
+                onClick={() => loadExample("fact(5) + ncr(8,2)")}
+                type="button"
+              >
+                <code>fact(5) + ncr(8,2)</code>
+                <span>Factorial and combinations → 148</span>
+              </button>
+              <button onClick={() => loadExample("gcd(48,18)")} type="button">
+                <code>gcd(48,18)</code>
+                <span>Greatest common divisor → 6</span>
+              </button>
+              <button onClick={() => loadExample("2.5e3 / 4")} type="button">
+                <code>2.5e3 / 4</code>
+                <span>Scientific notation → 625</span>
+              </button>
+            </div>
+          </article>
+        </div>
+
+        <aside className={styles.nextTools}>
+          <div>
+            <p>USE A DEDICATED WORKSPACE WHEN NEEDED</p>
+            <h2>Continue the problem in the right tool.</h2>
+          </div>
+          <div>
+            <Link href="/graphing-calculator">
+              <strong>Graphing Calculator</strong>
+              <span>Plot functions, tables, roots, and intersections.</span>
+            </Link>
+            <Link href="/matrix-calculator">
+              <strong>Matrix Calculator</strong>
+              <span>Work with matrices, RREF, rank, inverse, and systems.</span>
+            </Link>
+            <Link href="/unit-converter">
+              <strong>Unit Converter</strong>
+              <span>Convert engineering, science, and everyday units.</span>
+            </Link>
+          </div>
+        </aside>
+
+        <p className={styles.accuracyNote}>
+          Check important results independently and follow your teacher,
+          institution, or exam rules for calculator use. Numeric output can
+          depend on the selected angle mode, notation, input order, and
+          rounding.
+        </p>
       </section>
     </main>
   );
@@ -412,7 +765,10 @@ type DisplayOverlayProps = {
   onClose: () => void;
   onSetAngleMode: (mode: AngleMode) => void;
   onSetNotation: (notation: DisplayNotation) => void;
-  onSelectTool: (tool: "constants" | "variables" | "matrix" | "statistics" | "table" | "convert") => void;
+  onSelectTool: (
+    tool:
+      "constants" | "variables" | "matrix" | "statistics" | "table" | "convert",
+  ) => void;
   onSetMemoryAction: (action: MemoryAction) => void;
   onSelectMemory: (name: MemoryName) => void;
   onInsertConstant: (value: string) => void;
@@ -446,7 +802,9 @@ function DisplayOverlay({
         <div className={styles.optionRow}>
           {(["DEG", "RAD"] as AngleMode[]).map((mode) => (
             <button
-              className={mode === angleMode ? styles.optionActive : styles.optionButton}
+              className={
+                mode === angleMode ? styles.optionActive : styles.optionButton
+              }
               key={mode}
               onClick={() => onSetAngleMode(mode)}
               type="button"
@@ -459,7 +817,9 @@ function DisplayOverlay({
         <div className={styles.optionRow}>
           {(["NORM", "SCI", "ENG"] as DisplayNotation[]).map((mode) => (
             <button
-              className={mode === notation ? styles.optionActive : styles.optionButton}
+              className={
+                mode === notation ? styles.optionActive : styles.optionButton
+              }
               key={mode}
               onClick={() => onSetNotation(mode)}
               type="button"
@@ -477,9 +837,15 @@ function DisplayOverlay({
       <div className={styles.overlayContent}>
         <OverlayHeader title="TOOLS MENU" onClose={onClose} />
         <div className={styles.toolGrid}>
-          <button className={styles.toolActive} type="button" onClick={onClose}>CALC <span>current</span></button>
-          <button type="button" onClick={() => onSelectTool("constants")}>CONST <span>values</span></button>
-          <button type="button" onClick={() => onSelectTool("variables")}>VARS <span>memory</span></button>
+          <button className={styles.toolActive} type="button" onClick={onClose}>
+            CALC <span>current</span>
+          </button>
+          <button type="button" onClick={() => onSelectTool("constants")}>
+            CONST <span>values</span>
+          </button>
+          <button type="button" onClick={() => onSelectTool("variables")}>
+            VARS <span>memory</span>
+          </button>
           {connectedTools.map((tool) => (
             <Link href={getToolPath(tool)} key={tool.slug}>
               {tool.shortName.toUpperCase()} <span>{tool.category}</span>
@@ -495,12 +861,36 @@ function DisplayOverlay({
       <div className={styles.overlayContent}>
         <OverlayHeader title="VARIABLE MEMORY" onClose={onClose} />
         <div className={styles.memoryActions}>
-          <button className={memoryAction === "recall" ? styles.optionActive : styles.optionButton} onClick={() => onSetMemoryAction("recall")} type="button">RECALL</button>
-          <button className={memoryAction === "store" ? styles.optionActive : styles.optionButton} onClick={() => onSetMemoryAction("store")} type="button">STORE Ans</button>
+          <button
+            className={
+              memoryAction === "recall"
+                ? styles.optionActive
+                : styles.optionButton
+            }
+            onClick={() => onSetMemoryAction("recall")}
+            type="button"
+          >
+            RECALL
+          </button>
+          <button
+            className={
+              memoryAction === "store"
+                ? styles.optionActive
+                : styles.optionButton
+            }
+            onClick={() => onSetMemoryAction("store")}
+            type="button"
+          >
+            STORE Ans
+          </button>
         </div>
         <div className={styles.memoryGrid}>
           {memoryNames.map((name) => (
-            <button key={name} onClick={() => onSelectMemory(name)} type="button">
+            <button
+              key={name}
+              onClick={() => onSelectMemory(name)}
+              type="button"
+            >
               <strong>{name}</strong>
               <span>{formatMathNumber(memory[name])}</span>
             </button>
@@ -516,7 +906,11 @@ function DisplayOverlay({
         <OverlayHeader title="ENGINEERING CONSTANTS" onClose={onClose} />
         <div className={styles.constantsList}>
           {constants.map((constant) => (
-            <button key={constant.id} onClick={() => onInsertConstant(constant.value)} type="button">
+            <button
+              key={constant.id}
+              onClick={() => onInsertConstant(constant.value)}
+              type="button"
+            >
               <strong>{constant.symbol}</strong>
               <span>{constant.name}</span>
             </button>
@@ -529,13 +923,25 @@ function DisplayOverlay({
   if (overlay === "history") {
     return (
       <div className={styles.overlayContent}>
-        <OverlayHeader title="RECENT HISTORY" onClose={onClose} actionLabel="Clear" onAction={onClearHistory} disabled={history.length === 0} />
+        <OverlayHeader
+          title="RECENT HISTORY"
+          onClose={onClose}
+          actionLabel="Clear"
+          onAction={onClearHistory}
+          disabled={history.length === 0}
+        />
         {history.length === 0 ? (
-          <p className={styles.emptyState}>Completed calculations appear here.</p>
+          <p className={styles.emptyState}>
+            Completed calculations appear here.
+          </p>
         ) : (
           <div className={styles.historyList}>
             {history.map((item, index) => (
-              <button key={`${item.expression}-${item.result}-${index}`} onClick={() => onRestoreHistory(item)} type="button">
+              <button
+                key={`${item.expression}-${item.result}-${index}`}
+                onClick={() => onRestoreHistory(item)}
+                type="button"
+              >
                 <span>{item.expression}</span>
                 <strong>= {item.result}</strong>
               </button>
@@ -550,7 +956,9 @@ function DisplayOverlay({
     <div className={styles.overlayContent}>
       <OverlayHeader title="WORKSPACE NOTICE" onClose={onClose} />
       <p className={styles.noticeText}>{notice}</p>
-      <button className={styles.returnButton} onClick={onClose} type="button">Return to calculator</button>
+      <button className={styles.returnButton} onClick={onClose} type="button">
+        Return to calculator
+      </button>
     </div>
   );
 }
@@ -563,15 +971,25 @@ type OverlayHeaderProps = {
   disabled?: boolean;
 };
 
-function OverlayHeader({ title, onClose, actionLabel, onAction, disabled }: OverlayHeaderProps) {
+function OverlayHeader({
+  title,
+  onClose,
+  actionLabel,
+  onAction,
+  disabled,
+}: OverlayHeaderProps) {
   return (
     <div className={styles.overlayHeader}>
       <p>{title}</p>
       <div>
         {actionLabel && onAction && (
-          <button disabled={disabled} onClick={onAction} type="button">{actionLabel}</button>
+          <button disabled={disabled} onClick={onAction} type="button">
+            {actionLabel}
+          </button>
         )}
-        <button onClick={onClose} type="button">Close</button>
+        <button onClick={onClose} type="button">
+          Close
+        </button>
       </div>
     </div>
   );

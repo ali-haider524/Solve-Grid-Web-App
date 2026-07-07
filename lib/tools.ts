@@ -31,28 +31,32 @@ export const toolCategories: Record<
 > = {
   math: {
     label: "Math & algebra tools",
-    description: "Graph functions, solve equations, find roots, calculate statistics, and work with matrices.",
+    description:
+      "Graph functions, solve equations, find roots, calculate statistics, and work with matrices.",
     slug: "math-calculators",
     intro:
       "Free online math calculators for graphing functions, solving algebra, finding polynomial roots, analysing data, and working with matrices.",
   },
   engineering: {
     label: "Scientific & engineering tools",
-    description: "Fast calculations for technical study, formulas, units, and numeric work.",
+    description:
+      "Fast calculations for technical study, formulas, units, and numeric work.",
     slug: "engineering-calculators",
     intro:
       "Free scientific and engineering calculators for technical study, unit conversion, formulas, and everyday numeric work.",
   },
   research: {
     label: "Research & simulation labs",
-    description: "Numerical modelling, systems analysis, and advanced study workspaces.",
+    description:
+      "Numerical modelling, systems analysis, and advanced study workspaces.",
     slug: "research-tools",
     intro:
       "Research-focused online tools for numerical models, differential equations, and carefully labeled simulation workflows.",
   },
   everyday: {
     label: "Everyday calculators",
-    description: "Useful percentage, finance, conversion, distance, and adult health-screening tools.",
+    description:
+      "Useful percentage, finance, conversion, distance, and adult health-screening tools.",
     slug: "everyday-calculators",
     intro:
       "Free everyday calculators for percentage, profit, interest, loan, discount, conversion, distance, and adult BMI screening tasks.",
@@ -66,11 +70,12 @@ export const tools: ToolInfo[] = [
     shortName: "Scientific",
     category: "engineering",
     icon: "√",
-    title: "Free Scientific Calculator Online",
+    title:
+      "Free Scientific Calculator Online – Trigonometry, Logs, Factorials & Engineering Notation",
     description:
-      "Use a free online scientific calculator for trigonometry, roots, logarithms, factorials, combinations, variables, and engineering notation.",
+      "Use a free online scientific calculator for trigonometry, roots, logarithms, factorials, combinations, variables, scientific notation, and engineering notation.",
     summary:
-      "Calculate trigonometry, roots, logs, combinations, factorials, integer functions, scientific notation, and reusable variables in a compact workspace.",
+      "Evaluate trigonometry, roots, logarithms, powers, combinations, factorials, integer functions, scientific notation, reusable variables, constants, and recent calculations in one focused workspace.",
     keywords: [
       "scientific calculator online",
       "engineering calculator",
@@ -79,32 +84,60 @@ export const tools: ToolInfo[] = [
       "factorial calculator",
       "ncr calculator",
       "gcd calculator",
+      "scientific notation calculator",
+      "engineering notation calculator",
+      "combination calculator",
+      "gcd lcm calculator",
     ],
-    relatedSlugs: ["graphing-calculator", "unit-converter", "matrix-calculator"],
+    relatedSlugs: [
+      "graphing-calculator",
+      "unit-converter",
+      "matrix-calculator",
+    ],
     featured: true,
     priority: 0.95,
     useCases: [
-      "Trigonometry, roots, and logarithms",
+      "Trigonometry, roots, powers, logarithms, and inverse trigonometric functions",
       "Factorials, combinations, permutations, GCD, and LCM",
-      "Powers, engineering notation, variables, and constants",
+      "Scientific notation, engineering notation, constants, variables, Ans recall, and history",
     ],
     features: [
-      "Degrees and radians",
-      "Scientific and engineering notation",
-      "factorial(), ncr(), npr(), gcd(), lcm()",
-      "Variables A, B, C, X, and Y",
+      "Degrees and radians for trigonometric calculations",
+      "Normal, scientific, and engineering result formats",
+      "factorial(), ncr(), npr(), gcd(), and lcm() input support",
+      "Variables A, B, C, X, and Y with Ans recall",
+      "History for recent completed expressions",
+      "Engineering constants including π, e, gravity, light speed, and Planck constant",
     ],
     faqs: [
       {
         question: "Does the scientific calculator work in degrees and radians?",
-        answer: "Yes. Use MODE to switch the angle mode before evaluating trigonometric functions.",
+        answer:
+          "Yes. Open MODE and choose DEG or RAD before evaluating trigonometric functions. For example, sin(30) equals 0.5 when the calculator is set to degrees.",
       },
       {
-        question: "Can I use scientific notation?",
-        answer: "Yes. Enter values such as 2.5e3 for 2500.",
+        question: "Can I use scientific notation and engineering notation?",
+        answer:
+          "Yes. Enter scientific notation such as 2.5e3 for 2500. MODE can format results as NORM, SCI, or ENG; engineering notation uses powers of ten in multiples of three.",
+      },
+      {
+        question: "Which functions can I type directly?",
+        answer:
+          "Use supported expressions such as sin(), cos(), tan(), asin(), acos(), atan(), sqrt(), log(), ln(), abs(), fact(), ncr(), npr(), gcd(), and lcm(), along with brackets, powers, and arithmetic operators.",
+      },
+      {
+        question: "Can I save a result for another calculation?",
+        answer:
+          "Yes. Use Ans for the previous answer or open VAR to store and recall values from A, B, C, X, and Y.",
+      },
+      {
+        question: "When should I use another SolveGrid tool?",
+        answer:
+          "Use Graphing Calculator for visual functions and tables, Matrix Calculator for linear algebra, and Unit Converter when a problem requires conversion between physical units.",
       },
     ],
   },
+
   {
     slug: "graphing-calculator",
     name: "Graphing Calculator",
@@ -113,30 +146,69 @@ export const tools: ToolInfo[] = [
     icon: "⌁",
     title: "Free Online Graphing Calculator",
     description:
-      "Plot equations online, compare up to eight graphs, inspect tables, trace values, zoom graphs, and explore functions.",
+      "Use a free online graphing calculator to plot up to eight equations, compare functions, inspect value tables, trace points, estimate roots and intersections, and adjust the graph window.",
     summary:
-      "Plot and compare several functions, inspect value tables, trace x-values, and adjust the graph window directly in your browser.",
+      "Plot and compare several functions, inspect tables and trace values, estimate x-intercepts and intersections, and adjust the graph window directly in your browser.",
     keywords: [
       "online graphing calculator",
       "plot equations online",
       "function graph calculator",
       "graph table calculator",
+      "graph multiple equations",
+      "graphing calculator with table",
+      "graph intersections calculator",
+      "x intercept calculator",
+      "online function plotter",
     ],
-    relatedSlugs: ["differential-equation-solver", "equation-solver", "polynomial-solver"],
+    relatedSlugs: [
+      "differential-equation-solver",
+      "equation-solver",
+      "polynomial-solver",
+    ],
     featured: true,
     priority: 0.95,
-    useCases: ["Plot functions", "Compare curves", "Inspect values and trace points"],
+    useCases: [
+      "Plot and compare up to eight functions or vertical lines",
+      "Inspect value tables and trace a chosen x-coordinate",
+      "Estimate roots and intersections in the current graph window",
+      "Explore trigonometric functions in degrees or radians",
+    ],
+    features: [
+      "Up to eight equation lines and vertical lines",
+      "Graph, table, trace, and analysis views",
+      "Approximate x-intercepts and function intersections",
+      "Zoom controls and custom x/y window settings",
+      "Degrees and radians for trigonometric functions",
+    ],
     faqs: [
       {
         question: "Can I graph more than one equation?",
-        answer: "Yes. Add up to eight equation lines and compare them in the same graph window.",
+        answer:
+          "Yes. Add up to eight equation lines and compare them in the same graph window. Enter functions such as y = 2x + 1 or y = x^2 − 4, and use x = 3 for a vertical line.",
       },
       {
         question: "Can I see a table of values?",
-        answer: "Yes. Switch to the Table view to inspect calculated x and y values.",
+        answer:
+          "Yes. Switch to Table view to inspect calculated x and y values around the current trace position for every visible valid function.",
+      },
+      {
+        question: "Can the graphing calculator find roots and intersections?",
+        answer:
+          "Yes. Open Analysis to see approximate x-intercepts and crossing points for visible functions inside the current graph window. Results are numerical estimates, so use an algebra tool when an exact answer is required.",
+      },
+      {
+        question: "Does this graphing calculator support degrees and radians?",
+        answer:
+          "Yes. Use the Angle mode control before graphing trigonometric functions. Choose degrees for degree-based questions and radians for radian-based questions.",
+      },
+      {
+        question: "Which expressions can I graph?",
+        answer:
+          "The workspace supports arithmetic with x, powers, parentheses, sin, cos, tan, inverse trigonometric functions, square roots, logs, natural logs, absolute value, and exponential functions. Unsupported syntax is marked in the equation list.",
       },
     ],
   },
+
   {
     slug: "equation-solver",
     name: "Equation Solver",
@@ -158,7 +230,11 @@ export const tools: ToolInfo[] = [
       "cramers rule calculator",
       "matrix equation solver",
     ],
-    relatedSlugs: ["matrix-calculator", "polynomial-solver", "graphing-calculator"],
+    relatedSlugs: [
+      "matrix-calculator",
+      "polynomial-solver",
+      "graphing-calculator",
+    ],
     featured: true,
     priority: 0.95,
     useCases: [
@@ -178,11 +254,13 @@ export const tools: ToolInfo[] = [
     faqs: [
       {
         question: "Which equation systems can this page solve?",
-        answer: "It solves square linear systems from 2 through 8 variables using a coefficient table and a selected matrix method.",
+        answer:
+          "It solves square linear systems from 2 through 8 variables using a coefficient table and a selected matrix method.",
       },
       {
         question: "Where should I solve degree four or higher?",
-        answer: "Use the Polynomial Solver for coefficient-based roots from degree 1 through 10.",
+        answer:
+          "Use the Polynomial Solver for coefficient-based roots from degree 1 through 10.",
       },
     ],
   },
@@ -203,7 +281,11 @@ export const tools: ToolInfo[] = [
       "find polynomial roots",
       "complex roots calculator",
     ],
-    relatedSlugs: ["equation-solver", "graphing-calculator", "matrix-calculator"],
+    relatedSlugs: [
+      "equation-solver",
+      "graphing-calculator",
+      "matrix-calculator",
+    ],
     priority: 0.9,
     useCases: [
       "Quartic equations",
@@ -213,11 +295,13 @@ export const tools: ToolInfo[] = [
     faqs: [
       {
         question: "Does this tool support quartic equations?",
-        answer: "Yes. Choose degree 4 and enter coefficients from x⁴ through the constant term.",
+        answer:
+          "Yes. Choose degree 4 and enter coefficients from x⁴ through the constant term.",
       },
       {
         question: "Why can results be complex?",
-        answer: "A polynomial can have roots containing i when no corresponding real root exists.",
+        answer:
+          "A polynomial can have roots containing i when no corresponding real root exists.",
       },
     ],
   },
@@ -229,11 +313,13 @@ export const tools: ToolInfo[] = [
     icon: "[ ]",
     title: "Matrix Calculator – RREF, Rank, Inverse, Eigenvalues & Systems",
     description:
-      "Use an online 2×2 to 10×10 matrix calculator for determinant, inverse, transpose, REF, RREF, rank, cofactor, adjugate, matrix arithmetic, eigenvalues, and linear systems.",
+      "Use an online 2×2 to 10×10 matrix calculator and matrix reducer for determinant, inverse, transpose, REF, RREF, rank, matrix arithmetic, eigenvalues, and linear systems.",
     summary:
-      "Build or paste flexible matrices, then calculate arithmetic, row reduction, inverse, rank, cofactors, adjugate, 2×2 eigenvalues, and A·x = b systems.",
+      "Build or paste 2×2 through 10×10 matrices, then calculate arithmetic, row reduction, rank, inverse, determinants, cofactors, adjugates, 2×2 eigenvalues, and A·x = b systems.",
     keywords: [
       "matrix calculator",
+      "matrix reducer calculator",
+      "matrix reduction calculator",
       "rref calculator",
       "row echelon form calculator",
       "matrix rank calculator",
@@ -244,31 +330,55 @@ export const tools: ToolInfo[] = [
       "adjugate matrix calculator",
       "gauss jordan matrix calculator",
     ],
-    relatedSlugs: ["equation-solver", "differential-equation-solver", "scientific-calculator"],
+    relatedSlugs: [
+      "equation-solver",
+      "differential-equation-solver",
+      "scientific-calculator",
+    ],
     featured: true,
     priority: 0.9,
-    useCases: ["2×2 through 10×10 matrices", "REF, RREF, rank, transpose, inverse, and trace", "Matrix products, eigenvalues, and linear systems"],
+    useCases: [
+      "2×2 through 10×10 matrix calculations",
+      "REF, RREF, matrix rank, transpose, determinant, trace, and inverse",
+      "Matrix arithmetic, 2×2 eigenvalues, and A·x = b linear systems",
+    ],
     features: [
-      "Matrix addition and subtraction",
-      "Matrix multiplication and scalar multiplication",
-      "Determinant, trace, transpose, inverse, rank",
-      "REF and Gauss-Jordan RREF",
-      "Cofactor matrix and adjugate",
-      "2×2 eigenvalues",
-      "A·x = b with Gaussian, RREF, inverse, or Cramer's method",
+      "Matrix addition, subtraction, multiplication, and scalar multiplication",
+      "REF, Gauss-Jordan RREF, and matrix rank",
+      "Determinant, trace, transpose, inverse, cofactor matrix, and adjugate",
+      "2×2 eigenvalues and square linear systems",
+      "Fractions, scientific notation, and spreadsheet paste input",
     ],
     faqs: [
       {
         question: "What matrix sizes are supported?",
-        answer: "This workspace supports editable matrices from 2×2 through 10×10. Large grids scroll inside their card on mobile screens.",
+        answer:
+          "This workspace supports editable matrices from 2×2 through 10×10. Large grids scroll inside their card on mobile screens.",
+      },
+      {
+        question: "What is a matrix reducer calculator?",
+        answer:
+          "A matrix reducer calculator uses row operations to put a matrix into REF or RREF. This workspace provides both forms and also calculates rank from the pivot columns in RREF.",
+      },
+      {
+        question: "What is the difference between REF and RREF?",
+        answer:
+          "REF uses forward elimination to create pivots with zeros below them. RREF continues until each pivot is 1 and every other entry in a pivot column is zero.",
+      },
+      {
+        question: "Can I calculate matrix rank?",
+        answer:
+          "Yes. Choose rank(A) to count the independent pivot columns after row reduction. A repeated or dependent row does not increase the rank.",
       },
       {
         question: "Can I solve a linear system with a matrix?",
-        answer: "Yes. Enter square matrix A and vector b, then select Auto, Gaussian elimination, Gauss-Jordan RREF, matrix inverse, or Cramer's rule where supported.",
+        answer:
+          "Yes. Enter square matrix A and vector b, then select Auto, Gaussian elimination, Gauss-Jordan RREF, matrix inverse, or Cramer’s rule where supported.",
       },
       {
         question: "When does an inverse not exist?",
-        answer: "An inverse does not exist when the determinant is zero.",
+        answer:
+          "An inverse does not exist when a square matrix has determinant zero. In that case, the rows or columns are linearly dependent.",
       },
     ],
   },
@@ -290,18 +400,29 @@ export const tools: ToolInfo[] = [
       "linear regression calculator",
       "standard deviation calculator",
     ],
-    relatedSlugs: ["differential-equation-solver", "graphing-calculator", "matrix-calculator"],
+    relatedSlugs: [
+      "differential-equation-solver",
+      "graphing-calculator",
+      "matrix-calculator",
+    ],
     featured: true,
     priority: 0.9,
-    useCases: ["Mean, median, quartiles, and IQR", "Population and sample standard deviation", "Frequency tables and linear regression"],
+    useCases: [
+      "Mean, median, quartiles, and IQR",
+      "Population and sample standard deviation",
+      "Frequency tables and linear regression",
+    ],
     faqs: [
       {
         question: "How should I enter data?",
-        answer: "Raw data accepts commas, spaces, semicolons, or new lines. Frequency mode accepts pairs such as 12:3, and regression accepts matching X and Y lists.",
+        answer:
+          "Raw data accepts commas, spaces, semicolons, or new lines. Frequency mode accepts pairs such as 12:3, and regression accepts matching X and Y lists.",
       },
       {
-        question: "What is the difference between population and sample standard deviation?",
-        answer: "Population standard deviation divides by the full number of values. Sample standard deviation uses one fewer degree of freedom.",
+        question:
+          "What is the difference between population and sample standard deviation?",
+        answer:
+          "Population standard deviation divides by the full number of values. Sample standard deviation uses one fewer degree of freedom.",
       },
     ],
   },
@@ -325,18 +446,28 @@ export const tools: ToolInfo[] = [
       "density converter",
       "temperature converter",
     ],
-    relatedSlugs: ["distance-calculator", "scientific-calculator", "percentage-calculator"],
+    relatedSlugs: [
+      "distance-calculator",
+      "scientific-calculator",
+      "percentage-calculator",
+    ],
     featured: true,
     priority: 0.9,
-    useCases: ["Force, pressure, energy, power, and torque", "Length, area, volume, density, and temperature", "Speed, time, angles, frequency, and data units"],
+    useCases: [
+      "Force, pressure, energy, power, and torque",
+      "Length, area, volume, density, and temperature",
+      "Speed, time, angles, frequency, and data units",
+    ],
     faqs: [
       {
         question: "Which unit categories are included?",
-        answer: "Length, area, volume, mass, temperature, time, speed, acceleration, angles, data, force, pressure, energy, power, torque, frequency, and density are included.",
+        answer:
+          "Length, area, volume, mass, temperature, time, speed, acceleration, angles, data, force, pressure, energy, power, torque, frequency, and density are included.",
       },
       {
         question: "Does temperature conversion use a different formula?",
-        answer: "Yes. Temperature uses formulas rather than simple multiplication because Celsius, Fahrenheit, and Kelvin have different zero points.",
+        answer:
+          "Yes. Temperature uses formulas rather than simple multiplication because Celsius, Fahrenheit, and Kelvin have different zero points.",
       },
     ],
   },
@@ -359,17 +490,27 @@ export const tools: ToolInfo[] = [
       "profit margin calculator",
       "compound growth calculator",
     ],
-    relatedSlugs: ["profit-loss-calculator", "discount-calculator", "compound-interest-calculator"],
+    relatedSlugs: [
+      "profit-loss-calculator",
+      "discount-calculator",
+      "compound-interest-calculator",
+    ],
     priority: 0.85,
-    useCases: ["Percentage change and reverse percentages", "Markup and profit margin", "Compound growth over multiple periods"],
+    useCases: [
+      "Percentage change and reverse percentages",
+      "Markup and profit margin",
+      "Compound growth over multiple periods",
+    ],
     faqs: [
       {
         question: "How is percentage change calculated?",
-        answer: "It is calculated as (new value − original value) ÷ original value × 100.",
+        answer:
+          "It is calculated as (new value − original value) ÷ original value × 100.",
       },
       {
         question: "Can I calculate a discount?",
-        answer: "Yes. Use the percentage-of-a-value mode to calculate the discount amount, then subtract it from the original price.",
+        answer:
+          "Yes. Use the percentage-of-a-value mode to calculate the discount amount, then subtract it from the original price.",
       },
     ],
   },
@@ -390,9 +531,17 @@ export const tools: ToolInfo[] = [
       "speed distance time calculator",
       "midpoint calculator",
     ],
-    relatedSlugs: ["unit-converter", "graphing-calculator", "percentage-calculator"],
+    relatedSlugs: [
+      "unit-converter",
+      "graphing-calculator",
+      "percentage-calculator",
+    ],
     priority: 0.85,
-    useCases: ["Coordinate distance", "Midpoint calculations", "Speed, distance, and time"],
+    useCases: [
+      "Coordinate distance",
+      "Midpoint calculations",
+      "Speed, distance, and time",
+    ],
     faqs: [
       {
         question: "What distance formula is used for coordinates?",
@@ -400,7 +549,8 @@ export const tools: ToolInfo[] = [
       },
       {
         question: "Can I use it for travel distance?",
-        answer: "Yes. Use the speed and time mode to calculate one unknown value from the other two.",
+        answer:
+          "Yes. Use the speed and time mode to calculate one unknown value from the other two.",
       },
     ],
   },
@@ -426,7 +576,7 @@ export const tools: ToolInfo[] = [
     featured: true,
     priority: 0.88,
     useCases: [
-      "Age from date of birth", 
+      "Age from date of birth",
       "Age on a selected date",
       "Years, months, days, weeks, and total days",
     ],
@@ -441,15 +591,18 @@ export const tools: ToolInfo[] = [
     faqs: [
       {
         question: "Can I calculate age on a date other than today?",
-        answer: "Yes. Choose any valid reference date in the Calculate age on field.",
+        answer:
+          "Yes. Choose any valid reference date in the Calculate age on field.",
       },
       {
         question: "Does the calculator save my date of birth?",
-        answer: "No. The calculation runs in your browser. Dates are only placed in a shareable link when you choose Copy link.",
+        answer:
+          "No. The calculation runs in your browser. Dates are only placed in a shareable link when you choose Copy link.",
       },
       {
         question: "How are leap-day birthdays handled?",
-        answer: "For a February 29 birthday, the next birthday is shown on the last day of February in years without February 29.",
+        answer:
+          "For a February 29 birthday, the next birthday is shown on the last day of February in years without February 29.",
       },
     ],
   },
@@ -470,17 +623,27 @@ export const tools: ToolInfo[] = [
       "BMI metric calculator",
       "BMI imperial calculator",
     ],
-    relatedSlugs: ["unit-converter", "percentage-calculator", "distance-calculator"],
+    relatedSlugs: [
+      "unit-converter",
+      "percentage-calculator",
+      "distance-calculator",
+    ],
     priority: 0.8,
-    useCases: ["Metric BMI calculation", "Imperial BMI calculation", "Formula and screening context"],
+    useCases: [
+      "Metric BMI calculation",
+      "Imperial BMI calculation",
+      "Formula and screening context",
+    ],
     faqs: [
       {
         question: "Is BMI a diagnosis?",
-        answer: "No. BMI is a screening measure and does not diagnose health conditions or account for every individual factor.",
+        answer:
+          "No. BMI is a screening measure and does not diagnose health conditions or account for every individual factor.",
       },
       {
         question: "Is this BMI tool for children and teens?",
-        answer: "No. This page is designed for adults 20 and older. Younger people need age- and sex-specific assessment from a qualified health professional.",
+        answer:
+          "No. This page is designed for adults 20 and older. Younger people need age- and sex-specific assessment from a qualified health professional.",
       },
     ],
   },
@@ -505,7 +668,11 @@ export const tools: ToolInfo[] = [
       "numerical ode solver",
       "phase plot calculator",
     ],
-    relatedSlugs: ["optimization-lab", "advanced-statistics", "graphing-calculator"],
+    relatedSlugs: [
+      "optimization-lab",
+      "advanced-statistics",
+      "graphing-calculator",
+    ],
     featured: true,
     priority: 0.92,
     useCases: [
@@ -524,11 +691,13 @@ export const tools: ToolInfo[] = [
     faqs: [
       {
         question: "Which numerical methods are available?",
-        answer: "The lab provides Euler, Improved Euler (Heun), and classical Runge–Kutta 4 with a user-selected fixed step size.",
+        answer:
+          "The lab provides Euler, Improved Euler (Heun), and classical Runge–Kutta 4 with a user-selected fixed step size.",
       },
       {
         question: "Are the results exact?",
-        answer: "No. The workspace reports numerical approximations. Reduce the step size and compare methods when accuracy matters.",
+        answer:
+          "No. The workspace reports numerical approximations. Reduce the step size and compare methods when accuracy matters.",
       },
     ],
   },
@@ -550,7 +719,11 @@ export const tools: ToolInfo[] = [
       "algebraic equivalence checker",
       "symbolic differentiation online",
     ],
-    relatedSlugs: ["equation-solver", "scientific-calculator", "graphing-calculator"],
+    relatedSlugs: [
+      "equation-solver",
+      "scientific-calculator",
+      "graphing-calculator",
+    ],
     featured: true,
     priority: 0.9,
     useCases: [
@@ -567,11 +740,13 @@ export const tools: ToolInfo[] = [
     faqs: [
       {
         question: "Is this a formal proof system?",
-        answer: "No. It uses algebra-engine simplification and differentiation. A result should not be treated as a formal proof over every possible domain.",
+        answer:
+          "No. It uses algebra-engine simplification and differentiation. A result should not be treated as a formal proof over every possible domain.",
       },
       {
         question: "Which variables can I use?",
-        answer: "Use x, y, z, a, b, or c with supported arithmetic and common real-valued functions.",
+        answer:
+          "Use x, y, z, a, b, or c with supported arithmetic and common real-valued functions.",
       },
     ],
   },
@@ -593,7 +768,11 @@ export const tools: ToolInfo[] = [
       "minimize linear constraints calculator",
       "graphical method linear programming",
     ],
-    relatedSlugs: ["graphing-calculator", "matrix-calculator", "differential-equation-solver"],
+    relatedSlugs: [
+      "graphing-calculator",
+      "matrix-calculator",
+      "differential-equation-solver",
+    ],
     featured: true,
     priority: 0.9,
     useCases: [
@@ -610,11 +789,13 @@ export const tools: ToolInfo[] = [
     faqs: [
       {
         question: "Does this solve integer programming?",
-        answer: "No. This release solves continuous two-variable linear programs using corner-point evaluation. Integer and binary optimization need a separate solver.",
+        answer:
+          "No. This release solves continuous two-variable linear programs using corner-point evaluation. Integer and binary optimization need a separate solver.",
       },
       {
         question: "Can a linear program be unbounded?",
-        answer: "Yes. Check the constraints and feasible region before treating a corner-point result as a complete unboundedness test.",
+        answer:
+          "Yes. Check the constraints and feasible region before treating a corner-point result as a complete unboundedness test.",
       },
     ],
   },
@@ -637,7 +818,11 @@ export const tools: ToolInfo[] = [
       "series parallel resistor calculator",
       "rc circuit calculator",
     ],
-    relatedSlugs: ["scientific-calculator", "unit-converter", "matrix-calculator"],
+    relatedSlugs: [
+      "scientific-calculator",
+      "unit-converter",
+      "matrix-calculator",
+    ],
     priority: 0.88,
     useCases: [
       "Ohm's law and resistor networks",
@@ -654,11 +839,13 @@ export const tools: ToolInfo[] = [
     faqs: [
       {
         question: "Is this a full SPICE simulator?",
-        answer: "No. It is an ideal DC circuit-analysis workspace. Full device models, AC sweeps, and transient SPICE simulations require a dedicated simulation engine.",
+        answer:
+          "No. It is an ideal DC circuit-analysis workspace. Full device models, AC sweeps, and transient SPICE simulations require a dedicated simulation engine.",
       },
       {
         question: "How are current sources defined in nodal analysis?",
-        answer: "Positive I1 and I2 values are current injected into their corresponding nodes.",
+        answer:
+          "Positive I1 and I2 values are current injected into their corresponding nodes.",
       },
     ],
   },
@@ -681,7 +868,11 @@ export const tools: ToolInfo[] = [
       "pearson correlation calculator",
       "linear regression significance calculator",
     ],
-    relatedSlugs: ["statistics-calculator", "graphing-calculator", "differential-equation-solver"],
+    relatedSlugs: [
+      "statistics-calculator",
+      "graphing-calculator",
+      "differential-equation-solver",
+    ],
     featured: true,
     priority: 0.9,
     useCases: [
@@ -699,11 +890,13 @@ export const tools: ToolInfo[] = [
     faqs: [
       {
         question: "Do p values prove a research conclusion?",
-        answer: "No. Statistical outputs depend on assumptions, study design, data quality, and the question being asked.",
+        answer:
+          "No. Statistical outputs depend on assumptions, study design, data quality, and the question being asked.",
       },
       {
         question: "Which ANOVA is included?",
-        answer: "This workspace provides a one-way ANOVA for three or more independent groups entered as numeric lists.",
+        answer:
+          "This workspace provides a one-way ANOVA for three or more independent groups entered as numeric lists.",
       },
     ],
   },
@@ -714,17 +907,45 @@ export const tools: ToolInfo[] = [
     category: "everyday",
     icon: "±",
     title: "Profit and Loss Calculator – Margin, Markup & Percentages",
-    description: "Calculate profit, loss, markup percentage, and profit margin from cost price and selling price with a free online calculator.",
-    summary: "Compare cost and selling price to calculate profit or loss amount, percentage on cost, and selling-price margin.",
-    keywords: ["profit and loss calculator", "profit margin calculator", "markup calculator", "cost price selling price calculator"],
-    relatedSlugs: ["percentage-calculator", "discount-calculator", "simple-interest-calculator"],
+    description:
+      "Calculate profit, loss, markup percentage, and profit margin from cost price and selling price with a free online calculator.",
+    summary:
+      "Compare cost and selling price to calculate profit or loss amount, percentage on cost, and selling-price margin.",
+    keywords: [
+      "profit and loss calculator",
+      "profit margin calculator",
+      "markup calculator",
+      "cost price selling price calculator",
+    ],
+    relatedSlugs: [
+      "percentage-calculator",
+      "discount-calculator",
+      "simple-interest-calculator",
+    ],
     featured: true,
     priority: 0.88,
-    useCases: ["Profit and loss amount", "Markup percentage on cost", "Profit margin on selling price"],
-    features: ["Profit calculator", "Loss calculator", "Markup percentage", "Profit margin percentage"],
+    useCases: [
+      "Profit and loss amount",
+      "Markup percentage on cost",
+      "Profit margin on selling price",
+    ],
+    features: [
+      "Profit calculator",
+      "Loss calculator",
+      "Markup percentage",
+      "Profit margin percentage",
+    ],
     faqs: [
-      { question: "What is the difference between markup and margin?", answer: "Markup is measured against cost, while margin is measured against selling price." },
-      { question: "Can this calculator show a loss percentage?", answer: "Yes. Enter a selling price below cost and the calculator shows the loss amount and percentage of cost." },
+      {
+        question: "What is the difference between markup and margin?",
+        answer:
+          "Markup is measured against cost, while margin is measured against selling price.",
+      },
+      {
+        question: "Can this calculator show a loss percentage?",
+        answer:
+          "Yes. Enter a selling price below cost and the calculator shows the loss amount and percentage of cost.",
+      },
     ],
   },
   {
@@ -734,16 +955,43 @@ export const tools: ToolInfo[] = [
     category: "everyday",
     icon: "i",
     title: "Simple Interest Calculator – Principal, Rate & Time",
-    description: "Calculate simple interest and total amount from principal, annual interest rate, and time with a free online simple interest calculator.",
-    summary: "Use principal, annual rate, and years to calculate simple interest and final amount in a clear result panel.",
-    keywords: ["simple interest calculator", "interest calculator", "principal rate time calculator", "simple interest formula"],
-    relatedSlugs: ["compound-interest-calculator", "loan-calculator", "percentage-calculator"],
+    description:
+      "Calculate simple interest and total amount from principal, annual interest rate, and time with a free online simple interest calculator.",
+    summary:
+      "Use principal, annual rate, and years to calculate simple interest and final amount in a clear result panel.",
+    keywords: [
+      "simple interest calculator",
+      "interest calculator",
+      "principal rate time calculator",
+      "simple interest formula",
+    ],
+    relatedSlugs: [
+      "compound-interest-calculator",
+      "loan-calculator",
+      "percentage-calculator",
+    ],
     priority: 0.88,
-    useCases: ["Simple interest formula", "Interest earned over time", "Total maturity amount"],
-    features: ["Principal, rate, and time inputs", "Interest earned", "Total maturity amount"],
+    useCases: [
+      "Simple interest formula",
+      "Interest earned over time",
+      "Total maturity amount",
+    ],
+    features: [
+      "Principal, rate, and time inputs",
+      "Interest earned",
+      "Total maturity amount",
+    ],
     faqs: [
-      { question: "What formula does simple interest use?", answer: "Simple interest equals principal multiplied by annual rate multiplied by time, divided by 100." },
-      { question: "When should I use compound interest instead?", answer: "Use compound interest when interest is periodically added to the balance and then earns interest itself." },
+      {
+        question: "What formula does simple interest use?",
+        answer:
+          "Simple interest equals principal multiplied by annual rate multiplied by time, divided by 100.",
+      },
+      {
+        question: "When should I use compound interest instead?",
+        answer:
+          "Use compound interest when interest is periodically added to the balance and then earns interest itself.",
+      },
     ],
   },
   {
@@ -753,17 +1001,44 @@ export const tools: ToolInfo[] = [
     category: "everyday",
     icon: "↗",
     title: "Compound Interest Calculator – Growth, Contributions & Frequency",
-    description: "Calculate compound interest, future value, interest earned, regular contributions, and annual, monthly, quarterly, weekly, or daily compounding online.",
-    summary: "Project compound growth using a starting balance, annual rate, years, frequency, and optional regular contributions.",
-    keywords: ["compound interest calculator", "future value calculator", "investment growth calculator", "monthly compounding calculator"],
-    relatedSlugs: ["simple-interest-calculator", "loan-calculator", "percentage-calculator"],
+    description:
+      "Calculate compound interest, future value, interest earned, regular contributions, and annual, monthly, quarterly, weekly, or daily compounding online.",
+    summary:
+      "Project compound growth using a starting balance, annual rate, years, frequency, and optional regular contributions.",
+    keywords: [
+      "compound interest calculator",
+      "future value calculator",
+      "investment growth calculator",
+      "monthly compounding calculator",
+    ],
+    relatedSlugs: [
+      "simple-interest-calculator",
+      "loan-calculator",
+      "percentage-calculator",
+    ],
     featured: true,
     priority: 0.9,
-    useCases: ["Compound interest growth", "Regular contribution projections", "Future value and interest earned"],
-    features: ["Annual to daily compounding", "Optional recurring contributions", "Future value, deposits, and interest"],
+    useCases: [
+      "Compound interest growth",
+      "Regular contribution projections",
+      "Future value and interest earned",
+    ],
+    features: [
+      "Annual to daily compounding",
+      "Optional recurring contributions",
+      "Future value, deposits, and interest",
+    ],
     faqs: [
-      { question: "Can I choose monthly compounding?", answer: "Yes. Choose monthly, quarterly, annual, weekly, bi-weekly, or daily compounding." },
-      { question: "How are regular contributions handled?", answer: "The calculator applies an end-of-period contribution using the selected compounding frequency." },
+      {
+        question: "Can I choose monthly compounding?",
+        answer:
+          "Yes. Choose monthly, quarterly, annual, weekly, bi-weekly, or daily compounding.",
+      },
+      {
+        question: "How are regular contributions handled?",
+        answer:
+          "The calculator applies an end-of-period contribution using the selected compounding frequency.",
+      },
     ],
   },
   {
@@ -773,17 +1048,44 @@ export const tools: ToolInfo[] = [
     category: "everyday",
     icon: "₤",
     title: "Loan Payment Calculator – Monthly Payment & Total Interest",
-    description: "Estimate monthly, bi-weekly, or weekly loan payments, total repaid, and total interest from loan amount, annual rate, and term.",
-    summary: "Estimate an amortized payment, total repayment, and interest for a loan using a chosen payment frequency.",
-    keywords: ["loan calculator", "monthly payment calculator", "loan interest calculator", "amortization payment calculator"],
-    relatedSlugs: ["compound-interest-calculator", "simple-interest-calculator", "percentage-calculator"],
+    description:
+      "Estimate monthly, bi-weekly, or weekly loan payments, total repaid, and total interest from loan amount, annual rate, and term.",
+    summary:
+      "Estimate an amortized payment, total repayment, and interest for a loan using a chosen payment frequency.",
+    keywords: [
+      "loan calculator",
+      "monthly payment calculator",
+      "loan interest calculator",
+      "amortization payment calculator",
+    ],
+    relatedSlugs: [
+      "compound-interest-calculator",
+      "simple-interest-calculator",
+      "percentage-calculator",
+    ],
     featured: true,
     priority: 0.9,
-    useCases: ["Monthly loan payment", "Total interest estimate", "Weekly and bi-weekly payments"],
-    features: ["Amortized periodic payment", "Total repaid", "Total interest", "Monthly, bi-weekly, or weekly frequency"],
+    useCases: [
+      "Monthly loan payment",
+      "Total interest estimate",
+      "Weekly and bi-weekly payments",
+    ],
+    features: [
+      "Amortized periodic payment",
+      "Total repaid",
+      "Total interest",
+      "Monthly, bi-weekly, or weekly frequency",
+    ],
     faqs: [
-      { question: "Does this include lender fees?", answer: "No. This is an amortized payment estimate and does not include lender-specific fees, insurance, taxes, or rounding rules." },
-      { question: "Can I choose a weekly payment frequency?", answer: "Yes. Choose monthly, bi-weekly, or weekly payment frequency." },
+      {
+        question: "Does this include lender fees?",
+        answer:
+          "No. This is an amortized payment estimate and does not include lender-specific fees, insurance, taxes, or rounding rules.",
+      },
+      {
+        question: "Can I choose a weekly payment frequency?",
+        answer: "Yes. Choose monthly, bi-weekly, or weekly payment frequency.",
+      },
     ],
   },
   {
@@ -793,16 +1095,43 @@ export const tools: ToolInfo[] = [
     category: "everyday",
     icon: "↓",
     title: "Discount Calculator – Sale Price, Savings & Tax",
-    description: "Calculate discount amount, sale price, savings, and tax-adjusted final price from an original price and percentage discount online.",
-    summary: "Calculate a discount amount, sale price, optional tax, and final price with a compact discount calculator.",
-    keywords: ["discount calculator", "sale price calculator", "discount percentage calculator", "price after tax calculator"],
-    relatedSlugs: ["percentage-calculator", "profit-loss-calculator", "loan-calculator"],
+    description:
+      "Calculate discount amount, sale price, savings, and tax-adjusted final price from an original price and percentage discount online.",
+    summary:
+      "Calculate a discount amount, sale price, optional tax, and final price with a compact discount calculator.",
+    keywords: [
+      "discount calculator",
+      "sale price calculator",
+      "discount percentage calculator",
+      "price after tax calculator",
+    ],
+    relatedSlugs: [
+      "percentage-calculator",
+      "profit-loss-calculator",
+      "loan-calculator",
+    ],
     priority: 0.86,
-    useCases: ["Discount amount", "Sale price after discount", "Tax-adjusted final price"],
-    features: ["Discount percentage", "Sale price", "Tax after discount", "Savings amount"],
+    useCases: [
+      "Discount amount",
+      "Sale price after discount",
+      "Tax-adjusted final price",
+    ],
+    features: [
+      "Discount percentage",
+      "Sale price",
+      "Tax after discount",
+      "Savings amount",
+    ],
     faqs: [
-      { question: "Is tax applied before or after the discount?", answer: "This tool applies the discount first, then calculates tax on the discounted sale price." },
-      { question: "Can I set tax to zero?", answer: "Yes. Enter zero when no tax needs to be included." },
+      {
+        question: "Is tax applied before or after the discount?",
+        answer:
+          "This tool applies the discount first, then calculates tax on the discounted sale price.",
+      },
+      {
+        question: "Can I set tax to zero?",
+        answer: "Yes. Enter zero when no tax needs to be included.",
+      },
     ],
   },
 ];

@@ -84,3 +84,32 @@
 
 /* V8 mobile graph-first workspace */
 @media(max-width:640px){.page{padding-bottom:42px}.container{width:min(100% - 20px,1180px)}.intro{padding:20px 0 14px;text-align:left}.intro h1{font-size:clamp(1.72rem,8vw,2.15rem);line-height:1.04}.intro span{margin-top:9px;font-size:.84rem;line-height:1.55}.workspace{display:flex;flex-direction:column;gap:12px}.graphPanel{order:1;border-radius:16px}.controlPanel{order:2;padding:15px;border-radius:16px}.graphToolbar{padding:12px 14px}.graphToolbar h2{font-size:1.1rem}.canvasWrap{min-height:295px}.panelHeading{align-items:center}.inputGuide{margin-top:11px}.templateRow{overflow-x:auto;flex-wrap:nowrap;padding-bottom:2px;scrollbar-width:none}.templateRow button{flex:0 0 auto}.equationList{max-height:292px;overflow-y:auto;padding-right:2px}}
+
+
+/* V9 graphing-page learning and SEO content: keeps the working calculator above the guidance. */
+.graphingGuide{display:grid;gap:18px;margin-top:18px}
+.guideHeader,.exampleHeader{display:flex;align-items:end;justify-content:space-between;gap:22px;padding:4px 2px}
+.guideHeader p,.exampleHeader p,.methodGrid article>p,.accuracyNote p:first-child{margin:0;color:#3157e8;font-size:.66rem;font-weight:900;letter-spacing:.13em}
+.guideHeader h2,.exampleHeader h2{max-width:700px;margin:8px 0 0;color:#172640;font-size:clamp(1.52rem,2.8vw,2.25rem);letter-spacing:-.055em;line-height:1.1}
+.guideHeader>span,.exampleHeader>span{max-width:370px;color:#667791;font-size:.86rem;line-height:1.62}
+.featureGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.featureGrid article,.methodGrid article,.exampleGrid article{padding:18px;border:1px solid #dce5f2;border-radius:16px;background:#fff;box-shadow:0 8px 20px rgba(30,53,100,.045)}
+.featureGrid b{display:grid;place-items:center;width:28px;height:28px;border-radius:8px;background:#eaf0ff;color:#3157e8;font:900 .68rem ui-monospace,SFMono-Regular,Menlo,monospace}
+.featureGrid h3,.methodGrid h3,.exampleGrid h3,.accuracyNote h3{margin:11px 0 0;color:#1d3151;font-size:1rem;letter-spacing:-.035em;line-height:1.2}
+.featureGrid p,.methodGrid span,.exampleGrid>article>p,.accuracyNote>p{margin:8px 0 0;color:#667892;font-size:.83rem;line-height:1.63}
+.featureGrid code,.methodGrid code{padding:1px 3px;border-radius:4px;background:#f0f4ff;color:#3157e8;font:800 .75rem ui-monospace,SFMono-Regular,Menlo,monospace}
+.methodGrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.methodGrid article{min-height:176px;background:linear-gradient(145deg,#f9fbff,#fff)}
+.methodGrid h3{font-size:.96rem}
+.exampleHeader{margin-top:8px}
+.exampleGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.exampleGrid article{min-height:242px}
+.exampleGrid article>span{display:block;color:#3157e8;font-size:.63rem;font-weight:900;letter-spacing:.12em}
+.equationLine{padding:9px 10px;border:1px solid #d5e1f4;border-radius:9px;background:#f7faff;color:#3157e8!important;font:800 .74rem/1.5 ui-monospace,SFMono-Regular,Menlo,monospace}
+.exampleGrid strong{color:#3157e8}
+.accuracyNote{display:grid;grid-template-columns:minmax(210px,.7fr) minmax(0,1.3fr);gap:22px;align-items:start;padding:20px 22px;border:1px solid #cddafb;border-radius:17px;background:#edf3ff}
+.accuracyNote h3{margin-top:8px;font-size:1.08rem}
+.accuracyNote>p{margin:0;font-size:.85rem}
+.accuracyNote a{color:#3157e8;font-weight:850;text-decoration:underline;text-underline-offset:2px}
+@media(max-width:920px){.featureGrid{grid-template-columns:repeat(2,minmax(0,1fr))}.methodGrid{grid-template-columns:repeat(2,minmax(0,1fr))}.exampleGrid{grid-template-columns:1fr}.exampleGrid article{min-height:0}}
+@media(max-width:640px){.graphingGuide{gap:14px;margin-top:14px}.guideHeader,.exampleHeader{display:grid;gap:9px;padding:2px 0}.guideHeader h2,.exampleHeader h2{font-size:1.43rem}.guideHeader>span,.exampleHeader>span{font-size:.81rem}.featureGrid,.methodGrid{grid-template-columns:1fr;gap:10px}.featureGrid article,.methodGrid article,.exampleGrid article{padding:16px;border-radius:14px}.methodGrid article{min-height:0}.accuracyNote{grid-template-columns:1fr;gap:10px;padding:17px;border-radius:15px}.accuracyNote>p{font-size:.81rem}}
