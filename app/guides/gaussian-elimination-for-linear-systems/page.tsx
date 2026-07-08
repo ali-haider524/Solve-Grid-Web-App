@@ -3,7 +3,7 @@ import { createStaticPageMetadata } from "../../../lib/seo";
 
 export const metadata = createStaticPageMetadata(
   "Gaussian Elimination for Linear Systems",
-  "Learn Gaussian elimination with row operations, augmented matrices, back-substitution, and RREF checks for linear systems.",
+  "Learn Gaussian elimination with row operations, augmented matrices, REF, RREF, rank checks, pivots, and back-substitution for linear systems.",
   "/guides/gaussian-elimination-for-linear-systems",
 );
 
@@ -11,11 +11,11 @@ export default function GaussianEliminationGuide() {
   return (
     <GuideArticle
       eyebrow="LINEAR ALGEBRA GUIDE"
-      title="Gaussian elimination for solving linear systems"
-      description="Gaussian elimination is a row-reduction method for solving simultaneous linear equations. It turns a coefficient system into a simpler augmented matrix, then uses back-substitution to find the unknown values. On SolveGrid, you can use the Matrix Calculator to inspect REF, RREF, rank, and A·x = b workflows."
+      title="Gaussian elimination for solving linear systems step by step"
+      description="Gaussian elimination is a row-reduction method for solving simultaneous linear equations. It turns a coefficient system into REF, or row echelon form, then uses back-substitution to find the unknown values. On SolveGrid, you can use the Matrix Calculator as a matrix reducer to inspect REF, RREF, rank, pivot columns, and A·x = b workflows."
       slug="gaussian-elimination-for-linear-systems"
-      formula="Valid row operations: swap two rows; multiply one row by a non-zero constant; add a multiple of one row to another row."
-      example="For x − y = 1 and 2x + y = 8, start with [[1, −1 | 1], [2, 1 | 8]]. Replace row 2 with row 2 − 2·row 1 to get [[1, −1 | 1], [0, 3 | 6]]. This gives y = 2, then x = 3."
+      formula="Valid row operations: swap two rows; multiply one row by a non-zero constant; add a multiple of one row to another row. These operations preserve the solution set of an augmented linear system."
+      example="For x − y = 1 and 2x + y = 8, start with [[1, −1 | 1], [2, 1 | 8]]. Replace row 2 with row 2 − 2·row 1 to get [[1, −1 | 1], [0, 3 | 6]]. The second row gives y = 2, then back-substitution gives x = 3."
       steps={[
         {
           title: "Write every equation in the same variable order",
@@ -27,7 +27,7 @@ export default function GaussianEliminationGuide() {
         },
         {
           title: "Repeat across the remaining columns",
-          body: "Move one row down and one column right, then continue elimination. The goal of ordinary Gaussian elimination is row echelon form (REF), where each new pivot is farther right than the one above it.",
+          body: "Move one row down and one column right, then continue elimination. The goal of ordinary Gaussian elimination is row echelon form (REF), where each new pivot is farther right than the one above it. REF is sometimes called row echelon form, and in German study material it may be called Zeilenstufenform.",
         },
         {
           title: "Back-substitute to find each unknown",
@@ -35,7 +35,11 @@ export default function GaussianEliminationGuide() {
         },
         {
           title: "Use RREF or rank when you need more information",
-          body: "Gauss-Jordan reduction continues from REF to RREF, which makes a unique solution easy to read directly. Rank helps identify dependent equations, inconsistent systems, or systems with infinitely many solutions.",
+          body: "Gauss-Jordan reduction continues from REF to RREF, which makes a unique solution easy to read directly. Rank is the number of pivot columns. Comparing pivot columns with the number of variables helps identify dependent equations, inconsistent systems, or systems with infinitely many solutions.",
+        },
+        {
+          title: "Read rank and row-space clues from the reduced matrix",
+          body: "The non-zero rows in an echelon form show independent row directions, and pivot columns show independent variable directions. This is why a matrix rank calculator with steps usually shows row operations or RREF before giving the final rank.",
         },
         {
           title: "Verify the result in the original equations",

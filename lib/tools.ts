@@ -311,18 +311,22 @@ export const tools: ToolInfo[] = [
     shortName: "Matrix",
     category: "math",
     icon: "[ ]",
-    title: "Matrix Calculator – RREF, Rank, Inverse, Eigenvalues & Systems",
+    title: "Matrix Calculator – RREF, Rank With Steps, Row Space & Systems",
     description:
-      "Use an online 2×2 to 10×10 matrix calculator and matrix reducer for determinant, inverse, transpose, REF, RREF, rank, matrix arithmetic, eigenvalues, and linear systems.",
+      "Use an online 2×2 to 10×10 matrix calculator and matrix reducer for REF, RREF, matrix rank with steps, row space checks, inverse, determinant, arithmetic, eigenvalues, and linear systems.",
     summary:
-      "Build or paste 2×2 through 10×10 matrices, then calculate arithmetic, row reduction, rank, inverse, determinants, cofactors, adjugates, 2×2 eigenvalues, and A·x = b systems.",
+      "Build or paste 2×2 through 10×10 matrices, then calculate arithmetic, row reduction, RREF, matrix rank, row-space clues, inverse, determinants, cofactors, adjugates, 2×2 eigenvalues, and A·x = b systems.",
     keywords: [
       "matrix calculator",
       "matrix reducer calculator",
       "matrix reduction calculator",
-      "rref calculator",
-      "row echelon form calculator",
+      "matrix rank calculator with steps",
       "matrix rank calculator",
+      "row space calculator",
+      "rref calculator",
+      "rref calculator with steps",
+      "row echelon form calculator",
+      "zeilenstufenform rechner",
       "matrix inverse calculator",
       "matrix multiplication calculator",
       "matrix determinant calculator",
@@ -339,12 +343,13 @@ export const tools: ToolInfo[] = [
     priority: 0.9,
     useCases: [
       "2×2 through 10×10 matrix calculations",
-      "REF, RREF, matrix rank, transpose, determinant, trace, and inverse",
+      "REF, RREF, matrix rank with steps, pivot columns, row space, transpose, determinant, trace, and inverse",
       "Matrix arithmetic, 2×2 eigenvalues, and A·x = b linear systems",
     ],
     features: [
       "Matrix addition, subtraction, multiplication, and scalar multiplication",
-      "REF, Gauss-Jordan RREF, and matrix rank",
+      "REF, Gauss-Jordan RREF, pivot columns, row echelon form, and matrix rank",
+      "Rank and row-space guidance from the reduced matrix",
       "Determinant, trace, transpose, inverse, cofactor matrix, and adjugate",
       "2×2 eigenvalues and square linear systems",
       "Fractions, scientific notation, and spreadsheet paste input",
@@ -358,12 +363,27 @@ export const tools: ToolInfo[] = [
       {
         question: "What is a matrix reducer calculator?",
         answer:
-          "A matrix reducer calculator uses row operations to put a matrix into REF or RREF. This workspace provides both forms and also calculates rank from the pivot columns in RREF.",
+          "A matrix reducer calculator uses row operations to put a matrix into REF or RREF. This workspace provides both forms and calculates rank from the pivot columns in RREF.",
+      },
+      {
+        question: "Can I use it as a matrix rank calculator with steps?",
+        answer:
+          "Yes. Choose RREF(A) to see the reduced matrix, then choose rank(A) to count the pivot columns. The worked example on the page shows how row operations remove dependent rows before the final rank is read.",
+      },
+      {
+        question: "Does the calculator help with row space?",
+        answer:
+          "Yes. REF and RREF help you identify independent rows and pivot structure, which are used when reasoning about row space. The page explains how non-zero reduced rows relate to rank; a formal row-space basis output can be added later.",
       },
       {
         question: "What is the difference between REF and RREF?",
         answer:
           "REF uses forward elimination to create pivots with zeros below them. RREF continues until each pivot is 1 and every other entry in a pivot column is zero.",
+      },
+      {
+        question: "What does Zeilenstufenform mean?",
+        answer:
+          "Zeilenstufenform is the German term commonly used for row echelon form. In this calculator, REF(A) is the row echelon form workflow, while RREF(A) is the fully reduced Gauss-Jordan form.",
       },
       {
         question: "Can I calculate matrix rank?",
@@ -378,7 +398,7 @@ export const tools: ToolInfo[] = [
       {
         question: "When does an inverse not exist?",
         answer:
-          "An inverse does not exist when a square matrix has determinant zero. In that case, the rows or columns are linearly dependent.",
+          "An inverse does not exist when a square matrix has determinant zero. In that case, the rows or columns are linearly dependent, so use RREF and rank to inspect the system.",
       },
     ],
   },
@@ -954,16 +974,23 @@ export const tools: ToolInfo[] = [
     shortName: "Simple interest",
     category: "everyday",
     icon: "i",
-    title: "Simple Interest Calculator – Principal, Rate & Time",
+    title:
+      "Simple Interest Calculator – Formula, Per Annum Interest & Total Amount",
     description:
-      "Calculate simple interest and total amount from principal, annual interest rate, and time with a free online simple interest calculator.",
+      "Calculate simple interest per annum, interest earned, and total amount from principal, annual interest rate, and time using the simple interest formula.",
     summary:
-      "Use principal, annual rate, and years to calculate simple interest and final amount in a clear result panel.",
+      "Use principal, annual rate, and time in years, months, or days to calculate simple interest, interest earned, final amount, and a clear formula breakdown.",
     keywords: [
       "simple interest calculator",
+      "how to calculate simple interest per annum",
+      "calculate interest formula",
+      "simple interest formula",
+      "simple interest per annum",
       "interest calculator",
       "principal rate time calculator",
-      "simple interest formula",
+      "annual interest rate calculator",
+      "interest earned calculator",
+      "total amount calculator",
     ],
     relatedSlugs: [
       "compound-interest-calculator",
@@ -972,25 +999,43 @@ export const tools: ToolInfo[] = [
     ],
     priority: 0.88,
     useCases: [
-      "Simple interest formula",
-      "Interest earned over time",
-      "Total maturity amount",
+      "Simple interest formula: SI = P × R × T / 100",
+      "Interest earned from a principal amount and annual rate",
+      "Simple interest per annum with years, months, or days",
+      "Total maturity amount after adding interest to principal",
     ],
     features: [
-      "Principal, rate, and time inputs",
-      "Interest earned",
-      "Total maturity amount",
+      "Principal, annual rate, and time inputs",
+      "Years, months, or days converted into formula time",
+      "Interest earned and total amount",
+      "Formula line showing principal × rate × time / 100",
+      "Worked per-annum example and simple vs compound comparison",
     ],
     faqs: [
       {
         question: "What formula does simple interest use?",
         answer:
-          "Simple interest equals principal multiplied by annual rate multiplied by time, divided by 100.",
+          "Simple interest uses SI = P × R × T / 100, where P is principal, R is the annual interest rate percentage, and T is time in years.",
+      },
+      {
+        question: "How do I calculate simple interest per annum?",
+        answer:
+          "Use the annual rate as R and write time in years. For example, 10,000 at 12% per annum for 2 years gives 10,000 × 12 × 2 / 100 = 2,400 interest.",
+      },
+      {
+        question: "How are months handled in the formula?",
+        answer:
+          "Months are converted into years. Six months becomes 0.5 years, so simple interest for 6 months is half of one year at the same annual rate.",
+      },
+      {
+        question: "What is the total amount?",
+        answer:
+          "Total amount is principal plus simple interest. If the principal is 10,000 and the interest is 2,400, the total amount is 12,400.",
       },
       {
         question: "When should I use compound interest instead?",
         answer:
-          "Use compound interest when interest is periodically added to the balance and then earns interest itself.",
+          "Use compound interest when interest is periodically added to the balance and then earns interest itself, such as monthly, quarterly, or daily compounding.",
       },
     ],
   },

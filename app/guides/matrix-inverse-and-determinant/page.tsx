@@ -3,7 +3,7 @@ import { createStaticPageMetadata } from "../../../lib/seo";
 
 export const metadata = createStaticPageMetadata(
   "Matrix Inverse and Determinant",
-  "Understand determinants, inverse matrices, singular matrices, and when the inverse method can solve a linear system.",
+  "Understand determinants, inverse matrices, singular matrices, rank, pivots, and when the inverse method can solve a linear system.",
   "/guides/matrix-inverse-and-determinant",
 );
 
@@ -12,7 +12,7 @@ export default function MatrixInverseGuide() {
     <GuideArticle
       eyebrow="MATRIX METHOD GUIDE"
       title="Matrix inverse and determinant: when can you use them?"
-      description="A determinant tells you whether a square matrix can have an ordinary inverse. When det(A) is not zero, A is invertible and the inverse method can solve a compatible system A·x = b. When det(A) is zero, the matrix is singular, so use row reduction and rank to investigate the system instead."
+      description="A determinant tells you whether a square matrix can have an ordinary inverse. When det(A) is not zero, A is invertible and the inverse method can solve a compatible system A·x = b. When det(A) is zero, the matrix is singular, so use row reduction, pivot columns, and rank to investigate the system instead."
       slug="matrix-inverse-and-determinant"
       formula="For A = [[a, b], [c, d]], det(A) = ad − bc. If det(A) ≠ 0, then A⁻¹ = (1 / det(A)) [[d, −b], [−c, a]]."
       example="Let A = [[2, 1], [1, 1]]. Its determinant is 2·1 − 1·1 = 1, so the inverse exists: A⁻¹ = [[1, −1], [−1, 2]]. For A·x = [5, 3], multiplying by A⁻¹ gives x = [2, 1]."
@@ -23,7 +23,7 @@ export default function MatrixInverseGuide() {
         },
         {
           title: "Calculate the determinant before choosing the inverse method",
-          body: "A non-zero determinant means the matrix is non-singular and an inverse exists. A zero determinant means the rows or columns are dependent, so the matrix inverse method is not available.",
+          body: "A non-zero determinant means the matrix is non-singular and an inverse exists. A zero determinant means the rows or columns are dependent, so the matrix inverse method is not available. In that case, use RREF and rank to understand what the dependency means.",
         },
         {
           title: "Find the inverse with Gauss-Jordan reduction",
@@ -35,7 +35,11 @@ export default function MatrixInverseGuide() {
         },
         {
           title: "Use RREF and rank when an inverse does not exist",
-          body: "A singular matrix does not automatically mean the system has no solution. RREF and rank can show whether the system is inconsistent or whether it has infinitely many solutions.",
+          body: "A singular matrix does not automatically mean the system has no solution. RREF and rank can show whether the system is inconsistent or whether it has infinitely many solutions. The pivot columns show independent directions, while zero rows reveal dependencies.",
+        },
+        {
+          title: "Connect determinant, inverse, and rank",
+          body: "For an n×n matrix, det(A) ≠ 0 means rank(A) = n and every column is independent. If det(A) = 0, the rank is less than n and the matrix needs a row-reduction check before you decide what the related system means.",
         },
         {
           title: "Check the answer by multiplication",

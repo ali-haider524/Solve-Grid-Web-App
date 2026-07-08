@@ -282,7 +282,7 @@ export default function MatrixCalculator() {
 
   return <main id="main-content" className={styles.page}>
     <ToolHeader active="math" />
-    <section className={styles.hero}><p>FREE ADVANCED MATRIX & VECTOR CALCULATOR</p><h1>Choose an operation, dimensions, and method.</h1><span>Build matrices from 2×2 through 10×10, paste values from a spreadsheet, and use arithmetic, row reduction, inverse, rank, eigenvalue, and linear-system tools.</span></section>
+    <section className={styles.hero}><p>FREE ADVANCED MATRIX & VECTOR CALCULATOR</p><h1>Matrix calculator for rank, RREF, inverse, and linear systems.</h1><span>Build matrices from 2×2 through 10×10, paste values from a spreadsheet, and use arithmetic, row reduction, inverse, determinant, matrix rank with steps, row space checks, eigenvalue, and linear-system tools.</span></section>
     <section className={styles.workspace}>
       <article className={styles.inputCard}>
         <div className={styles.cardHeading}><div><p>MATRIX WORKSPACE</p><h2>{details.label}</h2></div><span>{dimensionLabel} A</span></div>
@@ -305,9 +305,10 @@ export default function MatrixCalculator() {
           <h2 id="matrix-capabilities">Choose the operation that matches your matrix problem.</h2>
         </div>
         <span>
-          Use this workspace as an online matrix calculator and matrix reducer for
-          matrix arithmetic, row reduction, rank, inverses, and supported linear
-          systems. The result depends on the values, dimensions, and method you choose.
+          Use this workspace as an online matrix calculator, matrix reducer calculator,
+          and matrix rank calculator with steps. It supports matrix arithmetic,
+          REF, RREF, rank, row-space interpretation, inverses, and supported
+          linear systems. The result depends on the values, dimensions, and method you choose.
         </span>
       </div>
 
@@ -323,11 +324,13 @@ export default function MatrixCalculator() {
 
         <article className={styles.capabilityCard}>
           <p>ROW REDUCTION</p>
-          <h3>REF, RREF, and matrix rank</h3>
+          <h3>REF, RREF, rank, pivots, and row space</h3>
           <span>
             Use the row-reduction tools as a matrix reducer calculator. REF applies
             forward elimination, while RREF continues until each pivot is 1 with
-            zeros above and below it. Rank counts pivot columns.
+            zeros above and below it. Rank counts pivot columns, and the non-zero
+            pivot rows help describe the row space. REF is also called row echelon
+            form; in some German study material it appears as Zeilenstufenform.
           </span>
         </article>
 
@@ -378,7 +381,7 @@ export default function MatrixCalculator() {
           <ul>
             <li>Add or subtract matrices with identical dimensions.</li>
             <li>Multiply when columns in A equal rows in B.</li>
-            <li>Use scalar multiplication, transpose, REF, RREF, and rank.</li>
+            <li>Use scalar multiplication, transpose, REF, RREF, rank, and row-space checks.</li>
           </ul>
         </article>
 
@@ -395,11 +398,12 @@ export default function MatrixCalculator() {
 
       <section className={styles.workedExample} aria-labelledby="matrix-rank-example">
         <div>
-          <p>WORKED RREF &amp; RANK EXAMPLE</p>
-          <h2 id="matrix-rank-example">See why a repeated row changes matrix rank.</h2>
+          <p>MATRIX RANK CALCULATOR WITH STEPS</p>
+          <h2 id="matrix-rank-example">Use RREF to find pivot columns, rank, and row space.</h2>
           <span>
-            Enter the matrix below, choose RREF(A), and calculate. The second row is
-            twice the first, so it does not add a new independent direction.
+            Enter the matrix below, choose RREF(A), then compare it with rank(A).
+            The second row is twice the first, so row reduction removes the repeated
+            direction and shows why the matrix has rank 1.
           </span>
         </div>
 
@@ -417,12 +421,12 @@ export default function MatrixCalculator() {
           <article>
             <span>03</span>
             <strong>RREF(A) = [[1, 2], [0, 0]]</strong>
-            <small>Only one pivot column remains.</small>
+            <small>The first column is the only pivot column.</small>
           </article>
           <article>
             <span>04</span>
             <strong>rank(A) = 1</strong>
-            <small>Choose rank(A) to confirm it.</small>
+            <small>The row space has one independent direction.</small>
           </article>
         </div>
       </section>
@@ -432,8 +436,9 @@ export default function MatrixCalculator() {
           <p>LEARN THE METHOD</p>
           <h2 id="matrix-guides">Read the matching matrix guide.</h2>
           <span>
-            Use these short guides when you want to understand the operation before
-            or after checking a result in the calculator.
+            Use these short guides when you want to understand row operations, pivots,
+            determinants, rank, row space, and linear-system methods before or
+            after checking a result in the calculator.
           </span>
         </div>
 
@@ -441,19 +446,19 @@ export default function MatrixCalculator() {
           <Link href="/guides/gaussian-elimination-for-linear-systems">
             <span>GAUSSIAN ELIMINATION</span>
             <strong>Reduce a system using row operations</strong>
-            <small>Learn the elimination workflow used in many linear-system problems.</small>
+            <small>Learn the REF and RREF workflow behind matrix reduction and rank checks.</small>
             <b>Read guide →</b>
           </Link>
           <Link href="/guides/matrix-inverse-and-determinant">
             <span>INVERSE &amp; DETERMINANT</span>
             <strong>Check when a matrix inverse exists</strong>
-            <small>See how determinant values connect to invertibility and solutions.</small>
+            <small>See how determinant values connect to invertibility, pivots, and solutions.</small>
             <b>Read guide →</b>
           </Link>
           <Link href="/guides/matrix-methods-for-linear-systems">
             <span>LINEAR SYSTEM METHODS</span>
             <strong>Compare Gaussian, RREF, inverse, and Cramer’s rule</strong>
-            <small>Choose a suitable method for a square system of equations.</small>
+            <small>Choose a suitable method and interpret rank, pivots, and special cases.</small>
             <b>Read guide →</b>
           </Link>
         </div>
