@@ -1,4 +1,548 @@
-.page{min-height:100vh;padding-bottom:68px;background:radial-gradient(circle at 88% 0%,rgba(98,132,255,.14),transparent 25%),#f4f7fc;color:#152033}.hero{width:min(800px,calc(100% - 36px));margin:0 auto;padding:48px 0 28px;text-align:center}.hero p,.cardHeading p,.resultCard>p,.tip p{margin:0;color:#3157e8;font-size:.67rem;font-weight:900;letter-spacing:.14em}.hero h1{margin:13px auto 0;max-width:740px;font-size:clamp(2.15rem,4.3vw,3.65rem);letter-spacing:-.07em;line-height:1.01}.hero>span{display:block;max-width:680px;margin:16px auto 0;color:#65758f;font-size:.94rem;line-height:1.68}.workspace{width:min(1060px,calc(100% - 36px));margin:0 auto;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(285px,.95fr);gap:18px;align-items:start}.inputCard,.resultCard{min-width:0;padding:24px;border:1px solid #dbe5f2;border-radius:20px;background:#fff;box-shadow:0 14px 32px rgba(30,53,100,.065)}.cardHeading{display:flex;align-items:flex-start;justify-content:space-between;gap:14px}.cardHeading h2,.resultCard h2{margin:7px 0 0;font-size:1.5rem;letter-spacing:-.055em}.cardHeading>span{padding:6px 8px;border-radius:8px;background:#eef3ff;color:#3157e8;font:800 .69rem ui-monospace,SFMono-Regular,Menlo,monospace}.modePicker{display:grid;gap:7px;margin-top:17px;padding:14px;border:1px solid #d6e2f4;border-radius:13px;background:#f9fbff}.modePicker>span{color:#60718c;font-size:.66rem;font-weight:900;letter-spacing:.1em}.modePicker select{width:100%;min-width:0;padding:11px 10px;border:1px solid #cbd9ef;border-radius:9px;outline:0;background:#fff;color:#1c2d48;font:800 .88rem inherit}.modePicker small{color:#6f8099;font-size:.76rem;line-height:1.45}.quickModes{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}.quickModes button{padding:7px 9px;border:1px solid #d9e4f3;border-radius:999px;background:#fff;color:#5c6e88;cursor:pointer;font:800 .72rem inherit}.quickModes button:hover,.quickModes .activeQuick{border-color:#b9caf9;background:#eaf0ff;color:#3157e8}.fields{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px;margin-top:17px}.fields label{min-width:0;padding:15px;border:1px solid #d5e1f4;border-radius:13px;background:#f8fbff}.fields span{display:block;color:#60718c;font-size:.67rem;font-weight:850;letter-spacing:.08em}.fields input{width:100%;min-width:0;margin-top:9px;padding:0;border:0;outline:0;background:transparent;color:#17243a;font-size:clamp(1.45rem,3vw,2rem);font-weight:650;letter-spacing:-.06em}.formula{margin-top:15px;padding:13px;border-radius:11px;background:#14213a;color:#dce7fa;font:750 .82rem/1.5 ui-monospace,SFMono-Regular,Menlo,monospace}.utilityRow{margin-top:14px;display:flex;align-items:center;justify-content:space-between;gap:14px;color:#73839c;font-size:.76rem;line-height:1.5}.utilityRow button{flex:0 0 auto;padding:9px 11px;border:1px solid #cbd9f5;border-radius:9px;background:#fff;color:#3157e8;cursor:pointer;font:850 .76rem inherit}.utilityRow button:hover{background:#eef3ff}.shareMessage{margin:8px 0 0;color:#17704a;font-size:.77rem;font-weight:800}.resultCard{min-height:400px;display:flex;flex-direction:column}.statement{margin-top:20px;color:#687893;line-height:1.6}.resultCard>strong{margin:12px 0 16px;overflow-wrap:anywhere;color:#3157e8;font-size:clamp(3rem,7vw,4.35rem);font-weight:550;letter-spacing:-.08em;line-height:1}.detail{color:#17704a;font-size:.84rem;line-height:1.5}.tip{margin-top:auto;padding:15px;border-radius:12px;background:#edf3ff;color:#52647f;font-size:.82rem;line-height:1.55}.tip p{margin-bottom:8px}.financeLinks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.financeLinks a{padding:7px 8px;border:1px solid #d5e1f6;border-radius:8px;background:rgba(255,255,255,.78);color:#3157e8;font-size:.72rem;font-weight:820}.financeLinks a:hover{background:#fff}@media(max-width:850px){.workspace{grid-template-columns:1fr}.resultCard{min-height:300px}}@media(max-width:640px){.page{padding-bottom:48px}.hero,.workspace{width:min(100% - 22px,1060px)}.hero{padding:34px 0 22px;text-align:left}.hero h1{font-size:2.16rem}.hero>span{margin-left:0}.workspace{gap:14px}.inputCard,.resultCard{padding:17px;border-radius:17px;box-shadow:0 9px 22px rgba(30,53,100,.05)}.cardHeading{flex-direction:column}.quickModes{display:none}.fields{grid-template-columns:1fr}.utilityRow{align-items:flex-start;flex-direction:column}.resultCard{min-height:0}.resultCard>strong{font-size:3.25rem}.financeLinks{grid-template-columns:1fr 1fr}}@media(max-width:360px){.financeLinks{grid-template-columns:1fr}.inputCard,.resultCard{padding:15px}}
+.page {
+  min-height: 100vh;
+  padding-bottom: 72px;
+  background:
+    radial-gradient(circle at 90% 0%, rgba(80, 115, 245, 0.14), transparent 26%),
+    linear-gradient(180deg, #f4f7fc 0%, #eef3fb 100%);
+  color: #14213a;
+}
 
-/* V8 result-first percentage controls */
-@media(max-width:640px){.hero{padding:20px 0 14px}.hero h1{font-size:clamp(1.72rem,8vw,2.15rem)}.hero>span{margin-top:9px;font-size:.84rem;line-height:1.55}.inputCard,.resultCard{padding:15px;border-radius:16px}.modePicker{margin-top:12px;padding:12px}.resultCard>strong{margin:9px 0 12px;font-size:2.8rem}.tip{padding:12px}}
+.hero {
+  width: min(860px, calc(100% - 36px));
+  margin: 0 auto;
+  padding: 46px 0 28px;
+  text-align: center;
+}
+
+.hero p,
+.cardHeading p,
+.resultCard > p,
+.tip p,
+.sectionIntro p,
+.explainerCard > p {
+  margin: 0;
+  color: #3157e8;
+  font-size: 0.67rem;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+}
+
+.hero h1 {
+  max-width: 820px;
+  margin: 13px auto 0;
+  font-size: clamp(2.2rem, 4.4vw, 3.75rem);
+  line-height: 1.01;
+  letter-spacing: -0.07em;
+}
+
+.hero > span,
+.sectionIntro > span {
+  display: block;
+  max-width: 730px;
+  margin: 16px auto 0;
+  color: #63748e;
+  font-size: 0.96rem;
+  line-height: 1.68;
+}
+
+.workspace,
+.exampleStrip,
+.contentGrid,
+.formulaSection,
+.qaSection {
+  width: min(1080px, calc(100% - 36px));
+  margin: 0 auto;
+}
+
+.workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(300px, 0.95fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.inputCard,
+.resultCard,
+.exampleStrip,
+.explainerCard,
+.formulaSection,
+.qaSection {
+  border: 1px solid #d9e4f3;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: 0 14px 34px rgba(25, 45, 85, 0.06);
+}
+
+.inputCard,
+.resultCard {
+  min-width: 0;
+  padding: 24px;
+}
+
+.cardHeading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.cardHeading h2,
+.resultCard h2,
+.sectionIntro h2,
+.explainerCard h2 {
+  margin: 7px 0 0;
+  font-size: 1.55rem;
+  letter-spacing: -0.055em;
+}
+
+.cardHeading > span {
+  padding: 6px 8px;
+  border: 1px solid #d5e1f4;
+  border-radius: 9px;
+  background: #eef3ff;
+  color: #3157e8;
+  font: 800 0.69rem ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.modePicker {
+  display: grid;
+  gap: 7px;
+  margin-top: 17px;
+  padding: 14px;
+  border: 1px solid #d6e2f4;
+  border-radius: 14px;
+  background: #f8fbff;
+}
+
+.modePicker > span,
+.fields span {
+  color: #5f718c;
+  font-size: 0.67rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+}
+
+.modePicker select {
+  width: 100%;
+  min-width: 0;
+  padding: 11px 10px;
+  border: 1px solid #c8d8f0;
+  border-radius: 10px;
+  outline: 0;
+  background: #fff;
+  color: #1c2d48;
+  font: 850 0.9rem inherit;
+}
+
+.modePicker small,
+.fields small {
+  color: #6f8099;
+  font-size: 0.76rem;
+  line-height: 1.45;
+}
+
+.quickModes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 12px;
+}
+
+.quickModes button {
+  padding: 7px 10px;
+  border: 1px solid #d8e3f3;
+  border-radius: 999px;
+  background: #fff;
+  color: #536680;
+  cursor: pointer;
+  font: 850 0.72rem inherit;
+}
+
+.quickModes button:hover,
+.quickModes .activeQuick {
+  border-color: #9fb7ff;
+  background: #eaf0ff;
+  color: #3157e8;
+}
+
+.fields {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 11px;
+  margin-top: 17px;
+}
+
+.fields label {
+  min-width: 0;
+  padding: 15px;
+  border: 1px solid #d5e1f4;
+  border-radius: 14px;
+  background: #f8fbff;
+}
+
+.fields span,
+.fields small {
+  display: block;
+}
+
+.fields input {
+  width: 100%;
+  min-width: 0;
+  margin-top: 8px;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #17243a;
+  font-size: clamp(1.45rem, 3vw, 2rem);
+  font-weight: 680;
+  letter-spacing: -0.06em;
+}
+
+.formula {
+  margin-top: 15px;
+  padding: 13px;
+  border-radius: 12px;
+  background: #14213a;
+  color: #dce7fa;
+  font: 750 0.82rem/1.5 ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.utilityRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-top: 14px;
+  color: #72839c;
+  font-size: 0.76rem;
+  line-height: 1.5;
+}
+
+.utilityRow button {
+  flex: 0 0 auto;
+  padding: 9px 11px;
+  border: 1px solid #cbd9f5;
+  border-radius: 10px;
+  background: #fff;
+  color: #3157e8;
+  cursor: pointer;
+  font: 850 0.76rem inherit;
+}
+
+.utilityRow button:hover {
+  background: #eef3ff;
+}
+
+.shareMessage {
+  margin: 8px 0 0;
+  color: #17704a;
+  font-size: 0.77rem;
+  font-weight: 800;
+}
+
+.resultCard {
+  min-height: 405px;
+  display: flex;
+  flex-direction: column;
+}
+
+.statement {
+  margin-top: 20px;
+  color: #687893;
+  line-height: 1.6;
+}
+
+.resultCard > strong {
+  margin: 12px 0 14px;
+  overflow-wrap: anywhere;
+  color: #3157e8;
+  font-size: clamp(3rem, 7vw, 4.35rem);
+  font-weight: 560;
+  letter-spacing: -0.08em;
+  line-height: 1;
+}
+
+.detail {
+  color: #17704a;
+  font-size: 0.84rem;
+  line-height: 1.5;
+}
+
+.tip {
+  margin-top: auto;
+  padding: 15px;
+  border-radius: 13px;
+  background: #edf3ff;
+  color: #52647f;
+  font-size: 0.82rem;
+  line-height: 1.55;
+}
+
+.tip p {
+  margin-bottom: 8px;
+}
+
+.financeLinks {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 7px;
+}
+
+.financeLinks a {
+  padding: 7px 8px;
+  border: 1px solid #d5e1f6;
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.78);
+  color: #3157e8;
+  font-size: 0.72rem;
+  font-weight: 830;
+}
+
+.financeLinks a:hover {
+  background: #fff;
+}
+
+.exampleStrip,
+.formulaSection,
+.qaSection {
+  margin-top: 22px;
+  padding: 24px;
+}
+
+.sectionIntro {
+  text-align: center;
+}
+
+.exampleGrid,
+.formulaGrid,
+.qaGrid,
+.contentGrid {
+  display: grid;
+  gap: 14px;
+}
+
+.exampleGrid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-top: 18px;
+}
+
+.exampleGrid button,
+.formulaGrid article,
+.qaGrid article,
+.explainerCard {
+  border: 1px solid #d9e4f3;
+  border-radius: 16px;
+  background: #f9fbff;
+}
+
+.exampleGrid button {
+  display: grid;
+  gap: 7px;
+  padding: 15px;
+  text-align: left;
+  color: #14213a;
+  cursor: pointer;
+}
+
+.exampleGrid button:hover {
+  border-color: #a9bfff;
+  background: #eef4ff;
+}
+
+.exampleGrid span,
+.formulaGrid h3,
+.qaGrid h3 {
+  color: #0f1f3a;
+  font-size: 0.96rem;
+  font-weight: 900;
+  letter-spacing: -0.035em;
+}
+
+.exampleGrid small,
+.formulaGrid p,
+.qaGrid p,
+.explainerCard li,
+.solveList span {
+  color: #5f718c;
+  font-size: 0.84rem;
+  line-height: 1.58;
+}
+
+.exampleGrid code,
+.formulaGrid code {
+  display: block;
+  color: #3157e8;
+  font: 800 0.74rem/1.55 ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.contentGrid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 22px;
+}
+
+.explainerCard {
+  padding: 24px;
+}
+
+.solveList {
+  display: grid;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.solveList span {
+  padding: 10px 12px;
+  border: 1px solid #d9e4f3;
+  border-radius: 999px;
+  background: #fff;
+  font-weight: 800;
+}
+
+.explainerCard ol {
+  margin: 15px 0 0;
+  padding-left: 20px;
+}
+
+.explainerCard li + li {
+  margin-top: 9px;
+}
+
+.formulaGrid,
+.qaGrid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 18px;
+}
+
+.formulaGrid article,
+.qaGrid article {
+  padding: 18px;
+}
+
+.formulaGrid h3,
+.qaGrid h3,
+.formulaGrid p,
+.qaGrid p {
+  margin: 0;
+}
+
+.formulaGrid code {
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 10px;
+  background: #14213a;
+  color: #dce7fa;
+}
+
+@media (max-width: 920px) {
+  .workspace,
+  .contentGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .resultCard {
+    min-height: 300px;
+  }
+
+  .exampleGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .page {
+    padding-bottom: 48px;
+  }
+
+  .hero,
+  .workspace,
+  .exampleStrip,
+  .contentGrid,
+  .formulaSection,
+  .qaSection {
+    width: min(100% - 22px, 1080px);
+  }
+
+  .hero {
+    padding: 22px 0 16px;
+    text-align: left;
+  }
+
+  .hero h1 {
+    font-size: clamp(1.82rem, 8.5vw, 2.2rem);
+  }
+
+  .hero > span,
+  .sectionIntro > span {
+    margin: 10px 0 0;
+    font-size: 0.84rem;
+    line-height: 1.55;
+  }
+
+  .workspace {
+    gap: 14px;
+  }
+
+  .inputCard,
+  .resultCard,
+  .exampleStrip,
+  .explainerCard,
+  .formulaSection,
+  .qaSection {
+    padding: 16px;
+    border-radius: 17px;
+    box-shadow: 0 9px 22px rgba(30, 53, 100, 0.05);
+  }
+
+  .cardHeading {
+    flex-direction: column;
+  }
+
+  .modePicker {
+    margin-top: 12px;
+    padding: 12px;
+  }
+
+  .quickModes {
+    display: none;
+  }
+
+  .fields,
+  .exampleGrid,
+  .formulaGrid,
+  .qaGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .fields label {
+    padding: 13px;
+  }
+
+  .utilityRow {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .resultCard {
+    min-height: 0;
+  }
+
+  .resultCard > strong {
+    margin: 9px 0 12px;
+    font-size: 2.9rem;
+  }
+
+  .financeLinks {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .sectionIntro {
+    text-align: left;
+  }
+}
+
+@media (max-width: 360px) {
+  .financeLinks {
+    grid-template-columns: 1fr;
+  }
+}

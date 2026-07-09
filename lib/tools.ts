@@ -776,16 +776,23 @@ export const tools: ToolInfo[] = [
     shortName: "Optimization",
     category: "research",
     icon: "max",
-    title: "Linear Programming Solver – Two Variable Optimization Lab",
+    title: "Optimization Problem Solver – Linear Programming Calculator",
     description:
-      "Solve two-variable linear programming models online with objective functions, constraints, feasible corner points, and maximize or minimize results.",
+      "Solve two-variable optimization problems online with a linear programming calculator for objective functions, constraints, feasible regions, corner points, and maximum or minimum values.",
     summary:
-      "Build a two-variable linear program, inspect feasible corner points, and calculate a maximum or minimum objective value in a transparent browser workspace.",
+      "Build a two-variable linear programming model, enter objective coefficients and constraints, inspect feasible corner points, and compare objective values to find a maximum or minimum result.",
     keywords: [
+      "optimization problem solver",
+      "optimization problem calculator",
+      "optimization solver calculator",
       "linear programming solver",
+      "linear programming calculator",
+      "online linear optimization solver",
       "two variable linear programming calculator",
       "maximize objective function calculator",
       "minimize linear constraints calculator",
+      "feasible region calculator",
+      "corner point method calculator",
       "graphical method linear programming",
     ],
     relatedSlugs: [
@@ -796,26 +803,49 @@ export const tools: ToolInfo[] = [
     featured: true,
     priority: 0.9,
     useCases: [
-      "Two-variable linear programs",
-      "Maximize or minimize an objective function",
-      "Feasible-region corner point analysis",
+      "Two-variable linear programming and optimization problems",
+      "Maximize profit, output, score, or value from constraints",
+      "Minimize cost, time, waste, or resource use from constraints",
+      "Feasible region and corner-point objective comparison",
     ],
     features: [
-      "Up to eight linear constraints",
-      "Maximize or minimize objective",
-      "Optional non-negative constraints",
+      "Objective function input for x and y coefficients",
+      "Up to eight linear constraints with ≤, ≥, or = operators",
+      "Maximize or minimize objective value",
+      "Optional non-negative constraints x ≥ 0 and y ≥ 0",
       "Feasible corner points and objective values",
+      "Graphical corner-point view for continuous two-variable models",
     ],
     faqs: [
       {
-        question: "Does this solve integer programming?",
+        question: "What optimization problems can this solver handle?",
         answer:
-          "No. This release solves continuous two-variable linear programs using corner-point evaluation. Integer and binary optimization need a separate solver.",
+          "It handles continuous two-variable linear programming problems where the objective function and constraints are linear in x and y.",
       },
       {
-        question: "Can a linear program be unbounded?",
+        question: "How does the corner point method work?",
         answer:
-          "Yes. Check the constraints and feasible region before treating a corner-point result as a complete unboundedness test.",
+          "For a bounded continuous two-variable linear program, the best objective value occurs at a feasible corner point. The lab finds feasible intersections and compares the objective value at those points.",
+      },
+      {
+        question: "What is the objective function?",
+        answer:
+          "The objective function is the value being maximized or minimized, such as profit, cost, output, time, or resource use. In this lab it has the form Z = c₁x + c₂y.",
+      },
+      {
+        question: "What are constraints in linear programming?",
+        answer:
+          "Constraints are limits or requirements written as linear equations or inequalities, such as 2x + 3y ≤ 42. The feasible solution must satisfy every constraint.",
+      },
+      {
+        question: "Does this solve integer programming?",
+        answer:
+          "No. This release solves continuous two-variable linear programs. Integer, binary, nonlinear, or many-variable optimization problems need a different solver.",
+      },
+      {
+        question: "Can a linear program be infeasible or unbounded?",
+        answer:
+          "Yes. A model is infeasible when no point satisfies all constraints. It can be unbounded when the feasible region extends in a direction that keeps improving the objective value.",
       },
     ],
   },
