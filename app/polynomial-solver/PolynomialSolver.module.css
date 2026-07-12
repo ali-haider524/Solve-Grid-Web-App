@@ -494,3 +494,158 @@
   .hero span { margin-left: 0; }
   .inputCard, .resultCard { padding: 18px; border-radius: 18px; }
 }
+
+/* Polynomial learning section fix: card layout for the added SEO explanation content */
+.guideButton {
+  display: inline-flex;
+  width: 100%;
+  min-height: 46px;
+  margin-top: 14px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #c8d7fb;
+  border-radius: 12px;
+  background: #eef3ff;
+  color: #3157e8;
+  font-size: 0.82rem;
+  font-weight: 850;
+  text-align: center;
+  text-decoration: none;
+}
+
+.guideButton:hover {
+  border-color: #92aaf7;
+  background: #ffffff;
+}
+
+.learningSection {
+  margin-top: 26px;
+  display: grid;
+  gap: 16px;
+}
+
+.learningHeader {
+  max-width: 820px;
+}
+
+.learningHeader > p,
+.explanationGrid article > p,
+.exampleGrid article > p,
+.relatedGuide p {
+  margin: 0;
+  color: #3157e8;
+  font-size: 0.67rem;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+}
+
+.learningHeader h2 {
+  margin: 10px 0 0;
+  color: #17243a;
+  font-size: clamp(1.55rem, 3vw, 2.35rem);
+  letter-spacing: -0.055em;
+  line-height: 1.1;
+}
+
+.learningHeader > span {
+  display: block;
+  margin-top: 12px;
+  color: #657690;
+  font-size: 0.94rem;
+  line-height: 1.7;
+}
+
+.explanationGrid,
+.exampleGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.exampleGrid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.explanationGrid article,
+.exampleGrid article,
+.relatedGuide {
+  padding: 20px;
+  border: 1px solid #dce5f2;
+  border-radius: 18px;
+  background: #ffffff;
+  box-shadow: 0 12px 30px rgba(30, 53, 100, 0.055);
+}
+
+.explanationGrid h3,
+.exampleGrid h3,
+.relatedGuide h2 {
+  margin: 10px 0 0;
+  color: #223652;
+  font-size: 1.05rem;
+  letter-spacing: -0.035em;
+  line-height: 1.25;
+}
+
+.relatedGuide h2 {
+  font-size: 1.45rem;
+}
+
+.explanationGrid span,
+.exampleGrid span,
+.relatedGuide span {
+  display: block;
+  margin-top: 9px;
+  color: #687892;
+  font-size: 0.86rem;
+  line-height: 1.65;
+}
+
+.relatedGuide {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 18px;
+  align-items: center;
+  background: linear-gradient(135deg, #edf3ff, #ffffff);
+}
+
+.relatedGuide > div:last-child {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.relatedGuide a {
+  min-height: 78px;
+  display: grid;
+  place-items: center;
+  padding: 12px;
+  border: 1px solid #d4e1f7;
+  border-radius: 11px;
+  background: rgba(255, 255, 255, 0.8);
+  color: #3157e8;
+  font-size: 0.78rem;
+  font-weight: 850;
+  text-align: center;
+  text-decoration: none;
+}
+
+.relatedGuide a:hover {
+  border-color: #9eb7f7;
+  background: #ffffff;
+}
+
+@media (max-width: 900px) {
+  .explanationGrid,
+  .exampleGrid,
+  .relatedGuide {
+    grid-template-columns: 1fr;
+  }
+
+  .relatedGuide > div:last-child {
+    grid-template-columns: 1fr;
+  }
+
+  .relatedGuide a {
+    min-height: 0;
+  }
+}

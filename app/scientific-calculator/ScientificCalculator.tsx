@@ -187,6 +187,8 @@ const quickExamples = [
   { label: "Combinations", expression: "ncr(8,2)" },
   { label: "Integer tools", expression: "gcd(48,18)" },
   { label: "Scientific form", expression: "2.5e3 / 4" },
+  { label: "Engineering value", expression: "12500" },
+  { label: "Micro value", expression: "47e-6" },
 ];
 
 const connectedTools = tools.filter(
@@ -426,14 +428,14 @@ export default function ScientificCalculator() {
         className={styles.intro}
         aria-labelledby="scientific-calculator-title"
       >
-        <p>FREE ONLINE SCIENTIFIC CALCULATOR</p>
+        <p>FREE SCIENTIFIC & ENGINEERING CALCULATOR ONLINE</p>
         <h1 id="scientific-calculator-title">
-          Scientific Calculator Online
+          Scientific and Engineering Calculator Online
         </h1>
         <span>
-          Evaluate expressions, trigonometry, roots, logarithms, factorials,
-          combinations, number theory functions, scientific notation, and
-          reusable variables directly in your browser.
+          Evaluate trigonometry, powers, roots, logarithms, factorials,
+          combinations, integer functions, engineering constants, scientific
+          notation, and engineering notation directly in your browser.
         </span>
       </section>
 
@@ -447,8 +449,8 @@ export default function ScientificCalculator() {
         >
           <header className={styles.deviceHeader}>
             <div>
-              <p>SCIENTIFIC WORKSPACE</p>
-              <h2>Scientific calculator</h2>
+              <p>SCIENTIFIC & ENGINEERING WORKSPACE</p>
+              <h2>Scientific engineering calculator</h2>
             </div>
             <div className={styles.deviceMeta}>
               <div
@@ -503,7 +505,7 @@ export default function ScientificCalculator() {
                       clearCalculator();
                     }
                   }}
-                  placeholder="Example: sqrt(81) + 2^5"
+                  placeholder="Example: 12500 or sqrt(81) + 2^5"
                   spellCheck={false}
                   inputMode="decimal"
                 />
@@ -569,7 +571,7 @@ export default function ScientificCalculator() {
         className={styles.quickExamplesPanel}
         aria-label="Quick scientific calculator examples"
       >
-        <p>QUICK INPUTS</p>
+        <p>QUICK INPUTS FOR SCIENCE & ENGINEERING</p>
         <div>
           {quickExamples.map((example) => (
             <button
@@ -589,15 +591,15 @@ export default function ScientificCalculator() {
         aria-labelledby="scientific-calculator-guide-title"
       >
         <header className={styles.learningHeader}>
-          <p>HOW THIS SCIENTIFIC CALCULATOR HELPS</p>
+          <p>HOW THIS SCIENTIFIC AND ENGINEERING CALCULATOR HELPS</p>
           <h2 id="scientific-calculator-guide-title">
-            Use the right function, setting, and notation for the problem.
+            Use the right function, angle mode, and notation for technical work.
           </h2>
           <span>
-            The calculator is designed for focused numeric work. Enter a
-            calculation, check the selected mode, read the result, then move to
-            a dedicated SolveGrid workspace when the task needs a graph, matrix,
-            data analysis, or unit conversion.
+            This engineering calculator is designed for focused numeric work.
+            Enter a calculation, check DEG or RAD, choose normal, scientific, or
+            engineering notation, then move to a dedicated SolveGrid workspace
+            when the task needs a graph, matrix, data analysis, or unit conversion.
           </span>
         </header>
 
@@ -631,8 +633,9 @@ export default function ScientificCalculator() {
             <p>ENGINEERING FORMAT</p>
             <h3>Scientific and engineering notation</h3>
             <span>
-              Enter values such as 2.5e3. Use MODE to display results in normal,
-              scientific, or engineering notation.
+              Enter values such as 2.5e3, 12500, or 47e-6. Use MODE to display
+              results in normal, scientific, or engineering notation where ENG
+              keeps powers of ten in multiples of three.
             </span>
           </article>
           <article>
@@ -686,7 +689,8 @@ export default function ScientificCalculator() {
                 <strong>Choose an output format.</strong>
                 <span>
                   Use NORM for everyday output, SCI for powers of ten, and ENG
-                  for exponents in multiples of three.
+                  when you want engineering notation such as <code>12.5e3</code>
+                  instead of <code>1.25e4</code>.
                 </span>
               </li>
             </ol>
@@ -718,6 +722,63 @@ export default function ScientificCalculator() {
                 <code>2.5e3 / 4</code>
                 <span>Scientific notation → 625</span>
               </button>
+              <button onClick={() => loadExample("12500")} type="button">
+                <code>12500</code>
+                <span>ENG mode → 12.5e3</span>
+              </button>
+              <button onClick={() => loadExample("47e-6")} type="button">
+                <code>47e-6</code>
+                <span>ENG mode → 47e-6</span>
+              </button>
+            </div>
+          </article>
+        </div>
+
+        <div className={styles.learningColumns}>
+          <article className={styles.workflowCard}>
+            <p>ENGINEERING NOTATION</p>
+            <h2>How engineering notation works</h2>
+            <ol>
+              <li>
+                <strong>Scientific notation uses any power of ten.</strong>
+                <span>
+                  For example, <code>12500</code> can be written as{" "}
+                  <code>1.25e4</code>.
+                </span>
+              </li>
+              <li>
+                <strong>Engineering notation uses powers in groups of three.</strong>
+                <span>
+                  The same value can be shown as <code>12.5e3</code>, which
+                  matches kilo-style engineering units.
+                </span>
+              </li>
+              <li>
+                <strong>Small technical values become easier to read.</strong>
+                <span>
+                  A capacitor value such as <code>47e-6</code> farads is often
+                  read as 47 microfarads in engineering work.
+                </span>
+              </li>
+            </ol>
+          </article>
+
+          <article className={styles.examplesCard}>
+            <p>COMMON SEARCH QUESTIONS</p>
+            <h2>Quick answers before you calculate</h2>
+            <div>
+              <button onClick={() => loadExample("12500")} type="button">
+                <code>What is engineering notation?</code>
+                <span>Use exponents in multiples of 3</span>
+              </button>
+              <button onClick={() => loadExample("0.000047")} type="button">
+                <code>Scientific vs engineering notation</code>
+                <span>SCI: 4.7e-5, ENG: 47e-6</span>
+              </button>
+              <button onClick={() => loadExample("9.80665 * 12")} type="button">
+                <code>Engineering calculator online</code>
+                <span>Use constants, powers, logs, and notation modes</span>
+              </button>
             </div>
           </article>
         </div>
@@ -728,6 +789,10 @@ export default function ScientificCalculator() {
             <h2>Continue the problem in the right tool.</h2>
           </div>
           <div>
+            <Link href="/guides/engineering-notation-and-scientific-notation">
+              <strong>Engineering notation guide</strong>
+              <span>Compare SCI, ENG, powers of ten, and SI prefixes.</span>
+            </Link>
             <Link href="/graphing-calculator">
               <strong>Graphing Calculator</strong>
               <span>Plot functions, tables, roots, and intersections.</span>
@@ -747,7 +812,8 @@ export default function ScientificCalculator() {
           Check important results independently and follow your teacher,
           institution, or exam rules for calculator use. Numeric output can
           depend on the selected angle mode, notation, input order, and
-          rounding.
+          rounding. For technical values, open MODE and compare SCI with ENG
+          so the result matches the notation style required by your problem.
         </p>
       </section>
     </main>

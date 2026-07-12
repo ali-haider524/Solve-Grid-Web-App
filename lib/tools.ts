@@ -71,64 +71,75 @@ export const tools: ToolInfo[] = [
     category: "engineering",
     icon: "√",
     title:
-      "Free Scientific Calculator Online – Trigonometry, Logs, Factorials & Engineering Notation",
+      "Scientific & Engineering Calculator Online – ENG Notation, Trig, Logs & Constants",
     description:
-      "Use a free online scientific calculator for trigonometry, roots, logarithms, factorials, combinations, variables, scientific notation, and engineering notation.",
+      "Use a free scientific and engineering calculator online for trigonometry, logarithms, roots, powers, factorials, combinations, constants, scientific notation, and engineering notation.",
     summary:
-      "Evaluate trigonometry, roots, logarithms, powers, combinations, factorials, integer functions, scientific notation, reusable variables, constants, and recent calculations in one focused workspace.",
+      "Evaluate trigonometry, roots, logarithms, powers, combinations, factorials, integer functions, reusable variables, constants, and normal, scientific, or engineering notation in one focused browser calculator.",
     keywords: [
       "scientific calculator online",
       "engineering calculator",
+      "engineering calculator online",
+      "engineer calculator",
+      "engineering notation calculator",
+      "calculator with engineering notation",
+      "engineer notation",
+      "scientific notation calculator",
+      "scientific notation vs engineering notation",
       "trigonometry calculator",
       "log calculator",
       "factorial calculator",
       "ncr calculator",
       "gcd calculator",
-      "scientific notation calculator",
-      "engineering notation calculator",
       "combination calculator",
       "gcd lcm calculator",
     ],
     relatedSlugs: [
-      "graphing-calculator",
       "unit-converter",
+      "graphing-calculator",
       "matrix-calculator",
     ],
     featured: true,
     priority: 0.95,
     useCases: [
+      "Engineering calculator work with scientific notation, engineering notation, SI-prefix sized values, and constants",
       "Trigonometry, roots, powers, logarithms, and inverse trigonometric functions",
-      "Factorials, combinations, permutations, GCD, and LCM",
-      "Scientific notation, engineering notation, constants, variables, Ans recall, and history",
+      "Factorials, combinations, permutations, GCD, LCM, variables, Ans recall, and history",
     ],
     features: [
-      "Degrees and radians for trigonometric calculations",
       "Normal, scientific, and engineering result formats",
+      "Degrees and radians for trigonometric calculations",
+      "Scientific notation input such as 2.5e3 and small engineering values such as 47e-6",
       "factorial(), ncr(), npr(), gcd(), and lcm() input support",
       "Variables A, B, C, X, and Y with Ans recall",
-      "History for recent completed expressions",
       "Engineering constants including π, e, gravity, light speed, and Planck constant",
+      "History for recent completed expressions",
     ],
     faqs: [
+      {
+        question: "Is this an engineering calculator online?",
+        answer:
+          "Yes. It supports technical numeric work including powers, roots, logarithms, trigonometry, constants, variables, scientific notation, and engineering notation. Use Unit Converter when a problem requires unit conversion.",
+      },
+      {
+        question: "What is engineering notation?",
+        answer:
+          "Engineering notation is a powers-of-ten format where the exponent is a multiple of three. For example, 12500 can be shown as 12.5e3 instead of 1.25e4.",
+      },
+      {
+        question: "Can I use scientific notation and engineering notation?",
+        answer:
+          "Yes. Enter scientific notation such as 2.5e3 for 2500. Open MODE and choose NORM, SCI, or ENG to change the result format.",
+      },
       {
         question: "Does the scientific calculator work in degrees and radians?",
         answer:
           "Yes. Open MODE and choose DEG or RAD before evaluating trigonometric functions. For example, sin(30) equals 0.5 when the calculator is set to degrees.",
       },
       {
-        question: "Can I use scientific notation and engineering notation?",
-        answer:
-          "Yes. Enter scientific notation such as 2.5e3 for 2500. MODE can format results as NORM, SCI, or ENG; engineering notation uses powers of ten in multiples of three.",
-      },
-      {
         question: "Which functions can I type directly?",
         answer:
           "Use supported expressions such as sin(), cos(), tan(), asin(), acos(), atan(), sqrt(), log(), ln(), abs(), fact(), ncr(), npr(), gcd(), and lcm(), along with brackets, powers, and arithmetic operators.",
-      },
-      {
-        question: "Can I save a result for another calculation?",
-        answer:
-          "Yes. Use Ans for the previous answer or open VAR to store and recall values from A, B, C, X, and Y.",
       },
       {
         question: "When should I use another SolveGrid tool?",
@@ -137,7 +148,6 @@ export const tools: ToolInfo[] = [
       },
     ],
   },
-
   {
     slug: "graphing-calculator",
     name: "Graphing Calculator",
@@ -270,16 +280,23 @@ export const tools: ToolInfo[] = [
     shortName: "Polynomials",
     category: "math",
     icon: "f(x)",
-    title: "Polynomial Solver Online – Find Roots of Degree 1 to 10",
+    title: "Polynomial Roots Calculator – Solve Degree 1 to 10 Polynomials",
     description:
-      "Find real and complex roots of polynomial equations from degree 1 to 10 using an online coefficient-based polynomial solver.",
+      "Use an online polynomial roots calculator to solve degree 1 to 10 equations from coefficients and find real or complex roots with numerical residual checks.",
     summary:
-      "Enter coefficients for a polynomial of degree 1 to 10 and calculate real or complex roots numerically.",
+      "Enter polynomial coefficients from the highest power to the constant term, then calculate real and complex roots numerically with residual checks for degree 1 through 10 equations.",
     keywords: [
+      "polynomial roots calculator",
+      "roots calculator polynomial",
       "polynomial solver",
-      "quartic equation solver",
       "find polynomial roots",
+      "root of polynomial calculator",
+      "degree 10 polynomial solver",
+      "quartic equation solver",
+      "cubic equation solver",
       "complex roots calculator",
+      "polynomial equation solver",
+      "coefficient polynomial solver",
     ],
     relatedSlugs: [
       "equation-solver",
@@ -288,20 +305,43 @@ export const tools: ToolInfo[] = [
     ],
     priority: 0.9,
     useCases: [
-      "Quartic equations",
-      "Higher-order polynomial roots",
-      "Complex numerical roots",
+      "Polynomial roots from coefficients",
+      "Quadratic, cubic, quartic, and higher-degree equations",
+      "Real and complex numerical roots with residual checks",
+    ],
+    features: [
+      "Degree 1 through 10 polynomial input",
+      "Coefficient fields ordered from highest power to constant term",
+      "Real roots and complex roots in a + bi format",
+      "Residual value for each calculated root",
+      "Quick samples for quadratic, cubic, quartic, and degree 5 polynomials",
+      "Helpful explanations for coefficient order, real roots, and complex roots",
     ],
     faqs: [
       {
-        question: "Does this tool support quartic equations?",
+        question: "How do I enter a polynomial?",
         answer:
-          "Yes. Choose degree 4 and enter coefficients from x⁴ through the constant term.",
+          "Choose the degree, then enter coefficients from the highest power down to the constant term. For x² − 5x + 6, enter 1, −5, and 6.",
       },
       {
-        question: "Why can results be complex?",
+        question: "Does this calculator find complex roots?",
         answer:
-          "A polynomial can have roots containing i when no corresponding real root exists.",
+          "Yes. If a polynomial has non-real roots, they are shown in a + bi form. Complex roots are common when the real graph does not cross the x-axis for every root.",
+      },
+      {
+        question: "What does the residual mean?",
+        answer:
+          "The residual is the size of f(root). A very small residual means the calculated root is close to making the polynomial equal zero.",
+      },
+      {
+        question: "Can I solve quartic and higher-degree equations?",
+        answer:
+          "Yes. The workspace supports degree 1 through 10. For degree 4 and above it uses numerical root-finding instead of long symbolic formulas.",
+      },
+      {
+        question: "When should I use the Graphing Calculator instead?",
+        answer:
+          "Use Graphing Calculator when you want to see the curve, x-intercepts, turning behavior, and approximate visual roots. Use Polynomial Solver when you have coefficients and need root values.",
       },
     ],
   },
@@ -956,16 +996,23 @@ export const tools: ToolInfo[] = [
     shortName: "Profit & loss",
     category: "everyday",
     icon: "±",
-    title: "Profit and Loss Calculator – Margin, Markup & Percentages",
+    title: "Profit and Loss Calculator – Markup, Margin, Cost & Selling Price",
     description:
-      "Calculate profit, loss, markup percentage, and profit margin from cost price and selling price with a free online calculator.",
+      "Calculate profit, loss, markup percentage, and profit margin from cost price and selling price. Compare markup vs margin with clear formulas and examples.",
     summary:
-      "Compare cost and selling price to calculate profit or loss amount, percentage on cost, and selling-price margin.",
+      "Enter cost price and selling price to calculate profit or loss amount, markup on cost, profit margin on revenue, and the difference between margin and markup.",
     keywords: [
       "profit and loss calculator",
       "profit margin calculator",
       "markup calculator",
+      "markup vs margin",
+      "calculating markup vs margin",
       "cost price selling price calculator",
+      "profit percentage calculator",
+      "loss percentage calculator",
+      "gross margin calculator",
+      "selling price calculator",
+      "profit formula calculator",
     ],
     relatedSlugs: [
       "percentage-calculator",
@@ -975,26 +1022,42 @@ export const tools: ToolInfo[] = [
     featured: true,
     priority: 0.88,
     useCases: [
-      "Profit and loss amount",
-      "Markup percentage on cost",
-      "Profit margin on selling price",
+      "Calculate profit or loss from cost price and selling price",
+      "Compare markup percentage on cost with profit margin on selling price",
+      "Check business pricing examples before using a discount or percentage workflow",
     ],
     features: [
-      "Profit calculator",
-      "Loss calculator",
-      "Markup percentage",
-      "Profit margin percentage",
+      "Profit amount and loss amount",
+      "Markup percentage measured against cost",
+      "Profit margin percentage measured against selling price",
+      "Worked example explaining why 25% markup equals 20% margin in a common pricing case",
+      "Guide link for markup vs margin formulas",
     ],
     faqs: [
       {
+        question: "What is the profit formula?",
+        answer:
+          "Profit is selling price minus cost price. If the result is negative, the sale produced a loss instead of a profit.",
+      },
+      {
         question: "What is the difference between markup and margin?",
         answer:
-          "Markup is measured against cost, while margin is measured against selling price.",
+          "Markup is profit divided by cost price. Profit margin is profit divided by selling price. Because they use different bases, the percentages are not the same.",
+      },
+      {
+        question: "How do I calculate markup percentage?",
+        answer:
+          "Use markup = profit ÷ cost price × 100. For example, if cost is 80 and selling price is 100, profit is 20 and markup is 25%.",
+      },
+      {
+        question: "How do I calculate profit margin percentage?",
+        answer:
+          "Use margin = profit ÷ selling price × 100. For example, if cost is 80 and selling price is 100, profit is 20 and margin is 20%.",
       },
       {
         question: "Can this calculator show a loss percentage?",
         answer:
-          "Yes. Enter a selling price below cost and the calculator shows the loss amount and percentage of cost.",
+          "Yes. Enter a selling price below cost and the calculator shows the loss amount and loss percentage on cost. The margin on selling price will also be negative.",
       },
     ],
   },

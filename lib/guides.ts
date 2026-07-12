@@ -15,7 +15,8 @@ export const guides: GuideInfo[] = [
   {
     slug: "profit-margin-vs-markup",
     title: "Profit margin vs markup",
-    summary: "Understand cost-based markup and selling-price margin.",
+    summary:
+      "Compare markup, profit margin, cost price, selling price, and the formulas behind business pricing.",
     toolSlugs: ["profit-loss-calculator", "percentage-calculator"],
   },
   {
@@ -35,6 +36,13 @@ export const guides: GuideInfo[] = [
     title: "How to plot multiple equations",
     summary: "Compare functions, vertical lines, tables, roots, and intersections.",
     toolSlugs: ["graphing-calculator", "equation-solver"],
+  },
+  {
+    slug: "polynomial-roots-and-complex-roots",
+    title: "Polynomial roots and complex roots",
+    summary:
+      "Find polynomial roots from coefficients and understand real roots, complex roots, and residual checks.",
+    toolSlugs: ["polynomial-solver", "graphing-calculator", "equation-solver"],
   },
   {
     slug: "ti-84-style-graphing-workflows",
@@ -87,7 +95,8 @@ export const guides: GuideInfo[] = [
   {
     slug: "engineering-notation-and-scientific-notation",
     title: "Engineering notation and scientific notation",
-    summary: "Read powers of ten, SI prefixes, and compact technical values clearly.",
+    summary:
+      "Compare scientific notation, engineering notation, powers of ten, and SI prefixes for technical values.",
     toolSlugs: ["scientific-calculator", "unit-converter"],
   },
   {
@@ -136,6 +145,14 @@ export const guides: GuideInfo[] = [
 export const guideSlugs = guides.map((guide) => guide.slug);
 
 const preferredGuideSlugsByTool: Record<string, string[]> = {
+  "profit-loss-calculator": [
+    "profit-margin-vs-markup",
+    "percentage-increase-and-decrease",
+  ],
+  "scientific-calculator": [
+    "engineering-notation-and-scientific-notation",
+    "ti-84-style-graphing-workflows",
+  ],
   "matrix-calculator": [
     "matrix-inverse-and-determinant",
     "gaussian-elimination-for-linear-systems",
@@ -145,6 +162,10 @@ const preferredGuideSlugsByTool: Record<string, string[]> = {
     "gaussian-elimination-for-linear-systems",
     "matrix-methods-for-linear-systems",
     "matrix-inverse-and-determinant",
+  ],
+  "polynomial-solver": [
+    "polynomial-roots-and-complex-roots",
+    "plot-multiple-equations",
   ],
 };
 

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import ToolHeader from "../../components/ToolHeader";
 import { useMemo, useState } from "react";
 import styles from "./PolynomialSolver.module.css";
@@ -116,11 +117,12 @@ export default function PolynomialSolver() {
       <ToolHeader active="math" />
       <div className={styles.container}>
         <section className={styles.hero}>
-          <p>POLYNOMIAL ROOT SOLVER</p>
-          <h1>Find roots beyond cubic equations.</h1>
+          <p>POLYNOMIAL ROOT CALCULATOR</p>
+          <h1>Polynomial solver for real and complex roots.</h1>
           <span>
-            Solve polynomial equations from degree 1 to 10. Real and complex
-            roots are calculated numerically in your browser.
+            Enter coefficients for degree 1 to 10 polynomials and find real or
+            complex roots numerically. Use it for quadratic, cubic, quartic, and
+            higher-degree equations when you need a coefficient-based roots calculator.
           </span>
         </section>
 
@@ -239,31 +241,91 @@ export default function PolynomialSolver() {
             <div className={styles.methodBox}>
               <p>HOW RESULTS ARE CALCULATED</p>
               <span>
-                Degree 1–3 are also covered in Equation Solver. This tool uses
-                numerical root-finding for degrees 4–10, where long symbolic
-                formulas are impractical and degree 5+ has no universal formula
-                using ordinary radicals.
+                Degree 1–3 are also covered in Equation Solver. This polynomial
+                roots calculator uses numerical root-finding for higher degrees,
+                then checks each answer with a residual so you can judge the
+                accuracy of the result.
               </span>
             </div>
+
+            <Link className={styles.guideButton} href="/guides/polynomial-roots-and-complex-roots">
+              Read the polynomial roots guide →
+            </Link>
           </aside>
         </section>
 
         <section className={styles.infoGrid}>
           <article>
             <span>01</span>
-            <h3>Higher-order equations</h3>
-            <p>Supports coefficient-based polynomial equations from degree 1 to 10.</p>
+            <h3>Polynomial roots from coefficients</h3>
+            <p>Choose the degree, enter coefficients from the highest power down to the constant term, and solve f(x) = 0.</p>
           </article>
           <article>
             <span>02</span>
-            <h3>Complex roots included</h3>
-            <p>Non-real roots are displayed in a + bi format when they occur.</p>
+            <h3>Real and complex roots included</h3>
+            <p>Real roots are shown as ordinary numbers. Non-real roots are displayed in a + bi format when the graph does not cross the x-axis.</p>
           </article>
           <article>
             <span>03</span>
-            <h3>Useful verification</h3>
-            <p>A residual is shown for every result to indicate numerical accuracy.</p>
+            <h3>Residual check for accuracy</h3>
+            <p>The residual shows how close f(root) is to zero, which is useful for repeated roots and higher-degree numerical answers.</p>
           </article>
+        </section>
+
+        <section className={styles.learningSection} aria-labelledby="polynomial-roots-guide-title">
+          <div className={styles.learningHeader}>
+            <p>POLYNOMIAL ROOTS EXPLAINED</p>
+            <h2 id="polynomial-roots-guide-title">How to use this polynomial roots calculator.</h2>
+            <span>
+              A polynomial root is a value of x that makes f(x) equal zero. This
+              workspace is built for coefficient form, so it is best when you
+              already know the coefficients of xⁿ, xⁿ⁻¹, and the constant term.
+            </span>
+          </div>
+
+          <div className={styles.explanationGrid}>
+            <article>
+              <p>COEFFICIENT ORDER</p>
+              <h3>Enter highest power first</h3>
+              <span>For x² − 5x + 6, enter 1, −5, and 6. For x⁴ − 5x² + 4, enter 1, 0, −5, 0, and 4.</span>
+            </article>
+            <article>
+              <p>REAL ROOTS</p>
+              <h3>Where the graph crosses</h3>
+              <span>Real roots are x-intercepts of the polynomial graph. Use the Graphing Calculator when you want to see the curve visually.</span>
+            </article>
+            <article>
+              <p>COMPLEX ROOTS</p>
+              <h3>When roots contain i</h3>
+              <span>Some polynomials have roots like 2 + 3i. They are valid roots even though they do not appear as x-axis crossings on a real graph.</span>
+            </article>
+          </div>
+
+          <div className={styles.exampleGrid}>
+            <article>
+              <p>QUADRATIC EXAMPLE</p>
+              <h3>x² − 5x + 6 = 0</h3>
+              <span>Use degree 2 with coefficients 1, −5, 6. The roots are 2 and 3 because (x − 2)(x − 3) = 0.</span>
+            </article>
+            <article>
+              <p>QUARTIC EXAMPLE</p>
+              <h3>x⁴ − 5x² + 4 = 0</h3>
+              <span>Use degree 4 with coefficients 1, 0, −5, 0, 4. The sample gives four roots: −2, −1, 1, and 2.</span>
+            </article>
+          </div>
+
+          <div className={styles.relatedGuide}>
+            <div>
+              <p>RELATED WORKFLOWS</p>
+              <h2>Use the right SolveGrid tool for the next step.</h2>
+              <span>Polynomial roots are one part of algebra work. Use graphing for visual checks and equation solving for lower-degree exact workflows.</span>
+            </div>
+            <div>
+              <Link href="/guides/polynomial-roots-and-complex-roots">Polynomial roots guide</Link>
+              <Link href="/graphing-calculator">Graphing Calculator</Link>
+              <Link href="/equation-solver">Equation Solver</Link>
+            </div>
+          </div>
         </section>
       </div>
     </main>
