@@ -599,7 +599,7 @@ export default function GraphingCalculator() {
         <section className={styles.learningSection}>
           <div>
             <p>BUILT FOR REAL MATH WORK</p>
-            <h2>Use one graphing calculator to compare equations, tables, roots, and intersections.</h2>
+            <h2>Whether you need a graphing calculator or a graph solver online, Use this graphing calculator to compare and analyze equations, tables, roots, and intersections.</h2>
           </div>
           <p>
             Add up to eight functions or vertical lines, then move between Graph, Table, and
