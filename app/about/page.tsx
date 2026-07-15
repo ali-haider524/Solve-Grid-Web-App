@@ -18,7 +18,7 @@ export default function AboutPage() {
         {
           title: "What SolveGrid does",
           paragraphs: [
-            "SolveGrid provides browser-based calculators, graphing workspaces, equation solvers, conversion tools, and everyday calculation tools. The goal is to help users enter their own values, see results clearly, and move between connected tools without installing software.",
+            "SolveGrid provides browser-based calculators, graphing workspaces, equation solvers, conversion tools, guides to learn stp by step use and everyday calculation tools. The goal is to help users enter their own values, see results clearly, and move between connected tools without installing software.",
           ],
         },
         {
