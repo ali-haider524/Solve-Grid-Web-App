@@ -448,41 +448,79 @@ export const tools: ToolInfo[] = [
     shortName: "Statistics",
     category: "math",
     icon: "σ",
-    title: "Advanced Statistics Calculator – Quartiles, Frequency & Regression",
+    title:
+      "Statistics Calculator – Standard Deviation, Variance, Quartiles & Regression",
     description:
-      "Calculate descriptive statistics, quartiles, IQR, variance, standard deviation, frequency tables, and linear regression from raw or paired data online.",
+      "Calculate sample or population standard deviation, variance, mean, median, mode, quartiles, IQR, frequency tables, grouped data estimates, correlation, and linear regression online.",
     summary:
-      "Analyse raw data, frequency pairs, or X/Y pairs using descriptive statistics, quartiles, standard deviation, and linear regression.",
+      "Analyse raw data, frequency tables, grouped intervals, or paired X/Y values using descriptive statistics, sample and population standard deviation, variance, quartiles, IQR, outlier checks, and regression results.",
     keywords: [
-      "advanced statistics calculator",
-      "quartile calculator",
-      "frequency table calculator",
-      "linear regression calculator",
+      "statistics calculator",
       "standard deviation calculator",
+      "sample standard deviation formula",
+      "formula for sample standard deviation",
+      "population standard deviation calculator",
+      "variance calculator",
+      "mean median mode calculator",
+      "quartile calculator",
+      "iqr calculator",
+      "frequency table calculator",
+      "grouped data standard deviation calculator",
+      "linear regression calculator",
+      "correlation calculator",
+      "r squared calculator",
+      "outlier calculator",
     ],
     relatedSlugs: [
-      "differential-equation-solver",
       "graphing-calculator",
+      "percentage-calculator",
       "matrix-calculator",
     ],
     featured: true,
     priority: 0.9,
     useCases: [
-      "Mean, median, quartiles, and IQR",
-      "Population and sample standard deviation",
-      "Frequency tables and linear regression",
+      "Calculate sample or population standard deviation and variance from raw values",
+      "Find mean, median, mode, range, quartiles, IQR, percentiles, and outliers",
+      "Use frequency tables, grouped class intervals, and paired X/Y regression data",
+    ],
+    features: [
+      "Raw data, frequency table, grouped data, and paired X/Y input modes",
+      "Sample and population standard deviation options",
+      "Variance, mean, median, mode, range, quartiles, IQR, percentile, CV, skewness, and outlier count",
+      "Linear regression slope, intercept, correlation r, R², covariance, and prediction",
+      "Distribution bars for entered values",
+      "Selectable result metrics to keep the output focused",
     ],
     faqs: [
       {
-        question: "How should I enter data?",
+        question: "What is the formula for sample standard deviation?",
         answer:
-          "Raw data accepts commas, spaces, semicolons, or new lines. Frequency mode accepts pairs such as 12:3, and regression accepts matching X and Y lists.",
+          "Sample standard deviation is s = √(Σ(x − x̄)² ÷ (n − 1)). Use it when the entered values are a sample from a larger population.",
       },
       {
-        question:
-          "What is the difference between population and sample standard deviation?",
+        question: "When should I use population standard deviation?",
         answer:
-          "Population standard deviation divides by the full number of values. Sample standard deviation uses one fewer degree of freedom.",
+          "Use population standard deviation when your data contains every value in the population being studied. It divides by n instead of n − 1.",
+      },
+      {
+        question: "Can this statistics calculator use frequency tables?",
+        answer:
+          "Yes. Choose discrete frequency for exact repeated values, or grouped data when you have class intervals and frequencies.",
+      },
+      {
+        question: "Does it calculate quartiles and IQR?",
+        answer:
+          "Yes. The calculator reports Q1, Q3, IQR, percentiles, and an outlier count based on the 1.5 × IQR fence rule.",
+      },
+      {
+        question: "Can I calculate linear regression?",
+        answer:
+          "Yes. Use paired X/Y mode to calculate slope, intercept, correlation r, R², covariance, and an optional predicted y-value.",
+      },
+      {
+        question: "Are grouped data results exact?",
+        answer:
+          "Grouped data results are estimates because each class interval is represented by its midpoint. Use raw data when exact values are available.",
       },
     ],
   },
@@ -895,47 +933,81 @@ export const tools: ToolInfo[] = [
     shortName: "Circuit analysis",
     category: "research",
     icon: "Ω",
-    title: "DC Circuit Analysis Calculator – Ohm, Nodal, RC & Resistors",
+    title:
+      "Circuit Analysis Calculator – Nodal Analysis, Ohm's Law, RC & Resistors",
     description:
-      "Analyse ideal DC resistor circuits online with Ohm's law, series and parallel resistance, voltage dividers, RC responses, and two-node nodal analysis.",
+      "Use a DC circuit analysis calculator for Ohm's law, series and parallel resistors, voltage dividers, RC transients, two-node nodal analysis, conductance matrices, KCL equations, and node voltages.",
     summary:
-      "Use transparent ideal-circuit calculations for resistors, voltage division, RC transients, and a two-node nodal-analysis model.",
+      "Calculate ideal DC resistor circuits with Ohm's law, resistor networks, voltage dividers, RC charge or discharge, and a two-node nodal-analysis solver that explains conductance matrices and current injections.",
     keywords: [
+      "circuit analysis calculator",
       "dc circuit analysis calculator",
       "nodal analysis calculator",
+      "two node nodal analysis",
+      "node voltage calculator",
+      "resistor network calculator",
+      "conductance matrix calculator",
+      "coefficient matrix circuit",
+      "kcl circuit solver",
       "ohms law calculator",
       "voltage divider calculator",
       "series parallel resistor calculator",
+      "parallel resistor calculator",
       "rc circuit calculator",
+      "rc transient calculator",
+      "resistor current calculator",
     ],
     relatedSlugs: [
+      "matrix-calculator",
       "scientific-calculator",
       "unit-converter",
-      "matrix-calculator",
     ],
     priority: 0.88,
     useCases: [
-      "Ohm's law and resistor networks",
-      "Voltage divider and RC transient calculations",
-      "Two-node DC nodal analysis",
+      "Solve Ohm's law questions by leaving voltage, current, or resistance blank",
+      "Calculate total resistance and optional current for series or parallel resistor networks",
+      "Find voltage-divider output, RC transient voltage, and two-node nodal-analysis voltages",
+      "Build a conductance matrix from KCL and solve node-voltage equations",
     ],
     features: [
-      "Ohm's law and power",
-      "Series and parallel resistors",
-      "Voltage divider",
-      "RC charge and discharge",
-      "Two-node nodal-analysis model",
+      "Ohm's law with voltage, current, resistance, and power context",
+      "Series and parallel resistor-network calculations",
+      "Voltage divider formula using top and bottom resistors",
+      "RC charge and discharge with ideal time-constant assumptions",
+      "Two-node nodal-analysis model with R1, R2, R12, I1, and I2 inputs",
+      "Conductance-matrix explanation and branch-current interpretation",
+      "Guide link for KCL, node voltages, and coefficient-matrix setup",
     ],
     faqs: [
       {
-        question: "Is this a full SPICE simulator?",
+        question: "Is this a nodal analysis calculator?",
         answer:
-          "No. It is an ideal DC circuit-analysis workspace. Full device models, AC sweeps, and transient SPICE simulations require a dedicated simulation engine.",
+          "Yes. The two-node nodal mode solves an ideal resistive KCL model using R1 from node 1 to ground, R2 from node 2 to ground, R12 between the nodes, and current injections I1 and I2.",
+      },
+      {
+        question: "What does G · V = I mean in circuit analysis?",
+        answer:
+          "G is the conductance matrix built from resistor values, V is the vector of unknown node voltages, and I is the vector of current injections. Solving the matrix gives the node voltages.",
       },
       {
         question: "How are current sources defined in nodal analysis?",
         answer:
-          "Positive I1 and I2 values are current injected into their corresponding nodes.",
+          "Positive I1 and I2 values are current injected into their corresponding nodes. A negative value represents current leaving that node in the chosen sign convention.",
+      },
+      {
+        question: "Can this solve series and parallel resistor networks?",
+        answer:
+          "Yes. Enter resistor values separated by commas, spaces, or semicolons. The calculator can estimate equivalent resistance and, when supply voltage is included, related current values.",
+      },
+      {
+        question: "Is this a full SPICE simulator?",
+        answer:
+          "No. It is an ideal DC circuit-analysis workspace for formulas and simple resistor models. Full device models, AC sweeps, nonlinear components, and detailed transient simulation require a dedicated SPICE engine.",
+      },
+      {
+        question: "When should I use the Matrix Calculator with circuit analysis?",
+        answer:
+          "Use Matrix Calculator when you want to inspect the coefficient matrix, determinant, inverse, RREF, or rank behind a circuit equation system.",
       },
     ],
   },

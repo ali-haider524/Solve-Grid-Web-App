@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useMemo, useState } from "react";
 import ToolHeader from "../../components/ToolHeader";
 import styles from "./StatisticsCalculator.module.css";
@@ -419,8 +420,8 @@ export default function StatisticsCalculator() {
       <ToolHeader active="math" />
       <section className={styles.hero}>
         <p>FREE ADVANCED STATISTICS CALCULATOR</p>
-        <h1>Choose the data type and the statistics you need.</h1>
-        <span>Analyse raw data, discrete or grouped frequency distributions, and paired values without being forced into one fixed result set.</span>
+        <h1>Statistics calculator for standard deviation, variance, quartiles, and regression.</h1>
+        <span>Calculate mean, median, mode, sample or population standard deviation, variance, quartiles, IQR, frequency tables, grouped data estimates, correlation, and linear regression from one focused workspace.</span>
       </section>
 
       <section className={styles.workspace}>
@@ -457,6 +458,127 @@ export default function StatisticsCalculator() {
           {result?.type === "summary" && <SummaryResultView value={result.value} selected={selectedMetrics} />}
           {result?.type === "regression" && <RegressionResultView value={result.value} selected={selectedMetrics} />}
         </article>
+      </section>
+
+      <section className={styles.learningSection} aria-labelledby="statistics-guide-title">
+        <div className={styles.learningHeader}>
+          <p>STATISTICS FORMULAS EXPLAINED</p>
+          <h2 id="statistics-guide-title">Understand the result before you use it.</h2>
+          <span>
+            This statistics calculator is built for class assignments, research summaries, lab data,
+            and business reports where users need both a number and a clear method. Choose the data
+            format first, then decide whether the problem needs sample or population statistics.
+          </span>
+        </div>
+
+        <div className={styles.topicGrid}>
+          <article>
+            <p>STANDARD DEVIATION</p>
+            <h3>Sample vs population SD</h3>
+            <span>
+              Use sample standard deviation when your values are only part of a larger group. Use
+              population standard deviation when the values are the complete population being studied.
+            </span>
+          </article>
+          <article>
+            <p>VARIANCE</p>
+            <h3>Average squared spread</h3>
+            <span>
+              Variance measures average squared distance from the mean. Standard deviation is the
+              square root of variance, so it is easier to read in the original unit.
+            </span>
+          </article>
+          <article>
+            <p>QUARTILES AND IQR</p>
+            <h3>Middle spread of the data</h3>
+            <span>
+              Q1, Q3, and IQR help explain spread without being controlled by very large or very
+              small values. IQR is useful when checking possible outliers.
+            </span>
+          </article>
+          <article>
+            <p>FREQUENCY TABLES</p>
+            <h3>Repeated values and grouped intervals</h3>
+            <span>
+              Use discrete frequency rows when exact values repeat. Use grouped data when values are
+              already summarized into class intervals such as 10–20 or 20–30.
+            </span>
+          </article>
+          <article>
+            <p>LINEAR REGRESSION</p>
+            <h3>Paired X/Y relationship</h3>
+            <span>
+              Paired mode calculates slope, intercept, correlation, R², covariance, and an optional
+              predicted y-value for a selected x-value.
+            </span>
+          </article>
+          <article>
+            <p>OUTLIERS</p>
+            <h3>1.5 × IQR rule</h3>
+            <span>
+              The outlier count uses the common IQR fence method: values below Q1 − 1.5×IQR or above
+              Q3 + 1.5×IQR are flagged as possible outliers.
+            </span>
+          </article>
+        </div>
+      </section>
+
+      <section className={styles.formulaSection} aria-labelledby="standard-deviation-formula-title">
+        <div className={styles.formulaIntro}>
+          <p>WORKED EXAMPLE</p>
+          <h2 id="standard-deviation-formula-title">How sample standard deviation is calculated.</h2>
+          <span>
+            For the raw data set 58, 64, 72, 72, 78, 84, 91, the mean is about 74.14.
+            With sample mode selected, the calculator divides the squared deviations by n − 1.
+          </span>
+        </div>
+        <div className={styles.formulaCards}>
+          <article>
+            <span>Sample variance</span>
+            <code>s² = Σ(x − x̄)² ÷ (n − 1)</code>
+            <p>For the example data, sample variance is about 128.14.</p>
+          </article>
+          <article>
+            <span>Sample standard deviation</span>
+            <code>s = √128.14 ≈ 11.32</code>
+            <p>The typical distance from the mean is about 11.32 data units.</p>
+          </article>
+          <article>
+            <span>Population standard deviation</span>
+            <code>σ = √(Σ(x − μ)² ÷ n)</code>
+            <p>Use this only when your entered values are the full population.</p>
+          </article>
+        </div>
+      </section>
+
+      <section className={styles.queryAnswerSection} aria-labelledby="statistics-question-title">
+        <div>
+          <p>COMMON QUESTIONS</p>
+          <h2 id="statistics-question-title">Quick answers for statistics problems.</h2>
+        </div>
+        <div className={styles.answerGrid}>
+          <article>
+            <h3>What is the formula for sample standard deviation?</h3>
+            <p>Subtract the mean from each value, square each difference, add them, divide by n − 1, then take the square root.</p>
+          </article>
+          <article>
+            <h3>What is the difference between variance and standard deviation?</h3>
+            <p>Variance is squared spread. Standard deviation is the square root of variance, so it is easier to compare with the original data unit.</p>
+          </article>
+          <article>
+            <h3>When should I use grouped data?</h3>
+            <p>Use grouped data when you only have class intervals and frequencies. The calculator estimates mean and spread using each class midpoint.</p>
+          </article>
+          <article>
+            <h3>Can this calculator do linear regression?</h3>
+            <p>Yes. Choose paired X/Y mode to calculate slope, intercept, correlation r, R², covariance, and optional prediction.</p>
+          </article>
+        </div>
+      </section>
+
+      <section className={styles.relatedSection} aria-label="Related statistics guides and tools">
+        <Link href="/guides/standard-deviation-formula">Read the standard deviation formula guide →</Link>
+        <Link href="/graphing-calculator">Use Graphing Calculator for visual checks →</Link>
       </section>
     </main>
   );

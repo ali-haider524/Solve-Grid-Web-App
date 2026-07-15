@@ -89,7 +89,8 @@ export const guides: GuideInfo[] = [
   {
     slug: "standard-deviation-formula",
     title: "Standard deviation formula",
-    summary: "Choose sample or population standard deviation and interpret spread.",
+    summary:
+      "Compare sample and population standard deviation, variance, mean deviations, quartiles, and spread.",
     toolSlugs: ["statistics-calculator"],
   },
   {
@@ -130,7 +131,7 @@ export const guides: GuideInfo[] = [
     slug: "two-node-nodal-analysis",
     title: "Two-node nodal analysis",
     summary:
-      "Set up a conductance matrix for a two-node resistor circuit with injected currents.",
+      "Set up KCL equations, conductance terms, coefficient matrices, node voltages, and branch currents for a two-node resistor circuit.",
     toolSlugs: ["circuit-analysis", "matrix-calculator", "scientific-calculator"],
   },
   {
@@ -166,6 +167,14 @@ const preferredGuideSlugsByTool: Record<string, string[]> = {
   "polynomial-solver": [
     "polynomial-roots-and-complex-roots",
     "plot-multiple-equations",
+  ],
+  "statistics-calculator": [
+    "standard-deviation-formula",
+    "choose-a-statistical-test",
+  ],
+  "circuit-analysis": [
+    "two-node-nodal-analysis",
+    "matrix-methods-for-linear-systems",
   ],
 };
 
