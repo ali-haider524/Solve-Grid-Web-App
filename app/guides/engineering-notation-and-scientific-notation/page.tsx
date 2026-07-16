@@ -45,6 +45,26 @@ export default function EngineeringNotationGuide() {
           body:
             "Engineering notation is only useful when the unit still makes sense. Keep a sensible number of significant figures and do not mix prefixes without converting them first.",
         },
+          {
+          title: "Use scientific notation for compact powers of ten",
+          body: "Scientific notation writes a number as a coefficient times a power of ten. The coefficient is usually between 1 and 10, so 0.000047 becomes 4.7 × 10^-5 and 920000 becomes 9.2 × 10^5.",
+        },
+        {
+          title: "Use engineering notation for SI-prefix sized values",
+          body: "Engineering notation keeps the exponent as a multiple of three. That makes it easier to connect values with prefixes such as kilo, mega, milli, micro, nano, and pico. For example, 0.000047 F becomes 47 × 10^-6 F, which is 47 microfarads.",
+        },
+        {
+          title: "Move the decimal point carefully",
+          body: "Moving the decimal point left increases the exponent, and moving it right decreases the exponent. The value stays the same only when the coefficient and exponent are adjusted together.",
+        },
+        {
+          title: "Choose the notation based on the problem",
+          body: "Use scientific notation when you need a standard math format for very large or very small numbers. Use engineering notation when the number is connected to physical units, electronics, measurement, or SI prefixes.",
+        },
+        {
+          title: "Use the calculator mode for readable results",
+          body: "In SolveGrid Scientific Calculator, use normal, scientific, or engineering result modes depending on how you want the answer displayed. Use Unit Converter when the problem also requires changing units, such as watts to kilowatts or pascals to kilopascals.",
+        },
       ]}
       toolLinks={[
         {
