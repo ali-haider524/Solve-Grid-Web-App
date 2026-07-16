@@ -154,26 +154,32 @@ export const tools: ToolInfo[] = [
     shortName: "Graphing",
     category: "math",
     icon: "⌁",
-    title: "Free Online Graphing Calculator",
+    title: "Online Graphing Calculator – Graph, Table, Trace & Intersections",
     description:
-      "Use a free online graphing calculator to plot up to eight equations, compare functions, inspect value tables, trace points, estimate roots and intersections, and adjust the graph window.",
+      "Use a free online graphing calculator to plot equations, compare functions, inspect value tables, trace points, estimate roots and intersections, adjust the graph window, and follow TI-84 style graphing workflows independently.",
     summary:
-      "Plot and compare several functions, inspect tables and trace values, estimate x-intercepts and intersections, and adjust the graph window directly in your browser.",
+      "Plot and compare several functions, inspect tables and trace values, estimate x-intercepts and intersections, adjust the graph window, and use a clear online workflow for common graphing-calculator tasks.",
     keywords: [
       "online graphing calculator",
+      "graphing calculator online",
+      "ti-84 online alternative",
+      "ti-84 style graphing calculator",
+      "graph equations online",
       "plot equations online",
       "function graph calculator",
+      "online graphing calculator with table",
       "graph table calculator",
       "graph multiple equations",
       "graphing calculator with table",
+      "trace graph calculator",
       "graph intersections calculator",
       "x intercept calculator",
       "online function plotter",
     ],
     relatedSlugs: [
-      "differential-equation-solver",
       "equation-solver",
       "polynomial-solver",
+      "scientific-calculator",
     ],
     featured: true,
     priority: 0.95,
@@ -181,6 +187,7 @@ export const tools: ToolInfo[] = [
       "Plot and compare up to eight functions or vertical lines",
       "Inspect value tables and trace a chosen x-coordinate",
       "Estimate roots and intersections in the current graph window",
+      "Use an independent TI-84 style workflow for graph, table, trace, roots, and intersections",
       "Explore trigonometric functions in degrees or radians",
     ],
     features: [
@@ -189,12 +196,18 @@ export const tools: ToolInfo[] = [
       "Approximate x-intercepts and function intersections",
       "Zoom controls and custom x/y window settings",
       "Degrees and radians for trigonometric functions",
+      "Guide link for choosing the right SolveGrid tool after a graphing step",
     ],
     faqs: [
       {
         question: "Can I graph more than one equation?",
         answer:
           "Yes. Add up to eight equation lines and compare them in the same graph window. Enter functions such as y = 2x + 1 or y = x^2 − 4, and use x = 3 for a vertical line.",
+      },
+      {
+        question: "Can I use this as a TI-84 online alternative?",
+        answer:
+          "It can help with many similar online graphing workflows such as graphing equations, viewing tables, tracing values, and estimating roots or intersections. SolveGrid is independent and is not an official TI-84 emulator or a Texas Instruments product.",
       },
       {
         question: "Can I see a table of values?",
@@ -225,52 +238,86 @@ export const tools: ToolInfo[] = [
     shortName: "Equations",
     category: "math",
     icon: "x²",
-    title: "Equation Solver – Linear, Quadratic, Cubic & Linear Systems",
+    title:
+      "Equation Solver – Linear, Quadratic, Cubic & System of Equations Calculator",
     description:
-      "Solve linear, quadratic, cubic, and 2–8 variable linear systems online with Gaussian elimination, Gauss-Jordan RREF, matrix inverse, and Cramer's rule.",
+      "Solve linear, quadratic, cubic, and 2–8 variable systems of equations online with steps, Gaussian elimination, Gauss-Jordan RREF, matrix inverse, and Cramer’s rule where supported.",
     summary:
-      "Choose a one-variable polynomial workflow or build a coefficient system with 2–8 variables and a transparent matrix-solving method.",
+      "Use a clear online equation solver for one-variable equations and simultaneous linear systems. Enter coefficients, solve linear, quadratic, and cubic equations, or compare matrix methods for A·x = b systems.",
     keywords: [
       "equation solver",
+      "online equation solver",
+      "engineering equation solver online",
+      "linear equation solver",
       "quadratic equation solver",
+      "quadratic formula calculator",
       "cubic equation solver",
+      "system of equations solver",
       "simultaneous equations solver",
+      "linear system solver",
       "gaussian elimination calculator",
+      "gaussian reduction calculator",
       "gauss jordan calculator",
+      "rref system solver",
       "cramers rule calculator",
       "matrix equation solver",
+      "coefficient matrix solver",
+      "A x equals b calculator",
     ],
     relatedSlugs: [
       "matrix-calculator",
-      "polynomial-solver",
       "graphing-calculator",
+      "polynomial-solver",
+      "scientific-calculator",
     ],
     featured: true,
     priority: 0.95,
     useCases: [
-      "Linear, quadratic, and cubic equations",
-      "2–8 variable simultaneous equations",
-      "Gaussian, Gauss-Jordan, inverse, and Cramer's methods",
+      "Solve linear, quadratic, and cubic equations from coefficients",
+      "Build 2–8 variable simultaneous equations from a coefficient matrix",
+      "Compare Gaussian elimination, Gauss-Jordan RREF, inverse method, and Cramer’s rule",
+      "Check whether a system has one solution, no solution, or infinitely many solutions",
     ],
     features: [
-      "Linear equation solver",
-      "Quadratic formula and complex roots",
-      "Cubic equation roots",
-      "Gaussian elimination",
-      "Gauss-Jordan RREF",
-      "Matrix inverse method",
-      "Cramer's rule for 2–4 variables",
+      "Linear equation solver for ax + b = 0",
+      "Quadratic formula workflow with real, repeated, and complex roots",
+      "Cubic equation roots from coefficient form",
+      "2–8 variable system of equations solver",
+      "Gaussian elimination and Gauss-Jordan RREF methods",
+      "Matrix inverse method for supported square systems",
+      "Cramer’s rule for small systems where applicable",
+      "Worked examples and internal links to matrix, graphing, and polynomial tools",
     ],
     faqs: [
       {
-        question: "Which equation systems can this page solve?",
+        question: "Which equations can this online equation solver handle?",
         answer:
-          "It solves square linear systems from 2 through 8 variables using a coefficient table and a selected matrix method.",
+          "It solves linear equations, quadratic equations, cubic equations, and square linear systems from 2 through 8 variables using coefficient input.",
       },
       {
-        question: "Where should I solve degree four or higher?",
+        question: "Can I use it as a system of equations solver?",
         answer:
-          "Use the Polynomial Solver for coefficient-based roots from degree 1 through 10.",
+          "Yes. Choose Linear system, enter coefficients in the same variable order, and pick Auto, Gaussian elimination, Gauss-Jordan RREF, matrix inverse, or Cramer’s rule where supported.",
+      },
+      {
+        question: "What is the difference between Gaussian elimination and RREF?",
+        answer:
+          "Gaussian elimination usually reduces the augmented matrix to row echelon form and then back-substitutes. Gauss-Jordan continues to RREF so pivots are easier to read directly.",
+      },
+      {
+        question: "Can the quadratic equation solver show complex roots?",
+        answer:
+          "Yes. If the discriminant is negative, the calculator reports complex roots in a + bi form instead of only saying that there are no real roots.",
+      },
+      {
+        question: "Where should I solve degree 4 or higher equations?",
+        answer:
+          "Use the Polynomial Solver for degree 4 through 10 polynomial roots. This page focuses on linear, quadratic, cubic, and simultaneous linear systems.",
+      },
+      {
+        question: "When should I graph the equation instead?",
+        answer:
+          "Use the Graphing Calculator when you want to visualize roots, intersections, or tables. Use Equation Solver when you need coefficient-based numerical answers.",
       },
     ],
   },
@@ -530,31 +577,51 @@ export const tools: ToolInfo[] = [
     shortName: "Units",
     category: "engineering",
     icon: "⇄",
-    title: "Advanced Unit Converter – Engineering, Science & Everyday Units",
+    title: "Unit Converter – Engineering, Metric, Imperial & Science Units",
     description:
-      "Convert 17 unit categories including length, force, pressure, energy, power, torque, density, temperature, speed, angles, and data units online.",
+      "Convert engineering, science, metric, imperial, and everyday units online across length, area, volume, mass, temperature, speed, acceleration, angles, data, force, pressure, energy, power, torque, frequency, density, and time.",
     summary:
-      "Convert engineering, science, and everyday units through 17 flexible categories, with pre-filled shareable URLs for exact conversions.",
+      "Convert 17 unit families with clear formulas, base-unit context, metric and imperial workflows, and shareable pre-filled conversion links for engineering, science, study, and everyday calculations.",
     keywords: [
-      "advanced unit converter",
+      "unit converter",
+      "online unit converter",
       "engineering unit converter",
+      "metric unit converter",
+      "imperial unit converter",
+      "scientific unit converter",
       "pressure converter",
+      "force converter",
       "energy converter",
+      "power converter",
       "torque converter",
       "density converter",
       "temperature converter",
+      "speed converter",
+      "data unit converter",
+      "metric to imperial converter",
+      "unit conversion formulas",
+      "engineering conversion calculator",
     ],
     relatedSlugs: [
-      "distance-calculator",
       "scientific-calculator",
-      "percentage-calculator",
+      "distance-calculator",
+      "circuit-analysis",
     ],
     featured: true,
     priority: 0.9,
     useCases: [
-      "Force, pressure, energy, power, and torque",
-      "Length, area, volume, density, and temperature",
-      "Speed, time, angles, frequency, and data units",
+      "Metric and imperial conversions for length, area, volume, mass, and temperature",
+      "Engineering conversions for force, pressure, energy, power, torque, density, and frequency",
+      "Speed, time, angle, acceleration, data, and everyday conversion checks",
+      "Shareable pre-filled conversion links for study notes or engineering calculations",
+    ],
+    features: [
+      "17 conversion families",
+      "Pressure, force, energy, power, torque, density, and frequency conversions",
+      "Temperature formulas for Celsius, Fahrenheit, and Kelvin",
+      "Metric and imperial units with base-unit explanation",
+      "Scientific notation friendly output for very large or very small values",
+      "Copyable pre-filled conversion links",
     ],
     faqs: [
       {
@@ -563,9 +630,24 @@ export const tools: ToolInfo[] = [
           "Length, area, volume, mass, temperature, time, speed, acceleration, angles, data, force, pressure, energy, power, torque, frequency, and density are included.",
       },
       {
+        question: "Is this an engineering unit converter?",
+        answer:
+          "Yes. It includes common engineering conversions such as force, pressure, energy, power, torque, density, frequency, speed, acceleration, and angles.",
+      },
+      {
         question: "Does temperature conversion use a different formula?",
         answer:
           "Yes. Temperature uses formulas rather than simple multiplication because Celsius, Fahrenheit, and Kelvin have different zero points.",
+      },
+      {
+        question: "Can I convert metric to imperial units?",
+        answer:
+          "Yes. Choose a category such as length, mass, volume, temperature, speed, or pressure, then select the metric and imperial units you need.",
+      },
+      {
+        question: "When should I use Scientific Calculator instead?",
+        answer:
+          "Use Scientific Calculator when you need powers, roots, trigonometry, logarithms, constants, scientific notation, or engineering notation. Use Unit Converter when the main task is changing from one unit to another.",
       },
     ],
   },

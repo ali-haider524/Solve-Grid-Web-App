@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import ToolHeader from "../../components/ToolHeader";
 import { convertUnit, isUnitCategoryKey, unitCategories, unitCategoryKeys, type UnitCategoryKey } from "../../lib/unit-catalog";
@@ -18,6 +19,34 @@ function getDefaults(category: UnitCategoryKey) {
   const units = unitCategories[category].units;
   return { from: units[0].id, to: units[Math.min(1, units.length - 1)].id };
 }
+
+
+const categoryHighlights = [
+  {
+    title: "Engineering conversions",
+    body:
+      "Convert pressure, force, energy, power, torque, density, frequency, angle, acceleration, and speed units for technical calculations.",
+  },
+  {
+    title: "Metric and imperial units",
+    body:
+      "Switch between meters, feet, inches, kilograms, pounds, liters, gallons, Celsius, Fahrenheit, miles per hour, kilometers per hour, and more.",
+  },
+  {
+    title: "Shareable conversion links",
+    body:
+      "Copy a pre-filled URL after choosing the value, category, source unit, and result unit, so the same conversion can be reopened later.",
+  },
+];
+
+const exampleConversions = [
+  { label: "Pressure", example: "1 bar = 100 kPa = 100,000 Pa" },
+  { label: "Temperature", example: "°C to °F uses °F = °C × 9/5 + 32" },
+  { label: "Torque", example: "1 N·m ≈ 0.737562 lb·ft" },
+  { label: "Speed", example: "1 m/s = 3.6 km/h" },
+  { label: "Energy", example: "1 kWh = 3,600,000 J" },
+  { label: "Data", example: "1 MiB = 1,048,576 bytes" },
+];
 
 export default function UnitConverter() {
   const [category, setCategory] = useState<UnitCategoryKey>("length");
@@ -163,6 +192,57 @@ export default function UnitConverter() {
             </span>
           </div>
         </section>
+      </section>
+
+      <section className={styles.learningSection} aria-label="Unit conversion formulas and examples">
+        <div className={styles.learningIntro}>
+          <p>UNIT CONVERSION GUIDE</p>
+          <h2>Convert units with clear formulas, examples, and engineering context.</h2>
+          <span>
+            Use this unit converter when a problem mixes measurement systems, engineering units,
+            scientific notation, or practical everyday values. The calculator uses a base-unit
+            workflow for most categories and special formulas where offsets matter, such as temperature.
+          </span>
+        </div>
+
+        <div className={styles.highlightGrid}>
+          {categoryHighlights.map((item) => (
+            <article key={item.title}>
+              <h3>{item.title}</h3>
+              <p>{item.body}</p>
+            </article>
+          ))}
+        </div>
+
+        <div className={styles.exampleGrid}>
+          <article className={styles.explainerCard}>
+            <p>COMMON CONVERSIONS</p>
+            <h3>Examples users often search for</h3>
+            <div className={styles.exampleList}>
+              {exampleConversions.map((item) => (
+                <span key={item.label}>
+                  <b>{item.label}</b>
+                  <code>{item.example}</code>
+                </span>
+              ))}
+            </div>
+          </article>
+
+          <article className={styles.explainerCard}>
+            <p>HOW TO CHOOSE A TOOL</p>
+            <h3>Use the right SolveGrid workflow</h3>
+            <ul>
+              <li>Use Unit Converter for measurement units, temperature scales, pressure, torque, energy, speed, and data units.</li>
+              <li>Use Scientific Calculator for arithmetic, trigonometry, logarithms, constants, scientific notation, and engineering notation.</li>
+              <li>Use Distance Calculator for coordinate distance, midpoint, speed, time, and travel-distance formulas.</li>
+            </ul>
+            <div className={styles.guideLinks}>
+              <Link href="/guides/unit-conversion-formulas">Read unit conversion formulas →</Link>
+              <Link href="/guides/engineering-unit-conversion">Read engineering unit guide →</Link>
+              <Link href="/scientific-calculator">Open scientific calculator →</Link>
+            </div>
+          </article>
+        </div>
       </section>
     </main>
   );

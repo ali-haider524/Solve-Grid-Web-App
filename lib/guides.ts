@@ -38,6 +38,13 @@ export const guides: GuideInfo[] = [
     toolSlugs: ["graphing-calculator", "equation-solver"],
   },
   {
+    slug: "linear-quadratic-cubic-equation-solver",
+    title: "Linear, quadratic, cubic, and system equations",
+    summary:
+      "Choose the right equation-solving method for one-variable equations and simultaneous linear systems.",
+    toolSlugs: ["equation-solver", "polynomial-solver", "graphing-calculator", "matrix-calculator"],
+  },
+  {
     slug: "polynomial-roots-and-complex-roots",
     title: "Polynomial roots and complex roots",
     summary:
@@ -46,12 +53,12 @@ export const guides: GuideInfo[] = [
   },
   {
     slug: "ti-84-style-graphing-workflows",
-    title: "TI-84 style online problem-solving guide",
+    title: "TI-84 style online calculator workflows",
     summary:
-      "Use independent online tools for scientific calculations, graphs, tables, equations, polynomial roots, matrices, statistics, and unit conversion.",
+      "Use independent online workflows for graphing equations, tables, trace values, roots, intersections, scientific calculations, matrices, statistics, and unit conversion.",
     toolSlugs: [
-      "scientific-calculator",
       "graphing-calculator",
+      "scientific-calculator",
       "equation-solver",
       "polynomial-solver",
       "matrix-calculator",
@@ -101,6 +108,20 @@ export const guides: GuideInfo[] = [
     toolSlugs: ["scientific-calculator", "unit-converter"],
   },
   {
+    slug: "unit-conversion-formulas",
+    title: "Unit conversion formulas",
+    summary:
+      "Convert units with base-unit formulas, metric prefixes, temperature formulas, speed, pressure, energy, torque, density, and data examples.",
+    toolSlugs: ["unit-converter", "scientific-calculator"],
+  },
+  {
+    slug: "engineering-unit-conversion",
+    title: "Engineering unit conversion",
+    summary:
+      "Understand engineering conversions for pressure, force, torque, energy, power, density, frequency, and scientific notation values.",
+    toolSlugs: ["unit-converter", "scientific-calculator", "circuit-analysis"],
+  },
+  {
     slug: "euler-method-for-differential-equations",
     title: "Euler method for differential equations",
     summary:
@@ -146,11 +167,22 @@ export const guides: GuideInfo[] = [
 export const guideSlugs = guides.map((guide) => guide.slug);
 
 const preferredGuideSlugsByTool: Record<string, string[]> = {
+  "graphing-calculator": [
+    "ti-84-style-graphing-workflows",
+    "plot-multiple-equations",
+    "polynomial-roots-and-complex-roots",
+  ],
   "profit-loss-calculator": [
     "profit-margin-vs-markup",
     "percentage-increase-and-decrease",
   ],
   "scientific-calculator": [
+    "engineering-notation-and-scientific-notation",
+    "ti-84-style-graphing-workflows",
+  ],
+  "unit-converter": [
+    "unit-conversion-formulas",
+    "engineering-unit-conversion",
     "engineering-notation-and-scientific-notation",
     "ti-84-style-graphing-workflows",
   ],
@@ -160,6 +192,7 @@ const preferredGuideSlugsByTool: Record<string, string[]> = {
     "matrix-methods-for-linear-systems",
   ],
   "equation-solver": [
+    "linear-quadratic-cubic-equation-solver",
     "gaussian-elimination-for-linear-systems",
     "matrix-methods-for-linear-systems",
     "matrix-inverse-and-determinant",

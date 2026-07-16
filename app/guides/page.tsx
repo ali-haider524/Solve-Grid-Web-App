@@ -6,9 +6,9 @@ import { guides } from "../../lib/guides";
 import styles from "./guides.module.css";
 
 export const metadata: Metadata = {
-  title: "Calculator Guides – Formulas, Methods & Worked Examples",
+  title: "Calculator Guides – Graphing, Equations, Units, Matrices & Worked Examples",
   description:
-    "Learn graphing, equations, matrices, scientific notation, engineering notation, statistics, unit conversion, finance, and age-calculation methods with concise SolveGrid guides.",
+    "Learn graphing workflows, equation solving, Gaussian elimination, matrix methods, scientific notation, unit conversion, statistics, finance formulas, and worked calculator examples.",
   alternates: { canonical: "/guides" },
 };
 

@@ -20,6 +20,78 @@ const modeLabels: Record<Mode, string> = {
   system: "Linear system",
 };
 
+const workflowCards = [
+  {
+    title: "Linear equation solver",
+    formula: "ax + b = 0",
+    body:
+      "Use this when the unknown appears only to the first power. The calculator moves the constant term, divides by the x coefficient, and reports whether there is one solution, no solution, or infinitely many solutions.",
+    example: "Example: 2x + 8 = 0 gives x = −4.",
+  },
+  {
+    title: "Quadratic equation solver",
+    formula: "ax² + bx + c = 0",
+    body:
+      "Use this for degree-two equations. The discriminant tells whether the equation has two real roots, one repeated root, or a pair of complex roots.",
+    example: "Example: x² − 5x + 6 = 0 gives x = 2 and x = 3.",
+  },
+  {
+    title: "Cubic equation solver",
+    formula: "ax³ + bx² + cx + d = 0",
+    body:
+      "Use this for degree-three equations when you want real and complex roots directly from coefficients. For degree 4 to 10, open the Polynomial Solver.",
+    example: "Example: x³ − 6x² + 11x − 6 = 0 gives roots 1, 2, and 3.",
+  },
+  {
+    title: "System of equations solver",
+    formula: "A · x = b",
+    body:
+      "Build a 2–8 variable simultaneous-equations system from coefficients. Compare auto row reduction, Gaussian elimination, Gauss-Jordan RREF, inverse method, and Cramer’s rule where supported.",
+    example: "Example: enter each equation row as coefficients followed by the right-side value.",
+  },
+];
+
+const methodCards = [
+  {
+    title: "Gaussian elimination",
+    body:
+      "A practical method for simultaneous equations. It converts the augmented matrix to row echelon form, then uses back-substitution to solve the unknowns.",
+  },
+  {
+    title: "Gauss-Jordan / RREF",
+    body:
+      "Continues row reduction until pivots are easy to read. RREF also helps identify free variables, inconsistent systems, and dependent equations.",
+  },
+  {
+    title: "Matrix inverse method",
+    body:
+      "Uses x = A⁻¹b for a square system when the coefficient matrix is invertible. It is useful when the same A matrix is reused with different right-side vectors.",
+  },
+  {
+    title: "Cramer’s rule",
+    body:
+      "Uses determinants and is mainly useful for small square systems. This workspace keeps Cramer’s rule limited to supported sizes.",
+  },
+];
+
+const questionCards = [
+  {
+    question: "Can this solve engineering equations online?",
+    answer:
+      "Yes. It is useful for coefficient-based engineering, algebra, and linear-system workflows. For formulas with units, combine it with the Scientific Calculator or Unit Converter.",
+  },
+  {
+    question: "When should I use Polynomial Solver instead?",
+    answer:
+      "Use Polynomial Solver for degree 4 through 10 roots. This Equation Solver focuses on linear, quadratic, cubic, and square linear systems.",
+  },
+  {
+    question: "When should I graph the equation?",
+    answer:
+      "Use Graphing Calculator when you want to see intercepts, turning points, intersections, or a table of values. Use Equation Solver when you need numeric roots or system values.",
+  },
+];
+
 function blankGrid(size: number) {
   return Array.from({ length: size }, () => Array.from({ length: size + 1 }, () => ""));
 }
@@ -33,7 +105,9 @@ function parse(value: string, label: string) {
 function format(value: number) {
   if (Math.abs(value) < EPSILON) return "0";
   const rounded = Number(value.toPrecision(10));
-  return Math.abs(rounded) >= 1_000_000 || (Math.abs(rounded) > 0 && Math.abs(rounded) < 0.000001) ? rounded.toExponential(5) : String(rounded);
+  return Math.abs(rounded) >= 1_000_000 || (Math.abs(rounded) > 0 && Math.abs(rounded) < 0.000001)
+    ? rounded.toExponential(5)
+    : String(rounded);
 }
 
 function complex(real: number, imaginary: number) {
@@ -41,10 +115,32 @@ function complex(real: number, imaginary: number) {
 }
 
 function solveLinear(a: number, b: number): SolverResult {
-  if (Math.abs(a) < EPSILON && Math.abs(b) < EPSILON) return { title: "Infinitely many solutions", summary: "The equation simplifies to 0 = 0.", answers: ["Every real x is a solution"], steps: [{ title: "Check coefficients", detail: "Both a and b are zero, so the statement is always true." }] };
-  if (Math.abs(a) < EPSILON) return { title: "No solution", summary: "There is no variable term and the remaining statement is false.", answers: ["No real x satisfies the equation"], steps: [{ title: "Check coefficients", detail: `${format(b)} = 0 is false.` }] };
+  if (Math.abs(a) < EPSILON && Math.abs(b) < EPSILON) {
+    return {
+      title: "Infinitely many solutions",
+      summary: "The equation simplifies to 0 = 0.",
+      answers: ["Every real x is a solution"],
+      steps: [{ title: "Check coefficients", detail: "Both a and b are zero, so the statement is always true." }],
+    };
+  }
+  if (Math.abs(a) < EPSILON) {
+    return {
+      title: "No solution",
+      summary: "There is no variable term and the remaining statement is false.",
+      answers: ["No real x satisfies the equation"],
+      steps: [{ title: "Check coefficients", detail: `${format(b)} = 0 is false.` }],
+    };
+  }
   const x = -b / a;
-  return { title: "One solution", summary: "A non-zero coefficient of x gives one real solution.", answers: [`x = ${format(x)}`], steps: [{ title: "Move the constant", detail: `${format(a)}x = ${format(-b)}.` }, { title: "Divide by a", detail: `x = ${format(-b)} ÷ ${format(a)} = ${format(x)}.` }] };
+  return {
+    title: "One solution",
+    summary: "A non-zero coefficient of x gives one real solution.",
+    answers: [`x = ${format(x)}`],
+    steps: [
+      { title: "Move the constant", detail: `${format(a)}x = ${format(-b)}.` },
+      { title: "Divide by a", detail: `x = ${format(-b)} ÷ ${format(a)} = ${format(x)}.` },
+    ],
+  };
 }
 
 function solveQuadratic(a: number, b: number, c: number): SolverResult {
@@ -55,15 +151,30 @@ function solveQuadratic(a: number, b: number, c: number): SolverResult {
     const root = Math.sqrt(discriminant);
     const x1 = (-b + root) / (2 * a);
     const x2 = (-b - root) / (2 * a);
-    return { title: "Two real roots", summary: "The discriminant is positive.", answers: [`x₁ = ${format(x1)}`, `x₂ = ${format(x2)}`], steps: [...steps, { title: "Apply the quadratic formula", detail: "x = (−b ± √Δ) ÷ 2a." }] };
+    return {
+      title: "Two real roots",
+      summary: "The discriminant is positive.",
+      answers: [`x₁ = ${format(x1)}`, `x₂ = ${format(x2)}`],
+      steps: [...steps, { title: "Apply the quadratic formula", detail: "x = (−b ± √Δ) ÷ 2a." }],
+    };
   }
   if (Math.abs(discriminant) < EPSILON) {
     const x = -b / (2 * a);
-    return { title: "Repeated real root", summary: "The discriminant is zero.", answers: [`x = ${format(x)}`], steps: [...steps, { title: "Apply the repeated-root formula", detail: `x = −b ÷ 2a = ${format(x)}.` }] };
+    return {
+      title: "Repeated real root",
+      summary: "The discriminant is zero.",
+      answers: [`x = ${format(x)}`],
+      steps: [...steps, { title: "Apply the repeated-root formula", detail: `x = −b ÷ 2a = ${format(x)}.` }],
+    };
   }
   const real = -b / (2 * a);
   const imaginary = Math.sqrt(-discriminant) / Math.abs(2 * a);
-  return { title: "Two complex roots", summary: "The discriminant is negative, so there are no real roots.", answers: [`x₁ = ${complex(real, imaginary)}`, `x₂ = ${complex(real, -imaginary)}`], steps: [...steps, { title: "Use the complex form", detail: "A negative discriminant produces an imaginary component." }] };
+  return {
+    title: "Two complex roots",
+    summary: "The discriminant is negative, so there are no real roots.",
+    answers: [`x₁ = ${complex(real, imaginary)}`, `x₂ = ${complex(real, -imaginary)}`],
+    steps: [...steps, { title: "Use the complex form", detail: "A negative discriminant produces an imaginary component." }],
+  };
 }
 
 function solveCubic(a: number, b: number, c: number, d: number): SolverResult {
@@ -71,29 +182,49 @@ function solveCubic(a: number, b: number, c: number, d: number): SolverResult {
   const A = b / a;
   const B = c / a;
   const C = d / a;
-  const p = B - (A ** 2) / 3;
+  const p = B - A ** 2 / 3;
   const q = (2 * A ** 3) / 27 - (A * B) / 3 + C;
   const discriminant = (q / 2) ** 2 + (p / 3) ** 3;
-  const steps: Step[] = [{ title: "Normalize the cubic", detail: `Divide each term by a = ${format(a)}.` }, { title: "Calculate the cubic discriminant", detail: `Δ = ${format(discriminant)}.` }];
+  const steps: Step[] = [
+    { title: "Normalize the cubic", detail: `Divide each term by a = ${format(a)}.` },
+    { title: "Calculate the cubic discriminant", detail: `Δ = ${format(discriminant)}.` },
+  ];
   if (discriminant > EPSILON) {
     const u = Math.cbrt(-q / 2 + Math.sqrt(discriminant));
     const v = Math.cbrt(-q / 2 - Math.sqrt(discriminant));
     const realRoot = u + v - A / 3;
     const complexReal = -(u + v) / 2 - A / 3;
     const complexImaginary = (Math.sqrt(3) / 2) * (u - v);
-    return { title: "One real root and two complex roots", summary: "The cubic discriminant is positive.", answers: [`x₁ = ${format(realRoot)}`, `x₂ = ${complex(complexReal, complexImaginary)}`, `x₃ = ${complex(complexReal, -complexImaginary)}`], steps: [...steps, { title: "Apply the cubic formula", detail: "The normalized p and q values produce one real root." }] };
+    return {
+      title: "One real root and two complex roots",
+      summary: "The cubic discriminant is positive.",
+      answers: [`x₁ = ${format(realRoot)}`, `x₂ = ${complex(complexReal, complexImaginary)}`, `x₃ = ${complex(complexReal, -complexImaginary)}`],
+      steps: [...steps, { title: "Apply the cubic formula", detail: "The normalized p and q values produce one real root." }],
+    };
   }
   if (Math.abs(discriminant) < EPSILON) {
     const u = Math.cbrt(-q / 2);
     const root1 = 2 * u - A / 3;
     const root2 = -u - A / 3;
     const roots = [...new Set([format(root1), format(root2)])];
-    return { title: "Repeated real roots", summary: "The cubic discriminant is zero, so at least two roots are equal.", answers: roots.map((root, index) => `x${index + 1} = ${root}`), steps: [...steps, { title: "Use repeated-root form", detail: "Δ = 0 indicates repeated real roots." }] };
+    return {
+      title: "Repeated real roots",
+      summary: "The cubic discriminant is zero, so at least two roots are equal.",
+      answers: roots.map((root, index) => `x${index + 1} = ${root}`),
+      steps: [...steps, { title: "Use repeated-root form", detail: "Δ = 0 indicates repeated real roots." }],
+    };
   }
   const radius = 2 * Math.sqrt(-p / 3);
   const angle = Math.acos((-q / 2) / Math.sqrt(-((p / 3) ** 3)));
-  const roots = [0, 1, 2].map((index) => radius * Math.cos((angle + 2 * Math.PI * index) / 3) - A / 3).sort((first, second) => first - second);
-  return { title: "Three real roots", summary: "The cubic discriminant is negative.", answers: roots.map((root, index) => `x${index + 1} = ${format(root)}`), steps: [...steps, { title: "Use trigonometric cubic form", detail: "A negative discriminant gives three distinct real roots." }] };
+  const roots = [0, 1, 2]
+    .map((index) => radius * Math.cos((angle + 2 * Math.PI * index) / 3) - A / 3)
+    .sort((first, second) => first - second);
+  return {
+    title: "Three real roots",
+    summary: "The cubic discriminant is negative.",
+    answers: roots.map((root, index) => `x${index + 1} = ${format(root)}`),
+    steps: [...steps, { title: "Use trigonometric cubic form", detail: "A negative discriminant gives three distinct real roots." }],
+  };
 }
 
 export default function EquationSolver() {
@@ -122,12 +253,20 @@ export default function EquationSolver() {
 
   function resizeSystem(size: number) {
     setSystemSize(size);
-    setSystem((current) => Array.from({ length: size }, (_, row) => Array.from({ length: size + 1 }, (_, column) => current[row]?.[column] ?? "")));
+    setSystem((current) =>
+      Array.from({ length: size }, (_, row) =>
+        Array.from({ length: size + 1 }, (_, column) => current[row]?.[column] ?? ""),
+      ),
+    );
     setResult(null);
   }
 
   function updateSystem(row: number, column: number, value: string) {
-    setSystem((current) => current.map((line, rowIndex) => line.map((cell, columnIndex) => rowIndex === row && columnIndex === column ? value : cell)));
+    setSystem((current) =>
+      current.map((line, rowIndex) =>
+        line.map((cell, columnIndex) => (rowIndex === row && columnIndex === column ? value : cell)),
+      ),
+    );
   }
 
   function loadExample() {
@@ -136,7 +275,11 @@ export default function EquationSolver() {
     if (mode === "cubic") setCubic({ a: "1", b: "-6", c: "11", d: "-6" });
     if (mode === "system") {
       resizeSystem(3);
-      setSystem([["2", "1", "-1", "8"], ["-3", "-1", "2", "-11"], ["-2", "1", "2", "-3"]]);
+      setSystem([
+        ["2", "1", "-1", "8"],
+        ["-3", "-1", "2", "-11"],
+        ["-2", "1", "2", "-3"],
+      ]);
     }
     setError("");
   }
@@ -148,13 +291,37 @@ export default function EquationSolver() {
       else if (mode === "quadratic") solved = solveQuadratic(parse(quadratic.a, "a"), parse(quadratic.b, "b"), parse(quadratic.c, "c"));
       else if (mode === "cubic") solved = solveCubic(parse(cubic.a, "a"), parse(cubic.b, "b"), parse(cubic.c, "c"), parse(cubic.d, "d"));
       else {
-        const coefficientMatrix = system.map((row, rowIndex) => row.slice(0, systemSize).map((value, columnIndex) => parse(value, `row ${rowIndex + 1}, ${variableNames[columnIndex]}`)));
+        const coefficientMatrix = system.map((row, rowIndex) =>
+          row.slice(0, systemSize).map((value, columnIndex) => parse(value, `row ${rowIndex + 1}, ${variableNames[columnIndex]}`)),
+        );
         const vector = system.map((row, rowIndex) => parse(row[systemSize], `row ${rowIndex + 1} right side`));
         const response = solveLinearSystem(coefficientMatrix, vector, method);
-        if (response.status === "none") solved = { title: "No solution", summary: "The augmented system is inconsistent.", answers: ["No common solution exists"], steps: [{ title: response.method, detail: "Row reduction produced a contradiction." }] };
-        else if (response.status === "infinite") solved = { title: "Infinitely many solutions", summary: "At least one variable is free after row reduction.", answers: ["The system is dependent"], steps: [{ title: response.method, detail: "The coefficient matrix does not have a pivot in every variable column." }] };
-        else if (response.status === "unsupported") throw new Error(response.message);
-        else solved = { title: "Unique system solution", summary: `${response.method} found one solution for the selected linear system.`, answers: response.solution.map((value, index) => `${variableNames[index]} = ${format(value)}`), steps: [{ title: "Create A·x = b", detail: `The coefficient matrix contains ${systemSize} equations and ${systemSize} unknowns.` }, { title: response.method, detail: "The system was reduced using the selected matrix method." }] };
+        if (response.status === "none") {
+          solved = {
+            title: "No solution",
+            summary: "The augmented system is inconsistent.",
+            answers: ["No common solution exists"],
+            steps: [{ title: response.method, detail: "Row reduction produced a contradiction." }],
+          };
+        } else if (response.status === "infinite") {
+          solved = {
+            title: "Infinitely many solutions",
+            summary: "At least one variable is free after row reduction.",
+            answers: ["The system is dependent"],
+            steps: [{ title: response.method, detail: "The coefficient matrix does not have a pivot in every variable column." }],
+          };
+        } else if (response.status === "unsupported") throw new Error(response.message);
+        else {
+          solved = {
+            title: "Unique system solution",
+            summary: `${response.method} found one solution for the selected linear system.`,
+            answers: response.solution.map((value, index) => `${variableNames[index]} = ${format(value)}`),
+            steps: [
+              { title: "Create A·x = b", detail: `The coefficient matrix contains ${systemSize} equations and ${systemSize} unknowns.` },
+              { title: response.method, detail: "The system was reduced using the selected matrix method." },
+            ],
+          };
+        }
       }
       setResult(solved);
       setError("");
@@ -164,27 +331,250 @@ export default function EquationSolver() {
     }
   }
 
-  return <main id="main-content" className={styles.page}>
-    <ToolHeader active="math" />
-    <section className={styles.hero}><p>FREE ADVANCED EQUATION SOLVER</p><h1>Choose a polynomial or build a flexible linear system.</h1><span>Solve linear, quadratic, cubic, and 2–8 variable systems with Gaussian elimination, Gauss-Jordan / RREF, matrix inverse, or Cramer’s rule where applicable.</span></section>
-    <section className={styles.workspace}>
-      <article className={styles.solverCard}>
-        <div className={styles.cardHeading}><div><p>SELECT A WORKFLOW</p><h2>{modeLabels[mode]}</h2></div><span>{preview}</span></div>
-        <div className={styles.modeTabs}>{(Object.keys(modeLabels) as Mode[]).map((item) => <button className={mode === item ? styles.activeTab : ""} key={item} onClick={() => changeMode(item)} type="button">{modeLabels[item]}</button>)}</div>
-        <label className={styles.mobileModePicker}><span>Equation workflow</span><select value={mode} onChange={(event) => changeMode(event.target.value as Mode)}>{(Object.keys(modeLabels) as Mode[]).map((item) => <option key={item} value={item}>{modeLabels[item]}</option>)}</select></label>
-        {mode === "linear" && <CoefficientRow items={[{ label: "a", description: "x coefficient", value: linear.a, set: (value) => setLinear((current) => ({ ...current, a: value })) }, { label: "b", description: "constant", value: linear.b, set: (value) => setLinear((current) => ({ ...current, b: value })) }]} />}
-        {mode === "quadratic" && <CoefficientRow items={[{ label: "a", description: "x² coefficient", value: quadratic.a, set: (value) => setQuadratic((current) => ({ ...current, a: value })) }, { label: "b", description: "x coefficient", value: quadratic.b, set: (value) => setQuadratic((current) => ({ ...current, b: value })) }, { label: "c", description: "constant", value: quadratic.c, set: (value) => setQuadratic((current) => ({ ...current, c: value })) }]} />}
-        {mode === "cubic" && <CoefficientRow items={[{ label: "a", description: "x³ coefficient", value: cubic.a, set: (value) => setCubic((current) => ({ ...current, a: value })) }, { label: "b", description: "x² coefficient", value: cubic.b, set: (value) => setCubic((current) => ({ ...current, b: value })) }, { label: "c", description: "x coefficient", value: cubic.c, set: (value) => setCubic((current) => ({ ...current, c: value })) }, { label: "d", description: "constant", value: cubic.d, set: (value) => setCubic((current) => ({ ...current, d: value })) }]} />}
-        {mode === "system" && <><div className={styles.systemControls}><label>Variables<select value={systemSize} onChange={(event) => resizeSystem(Number(event.target.value))}>{Array.from({ length: 7 }, (_, index) => index + 2).map((value) => <option key={value} value={value}>{value}</option>)}</select></label><label>Method<select value={method} onChange={(event) => setMethod(event.target.value as LinearMethod)}><option value="auto">Auto / row reduction</option><option value="gaussian">Gaussian elimination</option><option value="gauss-jordan">Gauss-Jordan / RREF</option><option value="inverse">Matrix inverse</option><option value="cramer">Cramer’s rule (2–4)</option></select></label></div><div className={styles.systemScroll}><table><thead><tr>{variableNames.slice(0, systemSize).map((name) => <th key={name}>{name}</th>)}<th>=</th></tr></thead><tbody>{system.map((row, rowIndex) => <tr key={rowIndex}>{row.map((cell, columnIndex) => <td key={columnIndex}><input value={cell} onChange={(event) => updateSystem(rowIndex, columnIndex, event.target.value)} inputMode="decimal" aria-label={`Equation ${rowIndex + 1}, ${columnIndex === systemSize ? "right side" : variableNames[columnIndex]}`} /></td>)}</tr>)}</tbody></table></div></>}
-        {mode === "cubic" && <p className={styles.polynomialLink}>Need degree 4–10 roots? <Link href="/polynomial-solver">Use the Polynomial Solver →</Link></p>}
-        {error && <p className={styles.error}>{error}</p>}
-        <div className={styles.actionRow}><button className={styles.exampleButton} onClick={loadExample} type="button">Load example</button><button className={styles.solveButton} onClick={solve} type="button">Solve {modeLabels[mode]} <span>→</span></button></div>
-      </article>
-      <aside className={styles.answerCard} aria-live="polite"><p>SOLUTION</p>{result ? <><h2>{result.title}</h2><span className={styles.summary}>{result.summary}</span><div className={styles.answerList}>{result.answers.map((answer) => <strong key={answer}>{answer}</strong>)}</div><div className={styles.steps}><p>METHOD</p>{result.steps.map((step, index) => <article key={`${step.title}-${index}`}><span>{String(index + 1).padStart(2, "0")}</span><div><h3>{step.title}</h3><p>{step.detail}</p></div></article>)}</div></> : <div className={styles.emptyAnswer}><span>ƒ(x)</span><p>Choose an equation type or a matrix method for a flexible linear system.</p></div>}<div className={styles.connected}><p>CONNECTED TOOLS</p><span>Use Matrix Calculator for matrix operations, Graphing Calculator to visualize functions, and Polynomial Solver for higher degrees.</span></div></aside>
-    </section>
-  </main>;
+  return (
+    <main id="main-content" className={styles.page}>
+      <ToolHeader active="math" />
+
+      <section className={styles.hero}>
+        <p>FREE ONLINE EQUATION SOLVER</p>
+        <h1>Equation solver for linear, quadratic, cubic, and system problems.</h1>
+        <span>
+          Solve one-variable equations or build a 2–8 variable system of equations. Use coefficients, compare matrix methods, and read the steps behind the answer.
+        </span>
+      </section>
+
+      <section className={styles.workspace}>
+        <article className={styles.solverCard}>
+          <div className={styles.cardHeading}>
+            <div>
+              <p>SELECT A WORKFLOW</p>
+              <h2>{modeLabels[mode]}</h2>
+            </div>
+            <span>{preview}</span>
+          </div>
+
+          <div className={styles.modeTabs}>
+            {(Object.keys(modeLabels) as Mode[]).map((item) => (
+              <button className={mode === item ? styles.activeTab : ""} key={item} onClick={() => changeMode(item)} type="button">
+                {modeLabels[item]}
+              </button>
+            ))}
+          </div>
+
+          <label className={styles.mobileModePicker}>
+            <span>Equation workflow</span>
+            <select value={mode} onChange={(event) => changeMode(event.target.value as Mode)}>
+              {(Object.keys(modeLabels) as Mode[]).map((item) => (
+                <option key={item} value={item}>{modeLabels[item]}</option>
+              ))}
+            </select>
+          </label>
+
+          {mode === "linear" && (
+            <CoefficientRow
+              items={[
+                { label: "a", description: "x coefficient", value: linear.a, set: (value) => setLinear((current) => ({ ...current, a: value })) },
+                { label: "b", description: "constant", value: linear.b, set: (value) => setLinear((current) => ({ ...current, b: value })) },
+              ]}
+            />
+          )}
+
+          {mode === "quadratic" && (
+            <CoefficientRow
+              items={[
+                { label: "a", description: "x² coefficient", value: quadratic.a, set: (value) => setQuadratic((current) => ({ ...current, a: value })) },
+                { label: "b", description: "x coefficient", value: quadratic.b, set: (value) => setQuadratic((current) => ({ ...current, b: value })) },
+                { label: "c", description: "constant", value: quadratic.c, set: (value) => setQuadratic((current) => ({ ...current, c: value })) },
+              ]}
+            />
+          )}
+
+          {mode === "cubic" && (
+            <CoefficientRow
+              items={[
+                { label: "a", description: "x³ coefficient", value: cubic.a, set: (value) => setCubic((current) => ({ ...current, a: value })) },
+                { label: "b", description: "x² coefficient", value: cubic.b, set: (value) => setCubic((current) => ({ ...current, b: value })) },
+                { label: "c", description: "x coefficient", value: cubic.c, set: (value) => setCubic((current) => ({ ...current, c: value })) },
+                { label: "d", description: "constant", value: cubic.d, set: (value) => setCubic((current) => ({ ...current, d: value })) },
+              ]}
+            />
+          )}
+
+          {mode === "system" && (
+            <>
+              <div className={styles.systemControls}>
+                <label>
+                  Variables
+                  <select value={systemSize} onChange={(event) => resizeSystem(Number(event.target.value))}>
+                    {Array.from({ length: 7 }, (_, index) => index + 2).map((value) => (
+                      <option key={value} value={value}>{value}</option>
+                    ))}
+                  </select>
+                </label>
+                <label>
+                  Method
+                  <select value={method} onChange={(event) => setMethod(event.target.value as LinearMethod)}>
+                    <option value="auto">Auto / row reduction</option>
+                    <option value="gaussian">Gaussian elimination</option>
+                    <option value="gauss-jordan">Gauss-Jordan / RREF</option>
+                    <option value="inverse">Matrix inverse</option>
+                    <option value="cramer">Cramer’s rule (2–4)</option>
+                  </select>
+                </label>
+              </div>
+              <div className={styles.systemScroll}>
+                <table>
+                  <thead>
+                    <tr>
+                      {variableNames.slice(0, systemSize).map((name) => <th key={name}>{name}</th>)}
+                      <th>=</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {system.map((row, rowIndex) => (
+                      <tr key={rowIndex}>
+                        {row.map((cell, columnIndex) => (
+                          <td key={columnIndex}>
+                            <input
+                              value={cell}
+                              onChange={(event) => updateSystem(rowIndex, columnIndex, event.target.value)}
+                              inputMode="decimal"
+                              aria-label={`Equation ${rowIndex + 1}, ${columnIndex === systemSize ? "right side" : variableNames[columnIndex]}`}
+                            />
+                          </td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </>
+          )}
+
+          {mode === "cubic" && (
+            <p className={styles.polynomialLink}>Need degree 4–10 roots? <Link href="/polynomial-solver">Use the Polynomial Solver →</Link></p>
+          )}
+          {error && <p className={styles.error}>{error}</p>}
+
+          <div className={styles.actionRow}>
+            <button className={styles.exampleButton} onClick={loadExample} type="button">Load example</button>
+            <button className={styles.solveButton} onClick={solve} type="button">Solve {modeLabels[mode]} <span>→</span></button>
+          </div>
+        </article>
+
+        <aside className={styles.answerCard} aria-live="polite">
+          <p>SOLUTION</p>
+          {result ? (
+            <>
+              <h2>{result.title}</h2>
+              <span className={styles.summary}>{result.summary}</span>
+              <div className={styles.answerList}>{result.answers.map((answer) => <strong key={answer}>{answer}</strong>)}</div>
+              <div className={styles.steps}>
+                <p>METHOD</p>
+                {result.steps.map((step, index) => (
+                  <article key={`${step.title}-${index}`}>
+                    <span>{String(index + 1).padStart(2, "0")}</span>
+                    <div>
+                      <h3>{step.title}</h3>
+                      <p>{step.detail}</p>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </>
+          ) : (
+            <div className={styles.emptyAnswer}>
+              <span>ƒ(x)</span>
+              <p>Choose an equation type or a matrix method for a flexible linear system.</p>
+            </div>
+          )}
+          <div className={styles.connected}>
+            <p>CONNECTED TOOLS</p>
+            <span>Use Matrix Calculator for matrix operations, Graphing Calculator to visualize functions, and Polynomial Solver for higher degrees.</span>
+          </div>
+        </aside>
+      </section>
+
+      <section className={styles.learningSection} aria-label="Equation solver guide and examples">
+        <div className={styles.learningHeader}>
+          <p>EQUATION SOLVER GUIDE</p>
+          <h2>How to choose the right equation-solving workflow</h2>
+          <span>
+            The best equation solver depends on the form of the problem. Start with the degree of the equation or decide whether the problem is a system of simultaneous equations.
+          </span>
+        </div>
+
+        <div className={styles.workflowGrid}>
+          {workflowCards.map((card) => (
+            <article key={card.title} className={styles.workflowCard}>
+              <p>{card.title}</p>
+              <code>{card.formula}</code>
+              <span>{card.body}</span>
+              <b>{card.example}</b>
+            </article>
+          ))}
+        </div>
+
+        <div className={styles.methodSection}>
+          <div>
+            <p>MATRIX METHODS FOR SYSTEMS</p>
+            <h2>Solving simultaneous equations from coefficients</h2>
+            <span>
+              For a system of equations, write coefficients in the same variable order on every row. The calculator builds the coefficient matrix A, the unknown vector x, and the right-side vector b.
+            </span>
+          </div>
+          <div className={styles.methodGrid}>
+            {methodCards.map((methodCard) => (
+              <article key={methodCard.title}>
+                <h3>{methodCard.title}</h3>
+                <p>{methodCard.body}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+
+        <div className={styles.examplePanel}>
+          <div>
+            <p>WORKED EXAMPLE</p>
+            <h2>System of equations example</h2>
+            <span>For 2x + y − z = 8, −3x − y + 2z = −11, and −2x + y + 2z = −3, enter each coefficient row with the constant at the end.</span>
+          </div>
+          <code>
+            [2, 1, −1 | 8]{"\n"}
+            [−3, −1, 2 | −11]{"\n"}
+            [−2, 1, 2 | −3]
+          </code>
+        </div>
+
+        <div className={styles.questionGrid}>
+          {questionCards.map((item) => (
+            <article key={item.question}>
+              <h3>{item.question}</h3>
+              <p>{item.answer}</p>
+            </article>
+          ))}
+        </div>
+
+        <div className={styles.guideLinks}>
+          <Link href="/guides/linear-quadratic-cubic-equation-solver">Read equation-solving guide →</Link>
+          <Link href="/guides/gaussian-elimination-for-linear-systems">Gaussian elimination guide →</Link>
+          <Link href="/guides/matrix-methods-for-linear-systems">Matrix methods guide →</Link>
+        </div>
+      </section>
+    </main>
+  );
 }
 
 function CoefficientRow({ items }: { items: Array<{ label: string; description: string; value: string; set: (value: string) => void }> }) {
-  return <div className={styles.coefficientGrid} style={{ gridTemplateColumns: `repeat(${items.length}, minmax(0, 1fr))` }}>{items.map((item) => <label key={item.label}><span>{item.label}</span><input value={item.value} onChange={(event) => item.set(event.target.value)} inputMode="decimal" aria-label={item.description} /><small>{item.description}</small></label>)}</div>;
+  return (
+    <div className={styles.coefficientGrid} style={{ gridTemplateColumns: `repeat(${items.length}, minmax(0, 1fr))` }}>
+      {items.map((item) => (
+        <label key={item.label}>
+          <span>{item.label}</span>
+          <input value={item.value} onChange={(event) => item.set(event.target.value)} inputMode="decimal" aria-label={item.description} />
+          <small>{item.description}</small>
+        </label>
+      ))}
+    </div>
+  );
 }
