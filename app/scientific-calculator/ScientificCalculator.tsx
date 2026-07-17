@@ -436,6 +436,7 @@ export default function ScientificCalculator() {
           Evaluate trigonometry, powers, roots, logarithms, factorials,
           combinations, integer functions, engineering constants, scientific
           notation, and engineering notation directly in your browser.
+          Switch instantly between normal, scientific, and engineering notation while solving mathematical, scientific, and engineering calculations.
         </span>
       </section>
 

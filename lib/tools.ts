@@ -146,6 +146,11 @@ export const tools: ToolInfo[] = [
         answer:
           "Use Graphing Calculator for visual functions and tables, Matrix Calculator for linear algebra, and Unit Converter when a problem requires conversion between physical units.",
       },
+       {
+        question: "How do I convert a number to engineering notation?",
+        answer:
+          "Enter your number and switch to ENG mode. The calculator automatically displays the result in engineering notation using powers of ten in multiples of three. For example, 12500 is shown as 12.5e3 instead of 1.25e4.",
+      },
     ],
   },
   {
