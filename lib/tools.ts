@@ -234,6 +234,11 @@ export const tools: ToolInfo[] = [
         answer:
           "The workspace supports arithmetic with x, powers, parentheses, sin, cos, tan, inverse trigonometric functions, square roots, logs, natural logs, absolute value, and exponential functions. Unsupported syntax is marked in the equation list.",
       },
+      {
+        question: "How do I plot an equation??",
+        answer:
+          "Enter your equation in the input field, such as y = x² or y = 2x + 3, and the Graphing Calculator will instantly plot the equation on the coordinate plane. You can zoom, compare multiple equations, and analyze key graph features.",
+      },
     ],
   },
 
@@ -573,6 +578,11 @@ export const tools: ToolInfo[] = [
         question: "Are grouped data results exact?",
         answer:
           "Grouped data results are estimates because each class interval is represented by its midpoint. Use raw data when exact values are available.",
+      },
+      {
+        question: "How do you find the standard deviation??",
+        answer:
+          "To find the standard deviation, calculate the mean of the dataset, subtract the mean from each value, square the differences, find the average of those squared differences (variance), and take the square root of the variance. Our Statistics Calculator performs these calculations instantly for both sample and population datasets..",
       },
     ],
   },
