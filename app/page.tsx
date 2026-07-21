@@ -1,17 +1,36 @@
 import Link from "next/link";
 import SiteFooter from "../components/SiteFooter";
 import ToolHeader from "../components/ToolHeader";
+import { guides } from "../lib/guides";
 import { createStaticPageMetadata } from "../lib/seo";
-import { getFeaturedTools, tools } from "../lib/tools";
+import {
+  getCategoryPath,
+  getFeaturedTools,
+  toolCategories,
+  tools,
+  type ToolCategory,
+} from "../lib/tools";
 
 export const metadata = createStaticPageMetadata(
   "Free Online Math, Engineering & Everyday Calculators",
-  "Use free online calculators for graphing, equations, matrices, scientific calculations, unit conversions, statistics, finance, and everyday problems.",
+  "Use free online calculators for graphing, equations, matrices, scientific calculations, unit conversions, statistics, finance, research methods, and everyday problems.",
   "/",
 );
 
+const featuredGuideSlugs = [
+  "symbolic-algebra-simplification",
+  "euler-method-for-differential-equations",
+  "choose-a-statistical-test",
+  "engineering-notation-and-scientific-notation",
+  "gaussian-elimination-for-linear-systems",
+  "unit-conversion-formulas",
+];
+
 export default function Home() {
   const featuredTools = getFeaturedTools(6);
+  const featuredGuides = featuredGuideSlugs
+    .map((slug) => guides.find((guide) => guide.slug === slug))
+    .filter((guide): guide is (typeof guides)[number] => Boolean(guide));
 
   return (
     <main id="main-content" className="home-page">
@@ -20,7 +39,7 @@ export default function Home() {
       <section className="hero">
         <div className="hero-content">
           <p className="eyebrow">
-            FREE ONLINE MATH, ENGINEERING, RESEARCH & EVERYDAY TOOLS
+            FREE ONLINE MATH, ENGINEERING, RESEARCH &amp; EVERYDAY TOOLS
           </p>
 
           <h1>
@@ -28,9 +47,10 @@ export default function Home() {
           </h1>
 
           <p className="hero-description">
-            Solve math step by step, get clear explanations, graph equations, solve algebra, convert units, use scientific calcuator, work with matrices, solve trignometric functions,
-            run numerical models, calculate percentages, calculate age and bmi, and use practical
-            tools for real calculations in your browser without need of installation for free.
+            Graph equations, solve algebra, calculate polynomial roots, work with
+            matrices and statistics, convert units, evaluate scientific expressions,
+            explore numerical models, and handle practical percentage, finance, date,
+            and distance questions directly in your browser.
           </p>
 
           <div className="hero-actions">
@@ -39,7 +59,7 @@ export default function Home() {
             </Link>
 
             <Link className="secondary-button" href="/graphing-calculator">
-              Open graphing studio
+              Open graphing calculator
             </Link>
           </div>
 
@@ -104,8 +124,8 @@ export default function Home() {
           <p className="eyebrow">CONNECTED TOOL PLATFORM</p>
           <h2>Choose the right calculator, then move naturally to the next step.</h2>
           <p>
-            Each tool is built for a specific problem and includes useful links
-            to related calculators, examples, and clear explanations.
+            Each tool is built for a specific problem and includes links to related
+            calculators, formulas, method guides, examples, and important scope notes.
           </p>
         </div>
 
@@ -131,6 +151,27 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="home-category-section" aria-labelledby="home-categories-heading">
+        <div className="section-heading">
+          <p className="eyebrow">BROWSE BY SUBJECT</p>
+          <h2 id="home-categories-heading">Start with a calculator collection.</h2>
+          <p>
+            Category hubs explain which tool to use, what each method can solve, and
+            which guides can help you verify or understand the result.
+          </p>
+        </div>
+        <div className="home-category-grid">
+          {(Object.keys(toolCategories) as ToolCategory[]).map((category) => (
+            <Link href={getCategoryPath(category)} key={category}>
+              <span>{toolCategories[category].label.toUpperCase()}</span>
+              <h3>{toolCategories[category].label}</h3>
+              <p>{toolCategories[category].intro}</p>
+              <b>Explore category →</b>
+            </Link>
+          ))}
+        </div>
+      </section>
+
       <section className="how-section" id="how-it-works">
         <div>
           <p className="eyebrow">HOW SOLVEGRID CALCULATES RESULTS</p>
@@ -141,26 +182,23 @@ export default function Home() {
           <div>
             <span>01</span>
             <p>
-              Choose a focused calculator built around a formula, numerical
-              method, matrix operation, statistical procedure, or
-              unit-conversion relationship.
+              Choose a focused calculator built around a formula, numerical method,
+              matrix operation, statistical procedure, or unit-conversion relationship.
             </p>
           </div>
 
           <div>
             <span>02</span>
             <p>
-              Enter values, equations, measurements, or data, then review the
-              result alongside its inputs, units, and any tool-specific
-              assumptions.
+              Enter values, equations, measurements, or data, then review the result
+              alongside its inputs, units, assumptions, and method notes.
             </p>
           </div>
 
           <div>
             <span>03</span>
             <p>
-              Use related tools to graph, verify, convert, or explore further.
-              {" "}
+              Use related tools to graph, verify, convert, or explore further. {" "}
               <Link href="/methodology">
                 Read our calculation methods and accuracy notes →
               </Link>
@@ -169,14 +207,34 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="home-guide-section" aria-labelledby="home-guides-heading">
+        <header>
+          <div>
+            <p className="eyebrow">FORMULAS &amp; METHOD GUIDES</p>
+            <h2 id="home-guides-heading">Understand the workflow behind the answer.</h2>
+          </div>
+          <Link href="/guides">Browse all guides →</Link>
+        </header>
+        <div className="home-guide-grid">
+          {featuredGuides.map((guide) => (
+            <Link href={`/guides/${guide.slug}`} key={guide.slug}>
+              <span>GUIDE</span>
+              <h3>{guide.title}</h3>
+              <p>{guide.summary}</p>
+              <b>Read guide →</b>
+            </Link>
+          ))}
+        </div>
+      </section>
+
       <section className="research-spotlight">
         <div>
-          <p className="eyebrow">RESEARCH & SIMULATION LABS</p>
+          <p className="eyebrow">RESEARCH &amp; SIMULATION LABS</p>
           <h2>Numerical modelling deserves a dedicated workspace.</h2>
           <p>
-            Explore controlled numerical methods for differential equations,
-            then connect graphs, matrices, and statistics to the rest of the
-            investigation.
+            Explore differential equations, symbolic algebra, optimization, circuit
+            analysis, and statistical inference, then connect graphs, matrices, units,
+            and descriptive statistics to the investigation.
           </p>
         </div>
 
@@ -186,8 +244,8 @@ export default function Home() {
       <section className="learn-section" id="learn">
         <p className="eyebrow">MADE FOR REAL PROBLEMS</p>
         <h2>
-          Students, engineers, tutors, professionals, and anyone who needs step by step solutions
-    
+          Clear browser-based tools for students, educators, engineers,
+          professionals, and independent learners.
         </h2>
       </section>
 

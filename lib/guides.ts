@@ -1,8 +1,59 @@
+export type GuideTopic =
+  | "algebra"
+  | "graphing"
+  | "engineering"
+  | "statistics"
+  | "finance"
+  | "everyday"
+  | "research";
+
 export type GuideInfo = {
   slug: string;
   title: string;
   summary: string;
   toolSlugs: string[];
+  topic: GuideTopic;
+};
+
+export const guideTopics: Record<
+  GuideTopic,
+  { label: string; description: string }
+> = {
+  algebra: {
+    label: "Algebra & linear systems",
+    description:
+      "Equation solving, polynomial roots, matrices, row reduction, determinants, rank, and systems of equations.",
+  },
+  graphing: {
+    label: "Graphing & calculator workflows",
+    description:
+      "Plot functions, inspect tables, trace values, and connect graphing with equation-solving tools.",
+  },
+  engineering: {
+    label: "Engineering methods & units",
+    description:
+      "Scientific notation, engineering notation, unit conversion, circuit analysis, and technical calculation workflows.",
+  },
+  statistics: {
+    label: "Statistics & data analysis",
+    description:
+      "Standard deviation, descriptive statistics, statistical tests, correlation, regression, and inference choices.",
+  },
+  finance: {
+    label: "Finance & percentage formulas",
+    description:
+      "Percent change, markup, margin, interest, loan payments, and practical business calculations.",
+  },
+  everyday: {
+    label: "Everyday calculation guides",
+    description:
+      "Clear methods for calendar age and other common calculations used outside a specialist workflow.",
+  },
+  research: {
+    label: "Numerical & research methods",
+    description:
+      "Differential equations, symbolic algebra, optimization, and method-focused research workflows.",
+  },
 };
 
 export const guides: GuideInfo[] = [
@@ -11,6 +62,7 @@ export const guides: GuideInfo[] = [
     title: "Percentage increase and decrease",
     summary: "Find percentage change from an original value to a new value.",
     toolSlugs: ["percentage-calculator", "profit-loss-calculator", "discount-calculator"],
+    topic: "finance",
   },
   {
     slug: "profit-margin-vs-markup",
@@ -18,24 +70,28 @@ export const guides: GuideInfo[] = [
     summary:
       "Compare markup, profit margin, cost price, selling price, and the formulas behind business pricing.",
     toolSlugs: ["profit-loss-calculator", "percentage-calculator"],
+    topic: "finance",
   },
   {
     slug: "simple-interest-formula",
     title: "Simple interest formula",
     summary: "Calculate interest from principal, annual rate, and time.",
     toolSlugs: ["simple-interest-calculator", "compound-interest-calculator"],
+    topic: "finance",
   },
   {
     slug: "loan-payment-formula",
     title: "Loan payment formula",
     summary: "Understand periodic payments, total repaid, and total interest.",
     toolSlugs: ["loan-calculator", "compound-interest-calculator"],
+    topic: "finance",
   },
   {
     slug: "plot-multiple-equations",
     title: "How to plot multiple equations",
     summary: "Compare functions, vertical lines, tables, roots, and intersections.",
     toolSlugs: ["graphing-calculator", "equation-solver"],
+    topic: "graphing",
   },
   {
     slug: "linear-quadratic-cubic-equation-solver",
@@ -43,6 +99,7 @@ export const guides: GuideInfo[] = [
     summary:
       "Choose the right equation-solving method for one-variable equations and simultaneous linear systems.",
     toolSlugs: ["equation-solver", "polynomial-solver", "graphing-calculator", "matrix-calculator"],
+    topic: "algebra",
   },
   {
     slug: "polynomial-roots-and-complex-roots",
@@ -50,6 +107,7 @@ export const guides: GuideInfo[] = [
     summary:
       "Find polynomial roots from coefficients and understand real roots, complex roots, and residual checks.",
     toolSlugs: ["polynomial-solver", "graphing-calculator", "equation-solver"],
+    topic: "algebra",
   },
   {
     slug: "ti-84-style-graphing-workflows",
@@ -65,12 +123,14 @@ export const guides: GuideInfo[] = [
       "statistics-calculator",
       "unit-converter",
     ],
+    topic: "graphing",
   },
   {
     slug: "calculate-age-from-date-of-birth",
     title: "Calculate age from a date of birth",
     summary: "Find calendar age in years, months, and days on a chosen date.",
     toolSlugs: ["age-calculator"],
+    topic: "everyday",
   },
   {
     slug: "gaussian-elimination-for-linear-systems",
@@ -78,6 +138,7 @@ export const guides: GuideInfo[] = [
     summary:
       "Use row operations, pivots, REF, and back-substitution to solve systems with several unknown values.",
     toolSlugs: ["equation-solver", "matrix-calculator"],
+    topic: "algebra",
   },
   {
     slug: "matrix-inverse-and-determinant",
@@ -85,6 +146,7 @@ export const guides: GuideInfo[] = [
     summary:
       "Understand determinants, singular matrices, inverse conditions, and inverse-based system solutions.",
     toolSlugs: ["matrix-calculator", "equation-solver"],
+    topic: "algebra",
   },
   {
     slug: "matrix-methods-for-linear-systems",
@@ -92,6 +154,7 @@ export const guides: GuideInfo[] = [
     summary:
       "Compare Gaussian elimination, RREF, inverse, rank, and Cramer’s rule for linear systems.",
     toolSlugs: ["matrix-calculator", "equation-solver"],
+    topic: "algebra",
   },
   {
     slug: "standard-deviation-formula",
@@ -99,6 +162,7 @@ export const guides: GuideInfo[] = [
     summary:
       "Compare sample and population standard deviation, variance, mean deviations, quartiles, and spread.",
     toolSlugs: ["statistics-calculator"],
+    topic: "statistics",
   },
   {
     slug: "engineering-notation-and-scientific-notation",
@@ -106,6 +170,7 @@ export const guides: GuideInfo[] = [
     summary:
       "Compare scientific notation, engineering notation, powers of ten, and SI prefixes for technical values.",
     toolSlugs: ["scientific-calculator", "unit-converter"],
+    topic: "engineering",
   },
   {
     slug: "unit-conversion-formulas",
@@ -113,6 +178,7 @@ export const guides: GuideInfo[] = [
     summary:
       "Convert units with base-unit formulas, metric prefixes, temperature formulas, speed, pressure, energy, torque, density, and data examples.",
     toolSlugs: ["unit-converter", "scientific-calculator"],
+    topic: "engineering",
   },
   {
     slug: "engineering-unit-conversion",
@@ -120,6 +186,7 @@ export const guides: GuideInfo[] = [
     summary:
       "Understand engineering conversions for pressure, force, torque, energy, power, density, frequency, and scientific notation values.",
     toolSlugs: ["unit-converter", "scientific-calculator", "circuit-analysis"],
+    topic: "engineering",
   },
   {
     slug: "euler-method-for-differential-equations",
@@ -127,12 +194,14 @@ export const guides: GuideInfo[] = [
     summary:
       "Use a fixed step and local slope to estimate a first-order initial value problem.",
     toolSlugs: ["differential-equation-solver"],
+    topic: "research",
   },
   {
     slug: "runge-kutta-rk4-method",
     title: "Runge-Kutta RK4 method",
     summary: "Understand four-slope RK4 updates for numerical ordinary differential equations.",
     toolSlugs: ["differential-equation-solver"],
+    topic: "research",
   },
   {
     slug: "symbolic-algebra-simplification",
@@ -140,6 +209,7 @@ export const guides: GuideInfo[] = [
     summary:
       "Understand what a symbolic algebra engine can simplify, differentiate, and compare.",
     toolSlugs: ["symbolic-algebra", "scientific-calculator", "equation-solver"],
+    topic: "research",
   },
   {
     slug: "graphical-linear-programming-method",
@@ -147,6 +217,7 @@ export const guides: GuideInfo[] = [
     summary:
       "Build constraints, identify feasible corner points, and test an objective function.",
     toolSlugs: ["optimization-lab", "graphing-calculator", "matrix-calculator"],
+    topic: "research",
   },
   {
     slug: "two-node-nodal-analysis",
@@ -154,6 +225,7 @@ export const guides: GuideInfo[] = [
     summary:
       "Set up KCL equations, conductance terms, coefficient matrices, node voltages, and branch currents for a two-node resistor circuit.",
     toolSlugs: ["circuit-analysis", "matrix-calculator", "scientific-calculator"],
+    topic: "engineering",
   },
   {
     slug: "choose-a-statistical-test",
@@ -161,6 +233,7 @@ export const guides: GuideInfo[] = [
     summary:
       "Separate descriptive statistics, t-tests, correlation, and one-way ANOVA by the question and data type.",
     toolSlugs: ["advanced-statistics", "statistics-calculator"],
+    topic: "statistics",
   },
 ];
 
@@ -176,9 +249,17 @@ const preferredGuideSlugsByTool: Record<string, string[]> = {
     "profit-margin-vs-markup",
     "percentage-increase-and-decrease",
   ],
+  "percentage-calculator": [
+    "percentage-increase-and-decrease",
+    "profit-margin-vs-markup",
+  ],
+  "simple-interest-calculator": ["simple-interest-formula", "loan-payment-formula"],
+  "compound-interest-calculator": ["simple-interest-formula", "loan-payment-formula"],
+  "loan-calculator": ["loan-payment-formula", "simple-interest-formula"],
   "scientific-calculator": [
     "engineering-notation-and-scientific-notation",
     "ti-84-style-graphing-workflows",
+    "unit-conversion-formulas",
   ],
   "unit-converter": [
     "unit-conversion-formulas",
@@ -205,17 +286,43 @@ const preferredGuideSlugsByTool: Record<string, string[]> = {
     "standard-deviation-formula",
     "choose-a-statistical-test",
   ],
+  "advanced-statistics": [
+    "choose-a-statistical-test",
+    "standard-deviation-formula",
+  ],
+  "differential-equation-solver": [
+    "euler-method-for-differential-equations",
+    "runge-kutta-rk4-method",
+  ],
+  "symbolic-algebra": [
+    "symbolic-algebra-simplification",
+    "linear-quadratic-cubic-equation-solver",
+  ],
+  "optimization-lab": [
+    "graphical-linear-programming-method",
+    "plot-multiple-equations",
+  ],
   "circuit-analysis": [
     "two-node-nodal-analysis",
+    "engineering-unit-conversion",
     "matrix-methods-for-linear-systems",
   ],
+  "age-calculator": ["calculate-age-from-date-of-birth"],
 };
 
-export function getGuidesForTool(toolSlug: string, limit = 2) {
+export function getGuideBySlug(slug: string) {
+  return guides.find((guide) => guide.slug === slug);
+}
+
+export function getGuidesByTopic(topic: GuideTopic) {
+  return guides.filter((guide) => guide.topic === topic);
+}
+
+export function getGuidesForTool(toolSlug: string, limit = 3) {
   const preferredSlugs = preferredGuideSlugsByTool[toolSlug] ?? [];
 
   const preferredGuides = preferredSlugs
-    .map((slug) => guides.find((guide) => guide.slug === slug))
+    .map((slug) => getGuideBySlug(slug))
     .filter((guide): guide is GuideInfo => Boolean(guide));
 
   const fallbackGuides = guides.filter(
@@ -225,4 +332,44 @@ export function getGuidesForTool(toolSlug: string, limit = 2) {
   );
 
   return [...preferredGuides, ...fallbackGuides].slice(0, limit);
+}
+
+export function getGuidesForTools(toolSlugs: string[], limit = 6) {
+  const toolSet = new Set(toolSlugs);
+
+  return guides
+    .map((guide) => ({
+      guide,
+      score: guide.toolSlugs.reduce(
+        (total, toolSlug) => total + (toolSet.has(toolSlug) ? 1 : 0),
+        0,
+      ),
+    }))
+    .filter((item) => item.score > 0)
+    .sort((first, second) => second.score - first.score)
+    .map((item) => item.guide)
+    .slice(0, limit);
+}
+
+export function getRelatedGuides(slug: string, limit = 3) {
+  const current = getGuideBySlug(slug);
+
+  if (!current) return guides.slice(0, limit);
+
+  const currentTools = new Set(current.toolSlugs);
+
+  return guides
+    .filter((guide) => guide.slug !== current.slug)
+    .map((guide) => {
+      const sharedTools = guide.toolSlugs.reduce(
+        (total, toolSlug) => total + (currentTools.has(toolSlug) ? 1 : 0),
+        0,
+      );
+      const sameTopic = guide.topic === current.topic ? 2 : 0;
+      return { guide, score: sharedTools * 3 + sameTopic };
+    })
+    .filter((item) => item.score > 0)
+    .sort((first, second) => second.score - first.score)
+    .map((item) => item.guide)
+    .slice(0, limit);
 }

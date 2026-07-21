@@ -1,10 +1,12 @@
-import type { Metadata } from "next";
 import ToolCategoryHub from "../../components/ToolCategoryHub";
+import { createStaticPageMetadata } from "../../lib/seo";
 
-export const metadata: Metadata = {
-  title: "Math Calculators Online – Graphing, Algebra, Matrices & More",
-  description: "Use free online math calculators for graphing functions, solving equations, finding polynomial roots, and working with matrices.",
-  alternates: { canonical: "/math-calculators" },
-};
+export const metadata = createStaticPageMetadata(
+  "Math Calculators Online – Equations, Graphs, Matrices & Statistics",
+  "Use free online math calculators for graphing functions, solving linear, quadratic and cubic equations, finding polynomial roots, reducing matrices, calculating rank, and analysing statistics.",
+  "/math-calculators",
+);
 
-export default function MathCalculatorsPage() { return <ToolCategoryHub category="math" />; }
+export default function MathCalculatorsPage() {
+  return <ToolCategoryHub category="math" />;
+}
