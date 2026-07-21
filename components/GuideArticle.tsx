@@ -15,6 +15,22 @@ type GuideLink = {
   description: string;
 };
 
+type GuideReference = {
+  title: string;
+  description?: string;
+  columns: [string, string, string];
+  rows: Array<{
+    first: string;
+    second: string;
+    third: string;
+  }>;
+};
+
+type GuideFaq = {
+  question: string;
+  answer: string;
+};
+
 type GuideProps = {
   title: string;
   eyebrow: string;
@@ -23,6 +39,8 @@ type GuideProps = {
   steps: Array<{ title: string; body: string }>;
   formula?: string;
   example?: string;
+  reference?: GuideReference;
+  faqs?: GuideFaq[];
   toolLinks: GuideLink[];
 };
 
@@ -34,6 +52,8 @@ export default function GuideArticle({
   steps,
   formula,
   example,
+  reference,
+  faqs = [],
   toolLinks,
 }: GuideProps) {
   const articleUrl = `${siteUrl}/guides/${slug}`;
@@ -88,6 +108,22 @@ export default function GuideArticle({
           url: `${articleUrl}#step-${index + 1}`,
         })),
       },
+      ...(faqs.length
+        ? [
+            {
+              "@type": "FAQPage",
+              "@id": `${articleUrl}#faq`,
+              mainEntity: faqs.map((faq) => ({
+                "@type": "Question",
+                name: faq.question,
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: faq.answer,
+                },
+              })),
+            },
+          ]
+        : []),
       {
         "@type": "BreadcrumbList",
         itemListElement: [
@@ -148,6 +184,36 @@ export default function GuideArticle({
               </section>
             ) : null}
 
+            {reference ? (
+              <section className={styles.reference} aria-labelledby={`${slug}-reference`}>
+                <p>QUICK REFERENCE</p>
+                <h2 id={`${slug}-reference`}>{reference.title}</h2>
+                {reference.description ? <span>{reference.description}</span> : null}
+                <div className={styles.referenceTableWrap}>
+                  <table>
+                    <thead>
+                      <tr>
+                        {reference.columns.map((column) => (
+                          <th key={column} scope="col">
+                            {column}
+                          </th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {reference.rows.map((row) => (
+                        <tr key={`${row.first}-${row.second}`}>
+                          <th scope="row">{row.first}</th>
+                          <td>{row.second}</td>
+                          <td>{row.third}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+            ) : null}
+
             <section className={styles.steps}>
               <p>STEP BY STEP</p>
               {steps.map((step, index) => (
@@ -160,6 +226,21 @@ export default function GuideArticle({
                 </article>
               ))}
             </section>
+
+            {faqs.length ? (
+              <section className={styles.faqs} aria-labelledby={`${slug}-faqs`}>
+                <p>COMMON QUESTIONS</p>
+                <h2 id={`${slug}-faqs`}>Frequently asked questions</h2>
+                <div>
+                  {faqs.map((faq) => (
+                    <details key={faq.question}>
+                      <summary>{faq.question}</summary>
+                      <p>{faq.answer}</p>
+                    </details>
+                  ))}
+                </div>
+              </section>
+            ) : null}
           </div>
 
           <aside className={styles.toolPanel}>

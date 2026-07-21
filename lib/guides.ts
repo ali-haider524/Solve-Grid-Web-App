@@ -88,8 +88,9 @@ export const guides: GuideInfo[] = [
   },
   {
     slug: "plot-multiple-equations",
-    title: "How to plot multiple equations",
-    summary: "Compare functions, vertical lines, tables, roots, and intersections.",
+    title: "Plot one, two, or multiple equations",
+    summary:
+      "Plot equations online, compare multiple functions, inspect tables, understand overlapping graphs, and estimate roots or intersections.",
     toolSlugs: ["graphing-calculator", "equation-solver"],
     topic: "graphing",
   },
@@ -166,9 +167,9 @@ export const guides: GuideInfo[] = [
   },
   {
     slug: "engineering-notation-and-scientific-notation",
-    title: "Engineering notation and scientific notation",
+    title: "Engineering notation vs scientific notation",
     summary:
-      "Compare scientific notation, engineering notation, powers of ten, and SI prefixes for technical values.",
+      "Compare SCI and ENG notation, SI prefix powers, micro and nano values, and technical powers-of-ten conversions.",
     toolSlugs: ["scientific-calculator", "unit-converter"],
     topic: "engineering",
   },

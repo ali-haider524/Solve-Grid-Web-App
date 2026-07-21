@@ -2,8 +2,8 @@ import GuideArticle from "../../../components/GuideArticle";
 import { createStaticPageMetadata } from "../../../lib/seo";
 
 export const metadata = createStaticPageMetadata(
-  "How to Plot Multiple Equations on One Graph",
-  "Learn how to plot and compare multiple equations online, use graph tables and trace values, estimate roots and intersections, and choose a useful graph window.",
+  "Plot Equations Online: One, Two or Multiple Functions",
+  "Learn how to plot an equation online, graph two equations on the same axes, compare multiple functions, use tables and trace values, and estimate roots or intersections.",
   "/guides/plot-multiple-equations",
 );
 
@@ -11,35 +11,98 @@ export default function PlotMultipleGuide() {
   return (
     <GuideArticle
       eyebrow="GRAPHING CALCULATOR GUIDE"
-      title="How to plot multiple equations on one graph"
-      description="Plotting two or more equations in the same coordinate window makes it easier to compare shapes, test a value, estimate roots, and see where functions intersect. SolveGrid lets you enter up to eight functions or vertical lines, then switch between graph, table, trace, and analysis views."
+      title="How to plot one, two, or multiple equations on the same graph"
+      description="Use this practical graphing guide when you need to plot an equation, graph two equations together, compare multiple functions, inspect a table of values, or estimate where curves cross. SolveGrid supports up to eight visible functions or vertical lines in one graphing workspace."
       slug="plot-multiple-equations"
-      formula="Examples: y = 2x + 1, y = x² − 4, y = sin(x), x = 3"
-      example="Plot y = x² − 4 and y = 2x + 1. In the default window, the curves meet at approximately (−1.449, −1.899) and (3.449, 7.899). Use the table near either x-value to see both outputs converge."
+      formula="Function: y = f(x)   |   Vertical line: x = c   |   Intersection: f(x) = g(x)"
+      example="Plot y = x² − 4 and y = 2x + 1. The curves cross near (−1.449, −1.899) and (3.449, 7.899). Move the trace position or open the table near either x-value to compare both outputs."
+      reference={{
+        title: "Equation formats and what appears on the graph",
+        description:
+          "Use one entry for each relationship. The visible result depends on the expression, graph window, and angle mode.",
+        columns: ["Task", "Example input", "What to expect"],
+        rows: [
+          {
+            first: "Plot one equation",
+            second: "y = 2x + 1",
+            third: "A single straight line appears in the coordinate window.",
+          },
+          {
+            first: "Graph two equations",
+            second: "y = x² − 4 and y = 2x + 1",
+            third: "Both curves appear together so roots, values, and intersections can be compared.",
+          },
+          {
+            first: "Graph multiple functions",
+            second: "Add one y = expression per line",
+            third: "Each valid visible function is drawn on the same axes with its own equation entry.",
+          },
+          {
+            first: "Plot a vertical line",
+            second: "x = 3",
+            third: "A vertical line is drawn through every point whose x-coordinate is 3.",
+          },
+          {
+            first: "Enter the same equation twice",
+            second: "y = x + 2 and y = x + 2",
+            third: "The graphs overlap exactly, so they look like one line and share every point.",
+          },
+        ],
+      }}
       steps={[
         {
-          title: "Enter one relationship per equation line",
-          body: "Use y = followed by an expression for a function, such as y = 2x + 1 or y = sqrt(x). Add another line for each function you want to compare. To draw a vertical line, use x = followed by a number, for example x = 3.",
+          title: "Write the relationship in a supported graphing form",
+          body: "To plot an equation as a function, enter y = followed by an expression in x, such as y = 2x + 1, y = x² − 4, or y = sin(x). For a vertical line, enter x = followed by a constant, such as x = 3.",
         },
         {
-          title: "Check the angle mode before graphing trigonometry",
-          body: "For sin, cos, tan, and inverse trigonometric functions, choose degrees or radians to match the question. A graph can look unfamiliar when the expression is correct but the angle mode is wrong.",
+          title: "Add a separate line for every function you want to compare",
+          body: "To graph two equations or several functions, keep each relationship in its own equation row. This makes it easier to hide, edit, or compare one function without rewriting the others.",
         },
         {
-          title: "Choose a graph window that reveals the important feature",
-          body: "Use the default window as a starting point. Zoom in to inspect nearby roots or intersections, zoom out to compare overall behaviour, or set the x and y limits manually when a curve is outside the visible area.",
+          title: "Check degrees or radians before plotting trigonometric functions",
+          body: "For sin, cos, tan, and inverse trigonometric functions, choose the angle mode used by the question. A correct expression may still produce an unexpected graph when the calculator is using radians instead of degrees, or the other way around.",
         },
         {
-          title: "Use Table and Trace to inspect values",
-          body: "Table view lists calculated values around the current trace position. Click or tap the graph, or move the trace slider, to select an x-value and compare the visible y-values without estimating only by eye.",
+          title: "Adjust the graph window until the important feature is visible",
+          body: "Start with the default window, then zoom or set custom x and y limits. A graph may appear missing when its values are outside the current window, nearly flat because the scale is too wide, or cut off because the scale is too narrow.",
         },
         {
-          title: "Use Analysis for approximate roots and intersections",
-          body: "Analysis estimates x-intercepts for each visible function and crossing points for visible pairs. These values depend on the current graph window and numerical sampling, so treat them as useful approximations rather than a symbolic proof.",
+          title: "Use the table and trace controls instead of estimating only by eye",
+          body: "Table view lists calculated values around the active trace position. Select an x-value and compare the y-values for each visible function to check points, signs, and nearby intersections more carefully.",
         },
         {
-          title: "Confirm an important algebraic answer",
-          body: "When a question asks for an exact root, coefficient solution, or higher-degree polynomial root, use the Equation Solver or Polynomial Solver after using the graph to understand the likely answer and check its reasonableness.",
+          title: "Estimate roots and intersections in the visible window",
+          body: "A root or x-intercept occurs where a graph reaches y = 0. An intersection occurs where two functions have the same x-value and y-value. Analysis results are numerical estimates based on the current graph window, so zoom in when you need a closer approximation.",
+        },
+        {
+          title: "Recognize overlapping or identical equations",
+          body: "When the exact same equation is graphed twice, both curves occupy the same points and appear as one line. This is not a missing graph: the equations are equivalent and have infinitely many shared points.",
+        },
+        {
+          title: "Confirm exact answers with a focused algebra tool",
+          body: "Use the graph to understand shape and approximate locations. When the task requires exact roots, coefficient solutions, complex roots, or a system-of-equations method, continue with Equation Solver or Polynomial Solver.",
+        },
+      ]}
+      faqs={[
+        {
+          question: "How do I plot an equation online?",
+          answer: "Open the Graphing Calculator and enter the relationship in a supported form such as y = 2x + 1. Check the window limits, then use Graph, Table, Trace, or Analysis depending on what you need to inspect.",
+        },
+        {
+          question: "How do I graph two equations on the same graph?",
+          answer: "Enter each equation on a separate line. Keep both lines visible, then use the common graph window to compare their shapes and estimate any intersection points.",
+        },
+        {
+          question: "Why do I see only one line when I graph the same equation twice?",
+          answer: "Identical equations produce identical sets of points. Their graphs overlap exactly, so the two curves look like one line and share infinitely many points.",
+        },
+        {
+          question: "How can I find where two equations intersect?",
+          answer: "Look for crossing points in Graph view, then use Trace, Table, or Analysis to estimate the coordinates. For an exact algebraic result, solve f(x) = g(x) with an equation-solving method.",
+        },
+        {
+          question: "Why is my equation not visible on the graph?",
+          answer: "Check that the expression is valid, the equation is enabled, the angle mode is correct for trigonometry, and the x/y window includes the function values. Zooming out is often the fastest check.",
         },
       ]}
       toolLinks={[

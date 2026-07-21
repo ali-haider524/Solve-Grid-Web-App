@@ -1,89 +1,113 @@
-import type { Metadata } from "next";
 import GuideArticle from "../../../components/GuideArticle";
+import { createStaticPageMetadata } from "../../../lib/seo";
 
-export const metadata: Metadata = {
-  title: "Engineering Notation and Scientific Notation – Powers of Ten Guide",
-  description:
-    "Learn the difference between scientific notation and engineering notation, including powers of ten, multiples of three, SI prefixes, and calculator examples.",
-  alternates: {
-    canonical: "/guides/engineering-notation-and-scientific-notation",
-  },
-};
+export const metadata = createStaticPageMetadata(
+  "Engineering Notation vs Scientific Notation: SI Prefix Guide",
+  "Compare engineering notation and scientific notation, learn ENG notation and SI prefixes, and convert kilo, milli, micro, nano, and other powers of ten.",
+  "/guides/engineering-notation-and-scientific-notation",
+);
 
 export default function EngineeringNotationGuide() {
   return (
     <GuideArticle
       eyebrow="ENGINEERING CALCULATION GUIDE"
-      title="Engineering notation and scientific notation"
-      description="Scientific notation writes values with powers of ten. Engineering notation keeps exponents in multiples of three so technical values line up with SI prefixes such as kilo, milli, micro, and nano."
+      title="Engineering notation vs scientific notation and SI prefixes"
+      description="Scientific notation uses a coefficient from 1 up to 10 with any integer power of ten. Engineering notation, often shown as ENG notation on a calculator, uses exponents in multiples of three so values match SI prefixes such as kilo, mega, milli, micro, nano, and pico."
       slug="engineering-notation-and-scientific-notation"
-      formula="Scientific: a × 10ⁿ; Engineering: a × 10³ᵏ, where 1 ≤ |a| < 1000"
-      example="12,500 can be written as 1.25 × 10⁴ in scientific notation or 12.5 × 10³ in engineering notation. A value of 0.000047 F can be written as 4.7 × 10⁻⁵ F or 47 µF."
+      formula="Scientific: a × 10ⁿ, 1 ≤ |a| < 10   |   Engineering: a × 10³ᵏ, 1 ≤ |a| < 1000"
+      example="0.000047 F = 4.7 × 10⁻⁵ F in scientific notation. In engineering notation it is 47 × 10⁻⁶ F, which matches the micro prefix and can be written as 47 µF."
+      reference={{
+        title: "Common engineering prefixes and powers of ten",
+        description:
+          "Engineering prefix notation groups exponents in steps of three. The base unit has no prefix and uses 10⁰.",
+        columns: ["SI prefix", "Power of ten", "Example"],
+        rows: [
+          { first: "tera (T)", second: "10¹²", third: "1 TW = 1 × 10¹² W" },
+          { first: "giga (G)", second: "10⁹", third: "3 GHz = 3 × 10⁹ Hz" },
+          { first: "mega (M)", second: "10⁶", third: "2 MW = 2 × 10⁶ W" },
+          { first: "kilo (k)", second: "10³", third: "5 kPa = 5 × 10³ Pa" },
+          { first: "base unit", second: "10⁰", third: "8 V = 8 × 10⁰ V" },
+          { first: "milli (m)", second: "10⁻³", third: "12 mA = 12 × 10⁻³ A" },
+          { first: "micro (µ)", second: "10⁻⁶", third: "47 µF = 47 × 10⁻⁶ F" },
+          { first: "nano (n)", second: "10⁻⁹", third: "100 nF = 100 × 10⁻⁹ F" },
+          { first: "pico (p)", second: "10⁻¹²", third: "22 pF = 22 × 10⁻¹² F" },
+        ],
+      }}
       steps={[
         {
-          title: "Start with scientific notation",
-          body:
-            "Move the decimal point until one non-zero digit is before the decimal. Count the movement to choose the power of ten. Moving left gives a positive exponent; moving right gives a negative exponent.",
+          title: "Recognize scientific notation",
+          body: "Scientific notation writes a non-zero value as a × 10ⁿ, where the coefficient a has an absolute value from 1 up to 10. For example, 92,000 becomes 9.2 × 10⁴ and 0.000047 becomes 4.7 × 10⁻⁵.",
         },
         {
-          title: "Convert to an engineering exponent",
-          body:
-            "Adjust the coefficient so the exponent becomes a multiple of three, such as −9, −6, −3, 0, 3, 6, or 9. The coefficient should stay between 1 and 1000 in size.",
+          title: "Recognize engineering or ENG notation",
+          body: "Engineering notation also uses powers of ten, but the exponent must be a multiple of three: ..., −12, −9, −6, −3, 0, 3, 6, 9, 12, .... The coefficient can range from 1 up to 1000 so the exponent stays aligned with an engineering prefix.",
         },
         {
-          title: "Match the exponent with an SI prefix",
-          body:
-            "Common engineering prefixes include nano for 10⁻⁹, micro for 10⁻⁶, milli for 10⁻³, kilo for 10³, mega for 10⁶, and giga for 10⁹.",
+          title: "Convert a scientific exponent to a multiple of three",
+          body: "Adjust the decimal point and exponent together until the exponent is divisible by three. For 1.25 × 10⁴, move the decimal one place right and reduce the exponent by one to get 12.5 × 10³.",
         },
         {
-          title: "Use calculator notation carefully",
-          body:
-            "On SolveGrid Scientific Calculator, enter values such as 2.5e3 or 47e-6, then use MODE to compare NORM, SCI, and ENG display formats.",
+          title: "Match the engineering exponent to an SI prefix",
+          body: "Replace 10³ with kilo, 10⁶ with mega, 10⁻³ with milli, 10⁻⁶ with micro, 10⁻⁹ with nano, and so on. Keep the physical unit attached so the converted quantity remains clear.",
         },
         {
-          title: "Check units and significant figures",
-          body:
-            "Engineering notation is only useful when the unit still makes sense. Keep a sensible number of significant figures and do not mix prefixes without converting them first.",
-        },
-          {
-          title: "Use scientific notation for compact powers of ten",
-          body: "Scientific notation writes a number as a coefficient times a power of ten. The coefficient is usually between 1 and 10, so 0.000047 becomes 4.7 × 10^-5 and 920000 becomes 9.2 × 10^5.",
+          title: "Translate micro and nano into scientific notation",
+          body: "Micro means 10⁻⁶, so 25 microseconds equals 25 × 10⁻⁶ seconds, or 2.5 × 10⁻⁵ seconds in normalized scientific notation. Nano means 10⁻⁹, so 8 nanometres equals 8 × 10⁻⁹ metres.",
         },
         {
-          title: "Use engineering notation for SI-prefix sized values",
-          body: "Engineering notation keeps the exponent as a multiple of three. That makes it easier to connect values with prefixes such as kilo, mega, milli, micro, nano, and pico. For example, 0.000047 F becomes 47 × 10^-6 F, which is 47 microfarads.",
+          title: "Convert an SI-prefixed value back to the base unit",
+          body: "Replace the prefix with its power of ten and multiply. For example, 4.7 kΩ is 4.7 × 10³ Ω = 4700 Ω, while 220 nF is 220 × 10⁻⁹ F = 0.000000220 F.",
         },
         {
-          title: "Move the decimal point carefully",
-          body: "Moving the decimal point left increases the exponent, and moving it right decreases the exponent. The value stays the same only when the coefficient and exponent are adjusted together.",
+          title: "Use SCI and ENG calculator modes for different reading needs",
+          body: "Use SCI when a standard normalized power-of-ten answer is required. Use ENG when working with electronics, measurements, or SI-prefix sized values. On SolveGrid Scientific Calculator, enter forms such as 2.5e3 or 47e-6, then compare NORM, SCI, and ENG outputs.",
         },
         {
-          title: "Choose the notation based on the problem",
-          body: "Use scientific notation when you need a standard math format for very large or very small numbers. Use engineering notation when the number is connected to physical units, electronics, measurement, or SI prefixes.",
+          title: "Preserve units and sensible significant figures",
+          body: "Changing notation must not change the quantity. Carry the unit through every step, use the correct capitalization for prefixes, and round only as far as the measurement or calculation justifies.",
+        },
+      ]}
+      faqs={[
+        {
+          question: "What is engineering notation?",
+          answer: "Engineering notation is a power-of-ten format in which the exponent is a multiple of three. This makes the value easy to express with SI prefixes such as kilo, milli, micro, and nano.",
         },
         {
-          title: "Use the calculator mode for readable results",
-          body: "In SolveGrid Scientific Calculator, use normal, scientific, or engineering result modes depending on how you want the answer displayed. Use Unit Converter when the problem also requires changing units, such as watts to kilowatts or pascals to kilopascals.",
+          question: "What does ENG notation mean on a calculator?",
+          answer: "ENG is the calculator abbreviation for engineering notation. It shifts the displayed exponent in steps of three while adjusting the coefficient so the numerical value remains unchanged.",
+        },
+        {
+          question: "What is the difference between scientific notation and engineering notation?",
+          answer: "Scientific notation keeps the coefficient from 1 up to 10 and allows any integer exponent. Engineering notation keeps the exponent divisible by three and allows the coefficient from 1 up to 1000.",
+        },
+        {
+          question: "What is SI notation?",
+          answer: "People often use SI notation to mean expressing a measurement with an International System of Units prefix, such as kPa, mA, µF, or GHz. The prefixes correspond to powers of ten and align naturally with engineering notation.",
+        },
+        {
+          question: "How is micro written in scientific notation?",
+          answer: "Micro, symbol µ, means 10⁻⁶. For example, 47 µF equals 47 × 10⁻⁶ F, which is 4.7 × 10⁻⁵ F in normalized scientific notation.",
+        },
+        {
+          question: "How is nano written in scientific notation?",
+          answer: "Nano, symbol n, means 10⁻⁹. For example, 100 nm equals 100 × 10⁻⁹ m, or 1 × 10⁻⁷ m in normalized scientific notation.",
         },
       ]}
       toolLinks={[
         {
           label: "Scientific Calculator",
           href: "/scientific-calculator",
-          description:
-            "Use SCI and ENG result formats for powers of ten, technical calculations, trigonometry, logs, constants, and variables.",
+          description: "Use NORM, SCI, and ENG display modes for powers of ten, technical calculations, trigonometry, logs, constants, and variables.",
         },
         {
           label: "Unit Converter",
           href: "/unit-converter",
-          description:
-            "Convert engineering and everyday units through transparent base-unit conversions.",
+          description: "Convert engineering and everyday units, including pressure, energy, power, frequency, and other SI-based quantities.",
         },
         {
-          label: "Matrix Calculator",
-          href: "/matrix-calculator",
-          description:
-            "Use scientific notation in larger matrix and linear-algebra calculations when values are very large or small.",
+          label: "Circuit Analysis",
+          href: "/circuit-analysis",
+          description: "Apply engineering-sized resistance, capacitance, current, and voltage values in practical DC circuit calculations.",
         },
       ]}
     />
