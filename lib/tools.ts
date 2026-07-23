@@ -840,6 +840,11 @@ export const tools: ToolInfo[] = [
         answer:
           "No. This page is designed for adults 20 and older. Younger people need age- and sex-specific assessment from a qualified health professional.",
       },
+      {
+        question: "How do you calculate BMI??",
+        answer:
+          "BMI is calculated by dividing your weight in kilograms by your height in meters squared. Simply enter your height and weight into our BMI Calculator to get your Body Mass Index instantly.",
+      },
     ],
   },
   {
@@ -1392,6 +1397,10 @@ export const tools: ToolInfo[] = [
       {
         question: "Can I choose a weekly payment frequency?",
         answer: "Yes. Choose monthly, bi-weekly, or weekly payment frequency.",
+      },
+      {
+        question: "Can I use this as an auto financing estimator?",
+        answer: "Yes. Enter your vehicle price, down payment, loan term, and interest rate to estimate your monthly auto loan payments.",
       },
     ],
   },
