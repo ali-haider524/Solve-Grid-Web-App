@@ -1402,6 +1402,10 @@ export const tools: ToolInfo[] = [
         question: "Can I use this as an auto financing estimator?",
         answer: "Yes. Enter your vehicle price, down payment, loan term, and interest rate to estimate your monthly auto loan payments.",
       },
+      {
+        question: "Can I use this as a car payment calculator?",
+        answer: "Yes. Enter the vehicle price, down payment, interest rate, and loan term to estimate your monthly car payment and total loan cost.",
+      },
     ],
   },
   {
