@@ -4,7 +4,7 @@ import {
   getToolPath,
   toolCategories,
 } from "../lib/tools";
-import { siteName, siteUrl } from "../lib/site";
+import { siteUrl } from "../lib/site";
 
 type ToolSchemaProps = { slug: string };
 
@@ -28,7 +28,7 @@ export default function ToolSchema({ slug }: ToolSchemaProps) {
         description: tool.description,
         url: pageUrl,
         inLanguage: "en",
-        isPartOf: { "@type": "WebSite", name: siteName, url: siteUrl },
+        isPartOf: { "@id": `${siteUrl}/#website` },
         mainEntity: { "@id": applicationId },
       },
       {
@@ -48,9 +48,7 @@ export default function ToolSchema({ slug }: ToolSchemaProps) {
           priceCurrency: "USD",
         },
         publisher: {
-          "@type": "Organization",
-          name: siteName,
-          url: siteUrl,
+          "@id": `${siteUrl}/#organization`,
         },
       },
       {

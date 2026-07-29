@@ -1,7 +1,14 @@
 import type { Metadata, Viewport } from "next";
-import "./globals.css";
-import { contactEmail, siteDescription, siteName, siteUrl } from "../lib/site";
 import Script from "next/script";
+import "./globals.css";
+import {
+  contactEmail,
+  siteDescription,
+  siteName,
+  siteOperatorName,
+  siteUrl,
+  socialProfiles,
+} from "../lib/site";
 
 const googleVerification = process.env.GOOGLE_SITE_VERIFICATION;
 
@@ -28,7 +35,7 @@ export const metadata: Metadata = {
   icons: {
     icon: "/favicon.ico",
     shortcut: "/favicon.ico",
-    apple: "/favicon.ico",
+    apple: "/apple-icon.png",
   },
   alternates: {
     canonical: "/",
@@ -69,21 +76,56 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const organizationId = `${siteUrl}/#organization`;
+  const websiteId = `${siteUrl}/#website`;
+
+  const organizationSchema = {
+    "@type": "Organization",
+    "@id": organizationId,
+    name: siteOperatorName,
+    alternateName: siteName,
+    url: siteUrl,
+    logo: {
+      "@type": "ImageObject",
+      url: `${siteUrl}/icon.png`,
+    },
+    description: siteDescription,
+    ...(contactEmail
+      ? {
+          email: contactEmail,
+          contactPoint: {
+            "@type": "ContactPoint",
+            contactType: "customer support",
+            email: contactEmail,
+            url: `${siteUrl}/contact`,
+            availableLanguage: ["English"],
+          },
+        }
+      : {
+          contactPoint: {
+            "@type": "ContactPoint",
+            contactType: "website support",
+            url: `${siteUrl}/contact`,
+            availableLanguage: ["English"],
+          },
+        }),
+    ...(socialProfiles.length ? { sameAs: socialProfiles } : {}),
+  };
+
   const siteSchema = {
     "@context": "https://schema.org",
     "@graph": [
-      {
-        "@type": "Organization",
-        name: siteName,
-        url: siteUrl,
-        ...(contactEmail ? { email: contactEmail } : {}),
-      },
+      organizationSchema,
       {
         "@type": "WebSite",
+        "@id": websiteId,
         name: siteName,
+        alternateName: "SolveGrid Calculators",
         url: siteUrl,
         description: siteDescription,
         inLanguage: "en",
+        publisher: { "@id": organizationId },
+        isAccessibleForFree: true,
       },
     ],
   };
@@ -98,19 +140,17 @@ export default function RootLayout({
         {children}
 
         <Script
-        src="https://www.googletagmanager.com/gtag/js?id=G-QDSPD4TGQN"
-         strategy="afterInteractive"
-       />
-
-       <Script id="google-analytics" strategy="afterInteractive">
-      {`
-         window.dataLayer = window.dataLayer || [];
-         function gtag(){window.dataLayer.push(arguments);}
-         gtag('js', new Date());
-
-         gtag('config', 'G-QDSPD4TGQN');
-       `}
-       </Script>
+          src="https://www.googletagmanager.com/gtag/js?id=G-QDSPD4TGQN"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){window.dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-QDSPD4TGQN');
+          `}
+        </Script>
       </body>
     </html>
   );

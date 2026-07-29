@@ -32,3 +32,20 @@
 
 /* V8 footer stays compact before long link groups on mobile. */
 .footer{content-visibility:auto;contain-intrinsic-size:580px}@media(max-width:640px){.container{width:min(100% - 28px,1180px);padding:30px 0 25px;gap:28px}.linksGrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}.linksGrid a:not(.categoryLink){margin:7px 0;font-size:.76rem}.bottom{padding:15px 18px;font-size:.7rem}}
+
+.socialLinks {
+  margin-top: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px 11px;
+}
+
+.socialLinks a {
+  color: #bcd0ff;
+  font-size: 0.73rem;
+  font-weight: 800;
+}
+
+.socialLinks a:hover {
+  color: #fff;
+}

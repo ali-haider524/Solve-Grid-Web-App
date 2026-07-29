@@ -73,7 +73,7 @@ export const tools: ToolInfo[] = [
     title:
       "Scientific & Engineering Calculator Online – ENG Notation, Trig, Logs & Constants",
     description:
-      "Use a free scientific and engineering calculator online for trigonometry, logarithms, roots, powers, factorials, combinations, constants, scientific notation, and engineering notation.",
+      "Use a free scientific and engineering calculator for trigonometry, logs, roots, powers, constants, scientific notation, and engineering notation.",
     summary:
       "Evaluate trigonometry, roots, logarithms, powers, combinations, factorials, integer functions, reusable variables, constants, and normal, scientific, or engineering notation in one focused browser calculator.",
     keywords: [
@@ -161,7 +161,7 @@ export const tools: ToolInfo[] = [
     icon: "⌁",
     title: "Online Graphing Calculator – Graph, Table, Trace & Intersections",
     description:
-      "Use a free online graphing calculator to plot equations, compare functions, inspect value tables, trace points, estimate roots and intersections, adjust the graph window, and follow TI-84 style graphing workflows independently.",
+      "Plot equations online, compare multiple functions, inspect tables, trace points, estimate roots and intersections, and adjust the graph window.",
     summary:
       "Plot and compare several functions, inspect tables and trace values, estimate x-intercepts and intersections, adjust the graph window, and use a clear online workflow for common graphing-calculator tasks.",
     keywords: [
@@ -235,7 +235,7 @@ export const tools: ToolInfo[] = [
           "The workspace supports arithmetic with x, powers, parentheses, sin, cos, tan, inverse trigonometric functions, square roots, logs, natural logs, absolute value, and exponential functions. Unsupported syntax is marked in the equation list.",
       },
       {
-        question: "How do I plot an equation??",
+        question: "How do I plot an equation?",
         answer:
           "Enter your equation in the input field, such as y = x² or y = 2x + 3, and the Graphing Calculator will instantly plot the equation on the coordinate plane. You can zoom, compare multiple equations, and analyze key graph features.",
       },
@@ -251,7 +251,7 @@ export const tools: ToolInfo[] = [
     title:
       "Equation Solver – Linear, Quadratic, Cubic & System of Equations Calculator",
     description:
-      "Solve linear, quadratic, cubic, and 2–8 variable systems of equations online with steps, Gaussian elimination, Gauss-Jordan RREF, matrix inverse, and Cramer’s rule where supported.",
+      "Solve linear, quadratic, cubic, and 2–8 variable systems online using Gaussian elimination, Gauss-Jordan RREF, inverse, and Cramer’s rule.",
     summary:
       "Use a clear online equation solver for one-variable equations and simultaneous linear systems. Enter coefficients, solve linear, quadratic, and cubic equations, or compare matrix methods for A·x = b systems.",
     keywords: [
@@ -410,7 +410,7 @@ export const tools: ToolInfo[] = [
     icon: "[ ]",
     title: "Matrix Calculator – RREF, Rank With Steps, Row Space & Systems",
     description:
-      "Use an online 2×2 to 10×10 matrix calculator and matrix reducer for REF, RREF, matrix rank with steps, row space checks, inverse, determinant, arithmetic, eigenvalues, and linear systems.",
+      "Calculate 2×2 to 10×10 matrices, REF, RREF, rank, row space, inverse, determinant, eigenvalues, arithmetic, and supported linear systems.",
     summary:
       "Build or paste 2×2 through 10×10 matrices, then calculate arithmetic, row reduction, RREF, matrix rank, row-space clues, inverse, determinants, cofactors, adjugates, 2×2 eigenvalues, and A·x = b systems.",
     keywords: [
@@ -508,7 +508,7 @@ export const tools: ToolInfo[] = [
     title:
       "Statistics Calculator – Standard Deviation, Variance, Quartiles & Regression",
     description:
-      "Calculate sample or population standard deviation, variance, mean, median, mode, quartiles, IQR, frequency tables, grouped data estimates, correlation, and linear regression online.",
+      "Calculate sample or population standard deviation, variance, mean, median, mode, quartiles, IQR, frequency tables, grouped data, correlation, and regression.",
     summary:
       "Analyse raw data, frequency tables, grouped intervals, or paired X/Y values using descriptive statistics, sample and population standard deviation, variance, quartiles, IQR, outlier checks, and regression results.",
     keywords: [
@@ -594,7 +594,7 @@ export const tools: ToolInfo[] = [
     icon: "⇄",
     title: "Unit Converter – Engineering, Metric, Imperial & Science Units",
     description:
-      "Convert engineering, science, metric, imperial, and everyday units online across length, area, volume, mass, temperature, speed, acceleration, angles, data, force, pressure, energy, power, torque, frequency, density, and time.",
+      "Convert engineering, scientific, metric, imperial, and everyday units for length, mass, temperature, speed, pressure, energy, torque, density, and more.",
     summary:
       "Convert 17 unit families with clear formulas, base-unit context, metric and imperial workflows, and shareable pre-filled conversion links for engineering, science, study, and everyday calculations.",
     keywords: [
@@ -958,7 +958,7 @@ export const tools: ToolInfo[] = [
     icon: "max",
     title: "Optimization Problem Solver – Linear Programming Calculator",
     description:
-      "Solve two-variable optimization problems online with a linear programming calculator for objective functions, constraints, feasible regions, corner points, and maximum or minimum values.",
+      "Solve two-variable linear programming problems online using objective functions, constraints, feasible regions, corner points, and maximum or minimum values.",
     summary:
       "Build a two-variable linear programming model, enter objective coefficients and constraints, inspect feasible corner points, and compare objective values to find a maximum or minimum result.",
     keywords: [
@@ -1038,7 +1038,7 @@ export const tools: ToolInfo[] = [
     title:
       "Circuit Analysis Calculator – Nodal Analysis, Ohm's Law, RC & Resistors",
     description:
-      "Use a DC circuit analysis calculator for Ohm's law, series and parallel resistors, voltage dividers, RC transients, two-node nodal analysis, conductance matrices, KCL equations, and node voltages.",
+      "Analyze DC circuits with Ohm’s law, series and parallel resistance, voltage dividers, RC transients, KCL, conductance matrices, and two-node nodal analysis.",
     summary:
       "Calculate ideal DC resistor circuits with Ohm's law, resistor networks, voltage dividers, RC charge or discharge, and a two-node nodal-analysis solver that explains conductance matrices and current injections.",
     keywords: [

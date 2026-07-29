@@ -14,7 +14,12 @@ const trustPages = [
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const coreRoutes: MetadataRoute.Sitemap = [
-    { url: siteUrl, changeFrequency: "weekly", priority: 1 },
+    {
+      url: siteUrl,
+      lastModified: new Date("2026-07-30"),
+      changeFrequency: "weekly",
+      priority: 1,
+    },
     { url: `${siteUrl}/tools`, changeFrequency: "weekly", priority: 0.96 },
     { url: `${siteUrl}/guides`, changeFrequency: "weekly", priority: 0.9 },
   ];
@@ -41,6 +46,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const trustRoutes: MetadataRoute.Sitemap = trustPages.map((slug) => ({
     url: `${siteUrl}/${slug}`,
+    ...(slug === "about" || slug === "contact" || slug === "methodology"
+      ? { lastModified: new Date("2026-07-30") }
+      : {}),
     changeFrequency: "yearly",
     priority: slug === "methodology" || slug === "about" ? 0.5 : 0.35,
   }));

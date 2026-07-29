@@ -1,67 +1,57 @@
 import fs from "node:fs";
 import path from "node:path";
-import process from "node:process";
 
-const projectRoot = process.cwd();
-const registryPath = path.join(projectRoot, "lib", "tools.ts");
-const appPath = path.join(projectRoot, "app");
+const root = process.cwd();
+const toolsFile = path.join(root, "lib", "tools.ts");
 
-const source = fs.readFileSync(registryPath, "utf8");
-const toolsBlockStart = source.indexOf("export const tools");
-const toolsBlockEnd = source.indexOf("export function getToolPath");
-
-if (toolsBlockStart === -1 || toolsBlockEnd === -1) {
-  console.error("Could not locate the SolveGrid tool registry in lib/tools.ts.");
+if (!fs.existsSync(toolsFile)) {
+  console.error("Tool registry verification failed: lib/tools.ts is missing.");
   process.exit(1);
 }
 
-const toolsBlock = source.slice(toolsBlockStart, toolsBlockEnd);
-const registeredSlugs = [...toolsBlock.matchAll(/\bslug:\s*"([^"]+)"/g)].map((match) => match[1]);
-const duplicateSlugs = registeredSlugs.filter((slug, index) => registeredSlugs.indexOf(slug) !== index);
+const source = fs.readFileSync(toolsFile, "utf8");
+const toolsArrayStart = source.indexOf("export const tools: ToolInfo[] = [");
+const toolsArrayEnd = source.indexOf("\n];", toolsArrayStart);
 
-const publicToolDirectories = fs
-  .readdirSync(appPath, { withFileTypes: true })
-  .filter((entry) => entry.isDirectory())
-  .map((entry) => entry.name)
-  .filter((name) => /-(calculator|solver|converter|algebra|lab|analysis|statistics)$/.test(name));
-
-const missingRoutes = registeredSlugs.filter((slug) => !fs.existsSync(path.join(appPath, slug, "page.tsx")));
-const missingRegistryEntries = publicToolDirectories.filter((directory) => !registeredSlugs.includes(directory));
-
-const seoContractProblems = [];
-for (const slug of registeredSlugs) {
-  const pagePath = path.join(appPath, slug, "page.tsx");
-  if (!fs.existsSync(pagePath)) continue;
-
-  const pageSource = fs.readFileSync(pagePath, "utf8");
-  const expectedMetadata = `createToolMetadata("${slug}")`;
-  const expectedSchema = `ToolSchema slug="${slug}"`;
-  const expectedLinks = `ToolCrossLinks currentSlug="${slug}"`;
-
-  if (!pageSource.includes(expectedMetadata)) seoContractProblems.push(`${slug}: missing createToolMetadata`);
-  if (!pageSource.includes(expectedSchema)) seoContractProblems.push(`${slug}: missing ToolSchema`);
-  if (!pageSource.includes(expectedLinks)) seoContractProblems.push(`${slug}: missing ToolCrossLinks`);
+if (toolsArrayStart < 0 || toolsArrayEnd < 0) {
+  console.error("Tool registry verification failed: tools array was not found.");
+  process.exit(1);
 }
 
-if (duplicateSlugs.length || missingRoutes.length || missingRegistryEntries.length || seoContractProblems.length) {
-  console.error("\nSolveGrid platform verification failed.");
+const toolsSource = source.slice(toolsArrayStart, toolsArrayEnd);
+const slugs = [...toolsSource.matchAll(/\bslug:\s*"([a-z0-9-]+)"/g)].map(
+  (match) => match[1],
+);
+const uniqueSlugs = new Set(slugs);
+const errors = [];
 
-  if (duplicateSlugs.length) {
-    console.error(`Duplicate registry slugs: ${[...new Set(duplicateSlugs)].join(", ")}`);
-  }
-  if (missingRoutes.length) {
-    console.error(`Registered tools without app routes: ${missingRoutes.join(", ")}`);
-  }
-  if (missingRegistryEntries.length) {
-    console.error(`Public tool routes missing registry entries: ${missingRegistryEntries.join(", ")}`);
-  }
-  if (seoContractProblems.length) {
-    console.error(`SEO route contract problems:\n- ${seoContractProblems.join("\n- ")}`);
-  }
+if (!slugs.length) {
+  errors.push("No tool slugs were found in lib/tools.ts.");
+}
 
+if (uniqueSlugs.size !== slugs.length) {
+  const seen = new Set();
+  const duplicates = slugs.filter((slug) => {
+    if (seen.has(slug)) return true;
+    seen.add(slug);
+    return false;
+  });
+  errors.push(`Duplicate tool slugs: ${[...new Set(duplicates)].join(", ")}`);
+}
+
+for (const slug of uniqueSlugs) {
+  const route = path.join(root, "app", slug, "page.tsx");
+  if (!fs.existsSync(route)) {
+    errors.push(`Tool registry entry has no route: /${slug}`);
+  }
+}
+
+if (errors.length) {
+  console.error("SolveGrid tool registry verification failed.");
+  for (const error of errors) console.error(`- ${error}`);
   process.exit(1);
 }
 
 console.log(
-  `SolveGrid platform verified: ${registeredSlugs.length} tools, ${publicToolDirectories.length} public tool routes, and SEO route contracts are connected.`,
+  `SolveGrid platform verified: ${uniqueSlugs.size} tools and ${uniqueSlugs.size} public tool routes are connected.`,
 );

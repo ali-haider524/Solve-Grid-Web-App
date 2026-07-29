@@ -1,8 +1,10 @@
 import Link from "next/link";
 import SiteFooter from "../components/SiteFooter";
 import ToolHeader from "../components/ToolHeader";
+import ScientificCalculator from "./scientific-calculator/ScientificCalculator";
 import { guides } from "../lib/guides";
 import { createStaticPageMetadata } from "../lib/seo";
+import { siteName, siteUrl } from "../lib/site";
 import {
   getCategoryPath,
   getFeaturedTools,
@@ -13,7 +15,7 @@ import {
 
 export const metadata = createStaticPageMetadata(
   "Free Online Math, Engineering & Everyday Calculators",
-  "Use free online calculators for graphing, equations, matrices, scientific calculations, unit conversions, statistics, finance, research methods, and everyday problems.",
+  "Use free online calculators for graphing, equations, matrices, scientific math, statistics, unit conversions, finance, and everyday problems.",
   "/",
 );
 
@@ -26,14 +28,100 @@ const featuredGuideSlugs = [
   "unit-conversion-formulas",
 ];
 
+const homepageFaqs = [
+  {
+    question: "Are SolveGrid calculators free to use?",
+    answer:
+      "Yes. SolveGrid provides free browser-based calculators for core math, engineering, research, finance, conversion, and everyday calculation tasks.",
+  },
+  {
+    question: "Do I need to create an account?",
+    answer:
+      "No account is required for the current public calculators. Open a tool, enter your values, and calculate directly in the browser.",
+  },
+  {
+    question: "Which calculator should I use for equations?",
+    answer:
+      "Use Equation Solver for linear, quadratic, cubic, and supported simultaneous systems. Use Graphing Calculator when you also need a visual graph or intersection estimate.",
+  },
+  {
+    question: "Can SolveGrid graph more than one equation?",
+    answer:
+      "Yes. Graphing Calculator can plot and compare several functions, show value tables, trace points, and estimate roots or intersections in the current graph window.",
+  },
+  {
+    question: "Does the Matrix Calculator calculate rank and RREF?",
+    answer:
+      "Yes. Matrix Calculator supports rank, REF, RREF, determinants, inverses, row space, null space, and supported linear-system workflows.",
+  },
+  {
+    question: "How are SolveGrid calculations checked?",
+    answer:
+      "Each tool is built around a defined formula, matrix operation, statistical procedure, numerical method, or unit relationship. Important assumptions and limitations are documented on tool pages, guides, and the Methods & Accuracy page.",
+  },
+];
+
+const homepageReviewedDate = "2026-07-30";
+
 export default function Home() {
   const featuredTools = getFeaturedTools(6);
   const featuredGuides = featuredGuideSlugs
     .map((slug) => guides.find((guide) => guide.slug === slug))
     .filter((guide): guide is (typeof guides)[number] => Boolean(guide));
 
+  const homepageSchema = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": `${siteUrl}/#webpage`,
+        url: siteUrl,
+        name: "Free Online Math, Engineering & Everyday Calculators",
+        description:
+          "Use free online calculators for graphing, equations, matrices, scientific math, statistics, unit conversions, finance, and everyday problems.",
+        inLanguage: "en",
+        isPartOf: { "@id": `${siteUrl}/#website` },
+        publisher: {
+          "@type": "Organization",
+          name: siteName,
+          url: siteUrl,
+        },
+        dateModified: homepageReviewedDate,
+        mainEntity: { "@id": `${siteUrl}/#featured-tools` },
+      },
+      {
+        "@type": "ItemList",
+        "@id": `${siteUrl}/#featured-tools`,
+        name: "Featured SolveGrid calculators",
+        numberOfItems: featuredTools.length,
+        itemListElement: featuredTools.map((tool, index) => ({
+          "@type": "ListItem",
+          position: index + 1,
+          name: tool.name,
+          url: `${siteUrl}/${tool.slug}`,
+        })),
+      },
+      {
+        "@type": "FAQPage",
+        "@id": `${siteUrl}/#faq`,
+        mainEntity: homepageFaqs.map((faq) => ({
+          "@type": "Question",
+          name: faq.question,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: faq.answer,
+          },
+        })),
+      },
+    ],
+  };
+
   return (
     <main id="main-content" className="home-page">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(homepageSchema) }}
+      />
       <ToolHeader />
 
       <section className="hero">
@@ -43,81 +131,47 @@ export default function Home() {
           </p>
 
           <h1>
-            Solve problems.<span> See each step clearly.</span>
+            Free online calculators.
+            <span> Solve problems clearly.</span>
           </h1>
 
           <p className="hero-description">
-            Graph equations, solve algebra, calculate polynomial roots, work with
-            matrices and statistics, convert units, evaluate scientific expressions,
-            explore numerical models, and handle practical percentage, finance, date,
-            and distance questions directly in your browser.
+            Start with the working scientific calculator, then open focused tools
+            for graphing, equations, matrices, statistics, unit conversion,
+            finance, numerical methods, and everyday calculations.
           </p>
 
           <div className="hero-actions">
-            <Link className="primary-button" href="/tools">
-              Explore all tools <span>→</span>
+            <Link className="primary-button" href="#home-scientific-expression">
+              Start calculating <span>→</span>
             </Link>
 
-            <Link className="secondary-button" href="/graphing-calculator">
-              Open graphing calculator
+            <Link className="secondary-button" href="/tools">
+              Explore all {tools.length} tools
             </Link>
           </div>
 
           <div className="hero-points">
-            <span>✓ No installation</span>
-            <span>✓ Works on mobile</span>
+            <span>✓ Works instantly</span>
+            <span>✓ No sign-up</span>
             <span>✓ Free core tools</span>
           </div>
         </div>
 
-        <div className="hero-preview" aria-label="Calculator preview">
-          <div className="preview-topbar">
-            <span className="preview-dot dot-one" />
-            <span className="preview-dot dot-two" />
-            <span className="preview-dot dot-three" />
-            <span className="preview-title">SolveGrid workspace</span>
-          </div>
-
-          <div className="calculator-screen">
-            <span className="screen-label">EXPRESSION</span>
-            <p>sqrt(81) + 3²</p>
-            <span className="screen-label result-label">RESULT</span>
-            <h2>18</h2>
-          </div>
-
-          <div className="keypad">
-            {[
-              "sin",
-              "cos",
-              "tan",
-              "√",
-              "7",
-              "8",
-              "9",
-              "÷",
-              "4",
-              "5",
-              "6",
-              "×",
-              "1",
-              "2",
-              "3",
-              "−",
-              "0",
-              ".",
-              "=",
-              "+",
-            ].map((key, index) => (
-              <span
-                className={key === "=" ? "key key-equals" : "key"}
-                key={`${key}-${index}`}
-              >
-                {key}
-              </span>
-            ))}
-          </div>
+        <div className="home-calculator-shell">
+          <ScientificCalculator variant="embedded" />
         </div>
       </section>
+
+      <nav className="home-task-strip" aria-label="Popular calculator tasks">
+        <span>POPULAR TASKS</span>
+        <Link href="/graphing-calculator">Graph an equation</Link>
+        <Link href="/equation-solver">Solve an equation</Link>
+        <Link href="/matrix-calculator">Find matrix rank</Link>
+        <Link href="/statistics-calculator">Standard deviation</Link>
+        <Link href="/unit-converter">Convert units</Link>
+        <Link href="/optimization-lab">Linear programming</Link>
+      </nav>
 
       <section className="tools-section" id="tools">
         <div className="section-heading">
@@ -141,13 +195,13 @@ export default function Home() {
               <div className="tool-icon">{tool.icon}</div>
               <h3>{tool.name}</h3>
               <p>{tool.summary}</p>
-              <span>Open tool →</span>
+              <span>Use {tool.name} →</span>
             </Link>
           ))}
         </div>
 
         <div className="home-directory-link">
-          <Link href="/tools">Browse all {tools.length} free tools →</Link>
+          <Link href="/tools">View all {tools.length} online calculators →</Link>
         </div>
       </section>
 
@@ -166,7 +220,7 @@ export default function Home() {
               <span>{toolCategories[category].label.toUpperCase()}</span>
               <h3>{toolCategories[category].label}</h3>
               <p>{toolCategories[category].intro}</p>
-              <b>Explore category →</b>
+              <b>Browse {toolCategories[category].label} →</b>
             </Link>
           ))}
         </div>
@@ -207,6 +261,55 @@ export default function Home() {
         </div>
       </section>
 
+      <section
+        className="home-trust-section"
+        aria-labelledby="home-trust-heading"
+      >
+        <header>
+          <p className="eyebrow">WORKING TOOLS &amp; DOCUMENTED METHODS</p>
+          <h2 id="home-trust-heading">
+            Calculate in the browser and understand how the result was produced.
+          </h2>
+          <p>
+            SolveGrid is an independent online calculator platform. Each public
+            workspace is connected to method notes, related calculators, or
+            practical guides so users can check inputs, units, assumptions, and
+            sensible next steps.
+          </p>
+        </header>
+        <div className="home-trust-grid">
+          <article>
+            <strong>{tools.length}</strong>
+            <h3>Working online calculators</h3>
+            <p>
+              Focused tools for math, engineering, research, finance, conversion,
+              and everyday calculation tasks.
+            </p>
+          </article>
+          <article>
+            <strong>Browser based</strong>
+            <h3>No account required</h3>
+            <p>
+              Current public calculations run directly in the browser and can be
+              used without signing up.
+            </p>
+          </article>
+          <article>
+            <strong>Reviewed</strong>
+            <h3>30 July 2026</h3>
+            <p>
+              Methods, limitations, and important-result guidance are documented
+              and updated when clearer explanations or corrections are needed.
+            </p>
+          </article>
+        </div>
+        <div className="home-trust-links">
+          <Link href="/methodology">Read Methods &amp; Accuracy →</Link>
+          <Link href="/about">Learn about SolveGrid →</Link>
+          <Link href="/contact">Report a calculation issue →</Link>
+        </div>
+      </section>
+
       <section className="home-guide-section" aria-labelledby="home-guides-heading">
         <header>
           <div>
@@ -221,7 +324,7 @@ export default function Home() {
               <span>GUIDE</span>
               <h3>{guide.title}</h3>
               <p>{guide.summary}</p>
-              <b>Read guide →</b>
+              <b>Read {guide.title} →</b>
             </Link>
           ))}
         </div>
@@ -241,12 +344,41 @@ export default function Home() {
         <Link href="/research-tools">Explore research labs →</Link>
       </section>
 
+      <section
+        className="home-faq-section"
+        id="frequently-asked-questions"
+        aria-labelledby="home-faq-heading"
+      >
+        <header>
+          <p className="eyebrow">COMMON QUESTIONS</p>
+          <h2 id="home-faq-heading">Frequently asked questions about SolveGrid</h2>
+          <p>
+            Quick answers about access, calculator choice, supported workflows,
+            and how calculation methods are documented.
+          </p>
+        </header>
+        <div>
+          {homepageFaqs.map((faq) => (
+            <details key={faq.question}>
+              <summary>{faq.question}</summary>
+              <p>{faq.answer}</p>
+            </details>
+          ))}
+        </div>
+      </section>
+
       <section className="learn-section" id="learn">
         <p className="eyebrow">MADE FOR REAL PROBLEMS</p>
         <h2>
-          Clear browser-based tools for students, educators, engineers,
+          Free online calculators for students, educators, engineers,
           professionals, and independent learners.
         </h2>
+        <p>
+          SolveGrid provides calculation support, not professional advice. Verify
+          high-stakes engineering, medical, financial, legal, safety, academic,
+          and research results using suitable standards and qualified review.
+        </p>
+        <small>Homepage last reviewed: 30 July 2026</small>
       </section>
 
       <SiteFooter />

@@ -4,7 +4,7 @@ import {
   getRelatedGuides,
   guideTopics,
 } from "../lib/guides";
-import { siteName, siteUrl } from "../lib/site";
+import { siteUrl } from "../lib/site";
 import SiteFooter from "./SiteFooter";
 import ToolHeader from "./ToolHeader";
 import styles from "./GuideArticle.module.css";
@@ -74,14 +74,13 @@ export default function GuideArticle({
         inLanguage: "en",
         isAccessibleForFree: true,
         author: {
-          "@type": "Organization",
-          name: siteName,
-          url: siteUrl,
+          "@id": `${siteUrl}/#organization`,
         },
         publisher: {
-          "@type": "Organization",
-          name: siteName,
-          url: siteUrl,
+          "@id": `${siteUrl}/#organization`,
+        },
+        isPartOf: {
+          "@id": `${siteUrl}/#website`,
         },
         ...(toolLinks.length
           ? {
@@ -251,12 +250,12 @@ export default function GuideArticle({
                 <Link href={tool.href} key={tool.href}>
                   <strong>{tool.label}</strong>
                   <span>{tool.description}</span>
-                  <b>Open tool →</b>
+                  <b>Open {tool.label} →</b>
                 </Link>
               ))}
             </div>
             <Link className={styles.allToolsLink} href="/tools">
-              Browse all calculators →
+              Browse all online calculators →
             </Link>
           </aside>
         </section>
@@ -276,7 +275,7 @@ export default function GuideArticle({
                   <span>GUIDE</span>
                   <strong>{guide.title}</strong>
                   <small>{guide.summary}</small>
-                  <b>Read →</b>
+                  <b>Read {guide.title} →</b>
                 </Link>
               ))}
             </div>

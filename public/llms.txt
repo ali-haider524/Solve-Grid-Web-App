@@ -1,0 +1,47 @@
+# SolveGrid
+
+> SolveGrid is an independent browser-based calculator platform for math, engineering, research methods, finance, unit conversion, and everyday calculation tasks.
+
+SolveGrid provides 21 public tools. Most current calculations run directly in the browser and do not require an account. Tool pages are connected to method guides, related calculators, assumptions, and scope notes where relevant.
+
+## Main directories
+
+- [Homepage](https://solvegrid.online/): Working scientific calculator, featured tools, categories, guides, FAQs, and platform information.
+- [All calculators](https://solvegrid.online/tools): Directory of every public SolveGrid calculator and research workspace.
+- [Calculation guides](https://solvegrid.online/guides): Formula, method, notation, graphing, matrix, statistics, finance, and numerical-method guides.
+- [Math and algebra calculators](https://solvegrid.online/math-calculators)
+- [Scientific and engineering calculators](https://solvegrid.online/engineering-calculators)
+- [Research and simulation tools](https://solvegrid.online/research-tools)
+- [Everyday calculators](https://solvegrid.online/everyday-calculators)
+
+## Featured tools
+
+- [Scientific and Engineering Calculator](https://solvegrid.online/scientific-calculator)
+- [Graphing Calculator](https://solvegrid.online/graphing-calculator)
+- [Equation Solver](https://solvegrid.online/equation-solver)
+- [Matrix Calculator](https://solvegrid.online/matrix-calculator)
+- [Statistics Calculator](https://solvegrid.online/statistics-calculator)
+- [Unit Converter](https://solvegrid.online/unit-converter)
+- [Optimization Lab](https://solvegrid.online/optimization-lab)
+- [Circuit Analysis Calculator](https://solvegrid.online/circuit-analysis)
+- [Differential Equation Solver](https://solvegrid.online/differential-equation-solver)
+- [Symbolic Algebra](https://solvegrid.online/symbolic-algebra)
+
+## Methods, trust, and support
+
+- [Calculation Methods, Accuracy and Limitations](https://solvegrid.online/methodology)
+- [About SolveGrid](https://solvegrid.online/about)
+- [Contact and calculation issue reporting](https://solvegrid.online/contact)
+- [Privacy Policy](https://solvegrid.online/privacy-policy)
+- [Terms of Use](https://solvegrid.online/terms-of-use)
+- [Disclaimer](https://solvegrid.online/disclaimer)
+- [XML Sitemap](https://solvegrid.online/sitemap.xml)
+
+## Usage notes
+
+- SolveGrid is independent and is not an official product of calculator manufacturers mentioned in educational comparisons.
+- Results are informational. High-stakes engineering, medical, financial, legal, safety, academic, or research work should be verified using appropriate standards, source data, and qualified review.
+- Numerical results can depend on rounding, floating-point arithmetic, step size, model assumptions, selected units, and entered values.
+- Do not enter confidential, regulated, medical, financial, or identity information into general-purpose calculator fields.
+
+Last reviewed: 30 July 2026.

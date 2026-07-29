@@ -30,3 +30,31 @@ export const siteUrl = normalizeSiteUrl(
 export const siteOperatorName =
   process.env.NEXT_PUBLIC_SITE_OPERATOR?.trim() || siteName;
 export const contactEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL?.trim() || "";
+
+
+function normalizePublicUrl(value: string) {
+  if (!value.trim()) return "";
+
+  try {
+    const url = new URL(value.trim());
+    return url.protocol === "http:" || url.protocol === "https:"
+      ? url.toString().replace(/\/+$/, "")
+      : "";
+  } catch {
+    return "";
+  }
+}
+
+export const githubUrl = normalizePublicUrl(
+  process.env.NEXT_PUBLIC_GITHUB_URL || "",
+);
+export const linkedinUrl = normalizePublicUrl(
+  process.env.NEXT_PUBLIC_LINKEDIN_URL || "",
+);
+export const youtubeUrl = normalizePublicUrl(
+  process.env.NEXT_PUBLIC_YOUTUBE_URL || "",
+);
+
+export const socialProfiles = [githubUrl, linkedinUrl, youtubeUrl].filter(
+  Boolean,
+);

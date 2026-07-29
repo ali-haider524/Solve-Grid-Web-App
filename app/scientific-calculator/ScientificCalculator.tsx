@@ -12,6 +12,22 @@ import {
   type AngleMode,
 } from "../../lib/math-core";
 
+
+declare global {
+  interface Window {
+    gtag?: (...args: unknown[]) => void;
+  }
+}
+
+function trackCalculatorEvent(
+  eventName: string,
+  parameters: Record<string, string | number | boolean> = {},
+) {
+  if (typeof window !== "undefined" && typeof window.gtag === "function") {
+    window.gtag("event", eventName, parameters);
+  }
+}
+
 type DisplayNotation = "NORM" | "SCI" | "ENG";
 type Overlay =
   "none" | "mode" | "tools" | "variables" | "constants" | "history" | "notice";
@@ -172,6 +188,74 @@ const calculatorKeys: CalculatorKey[] = [
   { id: "equals", label: "=", hint: "solve", action: "equals", tone: "equals" },
 ];
 
+
+const embeddedPrimaryKeyIds = [
+  "clear",
+  "delete",
+  "root",
+  "divide",
+  "multiply",
+  "seven",
+  "eight",
+  "nine",
+  "minus",
+  "plus",
+  "four",
+  "five",
+  "six",
+  "open",
+  "close",
+  "one",
+  "two",
+  "three",
+  "decimal",
+  "equals",
+  "zero",
+  "negative",
+  "pi",
+  "power",
+  "square",
+] as const;
+
+const embeddedAdvancedKeyIds = [
+  "shift",
+  "mode",
+  "tools",
+  "variables",
+  "sin",
+  "cos",
+  "tan",
+  "log",
+  "ln",
+  "exp",
+] as const;
+
+const calculatorKeyById = new Map(
+  calculatorKeys.map((calculatorKey) => [calculatorKey.id, calculatorKey]),
+);
+
+const embeddedCalculatorKeys = [
+  ...embeddedPrimaryKeyIds,
+  ...embeddedAdvancedKeyIds,
+].map((keyId) => {
+  const calculatorKey = calculatorKeyById.get(keyId);
+
+  if (!calculatorKey) {
+    throw new Error(`Missing calculator key configuration: ${keyId}`);
+  }
+
+  return calculatorKey;
+});
+
+const embeddedAdvancedKeySet = new Set<string>(embeddedAdvancedKeyIds);
+
+const embeddedQuickExamples = [
+  { label: "√144", expression: "sqrt(144)" },
+  { label: "2⁸", expression: "2^8" },
+  { label: "sin 30°", expression: "sin(30)" },
+  { label: "log 1000", expression: "log(1000)" },
+];
+
 const memoryNames: MemoryName[] = ["A", "B", "C", "X", "Y"];
 
 const constants = [
@@ -195,13 +279,20 @@ const connectedTools = tools.filter(
   (tool) => tool.slug !== "scientific-calculator",
 );
 
-export default function ScientificCalculator() {
+type ScientificCalculatorProps = {
+  variant?: "page" | "embedded";
+};
+
+export default function ScientificCalculator({
+  variant = "page",
+}: ScientificCalculatorProps) {
   const [expression, setExpression] = useState("");
   const [result, setResult] = useState("0");
   const [lastAnswer, setLastAnswer] = useState(0);
   const [angleMode, setAngleMode] = useState<AngleMode>("DEG");
   const [notation, setNotation] = useState<DisplayNotation>("NORM");
   const [shiftActive, setShiftActive] = useState(false);
+  const [showAdvancedKeys, setShowAdvancedKeys] = useState(false);
   const [overlay, setOverlay] = useState<Overlay>("none");
   const [notice, setNotice] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -259,13 +350,18 @@ export default function ScientificCalculator() {
     setJustEvaluated(false);
   }
 
-  function calculateResult() {
-    if (!expression.trim()) {
+  function evaluateExpression(
+    expressionValue: string,
+    source: "manual" | "example" = "manual",
+  ) {
+    const normalizedExpression = expressionValue.trim();
+
+    if (!normalizedExpression) {
       return;
     }
 
     try {
-      const calculation = calculateExpression(expression, {
+      const calculation = calculateExpression(normalizedExpression, {
         angleMode,
         ans: lastAnswer,
         variables: memory,
@@ -273,6 +369,7 @@ export default function ScientificCalculator() {
 
       const formattedResult = formatForDisplay(calculation.value, notation);
 
+      setExpression(normalizedExpression);
       setResult(formattedResult);
       setLastAnswer(calculation.value);
       setErrorMessage("");
@@ -280,12 +377,21 @@ export default function ScientificCalculator() {
       setShiftActive(false);
       setOverlay("none");
       setHistory((currentHistory) =>
-        [{ expression, result: formattedResult }, ...currentHistory].slice(
-          0,
-          10,
-        ),
+        [
+          { expression: normalizedExpression, result: formattedResult },
+          ...currentHistory,
+        ].slice(0, 10),
       );
+
+      if (variant === "embedded") {
+        trackCalculatorEvent("homepage_calculation", {
+          source,
+          angle_mode: angleMode,
+          notation,
+        });
+      }
     } catch (error) {
+      setExpression(normalizedExpression);
       setResult("Error");
       setErrorMessage(
         error instanceof Error
@@ -294,6 +400,15 @@ export default function ScientificCalculator() {
       );
       setJustEvaluated(false);
     }
+  }
+
+  function calculateResult() {
+    evaluateExpression(expression);
+  }
+
+  function runEmbeddedExample(label: string, expressionValue: string) {
+    trackCalculatorEvent("homepage_example_click", { label });
+    evaluateExpression(expressionValue, "example");
   }
 
   function handleKey(key: CalculatorKey) {
@@ -420,38 +535,43 @@ export default function ScientificCalculator() {
     setOverlay("none");
   }
 
-  return (
-    <main id="main-content" className={styles.page}>
-      <ToolHeader active="engineering" />
 
-      <section
-        className={styles.intro}
-        aria-labelledby="scientific-calculator-title"
-      >
-        <p>FREE SCIENTIFIC & ENGINEERING CALCULATOR ONLINE</p>
-        <h1 id="scientific-calculator-title">
-          Scientific and Engineering Calculator Online
-        </h1>
-        <span>
-          Evaluate trigonometry, powers, roots, logarithms, factorials,
-          combinations, integer functions, engineering constants, scientific
-          notation, and engineering notation directly in your browser.
-          Switch instantly between normal, scientific, and engineering notation while solving mathematical, scientific, and engineering calculations.
-        </span>
-      </section>
+  function renderCalculatorWorkspace(embedded = false) {
+    const expressionInputId = embedded
+      ? "home-scientific-expression"
+      : "expression";
+    const workspaceKeys = embedded ? embeddedCalculatorKeys : calculatorKeys;
 
+    return (
       <section
-        className={styles.calculatorStage}
-        aria-label="Scientific calculator workspace"
+        id={embedded ? "quick-solve" : undefined}
+        className={`${styles.calculatorStage} ${
+          embedded ? styles.embeddedStage : ""
+        }`}
+        aria-label={
+          embedded
+            ? "Working scientific calculator on the SolveGrid homepage"
+            : "Scientific calculator workspace"
+        }
       >
         <article
-          className={styles.device}
+          className={`${styles.device} ${
+            embedded ? styles.embeddedDevice : ""
+          } ${embedded && showAdvancedKeys ? styles.advancedExpanded : ""}`}
           aria-label="SolveGrid Scientific Calculator"
         >
           <header className={styles.deviceHeader}>
             <div>
-              <p>SCIENTIFIC & ENGINEERING WORKSPACE</p>
-              <h2>Scientific engineering calculator</h2>
+              <p>
+                {embedded
+                  ? "QUICK SCIENTIFIC CALCULATOR"
+                  : "SCIENTIFIC & ENGINEERING WORKSPACE"}
+              </p>
+              <h2>
+                {embedded
+                  ? "Calculate an expression"
+                  : "Scientific engineering calculator"}
+              </h2>
             </div>
             <div className={styles.deviceMeta}>
               <div
@@ -483,11 +603,11 @@ export default function ScientificCalculator() {
                   <span>CALC</span>
                   <span>{shiftActive ? "SHIFT READY" : "READY"}</span>
                 </div>
-                <label className={styles.displayLabel} htmlFor="expression">
+                <label className={styles.displayLabel} htmlFor={expressionInputId}>
                   EXPRESSION
                 </label>
                 <input
-                  id="expression"
+                  id={expressionInputId}
                   className={styles.expressionInput}
                   value={expression}
                   onChange={(event) => {
@@ -537,6 +657,28 @@ export default function ScientificCalculator() {
             )}
           </section>
 
+          {embedded ? (
+            <section
+              className={styles.embeddedExamples}
+              aria-label="Quick calculator examples"
+            >
+              <span>TRY</span>
+              <div>
+                {embeddedQuickExamples.map((example) => (
+                  <button
+                    key={example.label}
+                    onClick={() =>
+                      runEmbeddedExample(example.label, example.expression)
+                    }
+                    type="button"
+                  >
+                    {example.label}
+                  </button>
+                ))}
+              </div>
+            </section>
+          ) : null}
+
           <p
             className={
               errorMessage ? styles.errorMessage : styles.helperMessage
@@ -549,24 +691,107 @@ export default function ScientificCalculator() {
                 : "Use the keypad or type directly. Press Enter or = to evaluate the expression.")}
           </p>
 
+          {embedded ? (
+            <button
+              className={styles.advancedToggle}
+              aria-expanded={showAdvancedKeys}
+              onClick={() => {
+                setShowAdvancedKeys((current) => {
+                  const nextValue = !current;
+                  trackCalculatorEvent("homepage_advanced_functions_toggle", {
+                    expanded: nextValue,
+                  });
+                  return nextValue;
+                });
+              }}
+              type="button"
+            >
+              {showAdvancedKeys
+                ? "Hide advanced functions"
+                : "More scientific functions"}
+              <span aria-hidden="true">{showAdvancedKeys ? "−" : "+"}</span>
+            </button>
+          ) : null}
+
           <div
-            className={styles.keypad}
+            className={`${styles.keypad} ${
+              embedded ? styles.embeddedKeypad : ""
+            }`}
             aria-label="Scientific engineering calculator keypad"
           >
-            {calculatorKeys.map((key) => (
-              <button
-                className={`${styles.key} ${styles[key.tone]} ${key.id === "shift" && shiftActive ? styles.shiftPressed : ""}`}
-                key={key.id}
-                onClick={() => handleKey(key)}
-                type="button"
-              >
-                {key.hint && <span className={styles.keyHint}>{key.hint}</span>}
-                <span className={styles.keyLabel}>{key.label}</span>
-              </button>
-            ))}
+            {workspaceKeys.map((key) => {
+              const isEmbeddedAdvanced =
+                embedded && embeddedAdvancedKeySet.has(key.id);
+
+              return (
+                <button
+                  className={`${styles.key} ${styles[key.tone]} ${
+                    key.id === "shift" && shiftActive
+                      ? styles.shiftPressed
+                      : ""
+                  } ${
+                    isEmbeddedAdvanced ? styles.embeddedAdvancedKey : ""
+                  }`}
+                  key={key.id}
+                  onClick={() => handleKey(key)}
+                  type="button"
+                >
+                  {key.hint && (
+                    <span className={styles.keyHint}>{key.hint}</span>
+                  )}
+                  <span className={styles.keyLabel}>{key.label}</span>
+                </button>
+              );
+            })}
           </div>
         </article>
       </section>
+    );
+  }
+
+  if (variant === "embedded") {
+    return (
+      <div className={styles.embeddedWorkspace}>
+        {renderCalculatorWorkspace(true)}
+        <div className={styles.embeddedActions}>
+          <Link
+            href="/scientific-calculator"
+            onClick={() =>
+              trackCalculatorEvent("open_full_scientific_calculator")
+            }
+          >
+            Open the full scientific calculator <span>→</span>
+          </Link>
+          <p>
+            Use the complete workspace for history, examples, engineering notation,
+            and connected tools.
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <main id="main-content" className={styles.page}>
+      <ToolHeader active="engineering" />
+
+      <section
+        className={styles.intro}
+        aria-labelledby="scientific-calculator-title"
+      >
+        <p>FREE SCIENTIFIC & ENGINEERING CALCULATOR ONLINE</p>
+        <h1 id="scientific-calculator-title">
+          Scientific and Engineering Calculator Online
+        </h1>
+        <span>
+          Evaluate trigonometry, powers, roots, logarithms, factorials,
+          combinations, integer functions, engineering constants, scientific
+          notation, and engineering notation directly in your browser.
+          Switch instantly between normal, scientific, and engineering notation while solving mathematical, scientific, and engineering calculations.
+        </span>
+      </section>
+
+      {renderCalculatorWorkspace()}
 
       <section
         className={styles.quickExamplesPanel}
