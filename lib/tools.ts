@@ -1310,6 +1310,59 @@ export const tools: ToolInfo[] = [
       },
     ],
   },
+  {
+    slug: "shapiro-wilk-test-calculator",
+    name: "Shapiro-Wilk Normality Test Calculator",
+    shortName: "Shapiro-Wilk",
+    category: "statistics",
+    icon: "W",
+    title: "Shapiro-Wilk Test Calculator with Q-Q Plot",
+    description:
+      "Test whether data are normally distributed with the Shapiro-Wilk test. Get W, p value, skewness, kurtosis, a histogram, a Q-Q plot, and an APA sentence.",
+    summary:
+      "Check the normality assumption before a t-test or ANOVA, see the histogram and Q-Q plot, and get advice on what to do if normality is violated.",
+    keywords: [
+      "shapiro wilk test calculator",
+      "shapiro wilk test online",
+      "normality test calculator",
+      "test for normality online",
+      "normality assumption violated shapiro wilk",
+      "how to interpret shapiro wilk test",
+      "q-q plot online",
+    ],
+    relatedSlugs: ["statistical-test-chooser", "mann-whitney-u-test-calculator", "advanced-statistics"],
+    featured: true,
+    priority: 0.94,
+    useCases: [
+      "Check normality before a t-test or ANOVA",
+      "Decide between parametric and non-parametric tests",
+      "Report the Shapiro-Wilk result in APA style",
+    ],
+    features: [
+      "Royston (1995) algorithm, matches SPSS and R",
+      "W statistic and p value for 3–5,000 values",
+      "Skewness and excess kurtosis",
+      "Histogram and normal Q-Q plot",
+      "What-to-do-next guidance",
+    ],
+    faqs: [
+      {
+        question: "Does this give the same result as SPSS?",
+        answer:
+          "Yes. It uses Royston's algorithm, which SPSS, R (shapiro.test), and SciPy also use, so W and p agree to several decimal places.",
+      },
+      {
+        question: "My Shapiro-Wilk test is significant. Can I still use a t-test?",
+        answer:
+          "With large samples (roughly 30+ per group) and only mild skew, t-tests are usually robust. With small samples or strong skew, use the non-parametric alternative such as the Mann-Whitney U test.",
+      },
+      {
+        question: "Should I test all my data together?",
+        answer:
+          "No. Test each group separately for t-tests and ANOVA, the differences for a paired t-test, and the residuals for regression.",
+      },
+    ],
+  },
 ];
 
 export function getToolPath(tool: Pick<ToolInfo, "slug"> | string) {

@@ -60,6 +60,7 @@ function specialCandidates(query) {
     [/slovin|yamane|sample size/, ["/sample-size-calculator", "/guides/slovin-formula-sample-size"]],
     [/cronbach|reliability/, ["/cronbach-alpha-calculator"]],
     [/likert|weighted mean/, ["/likert-scale-calculator", "/guides/likert-scale-interpretation"]],
+    [/shapiro|normality/, ["/shapiro-wilk-test-calculator"]],
     [/mann.whitney|rank sum/, ["/mann-whitney-u-test-calculator"]],
     [/chi.square|cramer/, ["/chi-square-calculator"]],
     [/statistical test|which test/, ["/statistical-test-chooser", "/guides/choose-a-statistical-test"]],

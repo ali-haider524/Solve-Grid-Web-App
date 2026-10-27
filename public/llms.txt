@@ -2,7 +2,7 @@
 
 > SolveGrid is an independent browser-based calculator platform focused on research statistics for theses and surveys (sample size, Cronbach's alpha, Likert analysis, t-tests, ANOVA, correlation), with supporting math, engineering, and numerical-methods tools.
 
-SolveGrid provides 18 public tools. Most current calculations run directly in the browser and do not require an account. Tool pages are connected to method guides, related calculators, assumptions, and scope notes where relevant.
+SolveGrid provides 19 public tools. Most current calculations run directly in the browser and do not require an account. Tool pages are connected to method guides, related calculators, assumptions, and scope notes where relevant.
 
 ## Main directories
 
@@ -19,6 +19,7 @@ SolveGrid provides 18 public tools. Most current calculations run directly in th
 - [Statistical Test Chooser](https://solvegrid.online/statistical-test-chooser)
 - [Chi-Square Test Calculator](https://solvegrid.online/chi-square-calculator)
 - [Mann-Whitney U Test Calculator](https://solvegrid.online/mann-whitney-u-test-calculator)
+- [Shapiro-Wilk Normality Test Calculator](https://solvegrid.online/shapiro-wilk-test-calculator)
 - [Sample Size Calculator (Slovin, Yamane, Cochran)](https://solvegrid.online/sample-size-calculator)
 - [Cronbach's Alpha Calculator](https://solvegrid.online/cronbach-alpha-calculator)
 - [Likert Scale Weighted Mean Calculator](https://solvegrid.online/likert-scale-calculator)

@@ -36,7 +36,7 @@ export default function ChooseStatisticalTestGuide() {
         },
         {
           title: "Check the assumptions before you run it",
-          body: "Look at a histogram or a Shapiro-Wilk test for normality, check for outliers, and confirm expected counts of at least 5 for chi-square. If an assumption fails, switch to the non-parametric alternative.",
+          body: "Look at a histogram or run a Shapiro-Wilk test for normality, check for outliers, and confirm expected counts of at least 5 for chi-square. If an assumption fails, switch to the non-parametric alternative.",
         },
         {
           title: "Report the test, statistic, degrees of freedom, p value, and effect size",
@@ -100,6 +100,11 @@ export default function ChooseStatisticalTestGuide() {
           label: "Mann-Whitney U Calculator",
           href: "/mann-whitney-u-test-calculator",
           description: "Compare two independent groups on ordinal or skewed data with exact p values and effect size.",
+        },
+        {
+          label: "Shapiro-Wilk Normality Test",
+          href: "/shapiro-wilk-test-calculator",
+          description: "Check whether your data are normal before choosing a parametric or non-parametric test.",
         },
         {
           label: "Advanced Statistics Lab",

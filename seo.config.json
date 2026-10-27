@@ -20,6 +20,7 @@
     "/statistical-test-chooser",
     "/chi-square-calculator",
     "/mann-whitney-u-test-calculator",
+    "/shapiro-wilk-test-calculator",
     "/research-statistics",
     "/sample-size-calculator",
     "/cronbach-alpha-calculator",
@@ -181,6 +182,13 @@
           "rank sum"
         ],
         "page": "/mann-whitney-u-test-calculator"
+      },
+      {
+        "contains": [
+          "shapiro",
+          "normality"
+        ],
+        "page": "/shapiro-wilk-test-calculator"
       }
     ]
   }

@@ -648,3 +648,111 @@ export function mannWhitney(group1: number[], group2: number[]): MannWhitneyResu
     ties,
   };
 }
+
+/* ---------------- Shapiro-Wilk normality test (Royston, 1995) ---------------- */
+
+/** Inverse of the standard normal CDF (Acklam's algorithm, relative error < 1.2e-9 after refinement). */
+export function normalQuantile(p: number) {
+  if (p <= 0 || p >= 1) throw new Error("Probability must be between 0 and 1.");
+  const a = [-3.969683028665376e1, 2.209460984245205e2, -2.759285104469687e2, 1.38357751867269e2, -3.066479806614716e1, 2.506628277459239];
+  const b = [-5.447609879822406e1, 1.615858368580409e2, -1.556989798598866e2, 6.680131188771972e1, -1.328068155288572e1];
+  const c = [-7.784894002430293e-3, -3.223964580411365e-1, -2.400758277161838, -2.549732539343734, 4.374664141464968, 2.938163982698783];
+  const d = [7.784695709041462e-3, 3.224671290700398e-1, 2.445134137142996, 3.754408661907416];
+  const low = 0.02425;
+  let x: number;
+  if (p < low) {
+    const q = Math.sqrt(-2 * Math.log(p));
+    x = (((((c[0] * q + c[1]) * q + c[2]) * q + c[3]) * q + c[4]) * q + c[5]) / ((((d[0] * q + d[1]) * q + d[2]) * q + d[3]) * q + 1);
+  } else if (p <= 1 - low) {
+    const q = p - 0.5;
+    const r = q * q;
+    x = ((((((a[0] * r + a[1]) * r + a[2]) * r + a[3]) * r + a[4]) * r + a[5]) * q) / (((((b[0] * r + b[1]) * r + b[2]) * r + b[3]) * r + b[4]) * r + 1);
+  } else {
+    const q = Math.sqrt(-2 * Math.log(1 - p));
+    x = -(((((c[0] * q + c[1]) * q + c[2]) * q + c[3]) * q + c[4]) * q + c[5]) / ((((d[0] * q + d[1]) * q + d[2]) * q + d[3]) * q + 1);
+  }
+  // One Halley refinement step.
+  const e = 1 - normalSf(x) - p;
+  const u = e * Math.sqrt(2 * Math.PI) * Math.exp((x * x) / 2);
+  return x - u / (1 + (x * u) / 2);
+}
+
+export type ShapiroResult = {
+  n: number;
+  w: number;
+  p: number;
+  mean: number;
+  sd: number;
+  skewness: number;
+  kurtosis: number;
+};
+
+export function shapiroWilk(values: number[]): ShapiroResult {
+  const n = values.length;
+  if (n < 3) throw new Error("The Shapiro-Wilk test needs at least 3 values.");
+  if (n > 5000) throw new Error("The Shapiro-Wilk test is defined here for up to 5,000 values.");
+  const x = [...values].sort((p, q) => p - q);
+  const avg = x.reduce((s, v) => s + v, 0) / n;
+  const ss = x.reduce((s, v) => s + (v - avg) ** 2, 0);
+  if (ss === 0) throw new Error("All values are identical, so normality cannot be tested.");
+
+  const a = new Array<number>(n).fill(0);
+  if (n === 3) {
+    a[0] = -Math.SQRT1_2;
+    a[2] = Math.SQRT1_2;
+  } else {
+    const m = Array.from({ length: n }, (_, i) => normalQuantile((i + 1 - 0.375) / (n + 0.25)));
+    const mm = m.reduce((s, v) => s + v * v, 0);
+    const u = 1 / Math.sqrt(n);
+    const poly = (c: number[], t: number) => c.reduce((s, coef, i) => s + coef * t ** i, 0);
+    const an = poly([0, 0.221157, -0.147981, -2.07119, 4.434685, -2.706056], u) + m[n - 1] / Math.sqrt(mm);
+    if (n > 5) {
+      const an1 = poly([0, 0.042981, -0.293762, -1.752461, 5.682633, -3.582633], u) + m[n - 2] / Math.sqrt(mm);
+      const phi = (mm - 2 * m[n - 1] ** 2 - 2 * m[n - 2] ** 2) / (1 - 2 * an ** 2 - 2 * an1 ** 2);
+      for (let i = 2; i < n - 2; i += 1) a[i] = m[i] / Math.sqrt(phi);
+      a[n - 1] = an;
+      a[n - 2] = an1;
+      a[0] = -an;
+      a[1] = -an1;
+    } else {
+      const phi = (mm - 2 * m[n - 1] ** 2) / (1 - 2 * an ** 2);
+      for (let i = 1; i < n - 1; i += 1) a[i] = m[i] / Math.sqrt(phi);
+      a[n - 1] = an;
+      a[0] = -an;
+    }
+  }
+
+  const num = a.reduce((s, coef, i) => s + coef * x[i], 0) ** 2;
+  const w = Math.min(1, num / ss);
+
+  let p: number;
+  if (n === 3) {
+    p = Math.max(0, Math.min(1, (6 / Math.PI) * (Math.asin(Math.sqrt(w)) - Math.asin(Math.sqrt(0.75)))));
+  } else if (n <= 11) {
+    const gamma = -2.273 + 0.459 * n;
+    const mu = 0.544 - 0.39978 * n + 0.025054 * n ** 2 - 0.0006714 * n ** 3;
+    const sigma = Math.exp(1.3822 - 0.77857 * n + 0.062767 * n ** 2 - 0.0020322 * n ** 3);
+    const z = (-Math.log(gamma - Math.log(1 - w)) - mu) / sigma;
+    p = normalSf(z);
+  } else {
+    const ln = Math.log(n);
+    const mu = -1.5861 - 0.31082 * ln - 0.083751 * ln ** 2 + 0.0038915 * ln ** 3;
+    const sigma = Math.exp(-0.4803 - 0.082676 * ln + 0.0030302 * ln ** 2);
+    const z = (Math.log(1 - w) - mu) / sigma;
+    p = normalSf(z);
+  }
+
+  const sd = Math.sqrt(ss / (n - 1));
+  const m2 = ss / n;
+  const m3 = x.reduce((s, v) => s + (v - avg) ** 3, 0) / n;
+  const m4 = x.reduce((s, v) => s + (v - avg) ** 4, 0) / n;
+  return {
+    n,
+    w,
+    p: Math.max(0, Math.min(1, p)),
+    mean: avg,
+    sd,
+    skewness: m3 / m2 ** 1.5,
+    kurtosis: m4 / m2 ** 2 - 3,
+  };
+}

@@ -109,8 +109,9 @@ export default function StatisticalTestChooser() {
             <Choice label="4. ARE THE GROUPS THE SAME PEOPLE OR DIFFERENT PEOPLE?" options={designs} value={answers.design} onChange={(v) => set("design", v)} />
           ) : null}
           <p className={styles.sectionNote}>
-            Not sure if your data are normal? Likert items, ranks, and small skewed samples count as
-            &quot;ordinal / skewed&quot;. Summed scale scores from many items are often treated as numeric.
+            Not sure if your data are normal? <Link href="/shapiro-wilk-test-calculator">Check with the Shapiro-Wilk test</Link>.
+            Likert items, ranks, and small skewed samples count as &quot;ordinal / skewed&quot;. Summed scale scores
+            from many items are often treated as numeric.
           </p>
         </article>
         <aside className={styles.resultCard} aria-live="polite">
