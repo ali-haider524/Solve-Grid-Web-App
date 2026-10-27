@@ -22,6 +22,8 @@ export type Recommendation = {
   toolLabel?: string;
 };
 
+const wil = { toolHref: "/wilcoxon-signed-rank-test-calculator", toolLabel: "Run it in the Wilcoxon Signed-Rank Calculator" };
+const kw = { toolHref: "/kruskal-wallis-test-calculator", toolLabel: "Run it in the Kruskal-Wallis Calculator" };
 const mw = { toolHref: "/mann-whitney-u-test-calculator", toolLabel: "Run it in the Mann-Whitney U Calculator" };
 const chi = { toolHref: "/chi-square-calculator", toolLabel: "Run it in the Chi-Square Calculator" };
 const advanced = { toolHref: "/advanced-statistics", toolLabel: "Run it in the Advanced Statistics Lab" };
@@ -110,6 +112,7 @@ export function chooseTest(a: Answers): Recommendation {
             why: "The same participants were measured twice, and the outcome is ordinal or not normal.",
             assumptions: ["Paired measurements", "Outcome at least ordinal", "Differences roughly symmetric"],
             report: "A Wilcoxon signed-rank test indicated that [outcome] was [significantly / not significantly] higher at [time 2] (Mdn = X) than at [time 1] (Mdn = X), z = X.XX, p = .XXX.",
+            ...wil,
           };
     }
     return a.outcome === "normal"
@@ -161,5 +164,6 @@ export function chooseTest(a: Answers): Recommendation {
         why: "You are comparing three or more separate groups, and the outcome is ordinal or not normal.",
         assumptions: ["Independent groups", "Outcome at least ordinal", "Similar distribution shapes if you want to compare medians"],
         report: "A Kruskal-Wallis H test showed a [significant / non-significant] difference in [outcome] between groups, H(df) = X.XX, p = .XXX. [Follow with Dunn's pairwise tests if significant.]",
+        ...kw,
       };
 }

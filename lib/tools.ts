@@ -1277,7 +1277,7 @@ export const tools: ToolInfo[] = [
       "mann whitney effect size",
       "non parametric test two groups",
     ],
-    relatedSlugs: ["statistical-test-chooser", "likert-scale-calculator", "advanced-statistics"],
+    relatedSlugs: ["wilcoxon-signed-rank-test-calculator", "kruskal-wallis-test-calculator", "effect-size-calculator"],
     featured: true,
     priority: 0.94,
     useCases: [
@@ -1465,6 +1465,108 @@ export const tools: ToolInfo[] = [
       {
         question: "Can I calculate an effect size from a p value alone?",
         answer: "Not reliably. You need the test statistic (t, F, or z) and the sample sizes, or the means and SDs.",
+      },
+    ],
+  },
+  {
+    slug: "wilcoxon-signed-rank-test-calculator",
+    name: "Wilcoxon Signed-Rank Test Calculator",
+    shortName: "Wilcoxon signed-rank",
+    category: "statistics",
+    icon: "T",
+    title: "Wilcoxon Signed-Rank Test Calculator (Paired)",
+    description:
+      "Run a Wilcoxon signed-rank test on paired before/after data. Get T, W+, W−, z, exact or approximate p, medians, effect size r, and an APA sentence.",
+    summary:
+      "The non-parametric alternative to the paired t-test for pre-test/post-test and repeated measurements, with exact p values for small samples.",
+    keywords: [
+      "wilcoxon signed rank test calculator",
+      "wilcoxon test calculator",
+      "wilcoxon signed rank test online",
+      "paired non parametric test",
+      "wilcoxon vs mann whitney",
+      "pre test post test non parametric",
+    ],
+    relatedSlugs: ["mann-whitney-u-test-calculator", "statistical-test-chooser", "effect-size-calculator"],
+    featured: true,
+    priority: 0.93,
+    useCases: [
+      "Compare pre-test and post-test scores from the same students",
+      "Analyse paired Likert ratings",
+      "Report T, z, p, and r in APA style",
+    ],
+    features: [
+      "Exact p value for small samples without ties",
+      "Tie-corrected normal approximation (matches SPSS)",
+      "Zero differences dropped automatically",
+      "Medians and effect size r",
+      "APA report sentence",
+    ],
+    faqs: [
+      {
+        question: "What is the difference between Wilcoxon and Mann-Whitney?",
+        answer:
+          "The Wilcoxon signed-rank test is for paired data from the same people. The Mann-Whitney U test is for two independent groups of different people.",
+      },
+      {
+        question: "What happens to zero differences?",
+        answer: "Pairs with no change are dropped before ranking, as in SPSS and R. The number of pairs used is shown in the result.",
+      },
+      {
+        question: "Can I use it for Likert scale data?",
+        answer: "Yes. It is a standard choice for comparing two paired Likert ratings, such as before and after an intervention.",
+      },
+    ],
+  },
+  {
+    slug: "kruskal-wallis-test-calculator",
+    name: "Kruskal-Wallis Test Calculator",
+    shortName: "Kruskal-Wallis",
+    category: "statistics",
+    icon: "H",
+    title: "Kruskal-Wallis Test Calculator with Dunn Post Hoc",
+    description:
+      "Compare 3+ independent groups with the Kruskal-Wallis H test. Get H, df, p value, epsilon squared, medians, mean ranks, Dunn post hoc tests, and APA text.",
+    summary:
+      "The non-parametric alternative to one-way ANOVA, with Bonferroni-adjusted Dunn comparisons that show which groups differ.",
+    keywords: [
+      "kruskal wallis test calculator",
+      "kruskal wallis h test calculator",
+      "kruskal wallis calculator online",
+      "dunn test calculator",
+      "non parametric anova calculator",
+      "kruskal wallis post hoc",
+    ],
+    relatedSlugs: ["mann-whitney-u-test-calculator", "statistical-test-chooser", "advanced-statistics"],
+    featured: true,
+    priority: 0.93,
+    useCases: [
+      "Compare three or more groups on a Likert item",
+      "Replace one-way ANOVA when normality fails",
+      "Find which pairs differ with Dunn's test",
+    ],
+    features: [
+      "Tie-corrected H statistic",
+      "Epsilon squared effect size",
+      "Medians and mean ranks per group",
+      "Dunn post hoc with Bonferroni correction",
+      "APA report sentence",
+    ],
+    faqs: [
+      {
+        question: "What post hoc test follows Kruskal-Wallis?",
+        answer:
+          "Dunn's test is the standard choice. This calculator runs it for every pair and applies the Bonferroni correction.",
+      },
+      {
+        question: "Does Kruskal-Wallis compare medians?",
+        answer:
+          "It compares mean ranks. If the groups have similar distribution shapes, a significant result can be read as a difference in medians.",
+      },
+      {
+        question: "Kruskal-Wallis or one-way ANOVA?",
+        answer:
+          "Use one-way ANOVA when each group is roughly normal with similar variances. Use Kruskal-Wallis for ordinal data, small groups, or clear skew.",
       },
     ],
   },

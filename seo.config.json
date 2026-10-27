@@ -22,6 +22,8 @@
     "/mann-whitney-u-test-calculator",
     "/shapiro-wilk-test-calculator",
     "/effect-size-calculator",
+    "/wilcoxon-signed-rank-test-calculator",
+    "/kruskal-wallis-test-calculator",
     "/cohens-kappa-calculator",
     "/guides/how-to-report-anova-apa",
     "/guides/how-to-report-t-test-apa",
@@ -224,6 +226,20 @@
           "eta squared"
         ],
         "page": "/effect-size-calculator"
+      },
+      {
+        "contains": [
+          "wilcoxon",
+          "signed rank"
+        ],
+        "page": "/wilcoxon-signed-rank-test-calculator"
+      },
+      {
+        "contains": [
+          "kruskal",
+          "dunn"
+        ],
+        "page": "/kruskal-wallis-test-calculator"
       }
     ]
   }

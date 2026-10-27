@@ -939,3 +939,156 @@ export function effectFromZ(z: number, n: number) {
   if (!Number.isFinite(z) || !(n >= 2)) throw new Error("Enter z and the total N.");
   return { r: z / Math.sqrt(n) };
 }
+
+/* ---------------- Rank helpers ---------------- */
+
+function averageRanks(values: number[]) {
+  const order = values.map((v, i) => ({ v, i })).sort((a, b) => a.v - b.v);
+  const ranks = new Array<number>(values.length);
+  let tieTerm = 0;
+  for (let i = 0; i < order.length; ) {
+    let j = i;
+    while (j + 1 < order.length && order[j + 1].v === order[i].v) j += 1;
+    const avg = (i + j) / 2 + 1;
+    for (let k = i; k <= j; k += 1) ranks[order[k].i] = avg;
+    const t = j - i + 1;
+    if (t > 1) tieTerm += t ** 3 - t;
+    i = j + 1;
+  }
+  return { ranks, tieTerm };
+}
+
+/* ---------------- Wilcoxon signed-rank ---------------- */
+
+export type WilcoxonResult = {
+  nPairs: number;
+  nUsed: number;
+  zeros: number;
+  wPlus: number;
+  wMinus: number;
+  t: number;
+  z: number;
+  p: number;
+  exact: boolean;
+  r: number;
+  medianBefore: number;
+  medianAfter: number;
+  medianDiff: number;
+  ties: boolean;
+};
+
+function exactSignedRankP(t: number, n: number) {
+  const max = (n * (n + 1)) / 2;
+  let dist = new Array<number>(max + 1).fill(0);
+  dist[0] = 1;
+  for (let k = 1; k <= n; k += 1) {
+    const next = dist.slice();
+    for (let s = k; s <= max; s += 1) next[s] += dist[s - k];
+    dist = next;
+  }
+  const total = 2 ** n;
+  let cum = 0;
+  for (let s = 0; s <= Math.floor(t); s += 1) cum += dist[s];
+  return Math.min(1, (2 * cum) / total);
+}
+
+/** Wilcoxon signed-rank test for paired data (zero differences dropped, as in SPSS and R). */
+export function wilcoxonSignedRank(before: number[], after: number[]): WilcoxonResult {
+  if (before.length !== after.length) {
+    throw new Error(`Both columns need the same number of values (paired data): ${before.length} vs ${after.length}.`);
+  }
+  const diffs = after.map((a, i) => a - before[i]);
+  const nonZero = diffs.filter((d) => d !== 0);
+  const n = nonZero.length;
+  if (n < 2) throw new Error("At least 2 pairs with a non-zero difference are needed.");
+  const { ranks, tieTerm } = averageRanks(nonZero.map(Math.abs));
+  let wPlus = 0;
+  nonZero.forEach((d, i) => {
+    if (d > 0) wPlus += ranks[i];
+  });
+  const total = (n * (n + 1)) / 2;
+  const wMinus = total - wPlus;
+  const t = Math.min(wPlus, wMinus);
+  const mu = total / 2;
+  const sigma = Math.sqrt((n * (n + 1) * (2 * n + 1)) / 24 - tieTerm / 48);
+  const z = sigma > 0 ? (wPlus - mu) / sigma : 0;
+  const ties = tieTerm > 0;
+  const exact = !ties && n <= 50 && diffs.length === n;
+  const p = exact ? exactSignedRankP(t, n) : Math.min(1, 2 * normalSf(Math.abs(z)));
+  return {
+    nPairs: diffs.length,
+    nUsed: n,
+    zeros: diffs.length - n,
+    wPlus,
+    wMinus,
+    t,
+    z,
+    p,
+    exact,
+    r: Math.abs(z) / Math.sqrt(n),
+    medianBefore: median(before),
+    medianAfter: median(after),
+    medianDiff: median(diffs),
+    ties,
+  };
+}
+
+/* ---------------- Kruskal-Wallis H ---------------- */
+
+export type KruskalGroup = { name: string; n: number; median: number; meanRank: number };
+export type DunnComparison = { a: string; b: string; z: number; p: number; pAdj: number };
+export type KruskalResult = {
+  h: number;
+  df: number;
+  p: number;
+  n: number;
+  epsilonSquared: number;
+  groups: KruskalGroup[];
+  dunn: DunnComparison[];
+};
+
+export function kruskalWallis(groups: Array<{ name: string; values: number[] }>): KruskalResult {
+  const k = groups.length;
+  if (k < 2) throw new Error("Enter at least 2 groups (3 or more for a typical Kruskal-Wallis test).");
+  groups.forEach((g) => {
+    if (g.values.length < 2) throw new Error(`${g.name} needs at least 2 values.`);
+  });
+  const all = groups.flatMap((g) => g.values);
+  const N = all.length;
+  const { ranks, tieTerm } = averageRanks(all);
+  let offset = 0;
+  const rankSums = groups.map((g) => {
+    const sum = ranks.slice(offset, offset + g.values.length).reduce((s, r) => s + r, 0);
+    offset += g.values.length;
+    return sum;
+  });
+  let h = (12 / (N * (N + 1))) * rankSums.reduce((s, rs, i) => s + (rs * rs) / groups[i].values.length, 0) - 3 * (N + 1);
+  const correction = 1 - tieTerm / (N ** 3 - N);
+  if (correction > 0) h /= correction;
+  const df = k - 1;
+  const summary = groups.map((g, i) => ({
+    name: g.name,
+    n: g.values.length,
+    median: median(g.values),
+    meanRank: rankSums[i] / g.values.length,
+  }));
+  const pairs = (k * (k - 1)) / 2;
+  const base = (N * (N + 1)) / 12 - tieTerm / (12 * (N - 1));
+  const dunn: DunnComparison[] = [];
+  for (let i = 0; i < k; i += 1) {
+    for (let j = i + 1; j < k; j += 1) {
+      const z = (summary[i].meanRank - summary[j].meanRank) / Math.sqrt(base * (1 / summary[i].n + 1 / summary[j].n));
+      const p = Math.min(1, 2 * normalSf(Math.abs(z)));
+      dunn.push({ a: summary[i].name, b: summary[j].name, z, p, pAdj: Math.min(1, p * pairs) });
+    }
+  }
+  return {
+    h,
+    df,
+    p: chiSquarePValue(h, df),
+    n: N,
+    epsilonSquared: h / ((N * N - 1) / (N + 1)),
+    groups: summary,
+    dunn,
+  };
+}

@@ -43,6 +43,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "shapiro-wilk-test-calculator": "2026-10-28",
     "cohens-kappa-calculator": "2026-10-28",
     "effect-size-calculator": "2026-10-28",
+    "wilcoxon-signed-rank-test-calculator": "2026-10-28",
+    "kruskal-wallis-test-calculator": "2026-10-28",
     "statistics-calculator": "2026-10-28",
     "advanced-statistics": "2026-10-28",
     "guides/choose-a-statistical-test": "2026-10-28",

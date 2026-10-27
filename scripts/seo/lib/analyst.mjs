@@ -65,6 +65,8 @@ function specialCandidates(query) {
     [/report (an )?anova/, ["/guides/how-to-report-anova-apa"]],
     [/report (a )?t.?test/, ["/guides/how-to-report-t-test-apa"]],
     [/shapiro|normality/, ["/shapiro-wilk-test-calculator"]],
+    [/wilcoxon|signed.rank/, ["/wilcoxon-signed-rank-test-calculator"]],
+    [/kruskal|dunn/, ["/kruskal-wallis-test-calculator"]],
     [/mann.whitney|rank sum/, ["/mann-whitney-u-test-calculator"]],
     [/chi.square|cramer/, ["/chi-square-calculator"]],
     [/statistical test|which test/, ["/statistical-test-chooser", "/guides/choose-a-statistical-test"]],

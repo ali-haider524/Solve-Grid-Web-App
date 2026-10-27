@@ -102,6 +102,11 @@ export default function ChooseStatisticalTestGuide() {
           description: "Compare two independent groups on ordinal or skewed data with exact p values and effect size.",
         },
         {
+          label: "Wilcoxon & Kruskal-Wallis Calculators",
+          href: "/kruskal-wallis-test-calculator",
+          description: "Non-parametric tests for paired data (Wilcoxon) and three or more groups (Kruskal-Wallis, with Dunn post hoc).",
+        },
+        {
           label: "Shapiro-Wilk Normality Test",
           href: "/shapiro-wilk-test-calculator",
           description: "Check whether your data are normal before choosing a parametric or non-parametric test.",

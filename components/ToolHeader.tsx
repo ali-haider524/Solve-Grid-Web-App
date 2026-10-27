@@ -45,6 +45,8 @@ const menuToolSlugsByCategory: Record<ToolCategory, string[]> = {
     "likert-scale-calculator",
     "chi-square-calculator",
     "mann-whitney-u-test-calculator",
+    "wilcoxon-signed-rank-test-calculator",
+    "kruskal-wallis-test-calculator",
     "shapiro-wilk-test-calculator",
     "cohens-kappa-calculator",
     "effect-size-calculator",
