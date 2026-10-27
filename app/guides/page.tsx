@@ -14,25 +14,23 @@ import styles from "./guides.module.css";
 export const metadata: Metadata = {
   title: "Calculator Guides – Formulas, Methods & Worked Examples",
   description:
-    "Learn equation solving, graphing, matrices, statistics, engineering notation, unit conversion, finance formulas, numerical methods, and calculator workflows with practical SolveGrid guides.",
+    "Learn equation solving, graphing, matrices, research statistics, sample size, Likert analysis, engineering notation, unit conversion, numerical methods, and calculator workflows with practical SolveGrid guides.",
   alternates: { canonical: "/guides" },
   openGraph: {
     type: "website",
     title: "Calculator Guides – Formulas, Methods & Worked Examples",
     description:
-      "Browse practical guides for algebra, graphing, engineering calculations, statistics, finance, and numerical methods.",
+      "Browse practical guides for algebra, graphing, research statistics, engineering calculations, and numerical methods.",
     url: "/guides",
   },
 };
 
 const topicOrder: GuideTopic[] = [
+  "statistics",
+  "research",
   "algebra",
   "graphing",
   "engineering",
-  "statistics",
-  "research",
-  "finance",
-  "everyday",
 ];
 
 export default function GuidesPage() {
@@ -85,8 +83,8 @@ export default function GuidesPage() {
         <h1>Learn the method, then use the right tool.</h1>
         <span>
           Browse practical explanations, formulas, worked examples, and step-by-step
-          workflows for algebra, graphing, engineering, statistics, finance, and
-          numerical analysis.
+          workflows for research statistics, sample size, questionnaire analysis,
+          algebra, graphing, engineering, and numerical analysis.
         </span>
         <div className={styles.heroLinks}>
           <Link href="/tools">Browse all calculators</Link>

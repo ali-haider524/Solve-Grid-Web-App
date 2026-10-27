@@ -1,0 +1,169 @@
+{
+  "siteUrl": "https://solvegrid.online",
+  "searchConsoleSiteUrl": "sc-domain:solvegrid.online",
+  "languageCode": "en-US",
+  "searchType": "web",
+  "dataLagDays": 3,
+  "reportTimezone": "Asia/Karachi",
+  "comparisons": [
+    {
+      "id": "7d",
+      "days": 7
+    },
+    {
+      "id": "28d",
+      "days": 28
+    }
+  ],
+  "priorityPages": [
+    "/",
+    "/research-statistics",
+    "/sample-size-calculator",
+    "/cronbach-alpha-calculator",
+    "/likert-scale-calculator",
+    "/advanced-statistics",
+    "/guides/choose-a-statistical-test",
+    "/optimization-lab",
+    "/equation-solver",
+    "/graphing-calculator",
+    "/matrix-calculator",
+    "/scientific-calculator",
+    "/statistics-calculator",
+    "/guides/plot-multiple-equations",
+    "/guides/standard-deviation-formula",
+    "/guides/matrix-inverse-and-determinant",
+    "/guides/engineering-notation-and-scientific-notation"
+  ],
+  "pagespeedPages": [
+    "/",
+    "/optimization-lab",
+    "/equation-solver",
+    "/graphing-calculator",
+    "/matrix-calculator"
+  ],
+  "indexingPages": [
+    "/",
+    "/optimization-lab",
+    "/equation-solver",
+    "/graphing-calculator",
+    "/matrix-calculator",
+    "/scientific-calculator",
+    "/statistics-calculator",
+    "/guides/plot-multiple-equations",
+    "/guides/standard-deviation-formula",
+    "/guides/matrix-inverse-and-determinant"
+  ],
+  "thresholds": {
+    "minimumOpportunityImpressions": 5,
+    "minimumLossBaselineImpressions": 10,
+    "impressionLossPercent": 40,
+    "impressionGainPercent": 50,
+    "positionLoss": 10,
+    "lowCtrPercent": 1,
+    "protectGainPercent": 50,
+    "cannibalizationMinimumImpressions": 2
+  },
+  "manualCsv": {
+    "queryPageHints": [
+      {
+        "contains": [
+          "optimization",
+          "linear programming",
+          "lp problem"
+        ],
+        "page": "/optimization-lab"
+      },
+      {
+        "contains": [
+          "standard deviation",
+          "variance"
+        ],
+        "page": "/guides/standard-deviation-formula"
+      },
+      {
+        "contains": [
+          "matrix rank",
+          "rank of matrix"
+        ],
+        "page": "/matrix-calculator"
+      },
+      {
+        "contains": [
+          "determinant",
+          "inverse matrix"
+        ],
+        "page": "/guides/matrix-inverse-and-determinant"
+      },
+      {
+        "contains": [
+          "gaussian elimination",
+          "gaussian reduction"
+        ],
+        "page": "/guides/gaussian-elimination-for-linear-systems"
+      },
+      {
+        "contains": [
+          "plot equation",
+          "graph solver",
+          "equation grapher",
+          "plot equations"
+        ],
+        "page": "/graphing-calculator"
+      },
+      {
+        "contains": [
+          "equation solver"
+        ],
+        "page": "/equation-solver"
+      },
+      {
+        "contains": [
+          "engineering notation",
+          "scientific notation"
+        ],
+        "page": "/guides/engineering-notation-and-scientific-notation"
+      },
+      {
+        "contains": [
+          "engineering calculator"
+        ],
+        "page": "/scientific-calculator"
+      },
+      {
+        "contains": [
+          "conversion formula",
+          "unit conversion"
+        ],
+        "page": "/unit-converter"
+      },
+      {
+        "contains": [
+          "slovin",
+          "yamane",
+          "sample size"
+        ],
+        "page": "/sample-size-calculator"
+      },
+      {
+        "contains": [
+          "cronbach",
+          "reliability"
+        ],
+        "page": "/cronbach-alpha-calculator"
+      },
+      {
+        "contains": [
+          "likert",
+          "weighted mean"
+        ],
+        "page": "/likert-scale-calculator"
+      },
+      {
+        "contains": [
+          "statistical test"
+        ],
+        "page": "/guides/choose-a-statistical-test"
+      }
+    ]
+  }
+}

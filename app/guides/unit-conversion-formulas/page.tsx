@@ -74,11 +74,6 @@ export default function UnitConversionFormulasGuide() {
           href: "/scientific-calculator",
           description: "Use scientific notation, engineering notation, constants, powers, roots, logarithms, and trigonometry.",
         },
-        {
-          label: "Distance Calculator",
-          href: "/distance-calculator",
-          description: "Calculate coordinate distance, midpoint, speed, time, and travel distance.",
-        },
       ]}
     />
   );

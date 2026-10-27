@@ -15,7 +15,7 @@ export default function ToolFooter() {
               <span>SolveGrid</span>
             </Link>
             <p className={styles.footerIntro}>
-              Free browser-based math, graphing, algebra, engineering, and everyday calculation tools.
+              Free browser-based research statistics, math, and numerical-methods tools.
             </p>
           </div>
 

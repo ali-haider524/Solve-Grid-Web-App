@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import GuideArticle from "../../../components/GuideArticle";
 
 export const metadata: Metadata = {
-  title: "Standard Deviation Formula – Sample vs Population | SolveGrid",
+  title: "Standard Deviation Formula – Sample vs Population",
   description:
     "Learn the sample standard deviation formula, population standard deviation formula, variance, mean deviations, and when to use n or n − 1 with worked examples.",
   alternates: { canonical: "/guides/standard-deviation-formula" },

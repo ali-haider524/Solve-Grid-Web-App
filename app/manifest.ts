@@ -4,7 +4,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "SolveGrid",
     short_name: "SolveGrid",
-    description: "Free online math, graphing, engineering, and everyday calculators.",
+    description: "Free statistics calculators for thesis and survey research.",
     start_url: "/",
     display: "standalone",
     background_color: "#f4f7fc",

@@ -3,7 +3,7 @@ export const siteName = "SolveGrid";
 export const canonicalProductionUrl = "https://solvegrid.online";
 
 export const siteDescription =
-  "Free online math, graphing, engineering, research simulation, finance, and everyday calculation tools for students, educators, engineers, and professionals.";
+  "Free statistics calculators for thesis and survey research — sample size, Cronbach's alpha, Likert analysis, t-tests, ANOVA — plus supporting math and numerical-methods tools.";
 
 function normalizeSiteUrl(value: string) {
   try {

@@ -1,21 +1,25 @@
 # SolveGrid
 
-> SolveGrid is an independent browser-based calculator platform for math, engineering, research methods, finance, unit conversion, and everyday calculation tasks.
+> SolveGrid is an independent browser-based calculator platform focused on research statistics for theses and surveys (sample size, Cronbach's alpha, Likert analysis, t-tests, ANOVA, correlation), with supporting math, engineering, and numerical-methods tools.
 
-SolveGrid provides 21 public tools. Most current calculations run directly in the browser and do not require an account. Tool pages are connected to method guides, related calculators, assumptions, and scope notes where relevant.
+SolveGrid provides 15 public tools. Most current calculations run directly in the browser and do not require an account. Tool pages are connected to method guides, related calculators, assumptions, and scope notes where relevant.
 
 ## Main directories
 
-- [Homepage](https://solvegrid.online/): Working scientific calculator, featured tools, categories, guides, FAQs, and platform information.
+- [Homepage](https://solvegrid.online/): Research statistics workflow, featured tools, categories, guides, FAQs, and platform information.
 - [All calculators](https://solvegrid.online/tools): Directory of every public SolveGrid calculator and research workspace.
-- [Calculation guides](https://solvegrid.online/guides): Formula, method, notation, graphing, matrix, statistics, finance, and numerical-method guides.
+- [Calculation guides](https://solvegrid.online/guides): Formula, method, notation, graphing, matrix, research statistics, sample size, Likert, and numerical-method guides.
+- [Research statistics calculators](https://solvegrid.online/research-statistics)
 - [Math and algebra calculators](https://solvegrid.online/math-calculators)
 - [Scientific and engineering calculators](https://solvegrid.online/engineering-calculators)
 - [Research and simulation tools](https://solvegrid.online/research-tools)
-- [Everyday calculators](https://solvegrid.online/everyday-calculators)
 
 ## Featured tools
 
+- [Sample Size Calculator (Slovin, Yamane, Cochran)](https://solvegrid.online/sample-size-calculator)
+- [Cronbach's Alpha Calculator](https://solvegrid.online/cronbach-alpha-calculator)
+- [Likert Scale Weighted Mean Calculator](https://solvegrid.online/likert-scale-calculator)
+- [Advanced Statistics Lab (t-tests, ANOVA, correlation)](https://solvegrid.online/advanced-statistics)
 - [Scientific and Engineering Calculator](https://solvegrid.online/scientific-calculator)
 - [Graphing Calculator](https://solvegrid.online/graphing-calculator)
 - [Equation Solver](https://solvegrid.online/equation-solver)
@@ -44,4 +48,4 @@ SolveGrid provides 21 public tools. Most current calculations run directly in th
 - Numerical results can depend on rounding, floating-point arithmetic, step size, model assumptions, selected units, and entered values.
 - Do not enter confidential, regulated, medical, financial, or identity information into general-purpose calculator fields.
 
-Last reviewed: 30 July 2026.
+Last reviewed: 28 October 2026.

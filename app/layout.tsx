@@ -20,7 +20,7 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "SolveGrid | Free Online Math & Engineering Tools",
+    default: "SolveGrid | Free Statistics Calculators for Thesis & Survey Research",
     template: "%s | SolveGrid",
   },
   description: siteDescription,
@@ -55,13 +55,13 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     siteName,
-    title: "SolveGrid | Free Online Math & Engineering Tools",
+    title: "SolveGrid | Free Statistics Calculators for Thesis & Survey Research",
     description: siteDescription,
     url: "/",
   },
   twitter: {
     card: "summary",
-    title: "SolveGrid | Free Online Math & Engineering Tools",
+    title: "SolveGrid | Free Statistics Calculators for Thesis & Survey Research",
     description: siteDescription,
   },
   verification: googleVerification

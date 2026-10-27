@@ -1,38 +1,54 @@
 import Link from "next/link";
 import SiteFooter from "../components/SiteFooter";
 import ToolHeader from "../components/ToolHeader";
-import ScientificCalculator from "./scientific-calculator/ScientificCalculator";
 import { guides } from "../lib/guides";
 import { createStaticPageMetadata } from "../lib/seo";
 import { siteName, siteUrl } from "../lib/site";
 import {
   getCategoryPath,
-  getFeaturedTools,
+  getToolBySlug,
   toolCategories,
   tools,
   type ToolCategory,
 } from "../lib/tools";
 
 export const metadata = createStaticPageMetadata(
-  "Free Online Math, Engineering & Everyday Calculators",
-  "Use free online calculators for graphing, equations, matrices, scientific math, statistics, unit conversions, finance, and everyday problems.",
+  "Free Statistics Calculators for Thesis & Survey Research",
+  "Free research statistics calculators: Slovin and Cochran sample size, Cronbach's alpha, Likert weighted mean, standard deviation, t-tests, ANOVA, and correlation, with step-by-step working.",
   "/",
 );
 
+const featuredToolSlugs = [
+  "sample-size-calculator",
+  "cronbach-alpha-calculator",
+  "likert-scale-calculator",
+  "statistics-calculator",
+  "advanced-statistics",
+  "optimization-lab",
+];
+
+const researchPath = [
+  { step: "01", title: "Plan your sample", text: "Slovin, Yamane, or Cochran formula", href: "/sample-size-calculator" },
+  { step: "02", title: "Check reliability", text: "Cronbach's alpha with alpha if item deleted", href: "/cronbach-alpha-calculator" },
+  { step: "03", title: "Summarise responses", text: "Likert weighted mean and interpretation", href: "/likert-scale-calculator" },
+  { step: "04", title: "Describe the data", text: "Mean, standard deviation, quartiles", href: "/statistics-calculator" },
+  { step: "05", title: "Test hypotheses", text: "t-tests, ANOVA, correlation", href: "/advanced-statistics" },
+];
+
 const featuredGuideSlugs = [
-  "symbolic-algebra-simplification",
-  "euler-method-for-differential-equations",
   "choose-a-statistical-test",
-  "engineering-notation-and-scientific-notation",
-  "gaussian-elimination-for-linear-systems",
-  "unit-conversion-formulas",
+  "slovin-formula-sample-size",
+  "likert-scale-interpretation",
+  "standard-deviation-formula",
+  "graphical-linear-programming-method",
+  "matrix-inverse-and-determinant",
 ];
 
 const homepageFaqs = [
   {
     question: "Are SolveGrid calculators free to use?",
     answer:
-      "Yes. SolveGrid provides free browser-based calculators for core math, engineering, research, finance, conversion, and everyday calculation tasks.",
+      "Yes. SolveGrid provides free browser-based statistics calculators for student research, plus supporting math and numerical-methods tools. No account is needed.",
   },
   {
     question: "Do I need to create an account?",
@@ -40,19 +56,24 @@ const homepageFaqs = [
       "No account is required for the current public calculators. Open a tool, enter your values, and calculate directly in the browser.",
   },
   {
-    question: "Which calculator should I use for equations?",
+    question: "How do I calculate sample size for my thesis?",
     answer:
-      "Use Equation Solver for linear, quadratic, cubic, and supported simultaneous systems. Use Graphing Calculator when you also need a visual graph or intersection estimate.",
+      "Use the Sample Size Calculator. Slovin's formula needs only the population size and margin of error; Cochran's formula also lets you set the confidence level and expected proportion, with a finite population correction.",
   },
   {
-    question: "Can SolveGrid graph more than one equation?",
+    question: "How do I check if my questionnaire is reliable?",
     answer:
-      "Yes. Graphing Calculator can plot and compare several functions, show value tables, trace points, and estimate roots or intersections in the current graph window.",
+      "Paste item scores into the Cronbach's Alpha Calculator. It reports alpha, corrected item-total correlations, and alpha if item deleted, and it can reverse-code negatively worded items.",
   },
   {
-    question: "Does the Matrix Calculator calculate rank and RREF?",
+    question: "Which statistical test should I use?",
     answer:
-      "Yes. Matrix Calculator supports rank, REF, RREF, determinants, inverses, row space, null space, and supported linear-system workflows.",
+      "It depends on your question and data type: t-tests compare two means, one-way ANOVA compares three or more, and correlation measures a relationship between two numeric variables. The 'How to choose a statistical test' guide walks through the decision.",
+  },
+  {
+    question: "Is my research data uploaded?",
+    answer:
+      "No. Calculations run in your browser. Data you paste is not sent to SolveGrid's servers.",
   },
   {
     question: "How are SolveGrid calculations checked?",
@@ -64,7 +85,9 @@ const homepageFaqs = [
 const homepageReviewedDate = "2026-07-30";
 
 export default function Home() {
-  const featuredTools = getFeaturedTools(6);
+  const featuredTools = featuredToolSlugs
+    .map((slug) => getToolBySlug(slug))
+    .filter((tool): tool is (typeof tools)[number] => Boolean(tool));
   const featuredGuides = featuredGuideSlugs
     .map((slug) => guides.find((guide) => guide.slug === slug))
     .filter((guide): guide is (typeof guides)[number] => Boolean(guide));
@@ -76,9 +99,9 @@ export default function Home() {
         "@type": "WebPage",
         "@id": `${siteUrl}/#webpage`,
         url: siteUrl,
-        name: "Free Online Math, Engineering & Everyday Calculators",
+        name: "Free Statistics Calculators for Thesis & Survey Research",
         description:
-          "Use free online calculators for graphing, equations, matrices, scientific math, statistics, unit conversions, finance, and everyday problems.",
+          "Free research statistics calculators: Slovin and Cochran sample size, Cronbach's alpha, Likert weighted mean, standard deviation, t-tests, ANOVA, and correlation, with step-by-step working.",
         inLanguage: "en",
         isPartOf: { "@id": `${siteUrl}/#website` },
         publisher: {
@@ -127,23 +150,23 @@ export default function Home() {
       <section className="hero">
         <div className="hero-content">
           <p className="eyebrow">
-            FREE ONLINE MATH, ENGINEERING, RESEARCH &amp; EVERYDAY TOOLS
+            FREE STATISTICS TOOLS FOR STUDENT RESEARCHERS
           </p>
 
           <h1>
-            Free online calculators.
-            <span> Solve problems clearly.</span>
+            Statistics calculators for your thesis.
+            <span> Every step shown.</span>
           </h1>
 
           <p className="hero-description">
-            Start with the working scientific calculator, then open focused tools
-            for graphing, equations, matrices, statistics, unit conversion,
-            finance, numerical methods, and everyday calculations.
+            Calculate sample size, check questionnaire reliability, interpret
+            Likert data, and run t-tests, ANOVA, and correlation, with working
+            and write-up sentences you can use in your methods and results chapters.
           </p>
 
           <div className="hero-actions">
-            <Link className="primary-button" href="#home-scientific-expression">
-              Start calculating <span>→</span>
+            <Link className="primary-button" href="/sample-size-calculator">
+              Calculate sample size <span>→</span>
             </Link>
 
             <Link className="secondary-button" href="/tools">
@@ -154,28 +177,38 @@ export default function Home() {
           <div className="hero-points">
             <span>✓ Works instantly</span>
             <span>✓ No sign-up</span>
-            <span>✓ Free core tools</span>
+            <span>✓ Data stays in your browser</span>
           </div>
         </div>
 
-        <div className="home-calculator-shell">
-          <ScientificCalculator variant="embedded" />
-        </div>
+        <nav className="home-research-path" aria-label="Research statistics workflow">
+          <p>YOUR RESEARCH WORKFLOW</p>
+          {researchPath.map((item) => (
+            <Link href={item.href} key={item.href}>
+              <span>{item.step}</span>
+              <div>
+                <strong>{item.title}</strong>
+                <small>{item.text}</small>
+              </div>
+              <b>→</b>
+            </Link>
+          ))}
+        </nav>
       </section>
 
       <nav className="home-task-strip" aria-label="Popular calculator tasks">
         <span>POPULAR TASKS</span>
-        <Link href="/graphing-calculator">Graph an equation</Link>
-        <Link href="/equation-solver">Solve an equation</Link>
-        <Link href="/matrix-calculator">Find matrix rank</Link>
+        <Link href="/sample-size-calculator">Slovin&apos;s formula</Link>
+        <Link href="/cronbach-alpha-calculator">Cronbach&apos;s alpha</Link>
+        <Link href="/likert-scale-calculator">Likert weighted mean</Link>
+        <Link href="/guides/choose-a-statistical-test">Which statistical test?</Link>
         <Link href="/statistics-calculator">Standard deviation</Link>
-        <Link href="/unit-converter">Convert units</Link>
-        <Link href="/optimization-lab">Linear programming</Link>
+        <Link href="/advanced-statistics">t-test &amp; ANOVA</Link>
       </nav>
 
       <section className="tools-section" id="tools">
         <div className="section-heading">
-          <p className="eyebrow">CONNECTED TOOL PLATFORM</p>
+          <p className="eyebrow">RESEARCH STATISTICS TOOLS</p>
           <h2>Choose the right calculator, then move naturally to the next step.</h2>
           <p>
             Each tool is built for a specific problem and includes links to related
@@ -187,7 +220,7 @@ export default function Home() {
           {featuredTools.map((tool) => (
             <Link
               className={`tool-card ${
-                tool.slug === "graphing-calculator" ? "featured-card" : ""
+                tool.slug === "sample-size-calculator" ? "featured-card" : ""
               }`}
               href={`/${tool.slug}`}
               key={tool.slug}
@@ -282,8 +315,8 @@ export default function Home() {
             <strong>{tools.length}</strong>
             <h3>Working online calculators</h3>
             <p>
-              Focused tools for math, engineering, research, finance, conversion,
-              and everyday calculation tasks.
+              Focused tools for research statistics, plus supporting math and
+              numerical-methods workspaces.
             </p>
           </article>
           <article>
@@ -370,8 +403,8 @@ export default function Home() {
       <section className="learn-section" id="learn">
         <p className="eyebrow">MADE FOR REAL PROBLEMS</p>
         <h2>
-          Free online calculators for students, educators, engineers,
-          professionals, and independent learners.
+          Free statistics calculators for students, supervisors, and
+          independent researchers.
         </h2>
         <p>
           SolveGrid provides calculation support, not professional advice. Verify

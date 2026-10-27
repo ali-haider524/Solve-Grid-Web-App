@@ -144,62 +144,62 @@ const categoryEditorial: Record<ToolCategory, CategoryEditorial> = {
       },
     ],
   },
-  everyday: {
-    eyebrow: "EVERYDAY CALCULATORS",
-    heading: "Practical calculators for percentages, finance, dates, distance, and conversions.",
+  statistics: {
+    eyebrow: "RESEARCH STATISTICS CALCULATORS",
+    heading: "Statistics calculators for theses, dissertations, and survey research.",
     lead:
-      "Calculate percentages, profit and loss, interest, loan payments, discounts, age, distance, adult BMI screening values, and common unit conversions in focused browser tools.",
-    overviewTitle: "Use a clear formula for common real-world questions.",
+      "Plan your sample, check questionnaire reliability, summarise Likert responses, and run common hypothesis tests, with every step shown so you can explain it in your methods and results chapters.",
+    overviewTitle: "Follow the order a research project actually needs.",
     overview: [
-      "Everyday calculations can become confusing when the starting value, percentage base, time period, or unit is unclear. SolveGrid separates each workflow so the inputs and formula remain easy to review.",
-      "Choose Percentage Calculator for percent change, markup, margin, reverse percentages, and growth. Use the finance calculators for simple interest, compound growth, loan payments, profit and loss, or discount and tax. Date, distance, conversion, and adult BMI screening tools cover common non-finance tasks.",
+      "Most student research follows the same path: decide how many respondents you need, confirm that the questionnaire is reliable, describe the responses, and then test the research hypotheses. SolveGrid keeps each step in a focused calculator so inputs and outputs stay easy to check.",
+      "Start with the Sample Size Calculator (Slovin, Yamane, or Cochran). After data collection, use the Cronbach's Alpha Calculator for reliability and the Likert Scale Calculator for weighted means and verbal interpretation. Use the Statistics Calculator for descriptive statistics and the Advanced Statistics Lab for t-tests, ANOVA, and correlation.",
     ],
     topics: [
       {
-        title: "Percentages, prices, and business math",
-        text: "Calculate percent of a value, increase or decrease, markup, margin, cost and selling price, profit or loss, discounts, tax, and compound growth.",
-        links: ["percentage-calculator", "profit-loss-calculator", "discount-calculator"],
+        title: "Before data collection",
+        text: "Compute the minimum sample with Slovin's formula or Cochran's formula with finite population correction, and adjust for expected non-response.",
+        links: ["sample-size-calculator"],
       },
       {
-        title: "Interest and loan payments",
-        text: "Estimate simple interest, compound growth, periodic loan payments, total repayment, and total interest from clearly labelled rates and time periods.",
-        links: ["simple-interest-calculator", "compound-interest-calculator", "loan-calculator"],
+        title: "Questionnaire reliability and Likert data",
+        text: "Check internal consistency with Cronbach's alpha, find weak or reverse-coded items, and convert response counts into weighted means and interpretations.",
+        links: ["cronbach-alpha-calculator", "likert-scale-calculator"],
       },
       {
-        title: "Dates, distance, units, and screening",
-        text: "Calculate calendar age, coordinate or travel distance, convert measurements, and use an adult-only BMI screening calculation with appropriate scope notes.",
-        links: ["age-calculator", "distance-calculator", "unit-converter", "bmi-calculator"],
+        title: "Describe and test your data",
+        text: "Calculate mean, standard deviation, quartiles, and frequency tables, then run t-tests, one-way ANOVA, and Pearson correlation with stated assumptions.",
+        links: ["statistics-calculator", "advanced-statistics"],
       },
     ],
     workflow: [
       {
-        title: "Identify the original value",
-        text: "Percentage change, discount, markup, and margin use different bases. Confirm whether the calculation starts from the original price, cost price, selling price, or another reference value.",
+        title: "Fix the sampling plan first",
+        text: "Record the population size, margin of error, and confidence level you used. Reviewers ask for these, and changing them after data collection weakens the study.",
       },
       {
-        title: "Match the rate and time period",
-        text: "Interest calculations depend on whether a rate is annual and whether time is entered in years, months, or another period. Keep the units consistent before calculating.",
+        title: "Check reliability before interpreting scales",
+        text: "A composite score only makes sense if its items hang together. Report Cronbach's alpha for each subscale and reverse-code negatively worded items first.",
       },
       {
-        title: "Treat estimates as estimates",
-        text: "Loan results exclude lender-specific fees and rules, while adult BMI is a screening measure rather than a diagnosis. Important financial or health decisions need appropriate professional context.",
+        title: "Match the test to the question and data type",
+        text: "Comparing two group means calls for a t-test, three or more groups for ANOVA, and a relationship between two numeric variables for correlation. Check the assumptions each test states.",
       },
     ],
     faqs: [
       {
-        question: "Which calculator should I use for percentage increase?",
+        question: "Which sample size formula should I use for my thesis?",
         answer:
-          "Use Percentage Calculator and choose the percentage-change or increase workflow. Enter the original value and the new value so the correct base is used.",
+          "Slovin's (Yamane) formula is common when the population size is known and only the margin of error is set. Cochran's formula is more defensible when you need to state the confidence level or expected proportion.",
       },
       {
-        question: "Do loan and interest calculators include every bank fee?",
+        question: "Do these calculators replace SPSS?",
         answer:
-          "No. They provide formula-based estimates and do not include lender-specific fees, insurance, taxes, penalties, or local rounding rules unless the page explicitly states otherwise.",
+          "They cover the most common thesis calculations and show their working, but they do not replace a full statistics package for complex models. Check important results with your adviser or a statistician.",
       },
       {
-        question: "Is the BMI calculator a medical diagnosis?",
+        question: "Is my data uploaded anywhere?",
         answer:
-          "No. It is an adult-only screening calculation and does not diagnose a condition or account for every individual factor.",
+          "No. All calculations run in your browser and nothing you paste is sent to a server.",
       },
     ],
   },

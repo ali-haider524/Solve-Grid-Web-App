@@ -1,4 +1,4 @@
-export type ToolCategory = "math" | "engineering" | "research" | "everyday";
+export type ToolCategory = "math" | "engineering" | "research" | "statistics";
 
 export type ToolInfo = {
   slug: string;
@@ -29,6 +29,14 @@ export const toolCategories: Record<
     intro: string;
   }
 > = {
+  statistics: {
+    label: "Research statistics & survey tools",
+    description:
+      "Sample size, reliability, Likert analysis, descriptive statistics, and hypothesis tests for theses and survey research.",
+    slug: "research-statistics",
+    intro:
+      "Free statistics calculators for student researchers: Slovin and Cochran sample size, Cronbach's alpha, Likert weighted mean, standard deviation, t-tests, ANOVA, and correlation with write-up guidance.",
+  },
   math: {
     label: "Math & algebra tools",
     description:
@@ -52,14 +60,6 @@ export const toolCategories: Record<
     slug: "research-tools",
     intro:
       "Research-focused online tools for numerical models, differential equations, and carefully labeled simulation workflows.",
-  },
-  everyday: {
-    label: "Everyday calculators",
-    description:
-      "Useful percentage, finance, conversion, distance, and adult health-screening tools.",
-    slug: "everyday-calculators",
-    intro:
-      "Free everyday calculators for percentage, profit, interest, loan, discount, conversion, distance, and adult BMI screening tasks.",
   },
 };
 
@@ -503,7 +503,7 @@ export const tools: ToolInfo[] = [
     slug: "statistics-calculator",
     name: "Statistics Calculator",
     shortName: "Statistics",
-    category: "math",
+    category: "statistics",
     icon: "σ",
     title:
       "Statistics Calculator – Standard Deviation, Variance, Quartiles & Regression",
@@ -529,12 +529,12 @@ export const tools: ToolInfo[] = [
       "outlier calculator",
     ],
     relatedSlugs: [
-      "graphing-calculator",
-      "percentage-calculator",
-      "matrix-calculator",
+      "advanced-statistics",
+      "likert-scale-calculator",
+      "sample-size-calculator",
     ],
     featured: true,
-    priority: 0.9,
+    priority: 0.95,
     useCases: [
       "Calculate sample or population standard deviation and variance from raw values",
       "Find mean, median, mode, range, quartiles, IQR, percentiles, and outliers",
@@ -619,7 +619,6 @@ export const tools: ToolInfo[] = [
     ],
     relatedSlugs: [
       "scientific-calculator",
-      "distance-calculator",
       "circuit-analysis",
     ],
     featured: true,
@@ -663,187 +662,6 @@ export const tools: ToolInfo[] = [
         question: "When should I use Scientific Calculator instead?",
         answer:
           "Use Scientific Calculator when you need powers, roots, trigonometry, logarithms, constants, scientific notation, or engineering notation. Use Unit Converter when the main task is changing from one unit to another.",
-      },
-    ],
-  },
-  {
-    slug: "percentage-calculator",
-    name: "Percentage Calculator",
-    shortName: "Percentage",
-    category: "everyday",
-    icon: "%",
-    title: "Advanced Percentage Calculator – Change, Markup, Margin & Growth",
-    description:
-      "Calculate percent of a value, percentage change, increase, decrease, reverse percentages, markup, margin, and compound growth online.",
-    summary:
-      "Choose from ten percentage workflows including change, reverse calculations, selling-price markup, profit margin, and compound growth.",
-    keywords: [
-      "advanced percentage calculator",
-      "percentage increase calculator",
-      "reverse percentage calculator",
-      "markup calculator",
-      "profit margin calculator",
-      "compound growth calculator",
-    ],
-    relatedSlugs: [
-      "profit-loss-calculator",
-      "discount-calculator",
-      "compound-interest-calculator",
-    ],
-    priority: 0.85,
-    useCases: [
-      "Percentage change and reverse percentages",
-      "Markup and profit margin",
-      "Compound growth over multiple periods",
-    ],
-    faqs: [
-      {
-        question: "How is percentage change calculated?",
-        answer:
-          "It is calculated as (new value − original value) ÷ original value × 100.",
-      },
-      {
-        question: "Can I calculate a discount?",
-        answer:
-          "Yes. Use the percentage-of-a-value mode to calculate the discount amount, then subtract it from the original price.",
-      },
-    ],
-  },
-  {
-    slug: "distance-calculator",
-    name: "Distance Calculator",
-    shortName: "Distance",
-    category: "everyday",
-    icon: "↔",
-    title: "Distance Calculator – Coordinate & Speed Distance",
-    description:
-      "Calculate straight-line distance between coordinates, midpoint, or travel distance from speed and time with a free online distance calculator.",
-    summary:
-      "Find Euclidean distance and midpoint between two points, or calculate travel distance, speed, or time from the other two values.",
-    keywords: [
-      "distance calculator",
-      "distance between two points calculator",
-      "speed distance time calculator",
-      "midpoint calculator",
-    ],
-    relatedSlugs: [
-      "unit-converter",
-      "graphing-calculator",
-      "percentage-calculator",
-    ],
-    priority: 0.85,
-    useCases: [
-      "Coordinate distance",
-      "Midpoint calculations",
-      "Speed, distance, and time",
-    ],
-    faqs: [
-      {
-        question: "What distance formula is used for coordinates?",
-        answer: "The calculator uses √((x₂−x₁)² + (y₂−y₁)²).",
-      },
-      {
-        question: "Can I use it for travel distance?",
-        answer:
-          "Yes. Use the speed and time mode to calculate one unknown value from the other two.",
-      },
-    ],
-  },
-  {
-    slug: "age-calculator",
-    name: "Age Calculator",
-    shortName: "Age",
-    category: "everyday",
-    icon: "◷",
-    title: "Age Calculator by Date of Birth – Years, Months & Days",
-    description:
-      "Calculate age from date of birth in years, months, days, total months, total weeks, and total days. Choose today or any reference date.",
-    summary:
-      "Enter a date of birth and calculate calendar age on today’s date or a selected reference date, with years, months, days, totals, and next-birthday timing.",
-    keywords: [
-      "age calculator",
-      "age calculator by date of birth",
-      "calculate age in years months days",
-      "date of birth age calculator",
-      "age on a specific date calculator",
-    ],
-    relatedSlugs: ["bmi-calculator", "unit-converter", "percentage-calculator"],
-    featured: true,
-    priority: 0.88,
-    useCases: [
-      "Age from date of birth",
-      "Age on a selected date",
-      "Years, months, days, weeks, and total days",
-    ],
-    features: [
-      "Date-of-birth age calculation",
-      "Today or a custom reference date",
-      "Years, months, and days",
-      "Total months, weeks, and days",
-      "Next birthday timing",
-      "Optional shareable pre-filled link",
-    ],
-    faqs: [
-      {
-        question: "Can I calculate age on a date other than today?",
-        answer:
-          "Yes. Choose any valid reference date in the Calculate age on field.",
-      },
-      {
-        question: "Does the calculator save my date of birth?",
-        answer:
-          "No. The calculation runs in your browser. Dates are only placed in a shareable link when you choose Copy link.",
-      },
-      {
-        question: "How are leap-day birthdays handled?",
-        answer:
-          "For a February 29 birthday, the next birthday is shown on the last day of February in years without February 29.",
-      },
-    ],
-  },
-  {
-    slug: "bmi-calculator",
-    name: "BMI Calculator",
-    shortName: "BMI",
-    category: "everyday",
-    icon: "●",
-    title: "BMI Calculator for Adults – Metric & Imperial",
-    description:
-      "Calculate adult body mass index using metric or imperial measurements, with an age eligibility check for this adult-only screening tool.",
-    summary:
-      "Use adult height and weight measurements to calculate BMI as a screening measure. An optional age field confirms this adult-only tool is appropriate; it is not a diagnosis.",
-    keywords: [
-      "BMI calculator",
-      "body mass index calculator",
-      "BMI metric calculator",
-      "BMI imperial calculator",
-    ],
-    relatedSlugs: [
-      "unit-converter",
-      "percentage-calculator",
-      "distance-calculator",
-    ],
-    priority: 0.8,
-    useCases: [
-      "Metric BMI calculation",
-      "Imperial BMI calculation",
-      "Formula and screening context",
-    ],
-    faqs: [
-      {
-        question: "Is BMI a diagnosis?",
-        answer:
-          "No. BMI is a screening measure and does not diagnose health conditions or account for every individual factor.",
-      },
-      {
-        question: "Is this BMI tool for children and teens?",
-        answer:
-          "No. This page is designed for adults 20 and older. Younger people need age- and sex-specific assessment from a qualified health professional.",
-      },
-      {
-        question: "How do you calculate BMI??",
-        answer:
-          "BMI is calculated by dividing your weight in kilograms by your height in meters squared. Simply enter your height and weight into our BMI Calculator to get your Body Mass Index instantly.",
       },
     ],
   },
@@ -1117,7 +935,7 @@ export const tools: ToolInfo[] = [
     slug: "advanced-statistics",
     name: "Advanced Statistics Lab",
     shortName: "Advanced statistics",
-    category: "research",
+    category: "statistics",
     icon: "t",
     title: "Advanced Statistics Calculator – t Tests, ANOVA & Correlation",
     description:
@@ -1134,8 +952,8 @@ export const tools: ToolInfo[] = [
     ],
     relatedSlugs: [
       "statistics-calculator",
-      "graphing-calculator",
-      "differential-equation-solver",
+      "cronbach-alpha-calculator",
+      "sample-size-calculator",
     ],
     featured: true,
     priority: 0.9,
@@ -1165,292 +983,171 @@ export const tools: ToolInfo[] = [
     ],
   },
   {
-    slug: "profit-loss-calculator",
-    name: "Profit, Loss & Margin Calculator",
-    shortName: "Profit & loss",
-    category: "everyday",
-    icon: "±",
-    title: "Profit and Loss Calculator – Markup, Margin, Cost & Selling Price",
+    slug: "sample-size-calculator",
+    name: "Sample Size Calculator",
+    shortName: "Sample size",
+    category: "statistics",
+    icon: "n",
+    title: "Sample Size Calculator – Slovin, Yamane & Cochran Formula",
     description:
-      "Calculate profit, loss, markup percentage, and profit margin from cost price and selling price. Compare markup vs margin with clear formulas and examples.",
+      "Calculate research sample size with Slovin's formula, Taro Yamane, or Cochran's formula with finite population correction. Shows every step and a methodology sentence.",
     summary:
-      "Enter cost price and selling price to calculate profit or loss amount, markup on cost, profit margin on revenue, and the difference between margin and markup.",
+      "Find the minimum sample size for a survey or thesis using Slovin/Yamane or Cochran's formula, with confidence level, margin of error, population size, response-rate adjustment, and a copy-ready methods sentence.",
     keywords: [
-      "profit and loss calculator",
-      "profit margin calculator",
-      "markup calculator",
-      "markup vs margin",
-      "calculating markup vs margin",
-      "cost price selling price calculator",
-      "profit percentage calculator",
-      "loss percentage calculator",
-      "gross margin calculator",
-      "selling price calculator",
-      "profit formula calculator",
+      "sample size calculator",
+      "slovin formula calculator",
+      "slovin's formula",
+      "taro yamane sample size calculator",
+      "yamane formula",
+      "cochran formula calculator",
+      "sample size calculator for thesis",
+      "survey sample size calculator",
+      "finite population correction",
+      "raosoft sample size calculator alternative",
     ],
-    relatedSlugs: [
-      "percentage-calculator",
-      "discount-calculator",
-      "simple-interest-calculator",
-    ],
+    relatedSlugs: ["likert-scale-calculator", "cronbach-alpha-calculator", "statistics-calculator"],
     featured: true,
-    priority: 0.88,
+    priority: 0.96,
     useCases: [
-      "Calculate profit or loss from cost price and selling price",
-      "Compare markup percentage on cost with profit margin on selling price",
-      "Check business pricing examples before using a discount or percentage workflow",
+      "Compute minimum respondents for a thesis survey from a known population",
+      "Compare Slovin/Yamane with Cochran's formula and finite population correction",
+      "Inflate the sample for expected non-response",
     ],
     features: [
-      "Profit amount and loss amount",
-      "Markup percentage measured against cost",
-      "Profit margin percentage measured against selling price",
-      "Worked example explaining why 25% markup equals 20% margin in a common pricing case",
-      "Guide link for markup vs margin formulas",
+      "Slovin / Taro Yamane formula",
+      "Cochran formula with finite population correction",
+      "90%, 95%, and 99% confidence levels",
+      "Response-rate adjustment",
+      "Step-by-step working and methods sentence",
     ],
     faqs: [
       {
-        question: "What is the profit formula?",
+        question: "Are Slovin's formula and Taro Yamane's formula the same?",
         answer:
-          "Profit is selling price minus cost price. If the result is negative, the sale produced a loss instead of a profit.",
+          "Yes. Both use n = N ÷ (1 + N·e²). Yamane (1967) popularised the expression; many theses cite it under either name. Cite the source your adviser or department expects.",
       },
       {
-        question: "What is the difference between markup and margin?",
+        question: "When should I use Cochran's formula instead of Slovin's?",
         answer:
-          "Markup is profit divided by cost price. Profit margin is profit divided by selling price. Because they use different bases, the percentages are not the same.",
+          "Cochran's formula lets you set the confidence level and the expected proportion p, so it is more defensible when a reviewer asks how confidence was chosen. Slovin's formula assumes p = 0.5 and roughly 95% confidence implicitly.",
       },
       {
-        question: "How do I calculate markup percentage?",
+        question: "What margin of error should I use?",
         answer:
-          "Use markup = profit ÷ cost price × 100. For example, if cost is 80 and selling price is 100, profit is 20 and markup is 25%.",
+          "5% (0.05) is the most common choice in survey research. Smaller margins such as 3% need much larger samples; larger margins such as 10% are sometimes accepted for pilot or exploratory studies.",
       },
       {
-        question: "How do I calculate profit margin percentage?",
+        question: "Should I round the sample size up or down?",
         answer:
-          "Use margin = profit ÷ selling price × 100. For example, if cost is 80 and selling price is 100, profit is 20 and margin is 20%.",
-      },
-      {
-        question: "Can this calculator show a loss percentage?",
-        answer:
-          "Yes. Enter a selling price below cost and the calculator shows the loss amount and loss percentage on cost. The margin on selling price will also be negative.",
+          "Always round up to the next whole respondent, because rounding down produces a sample slightly smaller than the formula requires.",
       },
     ],
   },
   {
-    slug: "simple-interest-calculator",
-    name: "Simple Interest Calculator",
-    shortName: "Simple interest",
-    category: "everyday",
-    icon: "i",
-    title:
-      "Simple Interest Calculator – Formula, Per Annum Interest & Total Amount",
+    slug: "cronbach-alpha-calculator",
+    name: "Cronbach's Alpha Calculator",
+    shortName: "Cronbach's alpha",
+    category: "statistics",
+    icon: "α",
+    title: "Cronbach's Alpha Calculator – Reliability, Item-Total & Alpha if Deleted",
     description:
-      "Calculate simple interest per annum, interest earned, and total amount from principal, annual interest rate, and time using the simple interest formula.",
+      "Paste questionnaire responses to calculate Cronbach's alpha, corrected item-total correlations, and alpha if item deleted. Handles reverse-coded Likert items.",
     summary:
-      "Use principal, annual rate, and time in years, months, or days to calculate simple interest, interest earned, final amount, and a clear formula breakdown.",
+      "Check the internal consistency of a questionnaire scale from raw item scores, reverse-code negatively worded items, and see which items lower reliability.",
     keywords: [
-      "simple interest calculator",
-      "how to calculate simple interest per annum",
-      "calculate interest formula",
-      "simple interest formula",
-      "simple interest per annum",
-      "interest calculator",
-      "principal rate time calculator",
-      "annual interest rate calculator",
-      "interest earned calculator",
-      "total amount calculator",
+      "cronbach alpha calculator",
+      "cronbach's alpha calculator",
+      "cronbach alpha online",
+      "reliability test calculator",
+      "alpha if item deleted",
+      "corrected item total correlation",
+      "cronbach alpha interpretation",
+      "reverse coded items cronbach alpha",
     ],
-    relatedSlugs: [
-      "compound-interest-calculator",
-      "loan-calculator",
-      "percentage-calculator",
-    ],
-    priority: 0.88,
-    useCases: [
-      "Simple interest formula: SI = P × R × T / 100",
-      "Interest earned from a principal amount and annual rate",
-      "Simple interest per annum with years, months, or days",
-      "Total maturity amount after adding interest to principal",
-    ],
-    features: [
-      "Principal, annual rate, and time inputs",
-      "Years, months, or days converted into formula time",
-      "Interest earned and total amount",
-      "Formula line showing principal × rate × time / 100",
-      "Worked per-annum example and simple vs compound comparison",
-    ],
-    faqs: [
-      {
-        question: "What formula does simple interest use?",
-        answer:
-          "Simple interest uses SI = P × R × T / 100, where P is principal, R is the annual interest rate percentage, and T is time in years.",
-      },
-      {
-        question: "How do I calculate simple interest per annum?",
-        answer:
-          "Use the annual rate as R and write time in years. For example, 10,000 at 12% per annum for 2 years gives 10,000 × 12 × 2 / 100 = 2,400 interest.",
-      },
-      {
-        question: "How are months handled in the formula?",
-        answer:
-          "Months are converted into years. Six months becomes 0.5 years, so simple interest for 6 months is half of one year at the same annual rate.",
-      },
-      {
-        question: "What is the total amount?",
-        answer:
-          "Total amount is principal plus simple interest. If the principal is 10,000 and the interest is 2,400, the total amount is 12,400.",
-      },
-      {
-        question: "When should I use compound interest instead?",
-        answer:
-          "Use compound interest when interest is periodically added to the balance and then earns interest itself, such as monthly, quarterly, or daily compounding.",
-      },
-    ],
-  },
-  {
-    slug: "compound-interest-calculator",
-    name: "Compound Interest Calculator",
-    shortName: "Compound interest",
-    category: "everyday",
-    icon: "↗",
-    title: "Compound Interest Calculator – Growth, Contributions & Frequency",
-    description:
-      "Calculate compound interest, future value, interest earned, regular contributions, and annual, monthly, quarterly, weekly, or daily compounding online.",
-    summary:
-      "Project compound growth using a starting balance, annual rate, years, frequency, and optional regular contributions.",
-    keywords: [
-      "compound interest calculator",
-      "future value calculator",
-      "investment growth calculator",
-      "monthly compounding calculator",
-    ],
-    relatedSlugs: [
-      "simple-interest-calculator",
-      "loan-calculator",
-      "percentage-calculator",
-    ],
+    relatedSlugs: ["likert-scale-calculator", "sample-size-calculator", "statistics-calculator"],
     featured: true,
-    priority: 0.9,
+    priority: 0.95,
     useCases: [
-      "Compound interest growth",
-      "Regular contribution projections",
-      "Future value and interest earned",
+      "Test reliability of a Likert-scale questionnaire for a thesis",
+      "Find items that lower alpha before the final survey",
+      "Reverse-code negatively worded items automatically",
     ],
     features: [
-      "Annual to daily compounding",
-      "Optional recurring contributions",
-      "Future value, deposits, and interest",
+      "Raw Cronbach's alpha",
+      "Corrected item-total correlation",
+      "Alpha if item deleted",
+      "Reverse coding by scale minimum and maximum",
+      "Interpretation band and APA-style sentence",
     ],
     faqs: [
       {
-        question: "Can I choose monthly compounding?",
+        question: "What is a good Cronbach's alpha?",
         answer:
-          "Yes. Choose monthly, quarterly, annual, weekly, bi-weekly, or daily compounding.",
+          "A common rule of thumb (George & Mallery) is ≥ 0.9 excellent, ≥ 0.8 good, ≥ 0.7 acceptable, ≥ 0.6 questionable, ≥ 0.5 poor, and below 0.5 unacceptable. Very high values above 0.95 can signal redundant items.",
       },
       {
-        question: "How are regular contributions handled?",
+        question: "Why is my Cronbach's alpha negative or very low?",
         answer:
-          "The calculator applies an end-of-period contribution using the selected compounding frequency.",
+          "The most common cause is a negatively worded item that has not been reverse-coded. Mark that item as reversed and recalculate. Few items or a scale measuring more than one construct can also lower alpha.",
+      },
+      {
+        question: "How should data be entered?",
+        answer:
+          "One row per respondent and one column per item, separated by commas, tabs, or spaces. You can paste directly from Excel, Google Sheets, or SPSS data view.",
       },
     ],
   },
   {
-    slug: "loan-calculator",
-    name: "Loan Payment Calculator",
-    shortName: "Loan payment",
-    category: "everyday",
-    icon: "₤",
-    title: "Loan Payment Calculator – Monthly Payment & Total Interest",
+    slug: "likert-scale-calculator",
+    name: "Likert Scale Weighted Mean Calculator",
+    shortName: "Likert weighted mean",
+    category: "statistics",
+    icon: "Σw",
+    title: "Likert Scale Calculator – Weighted Mean, SD & Verbal Interpretation",
     description:
-      "Estimate monthly, bi-weekly, or weekly loan payments, total repaid, and total interest from loan amount, annual rate, and term.",
+      "Enter response counts for each Likert statement to get the weighted mean, standard deviation, verbal interpretation, and overall mean for 4-, 5-, or 7-point scales.",
     summary:
-      "Estimate an amortized payment, total repayment, and interest for a loan using a chosen payment frequency.",
+      "Turn questionnaire frequency counts into weighted means, standard deviations, rankings, and a verbal interpretation table ready for a thesis results chapter.",
     keywords: [
-      "loan calculator",
-      "monthly payment calculator",
-      "loan interest calculator",
-      "amortization payment calculator",
+      "likert scale calculator",
+      "weighted mean calculator likert scale",
+      "weighted mean interpretation",
+      "likert scale interpretation",
+      "5 point likert scale interpretation",
+      "4 point likert scale range",
+      "how to analyze likert scale data",
+      "likert scale mean range interpretation",
     ],
-    relatedSlugs: [
-      "compound-interest-calculator",
-      "simple-interest-calculator",
-      "percentage-calculator",
-    ],
+    relatedSlugs: ["cronbach-alpha-calculator", "sample-size-calculator", "statistics-calculator"],
     featured: true,
-    priority: 0.9,
+    priority: 0.95,
     useCases: [
-      "Monthly loan payment",
-      "Total interest estimate",
-      "Weekly and bi-weekly payments",
+      "Compute weighted mean per questionnaire statement",
+      "Assign verbal interpretations such as Agree or Strongly Agree",
+      "Produce an overall (grand) mean and rank statements",
     ],
     features: [
-      "Amortized periodic payment",
-      "Total repaid",
-      "Total interest",
-      "Monthly, bi-weekly, or weekly frequency",
+      "4-, 5-, and 7-point scales",
+      "Equal-interval range table",
+      "Weighted mean and standard deviation per item",
+      "Rank and overall mean",
+      "Editable verbal labels",
     ],
     faqs: [
       {
-        question: "Does this include lender fees?",
+        question: "How is the interpretation range calculated?",
         answer:
-          "No. This is an amortized payment estimate and does not include lender-specific fees, insurance, taxes, or rounding rules.",
+          "The interval width is (highest score − lowest score) ÷ number of levels. On a 5-point scale that is (5 − 1) ÷ 5 = 0.80, giving ranges 1.00–1.80, 1.81–2.60, 2.61–3.40, 3.41–4.20, and 4.21–5.00.",
       },
       {
-        question: "Can I choose a weekly payment frequency?",
-        answer: "Yes. Choose monthly, bi-weekly, or weekly payment frequency.",
-      },
-      {
-        question: "Can I use this as an auto financing estimator?",
-        answer: "Yes. Enter your vehicle price, down payment, loan term, and interest rate to estimate your monthly auto loan payments.",
-      },
-      {
-        question: "Can I use this as a car payment calculator?",
-        answer: "Yes. Enter the vehicle price, down payment, interest rate, and loan term to estimate your monthly car payment and total loan cost.",
-      },
-    ],
-  },
-  {
-    slug: "discount-calculator",
-    name: "Discount & Tax Calculator",
-    shortName: "Discount",
-    category: "everyday",
-    icon: "↓",
-    title: "Discount Calculator – Sale Price, Savings & Tax",
-    description:
-      "Calculate discount amount, sale price, savings, and tax-adjusted final price from an original price and percentage discount online.",
-    summary:
-      "Calculate a discount amount, sale price, optional tax, and final price with a compact discount calculator.",
-    keywords: [
-      "discount calculator",
-      "sale price calculator",
-      "discount percentage calculator",
-      "price after tax calculator",
-    ],
-    relatedSlugs: [
-      "percentage-calculator",
-      "profit-loss-calculator",
-      "loan-calculator",
-    ],
-    priority: 0.86,
-    useCases: [
-      "Discount amount",
-      "Sale price after discount",
-      "Tax-adjusted final price",
-    ],
-    features: [
-      "Discount percentage",
-      "Sale price",
-      "Tax after discount",
-      "Savings amount",
-    ],
-    faqs: [
-      {
-        question: "Is tax applied before or after the discount?",
+        question: "Is it valid to compute a mean from Likert data?",
         answer:
-          "This tool applies the discount first, then calculates tax on the discounted sale price.",
+          "Means of individual Likert items are widely used in applied theses but are debated, because single items are ordinal. Report medians or frequencies alongside means, and prefer summed scale scores for inferential tests.",
       },
       {
-        question: "Can I set tax to zero?",
-        answer: "Yes. Enter zero when no tax needs to be included.",
+        question: "Can I change the verbal labels?",
+        answer:
+          "Yes. Edit each label to match your instrument, for example Never–Always or Very Low–Very High.",
       },
     ],
   },

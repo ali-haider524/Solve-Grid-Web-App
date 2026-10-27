@@ -4,7 +4,7 @@ import { siteOperatorName } from "../../lib/site";
 
 export const metadata = createStaticPageMetadata(
   "About SolveGrid Online Calculators",
-  "Learn how SolveGrid builds browser-based math, engineering, finance, unit-conversion, research, and everyday calculators with clear methods and limits.",
+  "Learn how SolveGrid builds browser-based research statistics calculators and supporting math tools with clear methods, worked steps, and stated limits.",
   "/about",
 );
 
@@ -20,7 +20,7 @@ export default function AboutPage() {
           title: "What SolveGrid does",
           paragraphs: [
             "SolveGrid provides browser-based calculators, graphing workspaces, equation solvers, matrix tools, conversion tools, research labs, finance calculators, and practical calculation guides. The goal is to help users enter their own values, see results clearly, and move between connected tools without installing software.",
-            "The current public tools are designed for focused tasks rather than one oversized calculator menu. This makes it easier to choose an appropriate workspace for graphing, algebra, matrices, statistics, scientific calculations, unit conversion, numerical methods, finance, or everyday problems.",
+            "The current public tools are designed for focused tasks rather than one oversized calculator menu. This makes it easier to choose an appropriate workspace for graphing, algebra, matrices, statistics, scientific calculations, unit conversion, numerical methods, sample size planning, questionnaire reliability, or Likert analysis.",
           ],
         },
         {

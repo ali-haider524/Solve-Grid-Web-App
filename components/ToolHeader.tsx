@@ -16,10 +16,10 @@ type ToolHeaderProps = {
 };
 
 const categoryLinks: Array<{ category: ToolCategory; label: string }> = [
+  { category: "statistics", label: "Research statistics" },
   { category: "math", label: "Math & algebra" },
-  { category: "engineering", label: "Scientific & engineering" },
   { category: "research", label: "Research labs" },
-  { category: "everyday", label: "Everyday calculators" },
+  { category: "engineering", label: "Scientific & engineering" },
 ];
 
 // The header surfaces the most-used tools only. Each category page still lists
@@ -30,7 +30,6 @@ const menuToolSlugsByCategory: Record<ToolCategory, string[]> = {
     "equation-solver",
     "polynomial-solver",
     "matrix-calculator",
-    "statistics-calculator",
   ],
   engineering: ["scientific-calculator", "unit-converter"],
   research: [
@@ -38,14 +37,13 @@ const menuToolSlugsByCategory: Record<ToolCategory, string[]> = {
     "symbolic-algebra",
     "optimization-lab",
     "circuit-analysis",
-    "advanced-statistics",
   ],
-  everyday: [
-    "percentage-calculator",
-    "compound-interest-calculator",
-    "loan-calculator",
-    "discount-calculator",
-    "age-calculator",
+  statistics: [
+    "sample-size-calculator",
+    "cronbach-alpha-calculator",
+    "likert-scale-calculator",
+    "statistics-calculator",
+    "advanced-statistics",
   ],
 };
 

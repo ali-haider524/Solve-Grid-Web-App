@@ -3,8 +3,6 @@ export type GuideTopic =
   | "graphing"
   | "engineering"
   | "statistics"
-  | "finance"
-  | "everyday"
   | "research";
 
 export type GuideInfo = {
@@ -35,19 +33,9 @@ export const guideTopics: Record<
       "Scientific notation, engineering notation, unit conversion, circuit analysis, and technical calculation workflows.",
   },
   statistics: {
-    label: "Statistics & data analysis",
+    label: "Research statistics & data analysis",
     description:
       "Standard deviation, descriptive statistics, statistical tests, correlation, regression, and inference choices.",
-  },
-  finance: {
-    label: "Finance & percentage formulas",
-    description:
-      "Percent change, markup, margin, interest, loan payments, and practical business calculations.",
-  },
-  everyday: {
-    label: "Everyday calculation guides",
-    description:
-      "Clear methods for calendar age and other common calculations used outside a specialist workflow.",
   },
   research: {
     label: "Numerical & research methods",
@@ -57,35 +45,6 @@ export const guideTopics: Record<
 };
 
 export const guides: GuideInfo[] = [
-  {
-    slug: "percentage-increase-and-decrease",
-    title: "Percentage increase and decrease",
-    summary: "Find percentage change from an original value to a new value.",
-    toolSlugs: ["percentage-calculator", "profit-loss-calculator", "discount-calculator"],
-    topic: "finance",
-  },
-  {
-    slug: "profit-margin-vs-markup",
-    title: "Profit margin vs markup",
-    summary:
-      "Compare markup, profit margin, cost price, selling price, and the formulas behind business pricing.",
-    toolSlugs: ["profit-loss-calculator", "percentage-calculator"],
-    topic: "finance",
-  },
-  {
-    slug: "simple-interest-formula",
-    title: "Simple interest formula",
-    summary: "Calculate interest from principal, annual rate, and time.",
-    toolSlugs: ["simple-interest-calculator", "compound-interest-calculator"],
-    topic: "finance",
-  },
-  {
-    slug: "loan-payment-formula",
-    title: "Loan payment formula",
-    summary: "Understand periodic payments, total repaid, and total interest.",
-    toolSlugs: ["loan-calculator", "compound-interest-calculator"],
-    topic: "finance",
-  },
   {
     slug: "plot-multiple-equations",
     title: "Plot one, two, or multiple equations",
@@ -125,13 +84,6 @@ export const guides: GuideInfo[] = [
       "unit-converter",
     ],
     topic: "graphing",
-  },
-  {
-    slug: "calculate-age-from-date-of-birth",
-    title: "Calculate age from a date of birth",
-    summary: "Find calendar age in years, months, and days on a chosen date.",
-    toolSlugs: ["age-calculator"],
-    topic: "everyday",
   },
   {
     slug: "gaussian-elimination-for-linear-systems",
@@ -236,6 +188,22 @@ export const guides: GuideInfo[] = [
     toolSlugs: ["advanced-statistics", "statistics-calculator"],
     topic: "statistics",
   },
+  {
+    slug: "slovin-formula-sample-size",
+    title: "Slovin's formula for sample size (with examples)",
+    summary:
+      "Use n = N ÷ (1 + N·e²) to find a thesis sample size, compare it with Cochran's formula, and write it up correctly.",
+    toolSlugs: ["sample-size-calculator"],
+    topic: "statistics",
+  },
+  {
+    slug: "likert-scale-interpretation",
+    title: "Likert scale interpretation: weighted mean ranges",
+    summary:
+      "Build the 4-, 5-, and 7-point mean range tables, interpret weighted means, and report Likert results in a thesis.",
+    toolSlugs: ["likert-scale-calculator", "cronbach-alpha-calculator"],
+    topic: "statistics",
+  },
 ];
 
 export const guideSlugs = guides.map((guide) => guide.slug);
@@ -246,17 +214,6 @@ const preferredGuideSlugsByTool: Record<string, string[]> = {
     "plot-multiple-equations",
     "polynomial-roots-and-complex-roots",
   ],
-  "profit-loss-calculator": [
-    "profit-margin-vs-markup",
-    "percentage-increase-and-decrease",
-  ],
-  "percentage-calculator": [
-    "percentage-increase-and-decrease",
-    "profit-margin-vs-markup",
-  ],
-  "simple-interest-calculator": ["simple-interest-formula", "loan-payment-formula"],
-  "compound-interest-calculator": ["simple-interest-formula", "loan-payment-formula"],
-  "loan-calculator": ["loan-payment-formula", "simple-interest-formula"],
   "scientific-calculator": [
     "engineering-notation-and-scientific-notation",
     "ti-84-style-graphing-workflows",
@@ -286,11 +243,15 @@ const preferredGuideSlugsByTool: Record<string, string[]> = {
   "statistics-calculator": [
     "standard-deviation-formula",
     "choose-a-statistical-test",
+    "likert-scale-interpretation",
   ],
   "advanced-statistics": [
     "choose-a-statistical-test",
     "standard-deviation-formula",
   ],
+  "sample-size-calculator": ["slovin-formula-sample-size", "choose-a-statistical-test"],
+  "cronbach-alpha-calculator": ["likert-scale-interpretation", "choose-a-statistical-test"],
+  "likert-scale-calculator": ["likert-scale-interpretation", "choose-a-statistical-test"],
   "differential-equation-solver": [
     "euler-method-for-differential-equations",
     "runge-kutta-rk4-method",
@@ -308,7 +269,6 @@ const preferredGuideSlugsByTool: Record<string, string[]> = {
     "engineering-unit-conversion",
     "matrix-methods-for-linear-systems",
   ],
-  "age-calculator": ["calculate-age-from-date-of-birth"],
 };
 
 export function getGuideBySlug(slug: string) {

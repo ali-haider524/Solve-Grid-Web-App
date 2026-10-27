@@ -61,9 +61,8 @@ export default function SiteFooter() {
             SolveGrid
           </Link>
           <p>
-            Free math, engineering, research, finance, and everyday calculators
-            with working browser tools, connected guides, and method-focused
-            explanations.
+            Free research statistics calculators for theses and surveys, with
+            supporting math tools, connected guides, and step-by-step working.
           </p>
           <Link className={styles.toolsButton} href="/tools">
             Browse all online calculators →

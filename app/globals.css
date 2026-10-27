@@ -642,3 +642,14 @@ canvas, img, svg { max-width: 100%; }
     border-radius: 20px;
   }
 }
+
+/* Research workflow card in the homepage hero */
+.home-research-path{display:grid;gap:8px;align-self:center;padding:20px;border:1px solid #dbe5f2;border-radius:20px;background:#fff;box-shadow:0 14px 34px rgba(31,52,95,.08)}
+.home-research-path>p{margin:0 0 4px;color:#3157e8;font-size:.68rem;font-weight:900;letter-spacing:.14em}
+.home-research-path a{display:grid;grid-template-columns:38px 1fr auto;align-items:center;gap:12px;padding:12px;border:1px solid #e3eaf5;border-radius:13px;color:#172640;text-decoration:none;transition:border-color .15s,background .15s}
+.home-research-path a:hover{border-color:#b9caf7;background:#f5f8ff}
+.home-research-path a>span{display:grid;place-items:center;width:38px;height:38px;border-radius:11px;background:#eaf0ff;color:#3157e8;font:900 .78rem ui-monospace,SFMono-Regular,Menlo,monospace}
+.home-research-path strong{display:block;font-size:.95rem;letter-spacing:-.02em}
+.home-research-path small{display:block;margin-top:2px;color:#62748f;font-size:.8rem}
+.home-research-path b{color:#3157e8}
+.home-page .home-research-path{width:100%;min-width:0}

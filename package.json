@@ -9,7 +9,18 @@
     "build": "npm run verify:tools && npm run verify:launch && next build",
     "check": "npm run lint && npm run build",
     "start": "next start",
-    "verify:launch": "node scripts/verify-launch-readiness.mjs"
+    "verify:launch": "node scripts/verify-launch-readiness.mjs",
+    "seo:validate": "node scripts/seo/validate-config.mjs",
+    "seo:test": "node scripts/seo/test-analyzer.mjs",
+    "seo:monitor": "node scripts/seo/run-monitor.mjs",
+    "seo:monitor:csv": "node scripts/seo/run-monitor-csv.mjs",
+    "seo:test:csv": "node scripts/seo/test-csv-import.mjs",
+    "seo:analyst": "node scripts/seo/run-analyst.mjs",
+    "seo:analyst:test": "node scripts/seo/test-analyst.mjs",
+    "seo:audit": "node scripts/seo/run-recovery-audit.mjs",
+    "seo:audit:test": "node scripts/seo/test-recovery-auditor.mjs",
+    "seo:map": "node scripts/seo/run-query-mapper.mjs",
+    "seo:map:test": "node scripts/seo/test-query-mapper.mjs"
   },
   "dependencies": {
     "mathjs": "^15.2.0",

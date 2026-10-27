@@ -43,3 +43,9 @@ yarn-error.log*
 next-env.d.ts
 
 /backups/
+# Generated read-only SEO monitoring reports
+/seo-output/
+# Manual Search Console exports may contain private performance data
+/seo-input/*.csv
+/seo-input/**/*.csv
+/seo-input/**/*.zip

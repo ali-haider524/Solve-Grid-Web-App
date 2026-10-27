@@ -22,11 +22,11 @@ export default function MethodologyPage() {
             "The purpose of each tool is to help users work with their own values in a focused workspace. Where a method has important assumptions, supported ranges, or limitations, the relevant tool page or guide is intended to explain them in plain language.",
           ],
           bullets: [
-            "Formula-based calculations for percentages, interest, distance, age, discounts, and similar everyday tasks",
+            "Formula-based research calculations such as Slovin and Cochran sample size, Cronbach's alpha, and Likert weighted means",
             "Algebraic and matrix methods for equations, row reduction, inverses, determinants, rank, and supported linear systems",
             "Numerical methods for selected differential-equation and simulation workspaces",
             "Statistical calculations for descriptive statistics, regression, t-tests, correlation, and one-way ANOVA",
-            "Defined conversion relationships for supported scientific, engineering, and everyday units",
+            "Defined conversion relationships for supported scientific and engineering units",
           ],
         },
         {

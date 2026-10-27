@@ -7,7 +7,7 @@ import styles from "./tools.module.css";
 
 export const metadata: Metadata = {
   title: "Free Online Calculators, Math Tools & Engineering Tools",
-  description: "Browse SolveGrid's free online math, engineering, research, percentage, profit, interest, loan, discount, matrix, graphing, and everyday calculators.",
+  description: "Browse SolveGrid's free research statistics calculators — sample size, Cronbach's alpha, Likert analysis, t-tests, ANOVA — plus math, graphing, and numerical-methods tools.",
   alternates: { canonical: "/tools" },
 };
 
@@ -18,7 +18,7 @@ export default function ToolsPage() {
       <section className={styles.hero}>
         <p>FREE ONLINE CALCULATOR DIRECTORY</p>
         <h1>Find the right calculator for the problem.</h1>
-        <span>Browse connected math, engineering, finance, and everyday calculators. Every tool works directly in the browser and links to useful next steps.</span>
+        <span>Browse research statistics calculators and supporting math and engineering tools. Every tool works directly in the browser and links to useful next steps.</span>
       </section>
       <section className={styles.directory}>
         {(Object.keys(toolCategories) as Array<keyof typeof toolCategories>).map((category) => (
