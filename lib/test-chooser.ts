@@ -26,6 +26,7 @@ const wil = { toolHref: "/wilcoxon-signed-rank-test-calculator", toolLabel: "Run
 const kw = { toolHref: "/kruskal-wallis-test-calculator", toolLabel: "Run it in the Kruskal-Wallis Calculator" };
 const mw = { toolHref: "/mann-whitney-u-test-calculator", toolLabel: "Run it in the Mann-Whitney U Calculator" };
 const chi = { toolHref: "/chi-square-calculator", toolLabel: "Run it in the Chi-Square Calculator" };
+const tt = { toolHref: "/t-test-calculator", toolLabel: "Run it in the t-Test Calculator" };
 const advanced = { toolHref: "/advanced-statistics", toolLabel: "Run it in the Advanced Statistics Lab" };
 
 export function chooseTest(a: Answers): Recommendation {
@@ -87,7 +88,7 @@ export function chooseTest(a: Answers): Recommendation {
           alternative: "One-sample Wilcoxon signed-rank test if the data are skewed or ordinal.",
           assumptions: ["Continuous outcome", "Independent observations", "Roughly normal distribution"],
           report: "A one-sample t-test showed that the mean [outcome] (M = X.XX, SD = X.XX) was [significantly / not significantly] different from [value], t(df) = X.XX, p = .XXX.",
-          ...advanced,
+          ...tt,
         }
       : {
           test: "One-sample Wilcoxon signed-rank test",
@@ -106,6 +107,7 @@ export function chooseTest(a: Answers): Recommendation {
             alternative: "Wilcoxon signed-rank test if the differences are clearly non-normal.",
             assumptions: ["Paired measurements on the same participants", "Differences roughly normal", "No extreme outliers in the differences"],
             report: "A paired-samples t-test showed that [outcome] was [significantly / not significantly] higher at [time 2] (M = X.XX, SD = X.XX) than at [time 1] (M = X.XX, SD = X.XX), t(df) = X.XX, p = .XXX, d = X.XX.",
+            ...tt,
           }
         : {
             test: "Wilcoxon signed-rank test",
@@ -122,7 +124,7 @@ export function chooseTest(a: Answers): Recommendation {
           alternative: "Mann-Whitney U test if the outcome is skewed, ordinal, or the groups are very small.",
           assumptions: ["Two independent groups", "Continuous outcome", "Roughly normal within each group"],
           report: "A Welch's t-test showed that [group A] (M = X.XX, SD = X.XX) scored [significantly / not significantly] higher than [group B] (M = X.XX, SD = X.XX), t(df) = X.XX, p = .XXX, d = X.XX.",
-          ...advanced,
+          ...tt,
         }
       : {
           test: "Mann-Whitney U test",

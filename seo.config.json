@@ -16,6 +16,7 @@
     }
   ],
   "priorityPages": [
+    "/t-test-calculator",
     "/",
     "/statistical-test-chooser",
     "/chi-square-calculator",
@@ -259,6 +260,15 @@
           "indirect effect"
         ],
         "page": "/sobel-test-calculator"
+      },
+      {
+        "contains": [
+          "t test",
+          "t-test",
+          "welch",
+          "paired sample"
+        ],
+        "page": "/t-test-calculator"
       },
       {
         "contains": [

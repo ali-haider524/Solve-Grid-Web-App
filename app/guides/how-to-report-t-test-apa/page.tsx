@@ -80,6 +80,11 @@ export default function ReportTTestGuide() {
       ]}
       toolLinks={[
         {
+          label: "t-Test Calculator",
+          href: "/t-test-calculator",
+          description: "Run independent (Welch or Student), paired, and one-sample t-tests and copy the APA sentence.",
+        },
+        {
           label: "Advanced Statistics Lab",
           href: "/advanced-statistics",
           description: "Run one-sample and Welch t-tests with p values and confidence intervals.",

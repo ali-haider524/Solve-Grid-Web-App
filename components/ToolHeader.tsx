@@ -43,6 +43,7 @@ const menuToolSlugsByCategory: Record<ToolCategory, string[]> = {
     "sample-size-calculator",
     "cronbach-alpha-calculator",
     "likert-scale-calculator",
+    "t-test-calculator",
     "chi-square-calculator",
     "mann-whitney-u-test-calculator",
     "wilcoxon-signed-rank-test-calculator",

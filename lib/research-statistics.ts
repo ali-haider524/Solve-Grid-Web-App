@@ -1280,3 +1280,161 @@ export function sobelTest(a: number, sa: number, b: number, sb: number, c?: numb
     proportionMediated: c !== undefined && Number.isFinite(c) && c !== 0 ? ab / c : null,
   };
 }
+
+/* ---------------- t distribution and t-tests ---------------- */
+
+/** Two-sided p value for a t statistic. */
+export function tTwoSidedP(t: number, df: number) {
+  if (!Number.isFinite(t)) return Number.NaN;
+  return Math.min(1, incompleteBeta(df / (df + t * t), df / 2, 0.5));
+}
+
+/** Upper quantile of the t distribution: P(T > q) = alpha. */
+export function tQuantileUpper(alpha: number, df: number) {
+  let lo = 0;
+  let hi = 1;
+  while (tTwoSidedP(hi, df) / 2 > alpha) hi *= 2;
+  for (let i = 0; i < 200; i += 1) {
+    const mid = (lo + hi) / 2;
+    if (tTwoSidedP(mid, df) / 2 > alpha) lo = mid;
+    else hi = mid;
+    if (hi - lo < 1e-12 * Math.max(1, hi)) break;
+  }
+  return (lo + hi) / 2;
+}
+
+function sampleSd(values: number[]) {
+  const m = values.reduce((s, v) => s + v, 0) / values.length;
+  return Math.sqrt(values.reduce((s, v) => s + (v - m) ** 2, 0) / (values.length - 1));
+}
+
+export type TTestResult = {
+  kind: "independent" | "paired" | "one-sample";
+  t: number;
+  df: number;
+  p: number;
+  meanDiff: number;
+  ciLow: number;
+  ciHigh: number;
+  d: number;
+  dLabel: string;
+  groups: Array<{ label: string; n: number; mean: number; sd: number }>;
+  welch: boolean;
+  levene?: { f: number; p: number };
+  student?: { t: number; df: number; p: number };
+};
+
+/** Brown-Forsythe (median-centred) Levene test for two groups. */
+function leveneTwoGroups(a: number[], b: number[]) {
+  const za = a.map((v) => Math.abs(v - median(a)));
+  const zb = b.map((v) => Math.abs(v - median(b)));
+  const all = [...za, ...zb];
+  const N = all.length;
+  const grand = all.reduce((s, v) => s + v, 0) / N;
+  const ma = za.reduce((s, v) => s + v, 0) / za.length;
+  const mb = zb.reduce((s, v) => s + v, 0) / zb.length;
+  const between = za.length * (ma - grand) ** 2 + zb.length * (mb - grand) ** 2;
+  const within = za.reduce((s, v) => s + (v - ma) ** 2, 0) + zb.reduce((s, v) => s + (v - mb) ** 2, 0);
+  const f = within > 0 ? between / (within / (N - 2)) : 0;
+  return { f, p: 1 - fCdf(f, 1, N - 2) };
+}
+
+export function independentTTest(a: number[], b: number[], useWelch = true): TTestResult {
+  if (a.length < 2 || b.length < 2) throw new Error("Each group needs at least 2 values.");
+  const n1 = a.length;
+  const n2 = b.length;
+  const m1 = a.reduce((s, v) => s + v, 0) / n1;
+  const m2 = b.reduce((s, v) => s + v, 0) / n2;
+  const s1 = sampleSd(a);
+  const s2 = sampleSd(b);
+  if (s1 === 0 && s2 === 0) throw new Error("Both groups have zero variance, so a t-test is not possible.");
+  const diff = m1 - m2;
+  const pooledVar = ((n1 - 1) * s1 ** 2 + (n2 - 1) * s2 ** 2) / (n1 + n2 - 2);
+  const seStudent = Math.sqrt(pooledVar * (1 / n1 + 1 / n2));
+  const tStudent = diff / seStudent;
+  const dfStudent = n1 + n2 - 2;
+  const v1 = s1 ** 2 / n1;
+  const v2 = s2 ** 2 / n2;
+  const seWelch = Math.sqrt(v1 + v2);
+  const dfWelch = (v1 + v2) ** 2 / (v1 ** 2 / (n1 - 1) + v2 ** 2 / (n2 - 1));
+  const tWelch = diff / seWelch;
+  const se = useWelch ? seWelch : seStudent;
+  const t = useWelch ? tWelch : tStudent;
+  const df = useWelch ? dfWelch : dfStudent;
+  const q = tQuantileUpper(0.025, df);
+  return {
+    kind: "independent",
+    t,
+    df,
+    p: tTwoSidedP(t, df),
+    meanDiff: diff,
+    ciLow: diff - q * se,
+    ciHigh: diff + q * se,
+    d: diff / Math.sqrt(pooledVar),
+    dLabel: "Cohen's d",
+    groups: [
+      { label: "Group 1", n: n1, mean: m1, sd: s1 },
+      { label: "Group 2", n: n2, mean: m2, sd: s2 },
+    ],
+    welch: useWelch,
+    levene: leveneTwoGroups(a, b),
+    student: { t: tStudent, df: dfStudent, p: tTwoSidedP(tStudent, dfStudent) },
+  };
+}
+
+export function pairedTTest(before: number[], after: number[]): TTestResult {
+  if (before.length !== after.length) throw new Error(`Both columns need the same number of values: ${before.length} vs ${after.length}.`);
+  if (before.length < 2) throw new Error("Enter at least 2 pairs.");
+  const diffs = after.map((v, i) => v - before[i]);
+  const n = diffs.length;
+  const md = diffs.reduce((s, v) => s + v, 0) / n;
+  const sd = sampleSd(diffs);
+  if (sd === 0) throw new Error("Every pair changed by the same amount, so the t statistic is undefined.");
+  const se = sd / Math.sqrt(n);
+  const t = md / se;
+  const df = n - 1;
+  const q = tQuantileUpper(0.025, df);
+  const mean = (x: number[]) => x.reduce((s, v) => s + v, 0) / x.length;
+  return {
+    kind: "paired",
+    t,
+    df,
+    p: tTwoSidedP(t, df),
+    meanDiff: md,
+    ciLow: md - q * se,
+    ciHigh: md + q * se,
+    d: md / sd,
+    dLabel: "Cohen's dz",
+    groups: [
+      { label: "Before", n, mean: mean(before), sd: sampleSd(before) },
+      { label: "After", n, mean: mean(after), sd: sampleSd(after) },
+    ],
+    welch: false,
+  };
+}
+
+export function oneSampleT(values: number[], mu: number): TTestResult {
+  if (values.length < 2) throw new Error("Enter at least 2 values.");
+  if (!Number.isFinite(mu)) throw new Error("Enter the test value (population mean).");
+  const n = values.length;
+  const m = values.reduce((s, v) => s + v, 0) / n;
+  const sd = sampleSd(values);
+  if (sd === 0) throw new Error("All values are identical, so the t statistic is undefined.");
+  const se = sd / Math.sqrt(n);
+  const t = (m - mu) / se;
+  const df = n - 1;
+  const q = tQuantileUpper(0.025, df);
+  return {
+    kind: "one-sample",
+    t,
+    df,
+    p: tTwoSidedP(t, df),
+    meanDiff: m - mu,
+    ciLow: m - mu - q * se,
+    ciHigh: m - mu + q * se,
+    d: (m - mu) / sd,
+    dLabel: "Cohen's d",
+    groups: [{ label: "Sample", n, mean: m, sd }],
+    welch: false,
+  };
+}

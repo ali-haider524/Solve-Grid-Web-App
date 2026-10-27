@@ -1676,6 +1676,65 @@ export const tools: ToolInfo[] = [
       },
     ],
   },
+  {
+    slug: "t-test-calculator",
+    name: "t-Test Calculator",
+    shortName: "t-test",
+    category: "statistics",
+    icon: "t",
+    title: "t-Test Calculator: Independent, Paired & One-Sample",
+    description:
+      "Free t-test calculator for independent (Welch or Student), paired, and one-sample t-tests. Paste data to get t, df, p, 95% CI, Cohen's d, and APA text.",
+    summary:
+      "Paste raw scores and get a complete t-test: group means and SDs, t, degrees of freedom, exact p value, confidence interval, Cohen's d, Levene's test, and a ready APA sentence.",
+    keywords: [
+      "t test calculator",
+      "independent t test calculator",
+      "paired t test calculator",
+      "one sample t test calculator",
+      "welch t test calculator",
+      "student t test online",
+      "two sample t test calculator",
+      "t test p value calculator",
+    ],
+    relatedSlugs: ["effect-size-calculator", "mann-whitney-u-test-calculator", "shapiro-wilk-test-calculator"],
+    featured: true,
+    priority: 0.96,
+    useCases: [
+      "Compare two separate groups' mean scores in a thesis or survey",
+      "Test a pre-test vs post-test change on the same participants",
+      "Compare a sample mean with a scale midpoint or benchmark value",
+    ],
+    features: [
+      "Independent (Welch or Student), paired, and one-sample modes",
+      "Exact two-tailed p value and 95% confidence interval",
+      "Cohen's d with interpretation",
+      "Levene's (Brown-Forsythe) equal-variance check",
+      "APA 7 report sentence",
+    ],
+    faqs: [
+      {
+        question: "Should I use Welch's or Student's t-test?",
+        answer:
+          "Use Welch's t-test by default for two independent groups. It does not assume equal variances and loses almost nothing when variances are equal. Student's t-test is shown as a comparison and matches SPSS's \"Equal variances assumed\" row.",
+      },
+      {
+        question: "What is the difference between a paired and an independent t-test?",
+        answer:
+          "A paired t-test is for the same people measured twice, such as before and after an intervention. An independent t-test is for two different groups of people. Using the wrong one gives incorrect p values.",
+      },
+      {
+        question: "How do I calculate a t-test p value?",
+        answer:
+          "The p value is the probability of a t statistic at least as extreme as yours under the t distribution with your degrees of freedom. This calculator computes the exact two-tailed p value, so you do not need a t table.",
+      },
+      {
+        question: "What if my data are not normal?",
+        answer:
+          "With about 30+ per group the t-test is fairly robust. For small, skewed, or ordinal data, use the Mann-Whitney U test (independent groups) or the Wilcoxon signed-rank test (paired data).",
+      },
+    ],
+  },
 ];
 
 export function getToolPath(tool: Pick<ToolInfo, "slug"> | string) {

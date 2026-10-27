@@ -92,6 +92,11 @@ export default function ChooseStatisticalTestGuide() {
           description: "Answer four questions and get the recommended test, assumptions, and an APA report sentence.",
         },
         {
+          label: "t-Test Calculator",
+          href: "/t-test-calculator",
+          description: "Independent, paired, and one-sample t-tests with confidence intervals, Cohen's d, and APA text.",
+        },
+        {
           label: "Chi-Square Calculator",
           href: "/chi-square-calculator",
           description: "Run a chi-square test of independence or goodness of fit with Cramér's V and Fisher's exact test.",

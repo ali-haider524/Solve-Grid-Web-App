@@ -65,6 +65,7 @@ function specialCandidates(query) {
     [/kappa|inter.?rater/, ["/cohens-kappa-calculator"]],
     [/report (an )?anova/, ["/guides/how-to-report-anova-apa"]],
     [/report (a )?t.?test/, ["/guides/how-to-report-t-test-apa"]],
+    [/\bt.?test|welch|paired sample/, ["/t-test-calculator"]],
     [/shapiro|normality/, ["/shapiro-wilk-test-calculator"]],
     [/wilcoxon|signed.rank/, ["/wilcoxon-signed-rank-test-calculator"]],
     [/kruskal|dunn/, ["/kruskal-wallis-test-calculator"]],
