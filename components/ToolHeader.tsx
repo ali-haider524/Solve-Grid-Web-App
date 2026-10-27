@@ -44,6 +44,7 @@ const menuToolSlugsByCategory: Record<ToolCategory, string[]> = {
     "cronbach-alpha-calculator",
     "likert-scale-calculator",
     "chi-square-calculator",
+    "mann-whitney-u-test-calculator",
     "statistics-calculator",
     "advanced-statistics",
   ],

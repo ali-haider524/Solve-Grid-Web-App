@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { getTool, getToolPath } from "./tools";
 import { siteName, siteUrl } from "./site";
 
+const ogImage = { url: "/og-image.png", width: 1200, height: 630, alt: "SolveGrid statistics calculators for thesis research" };
+
 const sharedMetadata: Pick<Metadata, "authors" | "creator" | "publisher"> = {
   authors: [{ name: siteName, url: siteUrl }],
   creator: siteName,
@@ -27,11 +29,13 @@ export function createToolMetadata(slug: string): Metadata {
       title: `${tool.title} | ${siteName}`,
       description: tool.description,
       url: canonicalPath,
+      images: [ogImage],
     },
     twitter: {
-      card: "summary",
+      card: "summary_large_image",
       title: `${tool.title} | ${siteName}`,
       description: tool.description,
+      images: [ogImage.url],
     },
     robots: {
       index: true,
@@ -61,11 +65,13 @@ export function createStaticPageMetadata(
       title: `${title} | ${siteName}`,
       description,
       url: canonicalPath,
+      images: [ogImage],
     },
     twitter: {
-      card: "summary",
+      card: "summary_large_image",
       title: `${title} | ${siteName}`,
       description,
+      images: [ogImage.url],
     },
     robots: {
       index: true,

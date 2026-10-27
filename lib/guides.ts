@@ -251,6 +251,7 @@ const preferredGuideSlugsByTool: Record<string, string[]> = {
   ],
   "statistical-test-chooser": ["choose-a-statistical-test", "likert-scale-interpretation"],
   "chi-square-calculator": ["choose-a-statistical-test", "likert-scale-interpretation"],
+  "mann-whitney-u-test-calculator": ["choose-a-statistical-test", "likert-scale-interpretation"],
   "sample-size-calculator": ["slovin-formula-sample-size", "choose-a-statistical-test"],
   "cronbach-alpha-calculator": ["likert-scale-interpretation", "choose-a-statistical-test"],
   "likert-scale-calculator": ["likert-scale-interpretation", "choose-a-statistical-test"],

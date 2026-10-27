@@ -523,3 +523,128 @@ export function formatP(p: number) {
   if (p < 0.001) return "< .001";
   return p.toFixed(3).replace(/^0/, "");
 }
+
+/* ---------------- Mann-Whitney U ---------------- */
+
+export function parseNumbers(text: string, label: string) {
+  const values = text
+    .split(/[\s,;\t]+/)
+    .map((v) => v.trim())
+    .filter(Boolean)
+    .map(Number);
+  if (values.some((v) => !Number.isFinite(v))) throw new Error(`${label} contains a value that is not a number.`);
+  return values;
+}
+
+function median(values: number[]) {
+  const s = [...values].sort((a, b) => a - b);
+  const m = Math.floor(s.length / 2);
+  return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2;
+}
+
+function normalSf(z: number) {
+  // Upper-tail probability of the standard normal, via the Numerical Recipes erfc approximation (|error| < 1.2e-7).
+  const x = Math.abs(z) / Math.SQRT2;
+  const t = 1 / (1 + 0.5 * x);
+  const erfc =
+    t *
+    Math.exp(
+      -x * x - 1.26551223 + t * (1.00002368 + t * (0.37409196 + t * (0.09678418 + t * (-0.18628806 +
+        t * (0.27886807 + t * (-1.13520398 + t * (1.48851587 + t * (-0.82215223 + t * 0.17087277)))))))),
+    );
+  return z >= 0 ? erfc / 2 : 1 - erfc / 2;
+}
+
+/** Exact two-sided p for U with no ties (counts of U values by dynamic programming). */
+function exactMannWhitneyP(u: number, n1: number, n2: number) {
+  // f[i][j][k] = number of arrangements with i of sample 1 and j of sample 2 giving U = k
+  const maxU = n1 * n2;
+  let prev: number[][] = Array.from({ length: n2 + 1 }, () => new Array(maxU + 1).fill(0));
+  for (let j = 0; j <= n2; j += 1) prev[j][0] = 1;
+  for (let i = 1; i <= n1; i += 1) {
+    const cur: number[][] = Array.from({ length: n2 + 1 }, () => new Array(maxU + 1).fill(0));
+    cur[0][0] = 1;
+    for (let j = 1; j <= n2; j += 1) {
+      for (let k = 0; k <= i * j; k += 1) {
+        // last element from sample 1 (beats j of sample 2) or from sample 2
+        cur[j][k] = (k - j >= 0 ? prev[j][k - j] : 0) + cur[j - 1][k];
+      }
+    }
+    prev = cur;
+  }
+  const dist = prev[n2];
+  const total = dist.reduce((s, v) => s + v, 0);
+  const lower = Math.min(u, maxU - u);
+  let cum = 0;
+  for (let k = 0; k <= lower; k += 1) cum += dist[k];
+  return Math.min(1, (2 * cum) / total);
+}
+
+export type MannWhitneyResult = {
+  n1: number;
+  n2: number;
+  u1: number;
+  u2: number;
+  u: number;
+  z: number;
+  p: number;
+  exact: boolean;
+  r: number;
+  median1: number;
+  median2: number;
+  meanRank1: number;
+  meanRank2: number;
+  ties: boolean;
+};
+
+export function mannWhitney(group1: number[], group2: number[]): MannWhitneyResult {
+  const n1 = group1.length;
+  const n2 = group2.length;
+  if (n1 < 2 || n2 < 2) throw new Error("Each group needs at least 2 values.");
+  const all = [...group1.map((v) => ({ v, g: 1 })), ...group2.map((v) => ({ v, g: 2 }))].sort((a, b) => a.v - b.v);
+  const ranks = new Array(all.length).fill(0);
+  let tieTerm = 0;
+  let ties = false;
+  for (let i = 0; i < all.length; ) {
+    let j = i;
+    while (j + 1 < all.length && all[j + 1].v === all[i].v) j += 1;
+    const avg = (i + j) / 2 + 1;
+    for (let k = i; k <= j; k += 1) ranks[k] = avg;
+    const t = j - i + 1;
+    if (t > 1) {
+      ties = true;
+      tieTerm += t ** 3 - t;
+    }
+    i = j + 1;
+  }
+  let r1 = 0;
+  all.forEach((item, i) => {
+    if (item.g === 1) r1 += ranks[i];
+  });
+  const N = n1 + n2;
+  const u1 = r1 - (n1 * (n1 + 1)) / 2;
+  const u2 = n1 * n2 - u1;
+  const u = Math.min(u1, u2);
+  const mu = (n1 * n2) / 2;
+  const sigma = Math.sqrt(((n1 * n2) / 12) * (N + 1 - tieTerm / (N * (N - 1))));
+  const z = sigma > 0 ? (u1 - mu - Math.sign(u1 - mu) * 0.5) / sigma : 0;
+  const exact = !ties && n1 <= 25 && n2 <= 25;
+  const p = exact ? exactMannWhitneyP(u1, n1, n2) : Math.min(1, 2 * normalSf(Math.abs(z)));
+  const zNoCc = sigma > 0 ? (u1 - mu) / sigma : 0;
+  return {
+    n1,
+    n2,
+    u1,
+    u2,
+    u,
+    z: zNoCc,
+    p,
+    exact,
+    r: Math.abs(zNoCc) / Math.sqrt(N),
+    median1: median(group1),
+    median2: median(group2),
+    meanRank1: r1 / n1,
+    meanRank2: (N * (N + 1)) / 2 / n2 - (r1 / n2),
+    ties,
+  };
+}

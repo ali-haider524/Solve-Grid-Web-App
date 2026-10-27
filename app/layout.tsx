@@ -58,9 +58,11 @@ export const metadata: Metadata = {
     title: "SolveGrid | Free Statistics Calculators for Thesis & Survey Research",
     description: siteDescription,
     url: "/",
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "SolveGrid statistics calculators for thesis research" }],
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
+    images: ["/og-image.png"],
     title: "SolveGrid | Free Statistics Calculators for Thesis & Survey Research",
     description: siteDescription,
   },

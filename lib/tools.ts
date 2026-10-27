@@ -505,10 +505,9 @@ export const tools: ToolInfo[] = [
     shortName: "Statistics",
     category: "statistics",
     icon: "σ",
-    title:
-      "Statistics Calculator – Standard Deviation, Variance, Quartiles & Regression",
+    title: "Standard Deviation & Statistics Calculator",
     description:
-      "Calculate sample or population standard deviation, variance, mean, median, mode, quartiles, IQR, frequency tables, grouped data, correlation, and regression.",
+      "Calculate sample or population standard deviation, variance, mean, median, quartiles, IQR, frequency tables, and regression from raw or grouped data.",
     summary:
       "Analyse raw data, frequency tables, grouped intervals, or paired X/Y values using descriptive statistics, sample and population standard deviation, variance, quartiles, IQR, outlier checks, and regression results.",
     keywords: [
@@ -937,9 +936,9 @@ export const tools: ToolInfo[] = [
     shortName: "Advanced statistics",
     category: "statistics",
     icon: "t",
-    title: "Advanced Statistics Calculator – t Tests, ANOVA & Correlation",
+    title: "t-Test, ANOVA & Correlation Calculator",
     description:
-      "Run one-sample and Welch t-tests, Pearson correlation, regression, and one-way ANOVA online with p values, assumptions, and transparent outputs.",
+      "Run one-sample and Welch t-tests, one-way ANOVA, and Pearson correlation online with p values, assumptions, and clear outputs. Free, browser-based.",
     summary:
       "Use an inference-focused statistics workspace for t-tests, correlation, simple regression, and one-way ANOVA with visible assumptions.",
     keywords: [
@@ -988,9 +987,9 @@ export const tools: ToolInfo[] = [
     shortName: "Sample size",
     category: "statistics",
     icon: "n",
-    title: "Sample Size Calculator – Slovin, Yamane & Cochran Formula",
+    title: "Sample Size Calculator – Slovin, Yamane & Cochran",
     description:
-      "Calculate research sample size with Slovin's formula, Taro Yamane, or Cochran's formula with finite population correction. Shows every step and a methodology sentence.",
+      "Free sample size calculator using Slovin, Taro Yamane, or Cochran's formula with finite population correction. Every step shown, plus a methods sentence.",
     summary:
       "Find the minimum sample size for a survey or thesis using Slovin/Yamane or Cochran's formula, with confidence level, margin of error, population size, response-rate adjustment, and a copy-ready methods sentence.",
     keywords: [
@@ -1049,9 +1048,9 @@ export const tools: ToolInfo[] = [
     shortName: "Cronbach's alpha",
     category: "statistics",
     icon: "α",
-    title: "Cronbach's Alpha Calculator – Reliability, Item-Total & Alpha if Deleted",
+    title: "Cronbach's Alpha Calculator with Alpha If Deleted",
     description:
-      "Paste questionnaire responses to calculate Cronbach's alpha, corrected item-total correlations, and alpha if item deleted. Handles reverse-coded Likert items.",
+      "Paste survey data to get Cronbach's alpha, item-total correlations, and alpha if item deleted. Handles reverse-coded Likert items. Free, no sign-up.",
     summary:
       "Check the internal consistency of a questionnaire scale from raw item scores, reverse-code negatively worded items, and see which items lower reliability.",
     keywords: [
@@ -1103,9 +1102,9 @@ export const tools: ToolInfo[] = [
     shortName: "Likert weighted mean",
     category: "statistics",
     icon: "Σw",
-    title: "Likert Scale Calculator – Weighted Mean, SD & Verbal Interpretation",
+    title: "Likert Weighted Mean & Interpretation Calculator",
     description:
-      "Enter response counts for each Likert statement to get the weighted mean, standard deviation, verbal interpretation, and overall mean for 4-, 5-, or 7-point scales.",
+      "Get the weighted mean, SD, rank, and verbal interpretation for each Likert statement on 4-, 5-, or 7-point scales. Ready for your thesis results chapter.",
     summary:
       "Turn questionnaire frequency counts into weighted means, standard deviations, rankings, and a verbal interpretation table ready for a thesis results chapter.",
     keywords: [
@@ -1157,9 +1156,9 @@ export const tools: ToolInfo[] = [
     shortName: "Test chooser",
     category: "statistics",
     icon: "?",
-    title: "Which Statistical Test Should I Use? Interactive Test Chooser",
+    title: "Which Statistical Test Should I Use? Test Chooser",
     description:
-      "Answer four questions to find the right statistical test: t-test, ANOVA, chi-square, Mann-Whitney, Wilcoxon, Kruskal-Wallis, or correlation, with assumptions and an APA report sentence.",
+      "Answer 4 questions to pick the right test: t-test, ANOVA, chi-square, Mann-Whitney, Wilcoxon, Kruskal-Wallis, or correlation. Includes an APA sentence.",
     summary:
       "Pick the right statistical test for your thesis in four questions, then see the assumptions to check and a ready-to-edit APA-style sentence for your results chapter.",
     keywords: [
@@ -1210,9 +1209,9 @@ export const tools: ToolInfo[] = [
     shortName: "Chi-square",
     category: "statistics",
     icon: "χ²",
-    title: "Chi-Square Test Calculator – Independence, Goodness of Fit & Cramér's V",
+    title: "Chi-Square Test Calculator with Cramér's V",
     description:
-      "Run a chi-square test of independence or goodness of fit online. Get χ², df, p value, expected counts, Cramér's V, Fisher's exact test for 2×2 tables, and an APA sentence.",
+      "Free chi-square test of independence and goodness-of-fit calculator with p value, expected counts, Cramér's V, Fisher's exact test, and an APA sentence.",
     summary:
       "Test whether two categorical variables are associated, or whether counts match expected proportions, with expected-count checks and a ready-to-use APA write-up.",
     keywords: [
@@ -1255,6 +1254,59 @@ export const tools: ToolInfo[] = [
         question: "Is the Yates continuity correction applied?",
         answer:
           "No. Results match the uncorrected Pearson chi-square reported by most software. For small 2 × 2 tables, Fisher's exact test is shown instead.",
+      },
+    ],
+  },
+  {
+    slug: "mann-whitney-u-test-calculator",
+    name: "Mann-Whitney U Test Calculator",
+    shortName: "Mann-Whitney U",
+    category: "statistics",
+    icon: "U",
+    title: "Mann-Whitney U Test Calculator with Effect Size",
+    description:
+      "Compare two independent groups with the Mann-Whitney U test. Get U, z, exact or approximate p, medians, mean ranks, effect size r, and an APA sentence.",
+    summary:
+      "Run the non-parametric alternative to the independent t-test for Likert items or skewed data, with exact p values for small samples and a ready-to-use write-up.",
+    keywords: [
+      "mann whitney u test calculator",
+      "mann whitney calculator",
+      "wilcoxon rank sum test calculator",
+      "mann whitney u test vs t test",
+      "what is mann whitney u test",
+      "mann whitney effect size",
+      "non parametric test two groups",
+    ],
+    relatedSlugs: ["statistical-test-chooser", "likert-scale-calculator", "advanced-statistics"],
+    featured: true,
+    priority: 0.94,
+    useCases: [
+      "Compare two groups on a single Likert item",
+      "Compare skewed scores between two independent groups",
+      "Report U, z, p, medians, and effect size r",
+    ],
+    features: [
+      "Exact p value for small samples without ties",
+      "Tie-corrected normal approximation",
+      "Medians and mean ranks",
+      "Effect size r",
+      "APA report sentence",
+    ],
+    faqs: [
+      {
+        question: "Does this match SPSS?",
+        answer:
+          "Yes. U, z, and the asymptotic p value follow the same tie-corrected formulas as SPSS and R. For small samples without ties, the exact p value is shown.",
+      },
+      {
+        question: "Can I use the Mann-Whitney U test for Likert scale data?",
+        answer:
+          "Yes. It is the standard choice for comparing two independent groups on a single Likert item, because single items are ordinal.",
+      },
+      {
+        question: "What is a good effect size r?",
+        answer:
+          "Common guidelines are about .10 small, .30 medium, and .50 large (Cohen, 1988). r is calculated as |z| ÷ √N.",
       },
     ],
   },

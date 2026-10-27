@@ -19,6 +19,7 @@
     "/",
     "/statistical-test-chooser",
     "/chi-square-calculator",
+    "/mann-whitney-u-test-calculator",
     "/research-statistics",
     "/sample-size-calculator",
     "/cronbach-alpha-calculator",
@@ -173,6 +174,13 @@
           "cramer"
         ],
         "page": "/chi-square-calculator"
+      },
+      {
+        "contains": [
+          "mann whitney",
+          "rank sum"
+        ],
+        "page": "/mann-whitney-u-test-calculator"
       }
     ]
   }

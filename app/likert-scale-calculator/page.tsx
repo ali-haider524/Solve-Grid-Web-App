@@ -48,7 +48,7 @@ export default function LikertScaleCalculatorPage() {
             heading: "Good practice for your results chapter",
             paragraphs: [
               "Report the weighted mean, standard deviation, and verbal interpretation for each statement, then the grand mean for the dimension. Check scale reliability with Cronbach's alpha before interpreting a composite score.",
-              "Single Likert items are ordinal, so many reviewers also expect medians or frequency percentages. For group comparisons on summed scale scores, use a t-test or ANOVA; for single items, a Mann-Whitney or Kruskal-Wallis test is often safer.",
+              "Single Likert items are ordinal, so many reviewers also expect medians or frequency percentages. For group comparisons on summed scale scores, use a t-test or ANOVA; for single items, a Mann-Whitney U test (two groups) or Kruskal-Wallis test is often safer.",
             ],
           },
           {

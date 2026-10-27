@@ -22,6 +22,7 @@ export type Recommendation = {
   toolLabel?: string;
 };
 
+const mw = { toolHref: "/mann-whitney-u-test-calculator", toolLabel: "Run it in the Mann-Whitney U Calculator" };
 const chi = { toolHref: "/chi-square-calculator", toolLabel: "Run it in the Chi-Square Calculator" };
 const advanced = { toolHref: "/advanced-statistics", toolLabel: "Run it in the Advanced Statistics Lab" };
 
@@ -125,6 +126,7 @@ export function chooseTest(a: Answers): Recommendation {
           why: "You are comparing two separate groups, but the outcome is ordinal (such as a Likert item) or not normally distributed.",
           assumptions: ["Two independent groups", "Outcome at least ordinal", "Similar distribution shapes if you want to compare medians"],
           report: "A Mann-Whitney U test indicated that [outcome] was [significantly / not significantly] higher for [group A] (Mdn = X) than for [group B] (Mdn = X), U = X, p = .XXX.",
+          ...mw,
         };
   }
 

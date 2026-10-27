@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import GuideArticle from "../../../components/GuideArticle";
 
 export const metadata: Metadata = {
-  title: "Which Statistical Test Should I Use? How to Choose (with Table)",
+  title: "Which Statistical Test Should I Use? (With Table)",
   description:
-    "Choose the right statistical test by research question and data type: t-test, ANOVA, chi-square, Mann-Whitney, Wilcoxon, Kruskal-Wallis, Pearson or Spearman, with a decision table and examples.",
+    "Pick the right test by question and data type: t-test, ANOVA, chi-square, Mann-Whitney, Wilcoxon, Kruskal-Wallis, Pearson, or Spearman, with a decision table.",
   alternates: { canonical: "/guides/choose-a-statistical-test" },
 };
 
@@ -95,6 +95,11 @@ export default function ChooseStatisticalTestGuide() {
           label: "Chi-Square Calculator",
           href: "/chi-square-calculator",
           description: "Run a chi-square test of independence or goodness of fit with Cramér's V and Fisher's exact test.",
+        },
+        {
+          label: "Mann-Whitney U Calculator",
+          href: "/mann-whitney-u-test-calculator",
+          description: "Compare two independent groups on ordinal or skewed data with exact p values and effect size.",
         },
         {
           label: "Advanced Statistics Lab",
