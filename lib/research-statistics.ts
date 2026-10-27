@@ -353,3 +353,173 @@ export function likertAnalysis(
 export function fixed(value: number, digits = 3) {
   return Number.isFinite(value) ? value.toFixed(digits) : "—";
 }
+
+/* ---------------- Chi-square ---------------- */
+
+function lnGamma(z: number): number {
+  const g = 7;
+  const c = [
+    0.99999999999980993, 676.5203681218851, -1259.1392167224028, 771.32342877765313,
+    -176.61502916214059, 12.507343278686905, -0.13857109526572012, 9.9843695780195716e-6,
+    1.5056327351493116e-7,
+  ];
+  if (z < 0.5) return Math.log(Math.PI / Math.sin(Math.PI * z)) - lnGamma(1 - z);
+  z -= 1;
+  let x = c[0];
+  for (let i = 1; i < g + 2; i += 1) x += c[i] / (z + i);
+  const t = z + g + 0.5;
+  return 0.5 * Math.log(2 * Math.PI) + (z + 0.5) * Math.log(t) - t + Math.log(x);
+}
+
+/** Regularized upper incomplete gamma Q(a, x). */
+function gammaQ(a: number, x: number): number {
+  if (x <= 0) return 1;
+  const gln = lnGamma(a);
+  if (x < a + 1) {
+    let sum = 1 / a;
+    let term = sum;
+    for (let n = 1; n < 500; n += 1) {
+      term *= x / (a + n);
+      sum += term;
+      if (Math.abs(term) < Math.abs(sum) * 1e-15) break;
+    }
+    return 1 - sum * Math.exp(-x + a * Math.log(x) - gln);
+  }
+  let b = x + 1 - a;
+  let c = 1 / 1e-300;
+  let d = 1 / b;
+  let h = d;
+  for (let i = 1; i < 500; i += 1) {
+    const an = -i * (i - a);
+    b += 2;
+    d = an * d + b;
+    if (Math.abs(d) < 1e-300) d = 1e-300;
+    c = b + an / c;
+    if (Math.abs(c) < 1e-300) c = 1e-300;
+    d = 1 / d;
+    const delta = d * c;
+    h *= delta;
+    if (Math.abs(delta - 1) < 1e-15) break;
+  }
+  return Math.exp(-x + a * Math.log(x) - gln) * h;
+}
+
+/** Right-tail p value of the chi-square distribution. */
+export function chiSquarePValue(statistic: number, df: number) {
+  return Math.min(1, Math.max(0, gammaQ(df / 2, statistic / 2)));
+}
+
+function lnFactorial(n: number) {
+  return lnGamma(n + 1);
+}
+
+/** Two-sided Fisher's exact test for a 2×2 table [[a, b], [c, d]]. */
+export function fisherExact2x2(a: number, b: number, c: number, d: number) {
+  const r1 = a + b;
+  const r2 = c + d;
+  const c1 = a + c;
+  const n = r1 + r2;
+  const prob = (x: number) =>
+    Math.exp(
+      lnFactorial(r1) + lnFactorial(r2) + lnFactorial(c1) + lnFactorial(n - c1) -
+        lnFactorial(n) - lnFactorial(x) - lnFactorial(r1 - x) - lnFactorial(c1 - x) - lnFactorial(r2 - c1 + x),
+    );
+  const observed = prob(a);
+  let p = 0;
+  for (let x = Math.max(0, c1 - r2); x <= Math.min(r1, c1); x += 1) {
+    const px = prob(x);
+    if (px <= observed * (1 + 1e-7)) p += px;
+  }
+  return Math.min(1, p);
+}
+
+export type ChiSquareResult = {
+  statistic: number;
+  df: number;
+  p: number;
+  n: number;
+  expected: number[][];
+  cramersV: number;
+  lowExpectedShare: number;
+  minExpected: number;
+  fisherP: number | null;
+};
+
+export function chiSquareIndependence(table: number[][]): ChiSquareResult {
+  const rows = table.length;
+  const cols = table[0]?.length ?? 0;
+  if (rows < 2 || cols < 2) throw new Error("Enter at least a 2 × 2 table of counts.");
+  table.forEach((row, i) => {
+    if (row.length !== cols) throw new Error(`Row ${i + 1} has ${row.length} counts; every row needs ${cols}.`);
+    row.forEach((value) => {
+      if (!Number.isFinite(value) || value < 0 || !Number.isInteger(value)) {
+        throw new Error("Counts must be whole numbers of 0 or more.");
+      }
+    });
+  });
+  const rowTotals = table.map((row) => row.reduce((s, v) => s + v, 0));
+  const colTotals = Array.from({ length: cols }, (_, j) => table.reduce((s, row) => s + row[j], 0));
+  const n = rowTotals.reduce((s, v) => s + v, 0);
+  if (rowTotals.some((t) => t === 0) || colTotals.some((t) => t === 0)) {
+    throw new Error("Every row and column needs at least one count.");
+  }
+  const expected = table.map((_, i) => colTotals.map((ct) => (rowTotals[i] * ct) / n));
+  let statistic = 0;
+  let low = 0;
+  let minExpected = Infinity;
+  table.forEach((row, i) =>
+    row.forEach((obs, j) => {
+      const e = expected[i][j];
+      statistic += (obs - e) ** 2 / e;
+      if (e < 5) low += 1;
+      minExpected = Math.min(minExpected, e);
+    }),
+  );
+  const df = (rows - 1) * (cols - 1);
+  const cramersV = Math.sqrt(statistic / (n * (Math.min(rows, cols) - 1)));
+  const fisherP =
+    rows === 2 && cols === 2 ? fisherExact2x2(table[0][0], table[0][1], table[1][0], table[1][1]) : null;
+  return {
+    statistic,
+    df,
+    p: chiSquarePValue(statistic, df),
+    n,
+    expected,
+    cramersV,
+    lowExpectedShare: low / (rows * cols),
+    minExpected,
+    fisherP,
+  };
+}
+
+export type GoodnessResult = {
+  statistic: number;
+  df: number;
+  p: number;
+  n: number;
+  expected: number[];
+  minExpected: number;
+};
+
+/** Goodness of fit. Expected proportions default to equal; given proportions are normalised. */
+export function chiSquareGoodness(observed: number[], proportions?: number[]): GoodnessResult {
+  if (observed.length < 2) throw new Error("Enter counts for at least two categories.");
+  if (observed.some((v) => !Number.isInteger(v) || v < 0)) throw new Error("Counts must be whole numbers of 0 or more.");
+  const n = observed.reduce((s, v) => s + v, 0);
+  if (n === 0) throw new Error("Enter at least one count.");
+  let props = proportions && proportions.length ? proportions : observed.map(() => 1);
+  if (props.length !== observed.length) throw new Error("Give one expected proportion per category.");
+  if (props.some((v) => !Number.isFinite(v) || v <= 0)) throw new Error("Expected proportions must be positive.");
+  const total = props.reduce((s, v) => s + v, 0);
+  props = props.map((v) => v / total);
+  const expected = props.map((p) => p * n);
+  const statistic = observed.reduce((s, o, i) => s + (o - expected[i]) ** 2 / expected[i], 0);
+  const df = observed.length - 1;
+  return { statistic, df, p: chiSquarePValue(statistic, df), n, expected, minExpected: Math.min(...expected) };
+}
+
+export function formatP(p: number) {
+  if (!Number.isFinite(p)) return "—";
+  if (p < 0.001) return "< .001";
+  return p.toFixed(3).replace(/^0/, "");
+}

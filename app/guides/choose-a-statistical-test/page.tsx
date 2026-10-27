@@ -92,6 +92,11 @@ export default function ChooseStatisticalTestGuide() {
           description: "Answer four questions and get the recommended test, assumptions, and an APA report sentence.",
         },
         {
+          label: "Chi-Square Calculator",
+          href: "/chi-square-calculator",
+          description: "Run a chi-square test of independence or goodness of fit with Cramér's V and Fisher's exact test.",
+        },
+        {
           label: "Advanced Statistics Lab",
           href: "/advanced-statistics",
           description: "Run Welch t-tests, one-way ANOVA, and Pearson correlation with p values.",

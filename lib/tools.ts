@@ -1204,6 +1204,60 @@ export const tools: ToolInfo[] = [
       },
     ],
   },
+  {
+    slug: "chi-square-calculator",
+    name: "Chi-Square Test Calculator",
+    shortName: "Chi-square",
+    category: "statistics",
+    icon: "χ²",
+    title: "Chi-Square Test Calculator – Independence, Goodness of Fit & Cramér's V",
+    description:
+      "Run a chi-square test of independence or goodness of fit online. Get χ², df, p value, expected counts, Cramér's V, Fisher's exact test for 2×2 tables, and an APA sentence.",
+    summary:
+      "Test whether two categorical variables are associated, or whether counts match expected proportions, with expected-count checks and a ready-to-use APA write-up.",
+    keywords: [
+      "chi square test calculator",
+      "chi square calculator",
+      "chi square test of independence calculator",
+      "chi square goodness of fit calculator",
+      "cramers v calculator",
+      "fisher exact test calculator",
+      "chi-square test solved examples",
+      "chi square test is used for what type of data",
+    ],
+    relatedSlugs: ["statistical-test-chooser", "likert-scale-calculator", "sample-size-calculator"],
+    featured: true,
+    priority: 0.95,
+    useCases: [
+      "Test association between two survey questions (crosstab)",
+      "Check whether observed category counts match expected proportions",
+      "Switch to Fisher's exact test when expected counts are small",
+    ],
+    features: [
+      "Test of independence (any r × c table)",
+      "Goodness of fit with custom proportions",
+      "Expected counts and the 5-count rule",
+      "Cramér's V effect size",
+      "Fisher's exact p for 2 × 2 tables",
+    ],
+    faqs: [
+      {
+        question: "When should I use Fisher's exact test instead of chi-square?",
+        answer:
+          "Use Fisher's exact test for a 2 × 2 table when any expected count is below 5. For larger tables with many small expected counts, merge categories or collect more data.",
+      },
+      {
+        question: "Can I enter percentages?",
+        answer:
+          "No. The chi-square test needs raw counts of people or cases. Convert percentages back to counts using the group sizes.",
+      },
+      {
+        question: "Is the Yates continuity correction applied?",
+        answer:
+          "No. Results match the uncorrected Pearson chi-square reported by most software. For small 2 × 2 tables, Fisher's exact test is shown instead.",
+      },
+    ],
+  },
 ];
 
 export function getToolPath(tool: Pick<ToolInfo, "slug"> | string) {

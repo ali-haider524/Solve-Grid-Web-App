@@ -22,6 +22,7 @@ export type Recommendation = {
   toolLabel?: string;
 };
 
+const chi = { toolHref: "/chi-square-calculator", toolLabel: "Run it in the Chi-Square Calculator" };
 const advanced = { toolHref: "/advanced-statistics", toolLabel: "Run it in the Advanced Statistics Lab" };
 
 export function chooseTest(a: Answers): Recommendation {
@@ -41,6 +42,7 @@ export function chooseTest(a: Answers): Recommendation {
         alternative: "Exact binomial test when there are only two categories and a small sample.",
         assumptions: ["Independent observations", "Expected count of at least 5 in each category"],
         report: "A chi-square goodness-of-fit test indicated that [variable] [did / did not] differ from the expected distribution, χ²(df, N = n) = X.XX, p = .XXX.",
+        ...chi,
       };
     }
     return {
@@ -49,6 +51,7 @@ export function chooseTest(a: Answers): Recommendation {
       alternative: "Fisher's exact test when any expected cell count is below 5 (common in small 2×2 tables).",
       assumptions: ["Independent observations: each person counted once", "Expected count of at least 5 in at least 80% of cells"],
       report: "A chi-square test of independence showed [a / no] significant association between [variable A] and [variable B], χ²(df, N = n) = X.XX, p = .XXX, Cramér's V = .XX.",
+      ...chi,
     };
   }
 
