@@ -97,6 +97,11 @@ export default function ChooseStatisticalTestGuide() {
           description: "Independent, paired, and one-sample t-tests with confidence intervals, Cohen's d, and APA text.",
         },
         {
+          label: "One-Way ANOVA Calculator",
+          href: "/one-way-anova-calculator",
+          description: "Paste 3+ groups to get the ANOVA table, η², Levene's test, Welch's ANOVA, Tukey HSD, and an APA sentence.",
+        },
+        {
           label: "Chi-Square Calculator",
           href: "/chi-square-calculator",
           description: "Run a chi-square test of independence or goodness of fit with Cramér's V and Fisher's exact test.",

@@ -27,6 +27,7 @@ const kw = { toolHref: "/kruskal-wallis-test-calculator", toolLabel: "Run it in 
 const mw = { toolHref: "/mann-whitney-u-test-calculator", toolLabel: "Run it in the Mann-Whitney U Calculator" };
 const chi = { toolHref: "/chi-square-calculator", toolLabel: "Run it in the Chi-Square Calculator" };
 const tt = { toolHref: "/t-test-calculator", toolLabel: "Run it in the t-Test Calculator" };
+const anova = { toolHref: "/one-way-anova-calculator", toolLabel: "Run it in the One-Way ANOVA Calculator" };
 const advanced = { toolHref: "/advanced-statistics", toolLabel: "Run it in the Advanced Statistics Lab" };
 
 export function chooseTest(a: Answers): Recommendation {
@@ -159,7 +160,7 @@ export function chooseTest(a: Answers): Recommendation {
         alternative: "Kruskal-Wallis test if the outcome is ordinal or not normal; Welch's ANOVA if group variances differ a lot.",
         assumptions: ["Independent groups", "Roughly normal within each group", "Similar variances (Levene's test)"],
         report: "A one-way ANOVA showed a [significant / non-significant] difference in [outcome] between groups, F(df1, df2) = X.XX, p = .XXX, η² = .XX. [Follow with Tukey post-hoc comparisons if significant.]",
-        ...advanced,
+        ...anova,
       }
     : {
         test: "Kruskal-Wallis H test",

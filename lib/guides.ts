@@ -282,6 +282,7 @@ const preferredGuideSlugsByTool: Record<string, string[]> = {
   "wilcoxon-signed-rank-test-calculator": ["choose-a-statistical-test", "how-to-report-t-test-apa"],
   "kruskal-wallis-test-calculator": ["choose-a-statistical-test", "how-to-report-anova-apa"],
   "intraclass-correlation-calculator": ["choose-a-statistical-test", "likert-scale-interpretation"],
+  "one-way-anova-calculator": ["how-to-report-anova-apa", "choose-a-statistical-test"],
   "t-test-calculator": ["how-to-report-t-test-apa", "choose-a-statistical-test"],
   "sobel-test-calculator": ["how-to-report-t-test-apa", "choose-a-statistical-test"],
   "effect-size-calculator": ["how-to-report-t-test-apa", "how-to-report-anova-apa", "choose-a-statistical-test"],

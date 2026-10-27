@@ -168,7 +168,7 @@ const categoryEditorial: Record<ToolCategory, CategoryEditorial> = {
       {
         title: "Describe and test your data",
         text: "Calculate mean, standard deviation, quartiles, and frequency tables, then run t-tests, one-way ANOVA, and Pearson correlation with stated assumptions.",
-        links: ["statistical-test-chooser", "t-test-calculator", "chi-square-calculator", "mann-whitney-u-test-calculator", "wilcoxon-signed-rank-test-calculator", "kruskal-wallis-test-calculator", "shapiro-wilk-test-calculator", "effect-size-calculator", "sobel-test-calculator", "statistics-calculator", "advanced-statistics"],
+        links: ["statistical-test-chooser", "t-test-calculator", "one-way-anova-calculator", "chi-square-calculator", "mann-whitney-u-test-calculator", "wilcoxon-signed-rank-test-calculator", "kruskal-wallis-test-calculator", "shapiro-wilk-test-calculator", "effect-size-calculator", "sobel-test-calculator", "statistics-calculator", "advanced-statistics"],
       },
     ],
     workflow: [

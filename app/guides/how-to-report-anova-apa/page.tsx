@@ -78,6 +78,11 @@ export default function ReportAnovaGuide() {
       ]}
       toolLinks={[
         {
+          label: "One-Way ANOVA Calculator",
+          href: "/one-way-anova-calculator",
+          description: "Paste 3+ groups to get the ANOVA table, η², Levene's test, Welch's ANOVA, Tukey HSD, and an APA sentence.",
+        },
+        {
           label: "Advanced Statistics Lab",
           href: "/advanced-statistics",
           description: "Run a one-way ANOVA and get F, degrees of freedom, and the p value.",

@@ -1735,6 +1735,65 @@ export const tools: ToolInfo[] = [
       },
     ],
   },
+  {
+    slug: "one-way-anova-calculator",
+    name: "One-Way ANOVA Calculator",
+    shortName: "One-way ANOVA",
+    category: "statistics",
+    icon: "F",
+    title: "One-Way ANOVA Calculator with Tukey HSD",
+    description:
+      "Free one-way ANOVA calculator: paste 3+ groups to get the ANOVA table, F, p, eta squared, Levene's test, Welch's ANOVA, Tukey HSD post hoc tests, and APA text.",
+    summary:
+      "Compare three or more group means from raw data, with a full ANOVA source table, effect sizes, assumption checks, Tukey-Kramer pairwise comparisons, and a ready APA sentence.",
+    keywords: [
+      "one way anova calculator",
+      "anova calculator",
+      "tukey hsd calculator",
+      "anova post hoc test calculator",
+      "welch anova calculator",
+      "anova table calculator",
+      "f test calculator anova",
+      "anova p value calculator",
+    ],
+    relatedSlugs: ["t-test-calculator", "kruskal-wallis-test-calculator", "effect-size-calculator"],
+    featured: true,
+    priority: 0.96,
+    useCases: [
+      "Compare mean scores across three or more teaching methods, departments, or treatment groups",
+      "Find which pairs of groups differ with Tukey HSD after a significant F",
+      "Check equal variances and switch to Welch's ANOVA when needed",
+    ],
+    features: [
+      "Full ANOVA table: SS, df, MS, F, p",
+      "Eta squared and omega squared",
+      "Tukey HSD (Tukey-Kramer) with 95% CIs and adjusted p values",
+      "Levene's (Brown-Forsythe) test and Welch's ANOVA",
+      "APA 7 report sentence",
+    ],
+    faqs: [
+      {
+        question: "What post hoc test should I use after ANOVA?",
+        answer:
+          "Use Tukey HSD when variances are roughly equal; it compares every pair of groups and controls the familywise error rate. If Levene's test is significant, use Games-Howell instead and report Welch's ANOVA.",
+      },
+      {
+        question: "What does a significant F mean in a one-way ANOVA?",
+        answer:
+          "It means at least one group mean differs from the others. It does not say which groups differ, which is why you follow it with post hoc tests such as Tukey HSD.",
+      },
+      {
+        question: "What is a good eta squared value?",
+        answer:
+          "Common benchmarks (Cohen, 1988) are .01 small, .06 medium, and .14 large. Report it with F and p, for example F(2, 21) = 38.85, p < .001, η² = .79.",
+      },
+      {
+        question: "Can I use ANOVA for Likert scale data?",
+        answer:
+          "For summed or averaged scale scores, ANOVA is widely accepted when scores are roughly normal. For a single Likert item, use the Kruskal-Wallis test instead.",
+      },
+    ],
+  },
 ];
 
 export function getToolPath(tool: Pick<ToolInfo, "slug"> | string) {

@@ -1438,3 +1438,172 @@ export function oneSampleT(values: number[], mu: number): TTestResult {
     welch: false,
   };
 }
+
+/* ---------------- One-way ANOVA with Tukey HSD ---------------- */
+
+function normalCdf(z: number) {
+  return z >= 0 ? 1 - normalSf(z) : normalSf(-z);
+}
+
+// P(range of k standard normals < w)
+function normalRangeCdf(w: number, k: number) {
+  if (w <= 0) return 0;
+  const steps = 160;
+  const lo = -8;
+  const hi = 8;
+  const h = (hi - lo) / steps;
+  let sum = 0;
+  for (let i = 0; i <= steps; i += 1) {
+    const z = lo + i * h;
+    const inner = normalCdf(z) - normalCdf(z - w);
+    const f = Math.exp(-0.5 * z * z) / Math.sqrt(2 * Math.PI) * Math.pow(Math.max(inner, 0), k - 1);
+    sum += f * (i === 0 || i === steps ? 1 : i % 2 === 1 ? 4 : 2);
+  }
+  return Math.min(1, k * sum * (h / 3));
+}
+
+// CDF of the studentized range distribution, P(Q < q) for k means and df error degrees of freedom.
+export function ptukey(q: number, k: number, df: number) {
+  if (q <= 0) return 0;
+  if (df > 5000) return normalRangeCdf(q, k);
+  const sigma = 1 / Math.sqrt(2 * df);
+  const lo = Math.max(0, 1 - 9 * sigma);
+  const hi = 1 + 12 * sigma + (df < 10 ? 3 : 0);
+  const steps = 140;
+  const h = (hi - lo) / steps;
+  const logC = (df / 2) * Math.log(df) - lnGamma(df / 2) - (df / 2 - 1) * Math.log(2);
+  let sum = 0;
+  for (let i = 0; i <= steps; i += 1) {
+    const s = lo + i * h;
+    if (s <= 0) continue;
+    const dens = Math.exp(logC + (df - 1) * Math.log(s) - (df * s * s) / 2);
+    sum += dens * normalRangeCdf(q * s, k) * (i === 0 || i === steps ? 1 : i % 2 === 1 ? 4 : 2);
+  }
+  return Math.min(1, Math.max(0, sum * (h / 3)));
+}
+
+export function qtukey(p: number, k: number, df: number) {
+  let lo = 0;
+  let hi = 40;
+  for (let i = 0; i < 36; i += 1) {
+    const mid = (lo + hi) / 2;
+    if (ptukey(mid, k, df) < p) lo = mid;
+    else hi = mid;
+  }
+  return (lo + hi) / 2;
+}
+
+export type AnovaGroup = { name: string; n: number; mean: number; sd: number };
+export type TukeyComparison = { a: string; b: string; diff: number; ciLow: number; ciHigh: number; q: number; p: number };
+export type AnovaResult = {
+  k: number;
+  n: number;
+  ssBetween: number;
+  ssWithin: number;
+  ssTotal: number;
+  dfBetween: number;
+  dfWithin: number;
+  msBetween: number;
+  msWithin: number;
+  f: number;
+  p: number;
+  etaSquared: number;
+  omegaSquared: number;
+  groups: AnovaGroup[];
+  levene: { f: number; df1: number; df2: number; p: number };
+  welch: { f: number; df1: number; df2: number; p: number };
+  tukey: TukeyComparison[];
+};
+
+function anovaCore(groups: number[][]) {
+  const all = groups.flat();
+  const n = all.length;
+  const k = groups.length;
+  const grand = all.reduce((s, v) => s + v, 0) / n;
+  const means = groups.map((g) => g.reduce((s, v) => s + v, 0) / g.length);
+  const ssBetween = groups.reduce((s, g, i) => s + g.length * (means[i] - grand) ** 2, 0);
+  const ssWithin = groups.reduce((s, g, i) => s + g.reduce((t, v) => t + (v - means[i]) ** 2, 0), 0);
+  const dfBetween = k - 1;
+  const dfWithin = n - k;
+  const f = ssWithin === 0 ? Infinity : ssBetween / dfBetween / (ssWithin / dfWithin);
+  const p = Number.isFinite(f) ? 1 - fCdf(f, dfBetween, dfWithin) : 0;
+  return { n, k, means, ssBetween, ssWithin, dfBetween, dfWithin, f, p };
+}
+
+export function oneWayAnova(input: Array<{ name: string; values: number[] }>): AnovaResult {
+  const k = input.length;
+  if (k < 2) throw new Error("Enter at least 2 groups (3 or more for a typical one-way ANOVA).");
+  input.forEach((g) => {
+    if (g.values.length < 2) throw new Error(`${g.name} needs at least 2 values.`);
+  });
+  const values = input.map((g) => g.values);
+  const core = anovaCore(values);
+  if (core.dfWithin < 1) throw new Error("Not enough values: total N must be larger than the number of groups.");
+  const msBetween = core.ssBetween / core.dfBetween;
+  const msWithin = core.ssWithin / core.dfWithin;
+  const ssTotal = core.ssBetween + core.ssWithin;
+  const groups = input.map((g, i) => ({
+    name: g.name,
+    n: g.values.length,
+    mean: core.means[i],
+    sd: Math.sqrt(g.values.reduce((s, v) => s + (v - core.means[i]) ** 2, 0) / (g.values.length - 1)),
+  }));
+
+  // Levene (Brown-Forsythe, median-centred)
+  const dev = values.map((g) => {
+    const m = median(g);
+    return g.map((v) => Math.abs(v - m));
+  });
+  const lev = anovaCore(dev);
+  const levene = { f: lev.f, df1: lev.dfBetween, df2: lev.dfWithin, p: Number.isFinite(lev.f) ? lev.p : 0 };
+
+  // Welch's ANOVA
+  const w = groups.map((g) => g.n / (g.sd * g.sd));
+  const sw = w.reduce((s, v) => s + v, 0);
+  const wMean = groups.reduce((s, g, i) => s + w[i] * g.mean, 0) / sw;
+  const a = groups.reduce((s, g, i) => s + w[i] * (g.mean - wMean) ** 2, 0) / (k - 1);
+  const lam = groups.reduce((s, g, i) => s + (1 - w[i] / sw) ** 2 / (g.n - 1), 0);
+  const welchF = a / (1 + ((2 * (k - 2)) / (k * k - 1)) * lam);
+  const welchDf2 = (k * k - 1) / (3 * lam);
+  const welch = { f: welchF, df1: k - 1, df2: welchDf2, p: Number.isFinite(welchF) ? 1 - fCdf(welchF, k - 1, welchDf2) : NaN };
+
+  // Tukey HSD (Tukey-Kramer for unequal n)
+  const qCrit = qtukey(0.95, k, core.dfWithin);
+  const tukey: TukeyComparison[] = [];
+  for (let i = 0; i < k; i += 1) {
+    for (let j = i + 1; j < k; j += 1) {
+      const diff = groups[j].mean - groups[i].mean;
+      const se = Math.sqrt((msWithin / 2) * (1 / groups[i].n + 1 / groups[j].n));
+      const q = Math.abs(diff) / se;
+      tukey.push({
+        a: groups[i].name,
+        b: groups[j].name,
+        diff,
+        ciLow: diff - qCrit * se,
+        ciHigh: diff + qCrit * se,
+        q,
+        p: Math.min(1, Math.max(0, 1 - ptukey(q, k, core.dfWithin))),
+      });
+    }
+  }
+
+  return {
+    k,
+    n: core.n,
+    ssBetween: core.ssBetween,
+    ssWithin: core.ssWithin,
+    ssTotal,
+    dfBetween: core.dfBetween,
+    dfWithin: core.dfWithin,
+    msBetween,
+    msWithin,
+    f: core.f,
+    p: core.p,
+    etaSquared: core.ssBetween / ssTotal,
+    omegaSquared: Math.max(0, (core.ssBetween - core.dfBetween * msWithin) / (ssTotal + msWithin)),
+    groups,
+    levene,
+    welch,
+    tukey,
+  };
+}

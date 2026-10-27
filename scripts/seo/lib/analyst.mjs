@@ -64,6 +64,7 @@ function specialCandidates(query) {
     [/intraclass|\bicc\b|test.retest/, ["/intraclass-correlation-calculator"]],
     [/kappa|inter.?rater/, ["/cohens-kappa-calculator"]],
     [/report (an )?anova/, ["/guides/how-to-report-anova-apa"]],
+    [/anova|tukey|post.?hoc/, ["/one-way-anova-calculator"]],
     [/report (a )?t.?test/, ["/guides/how-to-report-t-test-apa"]],
     [/\bt.?test|welch|paired sample/, ["/t-test-calculator"]],
     [/shapiro|normality/, ["/shapiro-wilk-test-calculator"]],

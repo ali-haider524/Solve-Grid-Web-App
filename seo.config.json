@@ -16,6 +16,7 @@
     }
   ],
   "priorityPages": [
+    "/one-way-anova-calculator",
     "/t-test-calculator",
     "/",
     "/statistical-test-chooser",
@@ -269,6 +270,14 @@
           "paired sample"
         ],
         "page": "/t-test-calculator"
+      },
+      {
+        "contains": [
+          "anova",
+          "tukey",
+          "post hoc"
+        ],
+        "page": "/one-way-anova-calculator"
       },
       {
         "contains": [
