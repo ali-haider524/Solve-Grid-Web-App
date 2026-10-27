@@ -1363,6 +1363,58 @@ export const tools: ToolInfo[] = [
       },
     ],
   },
+  {
+    slug: "cohens-kappa-calculator",
+    name: "Cohen's Kappa Calculator",
+    shortName: "Cohen's kappa",
+    category: "statistics",
+    icon: "κ",
+    title: "Cohen's Kappa Calculator – Inter-Rater Agreement",
+    description:
+      "Calculate Cohen's kappa and weighted kappa for two raters. Get the 95% CI, p value, percent agreement, Landis and Koch interpretation, and an APA sentence.",
+    summary:
+      "Measure agreement between two raters or coders beyond chance, with confidence intervals and weighted kappa for ordered categories.",
+    keywords: [
+      "cohen's kappa calculator",
+      "cohen kappa calculator",
+      "inter rater reliability calculator",
+      "weighted kappa calculator",
+      "cohen kappa interpretation",
+      "kappa statistic calculator",
+      "intercoder reliability",
+    ],
+    relatedSlugs: ["cronbach-alpha-calculator", "chi-square-calculator", "statistical-test-chooser"],
+    featured: true,
+    priority: 0.93,
+    useCases: [
+      "Check intercoder reliability in qualitative coding",
+      "Measure agreement between two diagnosticians or graders",
+      "Report kappa with a confidence interval in a thesis",
+    ],
+    features: [
+      "Unweighted, linear, and quadratic weighted kappa",
+      "95% confidence interval and p value",
+      "Observed and chance agreement",
+      "Landis and Koch interpretation",
+      "APA report sentence",
+    ],
+    faqs: [
+      {
+        question: "What is a good Cohen's kappa?",
+        answer:
+          "Landis and Koch (1977) call 0.61–0.80 substantial and above 0.80 almost perfect. Many health and education studies expect at least 0.60; McHugh (2012) recommends 0.80 or higher for clinical research.",
+      },
+      {
+        question: "Can I use Cohen's kappa with three raters?",
+        answer: "No. Cohen's kappa is for exactly two raters. With three or more raters, use Fleiss' kappa.",
+      },
+      {
+        question: "Why is my kappa low when agreement is high?",
+        answer:
+          "When one category is very common, chance agreement is high, so kappa drops even with high percent agreement. Report both values and explain the category balance.",
+      },
+    ],
+  },
 ];
 
 export function getToolPath(tool: Pick<ToolInfo, "slug"> | string) {

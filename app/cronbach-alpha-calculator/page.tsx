@@ -46,6 +46,7 @@ export default function CronbachAlphaCalculatorPage() {
             paragraphs: [
               "Example: “The 10-item engagement scale showed good internal consistency (Cronbach's α = .84, N = 212).” APA style drops the leading zero for values that cannot exceed 1.",
               "Report alpha separately for each subscale, not only for the full questionnaire, and mention any items removed and why.",
+              "Alpha measures internal consistency of one scale. For agreement between two raters or coders, use Cohen's kappa instead.",
             ],
           },
           {

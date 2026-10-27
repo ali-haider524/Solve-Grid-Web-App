@@ -204,6 +204,22 @@ export const guides: GuideInfo[] = [
     toolSlugs: ["likert-scale-calculator", "cronbach-alpha-calculator"],
     topic: "statistics",
   },
+  {
+    slug: "how-to-report-anova-apa",
+    title: "How to report ANOVA results in APA style",
+    summary:
+      "Copy-ready APA templates for one-way, Welch, repeated-measures, and two-way ANOVA with effect sizes and post hoc tests.",
+    toolSlugs: ["advanced-statistics", "statistical-test-chooser"],
+    topic: "statistics",
+  },
+  {
+    slug: "how-to-report-t-test-apa",
+    title: "How to report a t-test in APA style",
+    summary:
+      "APA templates for independent, Welch, paired, and one-sample t-tests, plus their non-parametric alternatives.",
+    toolSlugs: ["advanced-statistics", "mann-whitney-u-test-calculator"],
+    topic: "statistics",
+  },
 ];
 
 export const guideSlugs = guides.map((guide) => guide.slug);
@@ -247,12 +263,14 @@ const preferredGuideSlugsByTool: Record<string, string[]> = {
   ],
   "advanced-statistics": [
     "choose-a-statistical-test",
-    "standard-deviation-formula",
+    "how-to-report-t-test-apa",
+    "how-to-report-anova-apa",
   ],
   "statistical-test-chooser": ["choose-a-statistical-test", "likert-scale-interpretation"],
   "chi-square-calculator": ["choose-a-statistical-test", "likert-scale-interpretation"],
-  "mann-whitney-u-test-calculator": ["choose-a-statistical-test", "likert-scale-interpretation"],
-  "shapiro-wilk-test-calculator": ["choose-a-statistical-test", "standard-deviation-formula"],
+  "mann-whitney-u-test-calculator": ["choose-a-statistical-test", "how-to-report-t-test-apa"],
+  "shapiro-wilk-test-calculator": ["choose-a-statistical-test", "how-to-report-t-test-apa"],
+  "cohens-kappa-calculator": ["choose-a-statistical-test", "likert-scale-interpretation"],
   "sample-size-calculator": ["slovin-formula-sample-size", "choose-a-statistical-test"],
   "cronbach-alpha-calculator": ["likert-scale-interpretation", "choose-a-statistical-test"],
   "likert-scale-calculator": ["likert-scale-interpretation", "choose-a-statistical-test"],

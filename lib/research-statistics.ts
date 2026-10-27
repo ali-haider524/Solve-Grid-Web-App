@@ -756,3 +756,97 @@ export function shapiroWilk(values: number[]): ShapiroResult {
     kurtosis: m4 / m2 ** 2 - 3,
   };
 }
+
+/* ---------------- Cohen's kappa ---------------- */
+
+export type KappaResult = {
+  n: number;
+  categories: number;
+  observedAgreement: number;
+  expectedAgreement: number;
+  kappa: number;
+  se: number;
+  ciLow: number;
+  ciHigh: number;
+  z: number;
+  p: number;
+  weighted: "none" | "linear" | "quadratic";
+  band: string;
+};
+
+export function kappaBand(k: number) {
+  if (!Number.isFinite(k)) return "Not defined";
+  if (k < 0) return "Poor (less than chance)";
+  if (k <= 0.2) return "Slight";
+  if (k <= 0.4) return "Fair";
+  if (k <= 0.6) return "Moderate";
+  if (k <= 0.8) return "Substantial";
+  return "Almost perfect";
+}
+
+/**
+ * Cohen's kappa from a k × k agreement table (rows = rater 1, columns = rater 2).
+ * Weighted kappa uses linear or quadratic disagreement weights for ordered categories.
+ */
+export function cohensKappa(table: number[][], weighting: "none" | "linear" | "quadratic" = "none"): KappaResult {
+  const k = table.length;
+  if (k < 2) throw new Error("Enter at least a 2 × 2 agreement table.");
+  table.forEach((row, i) => {
+    if (row.length !== k) throw new Error(`The table must be square: row ${i + 1} has ${row.length} values but there are ${k} rows.`);
+    row.forEach((v) => {
+      if (!Number.isInteger(v) || v < 0) throw new Error("Counts must be whole numbers of 0 or more.");
+    });
+  });
+  const n = table.flat().reduce((s, v) => s + v, 0);
+  if (n === 0) throw new Error("Enter at least one rating pair.");
+  const p = table.map((row) => row.map((v) => v / n));
+  const rowM = p.map((row) => row.reduce((s, v) => s + v, 0));
+  const colM = Array.from({ length: k }, (_, j) => p.reduce((s, row) => s + row[j], 0));
+  const w = (i: number, j: number) => {
+    if (weighting === "none") return i === j ? 1 : 0;
+    const d = Math.abs(i - j) / (k - 1);
+    return weighting === "linear" ? 1 - d : 1 - d * d;
+  };
+  let po = 0;
+  let pe = 0;
+  for (let i = 0; i < k; i += 1) {
+    for (let j = 0; j < k; j += 1) {
+      po += w(i, j) * p[i][j];
+      pe += w(i, j) * rowM[i] * colM[j];
+    }
+  }
+  if (pe === 1) throw new Error("Expected agreement is 100%, so kappa is undefined (both raters used one category only).");
+  const kappa = (po - pe) / (1 - pe);
+
+  // Large-sample standard errors (Fleiss, Cohen & Everitt, 1969).
+  const wBarRow = Array.from({ length: k }, (_, i) => colM.reduce((s, c, j) => s + w(i, j) * c, 0));
+  const wBarCol = Array.from({ length: k }, (_, j) => rowM.reduce((s, r, i) => s + w(i, j) * r, 0));
+  let varA = 0;
+  let var0 = 0;
+  for (let i = 0; i < k; i += 1) {
+    for (let j = 0; j < k; j += 1) {
+      const termA = w(i, j) * (1 - pe) - (wBarRow[i] + wBarCol[j]) * (1 - po);
+      varA += p[i][j] * termA ** 2;
+      var0 += rowM[i] * colM[j] * (w(i, j) - (wBarRow[i] + wBarCol[j])) ** 2;
+    }
+  }
+  varA = (varA - (po * pe - 2 * pe + po) ** 2) / (n * (1 - pe) ** 4);
+  var0 = (var0 - pe ** 2) / (n * (1 - pe) ** 2);
+  const se = Math.sqrt(Math.max(0, varA));
+  const se0 = Math.sqrt(Math.max(0, var0));
+  const z = se0 > 0 ? kappa / se0 : 0;
+  return {
+    n,
+    categories: k,
+    observedAgreement: po,
+    expectedAgreement: pe,
+    kappa,
+    se,
+    ciLow: kappa - 1.96 * se,
+    ciHigh: kappa + 1.96 * se,
+    z,
+    p: Math.min(1, 2 * normalSf(Math.abs(z))),
+    weighted: weighting,
+    band: kappaBand(kappa),
+  };
+}

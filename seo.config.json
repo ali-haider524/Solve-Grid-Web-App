@@ -21,6 +21,9 @@
     "/chi-square-calculator",
     "/mann-whitney-u-test-calculator",
     "/shapiro-wilk-test-calculator",
+    "/cohens-kappa-calculator",
+    "/guides/how-to-report-anova-apa",
+    "/guides/how-to-report-t-test-apa",
     "/research-statistics",
     "/sample-size-calculator",
     "/cronbach-alpha-calculator",
@@ -189,6 +192,27 @@
           "normality"
         ],
         "page": "/shapiro-wilk-test-calculator"
+      },
+      {
+        "contains": [
+          "kappa",
+          "inter rater",
+          "interrater"
+        ],
+        "page": "/cohens-kappa-calculator"
+      },
+      {
+        "contains": [
+          "report anova"
+        ],
+        "page": "/guides/how-to-report-anova-apa"
+      },
+      {
+        "contains": [
+          "report t test",
+          "report t-test"
+        ],
+        "page": "/guides/how-to-report-t-test-apa"
       }
     ]
   }
