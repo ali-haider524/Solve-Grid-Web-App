@@ -1623,6 +1623,59 @@ export const tools: ToolInfo[] = [
       },
     ],
   },
+  {
+    slug: "sobel-test-calculator",
+    name: "Sobel Test Calculator",
+    shortName: "Sobel test",
+    category: "statistics",
+    icon: "ab",
+    title: "Sobel Test Calculator for Mediation Analysis",
+    description:
+      "Test a mediation (indirect) effect with the Sobel, Aroian, and Goodman tests. Enter a, b, and their standard errors to get z, p, a 95% CI, and APA text.",
+    summary:
+      "Check whether a mediator carries the effect of X on Y, with three classic z tests, the proportion mediated, and clear guidance on when bootstrapping is better.",
+    keywords: [
+      "sobel test calculator",
+      "sobel test online",
+      "mediation analysis calculator",
+      "indirect effect calculator",
+      "aroian test",
+      "goodman test mediation",
+      "how to report sobel test",
+    ],
+    relatedSlugs: ["advanced-statistics", "effect-size-calculator", "statistical-test-chooser"],
+    featured: true,
+    priority: 0.9,
+    useCases: [
+      "Test the indirect effect X → M → Y in a thesis model",
+      "Report a Sobel test alongside regression results",
+      "Estimate the proportion of the total effect that is mediated",
+    ],
+    features: [
+      "Sobel, Aroian, and Goodman z tests",
+      "Indirect effect a × b with 95% CI",
+      "Proportion mediated (ab ÷ c)",
+      "Step-by-step regression guidance",
+      "APA report sentence",
+    ],
+    faqs: [
+      {
+        question: "Which values do I enter for a and b?",
+        answer:
+          "a is the unstandardised coefficient of X when predicting M. b is the coefficient of M when predicting Y with X also in the model. Enter each coefficient's standard error from the same output.",
+      },
+      {
+        question: "Is the Sobel test still acceptable?",
+        answer:
+          "It is widely cited and fine as a supporting result, but bootstrap confidence intervals are now preferred because the Sobel test assumes the indirect effect is normally distributed.",
+      },
+      {
+        question: "What is the difference between Sobel, Aroian, and Goodman?",
+        answer:
+          "They differ only in a small second-order term in the standard error. Aroian adds it, Goodman subtracts it, and Sobel leaves it out. With reasonable sample sizes they give very similar results.",
+      },
+    ],
+  },
 ];
 
 export function getToolPath(tool: Pick<ToolInfo, "slug"> | string) {

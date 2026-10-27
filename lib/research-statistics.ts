@@ -1239,3 +1239,44 @@ export function intraclassCorrelation(matrix: number[][]): IccResult {
     ],
   };
 }
+
+/* ---------------- Sobel / mediation ---------------- */
+
+export type SobelResult = {
+  indirect: number;
+  sobel: { se: number; z: number; p: number };
+  aroian: { se: number; z: number; p: number };
+  goodman: { se: number; z: number; p: number } | null;
+  ciLow: number;
+  ciHigh: number;
+  proportionMediated: number | null;
+};
+
+/**
+ * Sobel (1982), Aroian (1947) and Goodman (1960) tests of the indirect effect a × b.
+ * a and se(a) come from X → M; b and se(b) from M → Y controlling for X. c (total effect) is optional.
+ */
+export function sobelTest(a: number, sa: number, b: number, sb: number, c?: number): SobelResult {
+  [a, sa, b, sb].forEach((v) => {
+    if (!Number.isFinite(v)) throw new Error("Enter a, SE(a), b, and SE(b).");
+  });
+  if (sa <= 0 || sb <= 0) throw new Error("Standard errors must be greater than 0.");
+  const ab = a * b;
+  const test = (variance: number) => {
+    const se = Math.sqrt(variance);
+    const z = ab / se;
+    return { se, z, p: Math.min(1, 2 * normalSf(Math.abs(z))) };
+  };
+  const base = b * b * sa * sa + a * a * sb * sb;
+  const goodmanVar = base - sa * sa * sb * sb;
+  const sobel = test(base);
+  return {
+    indirect: ab,
+    sobel,
+    aroian: test(base + sa * sa * sb * sb),
+    goodman: goodmanVar > 0 ? test(goodmanVar) : null,
+    ciLow: ab - 1.96 * sobel.se,
+    ciHigh: ab + 1.96 * sobel.se,
+    proportionMediated: c !== undefined && Number.isFinite(c) && c !== 0 ? ab / c : null,
+  };
+}

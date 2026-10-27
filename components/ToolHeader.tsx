@@ -51,6 +51,7 @@ const menuToolSlugsByCategory: Record<ToolCategory, string[]> = {
     "cohens-kappa-calculator",
     "intraclass-correlation-calculator",
     "effect-size-calculator",
+    "sobel-test-calculator",
     "statistics-calculator",
     "advanced-statistics",
   ],

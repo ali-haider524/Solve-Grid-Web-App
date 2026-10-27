@@ -50,7 +50,7 @@ export default function ChiSquareCalculatorPage() {
           {
             heading: "How to report it (APA style)",
             paragraphs: [
-              "“A chi-square test of independence showed a significant association between study mode and exam outcome, χ²(1, N = 100) = 4.00, p = .046, Cramér's V = .20.” Include N in the brackets and report the effect size.",
+              "“A chi-square test of independence showed a significant association between study mode and exam outcome, χ²(1, N = 100) = 4.00, p = .046, Cramér's V = .20.” Include N in the brackets and report the effect size. The APA chi-square guide has templates for every case.",
             ],
           },
           {

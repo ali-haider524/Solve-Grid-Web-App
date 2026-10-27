@@ -46,6 +46,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "wilcoxon-signed-rank-test-calculator": "2026-10-28",
     "kruskal-wallis-test-calculator": "2026-10-28",
     "intraclass-correlation-calculator": "2026-10-28",
+    "sobel-test-calculator": "2026-10-28",
+    "guides/how-to-report-chi-square-apa": "2026-10-28",
     "statistics-calculator": "2026-10-28",
     "advanced-statistics": "2026-10-28",
     "guides/choose-a-statistical-test": "2026-10-28",

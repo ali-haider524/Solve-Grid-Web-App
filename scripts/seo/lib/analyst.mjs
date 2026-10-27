@@ -69,6 +69,8 @@ function specialCandidates(query) {
     [/wilcoxon|signed.rank/, ["/wilcoxon-signed-rank-test-calculator"]],
     [/kruskal|dunn/, ["/kruskal-wallis-test-calculator"]],
     [/mann.whitney|rank sum/, ["/mann-whitney-u-test-calculator"]],
+    [/report (a )?chi/, ["/guides/how-to-report-chi-square-apa"]],
+    [/sobel|mediation|indirect effect/, ["/sobel-test-calculator"]],
     [/chi.square|cramer/, ["/chi-square-calculator"]],
     [/statistical test|which test/, ["/statistical-test-chooser", "/guides/choose-a-statistical-test"]],
     [/unit conversion|conversion formula/, ["/unit-converter", "/guides/unit-conversion-formulas"]],

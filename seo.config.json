@@ -25,6 +25,8 @@
     "/wilcoxon-signed-rank-test-calculator",
     "/kruskal-wallis-test-calculator",
     "/intraclass-correlation-calculator",
+    "/sobel-test-calculator",
+    "/guides/how-to-report-chi-square-apa",
     "/cohens-kappa-calculator",
     "/guides/how-to-report-anova-apa",
     "/guides/how-to-report-t-test-apa",
@@ -249,6 +251,20 @@
           "test retest"
         ],
         "page": "/intraclass-correlation-calculator"
+      },
+      {
+        "contains": [
+          "sobel",
+          "mediation",
+          "indirect effect"
+        ],
+        "page": "/sobel-test-calculator"
+      },
+      {
+        "contains": [
+          "report chi"
+        ],
+        "page": "/guides/how-to-report-chi-square-apa"
       }
     ]
   }

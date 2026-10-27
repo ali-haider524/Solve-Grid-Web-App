@@ -220,6 +220,14 @@ export const guides: GuideInfo[] = [
     toolSlugs: ["advanced-statistics", "effect-size-calculator", "mann-whitney-u-test-calculator"],
     topic: "statistics",
   },
+  {
+    slug: "how-to-report-chi-square-apa",
+    title: "How to report chi-square results in APA style",
+    summary:
+      "APA templates for chi-square tests of independence and goodness of fit, with N, Cramér's V, and Fisher's exact test.",
+    toolSlugs: ["chi-square-calculator", "statistical-test-chooser"],
+    topic: "statistics",
+  },
 ];
 
 export const guideSlugs = guides.map((guide) => guide.slug);
@@ -267,13 +275,14 @@ const preferredGuideSlugsByTool: Record<string, string[]> = {
     "how-to-report-anova-apa",
   ],
   "statistical-test-chooser": ["choose-a-statistical-test", "likert-scale-interpretation"],
-  "chi-square-calculator": ["choose-a-statistical-test", "likert-scale-interpretation"],
+  "chi-square-calculator": ["how-to-report-chi-square-apa", "choose-a-statistical-test"],
   "mann-whitney-u-test-calculator": ["choose-a-statistical-test", "how-to-report-t-test-apa"],
   "shapiro-wilk-test-calculator": ["choose-a-statistical-test", "how-to-report-t-test-apa"],
   "cohens-kappa-calculator": ["choose-a-statistical-test", "likert-scale-interpretation"],
   "wilcoxon-signed-rank-test-calculator": ["choose-a-statistical-test", "how-to-report-t-test-apa"],
   "kruskal-wallis-test-calculator": ["choose-a-statistical-test", "how-to-report-anova-apa"],
   "intraclass-correlation-calculator": ["choose-a-statistical-test", "likert-scale-interpretation"],
+  "sobel-test-calculator": ["how-to-report-t-test-apa", "choose-a-statistical-test"],
   "effect-size-calculator": ["how-to-report-t-test-apa", "how-to-report-anova-apa", "choose-a-statistical-test"],
   "sample-size-calculator": ["slovin-formula-sample-size", "choose-a-statistical-test"],
   "cronbach-alpha-calculator": ["likert-scale-interpretation", "choose-a-statistical-test"],
