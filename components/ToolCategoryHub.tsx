@@ -163,7 +163,7 @@ const categoryEditorial: Record<ToolCategory, CategoryEditorial> = {
       {
         title: "Questionnaire reliability and Likert data",
         text: "Check internal consistency with Cronbach's alpha, find weak or reverse-coded items, and convert response counts into weighted means and interpretations.",
-        links: ["cronbach-alpha-calculator", "cohens-kappa-calculator", "likert-scale-calculator"],
+        links: ["cronbach-alpha-calculator", "cohens-kappa-calculator", "intraclass-correlation-calculator", "likert-scale-calculator"],
       },
       {
         title: "Describe and test your data",

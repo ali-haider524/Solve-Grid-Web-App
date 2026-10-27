@@ -49,6 +49,7 @@ const menuToolSlugsByCategory: Record<ToolCategory, string[]> = {
     "kruskal-wallis-test-calculator",
     "shapiro-wilk-test-calculator",
     "cohens-kappa-calculator",
+    "intraclass-correlation-calculator",
     "effect-size-calculator",
     "statistics-calculator",
     "advanced-statistics",

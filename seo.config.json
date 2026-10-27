@@ -24,6 +24,7 @@
     "/effect-size-calculator",
     "/wilcoxon-signed-rank-test-calculator",
     "/kruskal-wallis-test-calculator",
+    "/intraclass-correlation-calculator",
     "/cohens-kappa-calculator",
     "/guides/how-to-report-anova-apa",
     "/guides/how-to-report-t-test-apa",
@@ -240,6 +241,14 @@
           "dunn"
         ],
         "page": "/kruskal-wallis-test-calculator"
+      },
+      {
+        "contains": [
+          "intraclass",
+          "icc",
+          "test retest"
+        ],
+        "page": "/intraclass-correlation-calculator"
       }
     ]
   }

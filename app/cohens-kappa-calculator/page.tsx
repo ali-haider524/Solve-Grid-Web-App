@@ -46,7 +46,7 @@ export default function CohensKappaPage() {
               "Two raters, unordered categories → Cohen's kappa",
               "Two raters, ordered categories → weighted kappa (linear or quadratic)",
               "More than two raters, categories → Fleiss' kappa",
-              "Numeric ratings or scores → intraclass correlation (ICC)",
+              "Numeric ratings or scores → intraclass correlation (ICC), see the ICC calculator",
             ],
           },
           {

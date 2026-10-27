@@ -61,6 +61,7 @@ function specialCandidates(query) {
     [/cronbach|reliability/, ["/cronbach-alpha-calculator"]],
     [/likert|weighted mean/, ["/likert-scale-calculator", "/guides/likert-scale-interpretation"]],
     [/effect size|cohen'?s d|hedges|eta squared/, ["/effect-size-calculator"]],
+    [/intraclass|\bicc\b|test.retest/, ["/intraclass-correlation-calculator"]],
     [/kappa|inter.?rater/, ["/cohens-kappa-calculator"]],
     [/report (an )?anova/, ["/guides/how-to-report-anova-apa"]],
     [/report (a )?t.?test/, ["/guides/how-to-report-t-test-apa"]],

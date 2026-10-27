@@ -273,6 +273,7 @@ const preferredGuideSlugsByTool: Record<string, string[]> = {
   "cohens-kappa-calculator": ["choose-a-statistical-test", "likert-scale-interpretation"],
   "wilcoxon-signed-rank-test-calculator": ["choose-a-statistical-test", "how-to-report-t-test-apa"],
   "kruskal-wallis-test-calculator": ["choose-a-statistical-test", "how-to-report-anova-apa"],
+  "intraclass-correlation-calculator": ["choose-a-statistical-test", "likert-scale-interpretation"],
   "effect-size-calculator": ["how-to-report-t-test-apa", "how-to-report-anova-apa", "choose-a-statistical-test"],
   "sample-size-calculator": ["slovin-formula-sample-size", "choose-a-statistical-test"],
   "cronbach-alpha-calculator": ["likert-scale-interpretation", "choose-a-statistical-test"],

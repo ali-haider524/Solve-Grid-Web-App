@@ -1383,7 +1383,7 @@ export const tools: ToolInfo[] = [
       "kappa statistic calculator",
       "intercoder reliability",
     ],
-    relatedSlugs: ["cronbach-alpha-calculator", "chi-square-calculator", "statistical-test-chooser"],
+    relatedSlugs: ["intraclass-correlation-calculator", "cronbach-alpha-calculator", "statistical-test-chooser"],
     featured: true,
     priority: 0.93,
     useCases: [
@@ -1567,6 +1567,59 @@ export const tools: ToolInfo[] = [
         question: "Kruskal-Wallis or one-way ANOVA?",
         answer:
           "Use one-way ANOVA when each group is roughly normal with similar variances. Use Kruskal-Wallis for ordinal data, small groups, or clear skew.",
+      },
+    ],
+  },
+  {
+    slug: "intraclass-correlation-calculator",
+    name: "Intraclass Correlation (ICC) Calculator",
+    shortName: "ICC",
+    category: "statistics",
+    icon: "ρ",
+    title: "Intraclass Correlation (ICC) Calculator with 95% CI",
+    description:
+      "Calculate ICC(1,1), ICC(2,1), ICC(3,1) and average-measure ICCs with 95% confidence intervals and F tests, plus help choosing the right ICC and APA text.",
+    summary:
+      "Assess inter-rater and test-retest reliability for numeric ratings with all six Shrout and Fleiss ICC forms and a guided model choice.",
+    keywords: [
+      "intraclass correlation calculator",
+      "icc calculator",
+      "icc calculator online free",
+      "inter rater reliability icc",
+      "test retest reliability calculator",
+      "which icc to use",
+      "icc interpretation",
+    ],
+    relatedSlugs: ["cohens-kappa-calculator", "cronbach-alpha-calculator", "statistical-test-chooser"],
+    featured: true,
+    priority: 0.93,
+    useCases: [
+      "Check agreement between raters scoring the same subjects",
+      "Measure test-retest reliability of a scale",
+      "Report the ICC model, type, unit, and 95% CI",
+    ],
+    features: [
+      "All six Shrout and Fleiss ICC forms",
+      "95% confidence intervals and F tests",
+      "Guided choice of model, type, and unit",
+      "Koo and Li (2016) interpretation",
+      "APA report sentence",
+    ],
+    faqs: [
+      {
+        question: "Does this match SPSS?",
+        answer:
+          "Yes. The values follow Shrout and Fleiss (1979) and McGraw and Wong (1996), the same definitions used by SPSS RELIABILITY and the R psych package. SPSS's 'two-way mixed, absolute agreement' equals ICC(2,·) here.",
+      },
+      {
+        question: "What is a good ICC value?",
+        answer:
+          "Koo and Li (2016): below .50 poor, .50–.75 moderate, .75–.90 good, and above .90 excellent. Base the judgement on the 95% confidence interval as well as the point estimate.",
+      },
+      {
+        question: "Single measures or average measures?",
+        answer:
+          "Report single measures if one rater's score will be used in practice. Report average measures only if the final score is the mean of all raters.",
       },
     ],
   },

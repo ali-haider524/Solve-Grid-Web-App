@@ -2,7 +2,7 @@
 
 > SolveGrid is an independent browser-based calculator platform focused on research statistics for theses and surveys (sample size, Cronbach's alpha, Likert analysis, t-tests, ANOVA, correlation), with supporting math, engineering, and numerical-methods tools.
 
-SolveGrid provides 23 public tools. Most current calculations run directly in the browser and do not require an account. Tool pages are connected to method guides, related calculators, assumptions, and scope notes where relevant.
+SolveGrid provides 24 public tools. Most current calculations run directly in the browser and do not require an account. Tool pages are connected to method guides, related calculators, assumptions, and scope notes where relevant.
 
 ## Main directories
 
@@ -23,6 +23,7 @@ SolveGrid provides 23 public tools. Most current calculations run directly in th
 - [Kruskal-Wallis Test Calculator](https://solvegrid.online/kruskal-wallis-test-calculator)
 - [Shapiro-Wilk Normality Test Calculator](https://solvegrid.online/shapiro-wilk-test-calculator)
 - [Cohen's Kappa Calculator](https://solvegrid.online/cohens-kappa-calculator)
+- [Intraclass Correlation (ICC) Calculator](https://solvegrid.online/intraclass-correlation-calculator)
 - [Effect Size Calculator (Cohen's d, Hedges' g, eta squared)](https://solvegrid.online/effect-size-calculator)
 - [How to report ANOVA in APA style](https://solvegrid.online/guides/how-to-report-anova-apa)
 - [How to report a t-test in APA style](https://solvegrid.online/guides/how-to-report-t-test-apa)

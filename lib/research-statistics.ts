@@ -1092,3 +1092,150 @@ export function kruskalWallis(groups: Array<{ name: string; values: number[] }>)
     dunn,
   };
 }
+
+/* ---------------- F distribution ---------------- */
+
+function betacf(a: number, b: number, x: number) {
+  const qab = a + b;
+  const qap = a + 1;
+  const qam = a - 1;
+  let c = 1;
+  let d = 1 - (qab * x) / qap;
+  if (Math.abs(d) < 1e-300) d = 1e-300;
+  d = 1 / d;
+  let h = d;
+  for (let m = 1; m <= 300; m += 1) {
+    const m2 = 2 * m;
+    let aa = (m * (b - m) * x) / ((qam + m2) * (a + m2));
+    d = 1 + aa * d;
+    if (Math.abs(d) < 1e-300) d = 1e-300;
+    c = 1 + aa / c;
+    if (Math.abs(c) < 1e-300) c = 1e-300;
+    d = 1 / d;
+    h *= d * c;
+    aa = (-(a + m) * (qab + m) * x) / ((a + m2) * (qap + m2));
+    d = 1 + aa * d;
+    if (Math.abs(d) < 1e-300) d = 1e-300;
+    c = 1 + aa / c;
+    if (Math.abs(c) < 1e-300) c = 1e-300;
+    d = 1 / d;
+    const del = d * c;
+    h *= del;
+    if (Math.abs(del - 1) < 1e-14) break;
+  }
+  return h;
+}
+
+/** Regularized incomplete beta I_x(a, b). */
+function incompleteBeta(x: number, a: number, b: number) {
+  if (x <= 0) return 0;
+  if (x >= 1) return 1;
+  const bt = Math.exp(lnGamma(a + b) - lnGamma(a) - lnGamma(b) + a * Math.log(x) + b * Math.log(1 - x));
+  return x < (a + 1) / (a + b + 2) ? (bt * betacf(a, b, x)) / a : 1 - (bt * betacf(b, a, 1 - x)) / b;
+}
+
+export function fCdf(f: number, d1: number, d2: number) {
+  if (f <= 0) return 0;
+  return incompleteBeta((d1 * f) / (d1 * f + d2), d1 / 2, d2 / 2);
+}
+
+/** Quantile of the F distribution by bisection on the CDF. */
+export function fQuantile(p: number, d1: number, d2: number) {
+  let lo = 0;
+  let hi = 1;
+  while (fCdf(hi, d1, d2) < p) hi *= 2;
+  for (let i = 0; i < 200; i += 1) {
+    const mid = (lo + hi) / 2;
+    if (fCdf(mid, d1, d2) < p) lo = mid;
+    else hi = mid;
+    if (hi - lo < 1e-12 * Math.max(1, hi)) break;
+  }
+  return (lo + hi) / 2;
+}
+
+/* ---------------- Intraclass correlation (Shrout & Fleiss / McGraw & Wong) ---------------- */
+
+export type IccRow = {
+  type: string;
+  label: string;
+  value: number;
+  ciLow: number;
+  ciHigh: number;
+  f: number;
+  df1: number;
+  df2: number;
+  p: number;
+};
+
+export type IccResult = { subjects: number; raters: number; rows: IccRow[] };
+
+export function iccBand(v: number) {
+  if (!Number.isFinite(v)) return "Not defined";
+  if (v < 0.5) return "Poor";
+  if (v < 0.75) return "Moderate";
+  if (v < 0.9) return "Good";
+  return "Excellent";
+}
+
+export function intraclassCorrelation(matrix: number[][]): IccResult {
+  const n = matrix.length;
+  const k = matrix[0]?.length ?? 0;
+  if (n < 3) throw new Error("Enter at least 3 subjects (rows).");
+  if (k < 2) throw new Error("Enter at least 2 raters or measurements (columns).");
+  const grand = matrix.flat().reduce((s, v) => s + v, 0) / (n * k);
+  const rowMeans = matrix.map((r) => r.reduce((s, v) => s + v, 0) / k);
+  const colMeans = Array.from({ length: k }, (_, j) => matrix.reduce((s, r) => s + r[j], 0) / n);
+  const ssTotal = matrix.flat().reduce((s, v) => s + (v - grand) ** 2, 0);
+  const ssR = k * rowMeans.reduce((s, m) => s + (m - grand) ** 2, 0);
+  const ssC = n * colMeans.reduce((s, m) => s + (m - grand) ** 2, 0);
+  const ssE = ssTotal - ssR - ssC;
+  const msR = ssR / (n - 1);
+  const msC = ssC / (k - 1);
+  const msE = ssE / ((n - 1) * (k - 1));
+  const msW = (ssC + ssE) / (n * (k - 1));
+  if (msE <= 0 && msW <= 0) throw new Error("All raters gave identical scores, so the ICC is undefined.");
+  const q = 0.975;
+
+  const icc1 = (msR - msW) / (msR + (k - 1) * msW);
+  const icc2 = (msR - msE) / (msR + (k - 1) * msE + (k * (msC - msE)) / n);
+  const icc3 = (msR - msE) / (msR + (k - 1) * msE);
+  const icc1k = (msR - msW) / msR;
+  const icc2k = (msR - msE) / (msR + (msC - msE) / n);
+  const icc3k = (msR - msE) / msR;
+
+  const f1 = msR / msW;
+  const df1a = n - 1;
+  const df1b = n * (k - 1);
+  const f1L = f1 / fQuantile(q, df1a, df1b);
+  const f1U = f1 * fQuantile(q, df1b, df1a);
+
+  const f3 = msR / msE;
+  const df3b = (n - 1) * (k - 1);
+  const f3L = f3 / fQuantile(q, df1a, df3b);
+  const f3U = f3 * fQuantile(q, df3b, df1a);
+
+  const fj = msC / msE;
+  const vn = (k - 1) * (n - 1) * (k * icc2 * fj + n * (1 + (k - 1) * icc2) - k * icc2) ** 2;
+  const vd = (n - 1) * k * k * icc2 * icc2 * fj * fj + (n * (1 + (k - 1) * icc2) - k * icc2) ** 2;
+  const v = vn / vd;
+  const f2U = fQuantile(q, n - 1, v);
+  const f2L = fQuantile(q, v, n - 1);
+  const lb2 = (n * (msR - f2U * msE)) / (f2U * (k * msC + (k * n - k - n) * msE) + n * msR);
+  const ub2 = (n * (f2L * msR - msE)) / (k * msC + (k * n - k - n) * msE + n * f2L * msR);
+
+  const p1 = 1 - fCdf(f1, df1a, df1b);
+  const p3 = 1 - fCdf(f3, df1a, df3b);
+
+  return {
+    subjects: n,
+    raters: k,
+    rows: [
+      { type: "ICC(1,1)", label: "One-way random, single rater", value: icc1, ciLow: (f1L - 1) / (f1L + k - 1), ciHigh: (f1U - 1) / (f1U + k - 1), f: f1, df1: df1a, df2: df1b, p: p1 },
+      { type: "ICC(2,1)", label: "Two-way random, absolute agreement, single rater", value: icc2, ciLow: lb2, ciHigh: ub2, f: f3, df1: df1a, df2: df3b, p: p3 },
+      { type: "ICC(3,1)", label: "Two-way mixed, consistency, single rater", value: icc3, ciLow: (f3L - 1) / (f3L + k - 1), ciHigh: (f3U - 1) / (f3U + k - 1), f: f3, df1: df1a, df2: df3b, p: p3 },
+      { type: "ICC(1,k)", label: "One-way random, average of raters", value: icc1k, ciLow: 1 - 1 / f1L, ciHigh: 1 - 1 / f1U, f: f1, df1: df1a, df2: df1b, p: p1 },
+      { type: "ICC(2,k)", label: "Two-way random, absolute agreement, average", value: icc2k, ciLow: (lb2 * k) / (1 + lb2 * (k - 1)), ciHigh: (ub2 * k) / (1 + ub2 * (k - 1)), f: f3, df1: df1a, df2: df3b, p: p3 },
+      { type: "ICC(3,k)", label: "Two-way mixed, consistency, average", value: icc3k, ciLow: 1 - 1 / f3L, ciHigh: 1 - 1 / f3U, f: f3, df1: df1a, df2: df3b, p: p3 },
+    ],
+  };
+}
