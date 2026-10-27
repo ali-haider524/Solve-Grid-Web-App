@@ -21,6 +21,7 @@
     "/chi-square-calculator",
     "/mann-whitney-u-test-calculator",
     "/shapiro-wilk-test-calculator",
+    "/effect-size-calculator",
     "/cohens-kappa-calculator",
     "/guides/how-to-report-anova-apa",
     "/guides/how-to-report-t-test-apa",
@@ -213,6 +214,16 @@
           "report t-test"
         ],
         "page": "/guides/how-to-report-t-test-apa"
+      },
+      {
+        "contains": [
+          "effect size",
+          "cohen's d",
+          "cohens d",
+          "hedges",
+          "eta squared"
+        ],
+        "page": "/effect-size-calculator"
       }
     ]
   }

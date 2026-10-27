@@ -209,7 +209,7 @@ export const guides: GuideInfo[] = [
     title: "How to report ANOVA results in APA style",
     summary:
       "Copy-ready APA templates for one-way, Welch, repeated-measures, and two-way ANOVA with effect sizes and post hoc tests.",
-    toolSlugs: ["advanced-statistics", "statistical-test-chooser"],
+    toolSlugs: ["advanced-statistics", "effect-size-calculator", "statistical-test-chooser"],
     topic: "statistics",
   },
   {
@@ -217,7 +217,7 @@ export const guides: GuideInfo[] = [
     title: "How to report a t-test in APA style",
     summary:
       "APA templates for independent, Welch, paired, and one-sample t-tests, plus their non-parametric alternatives.",
-    toolSlugs: ["advanced-statistics", "mann-whitney-u-test-calculator"],
+    toolSlugs: ["advanced-statistics", "effect-size-calculator", "mann-whitney-u-test-calculator"],
     topic: "statistics",
   },
 ];
@@ -271,6 +271,7 @@ const preferredGuideSlugsByTool: Record<string, string[]> = {
   "mann-whitney-u-test-calculator": ["choose-a-statistical-test", "how-to-report-t-test-apa"],
   "shapiro-wilk-test-calculator": ["choose-a-statistical-test", "how-to-report-t-test-apa"],
   "cohens-kappa-calculator": ["choose-a-statistical-test", "likert-scale-interpretation"],
+  "effect-size-calculator": ["how-to-report-t-test-apa", "how-to-report-anova-apa", "choose-a-statistical-test"],
   "sample-size-calculator": ["slovin-formula-sample-size", "choose-a-statistical-test"],
   "cronbach-alpha-calculator": ["likert-scale-interpretation", "choose-a-statistical-test"],
   "likert-scale-calculator": ["likert-scale-interpretation", "choose-a-statistical-test"],

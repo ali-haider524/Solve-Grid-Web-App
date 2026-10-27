@@ -83,6 +83,11 @@ export default function ReportAnovaGuide() {
           description: "Run a one-way ANOVA and get F, degrees of freedom, and the p value.",
         },
         {
+          label: "Effect Size Calculator",
+          href: "/effect-size-calculator",
+          description: "Get Cohen's d, Hedges' g, or partial eta squared from your means, SDs, t, or F value.",
+        },
+        {
           label: "Statistical Test Chooser",
           href: "/statistical-test-chooser",
           description: "Check that ANOVA is the right test, or find the non-parametric alternative.",

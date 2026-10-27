@@ -1415,6 +1415,59 @@ export const tools: ToolInfo[] = [
       },
     ],
   },
+  {
+    slug: "effect-size-calculator",
+    name: "Effect Size Calculator",
+    shortName: "Effect size",
+    category: "statistics",
+    icon: "d",
+    title: "Effect Size Calculator – Cohen's d, Hedges' g & η²",
+    description:
+      "Calculate Cohen's d, Hedges' g, Glass's delta, partial eta squared, and r from means and SDs or from t, F, and z values, with 95% CI and benchmarks.",
+    summary:
+      "Get the effect size for any common test in seconds, from raw summary statistics or from a reported t, F, or z value, with benchmarks and APA wording.",
+    keywords: [
+      "effect size calculator",
+      "cohen's d calculator",
+      "hedges g calculator",
+      "eta squared calculator",
+      "partial eta squared from f",
+      "effect size from t value",
+      "effect size r mann whitney",
+      "convert r to d",
+    ],
+    relatedSlugs: ["statistical-test-chooser", "advanced-statistics", "mann-whitney-u-test-calculator"],
+    featured: true,
+    priority: 0.94,
+    useCases: [
+      "Report Cohen's d alongside a t-test",
+      "Get partial eta squared from an ANOVA F value",
+      "Compute r for Mann-Whitney or Wilcoxon results",
+    ],
+    features: [
+      "Cohen's d with 95% confidence interval",
+      "Hedges' g and Glass's Δ",
+      "d or dz from independent or paired t",
+      "Partial η² and Cohen's f from F",
+      "r from z, and r ↔ d conversion",
+    ],
+    faqs: [
+      {
+        question: "What is a good effect size?",
+        answer:
+          "Cohen (1988) suggested d = 0.2 small, 0.5 medium, and 0.8 large; for η², .01, .06, and .14; for r, .1, .3, and .5. These are rough guides, so compare with typical effects in your own field.",
+      },
+      {
+        question: "Should I use Cohen's d or Hedges' g?",
+        answer:
+          "They are nearly identical with more than about 20 per group. With smaller samples, Hedges' g is preferred because it corrects the slight overestimate in d.",
+      },
+      {
+        question: "Can I calculate an effect size from a p value alone?",
+        answer: "Not reliably. You need the test statistic (t, F, or z) and the sample sizes, or the means and SDs.",
+      },
+    ],
+  },
 ];
 
 export function getToolPath(tool: Pick<ToolInfo, "slug"> | string) {

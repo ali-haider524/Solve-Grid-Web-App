@@ -850,3 +850,92 @@ export function cohensKappa(table: number[][], weighting: "none" | "linear" | "q
     band: kappaBand(kappa),
   };
 }
+
+/* ---------------- Effect sizes ---------------- */
+
+export function dBand(d: number) {
+  const a = Math.abs(d);
+  if (a < 0.2) return "negligible";
+  if (a < 0.5) return "small";
+  if (a < 0.8) return "medium";
+  return "large";
+}
+
+export function etaBand(eta: number) {
+  if (eta < 0.01) return "negligible";
+  if (eta < 0.06) return "small";
+  if (eta < 0.14) return "medium";
+  return "large";
+}
+
+export function rBand(r: number) {
+  const a = Math.abs(r);
+  if (a < 0.1) return "negligible";
+  if (a < 0.3) return "small";
+  if (a < 0.5) return "medium";
+  return "large";
+}
+
+export type MeansEffect = {
+  d: number;
+  g: number;
+  glassDelta: number;
+  pooledSd: number;
+  ciLow: number;
+  ciHigh: number;
+  r: number;
+};
+
+/** Cohen's d, Hedges' g and Glass's delta from two group means, SDs and sizes. */
+export function effectFromMeans(m1: number, sd1: number, n1: number, m2: number, sd2: number, n2: number): MeansEffect {
+  [m1, sd1, n1, m2, sd2, n2].forEach((v) => {
+    if (!Number.isFinite(v)) throw new Error("Fill in every mean, SD, and n.");
+  });
+  if (sd1 <= 0 || sd2 <= 0) throw new Error("Standard deviations must be greater than 0.");
+  if (n1 < 2 || n2 < 2 || !Number.isInteger(n1) || !Number.isInteger(n2)) throw new Error("Each group needs a whole-number n of at least 2.");
+  const df = n1 + n2 - 2;
+  const pooledSd = Math.sqrt(((n1 - 1) * sd1 ** 2 + (n2 - 1) * sd2 ** 2) / df);
+  const d = (m1 - m2) / pooledSd;
+  const j = 1 - 3 / (4 * df - 1);
+  const se = Math.sqrt((n1 + n2) / (n1 * n2) + (d * d) / (2 * (n1 + n2)));
+  return {
+    d,
+    g: d * j,
+    glassDelta: (m1 - m2) / sd2,
+    pooledSd,
+    ciLow: d - 1.96 * se,
+    ciHigh: d + 1.96 * se,
+    r: d / Math.sqrt(d * d + ((n1 + n2) ** 2) / (n1 * n2)),
+  };
+}
+
+/** d from an independent t statistic, or dz from a paired / one-sample t statistic. */
+export function effectFromT(t: number, n1: number, n2?: number) {
+  if (!Number.isFinite(t)) throw new Error("Enter the t value.");
+  if (n2 === undefined) {
+    if (!(n1 >= 2)) throw new Error("Enter n (number of pairs or participants).");
+    return { d: t / Math.sqrt(n1), r: Math.sqrt((t * t) / (t * t + (n1 - 1))) * Math.sign(t) };
+  }
+  if (!(n1 >= 2 && n2 >= 2)) throw new Error("Enter both group sizes.");
+  const df = n1 + n2 - 2;
+  return { d: t * Math.sqrt(1 / n1 + 1 / n2), r: Math.sqrt((t * t) / (t * t + df)) * Math.sign(t) };
+}
+
+/** Partial eta squared and Cohen's f from an F statistic. */
+export function effectFromF(f: number, df1: number, df2: number) {
+  if (!Number.isFinite(f) || f < 0) throw new Error("Enter a non-negative F value.");
+  if (!(df1 >= 1 && df2 >= 1)) throw new Error("Enter both degrees of freedom.");
+  const eta = (f * df1) / (f * df1 + df2);
+  return { etaSquared: eta, cohensF: Math.sqrt(eta / (1 - eta)) };
+}
+
+/** Convert a correlation r to d, and z (e.g. from Mann-Whitney or Wilcoxon) to r. */
+export function effectFromR(r: number) {
+  if (!Number.isFinite(r) || r <= -1 || r >= 1) throw new Error("r must be between −1 and 1.");
+  return { d: (2 * r) / Math.sqrt(1 - r * r), rSquared: r * r };
+}
+
+export function effectFromZ(z: number, n: number) {
+  if (!Number.isFinite(z) || !(n >= 2)) throw new Error("Enter z and the total N.");
+  return { r: z / Math.sqrt(n) };
+}

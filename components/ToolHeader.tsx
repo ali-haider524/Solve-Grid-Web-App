@@ -47,6 +47,7 @@ const menuToolSlugsByCategory: Record<ToolCategory, string[]> = {
     "mann-whitney-u-test-calculator",
     "shapiro-wilk-test-calculator",
     "cohens-kappa-calculator",
+    "effect-size-calculator",
     "statistics-calculator",
     "advanced-statistics",
   ],

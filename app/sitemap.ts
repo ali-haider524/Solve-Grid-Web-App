@@ -16,7 +16,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const coreRoutes: MetadataRoute.Sitemap = [
     {
       url: siteUrl,
-      lastModified: new Date("2026-07-30"),
+      lastModified: new Date("2026-10-28"),
       changeFrequency: "weekly",
       priority: 1,
     },
@@ -32,16 +32,41 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: category === "math" || category === "engineering" ? 0.92 : 0.88,
   }));
 
+  // Update a slug's date here whenever its content changes, so crawlers see real freshness.
+  const contentUpdated: Record<string, string> = {
+    "statistical-test-chooser": "2026-10-28",
+    "sample-size-calculator": "2026-10-28",
+    "cronbach-alpha-calculator": "2026-10-28",
+    "likert-scale-calculator": "2026-10-28",
+    "chi-square-calculator": "2026-10-28",
+    "mann-whitney-u-test-calculator": "2026-10-28",
+    "shapiro-wilk-test-calculator": "2026-10-28",
+    "cohens-kappa-calculator": "2026-10-28",
+    "effect-size-calculator": "2026-10-28",
+    "statistics-calculator": "2026-10-28",
+    "advanced-statistics": "2026-10-28",
+    "guides/choose-a-statistical-test": "2026-10-28",
+    "guides/slovin-formula-sample-size": "2026-10-28",
+    "guides/likert-scale-interpretation": "2026-10-28",
+    "guides/how-to-report-anova-apa": "2026-10-28",
+    "guides/how-to-report-t-test-apa": "2026-10-28",
+    "guides/standard-deviation-formula": "2026-10-28",
+  };
+  const updated = (key: string) =>
+    contentUpdated[key] ? { lastModified: new Date(contentUpdated[key]) } : {};
+
   const toolRoutes: MetadataRoute.Sitemap = tools.map((tool) => ({
     url: `${siteUrl}/${tool.slug}`,
+    ...updated(tool.slug),
     changeFrequency: "weekly",
     priority: tool.priority,
   }));
 
   const guideRoutes: MetadataRoute.Sitemap = guideSlugs.map((slug) => ({
     url: `${siteUrl}/guides/${slug}`,
+    ...updated(`guides/${slug}`),
     changeFrequency: "monthly",
-    priority: 0.76,
+    priority: slug === "choose-a-statistical-test" ? 0.9 : 0.76,
   }));
 
   const trustRoutes: MetadataRoute.Sitemap = trustPages.map((slug) => ({

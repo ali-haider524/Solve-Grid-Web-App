@@ -85,6 +85,11 @@ export default function ReportTTestGuide() {
           description: "Run one-sample and Welch t-tests with p values and confidence intervals.",
         },
         {
+          label: "Effect Size Calculator",
+          href: "/effect-size-calculator",
+          description: "Get Cohen's d, Hedges' g, or partial eta squared from your means, SDs, t, or F value.",
+        },
+        {
           label: "Mann-Whitney U Calculator",
           href: "/mann-whitney-u-test-calculator",
           description: "The non-parametric alternative for two independent groups, with an APA sentence.",
