@@ -17,6 +17,7 @@
   ],
   "priorityPages": [
     "/",
+    "/statistical-test-chooser",
     "/research-statistics",
     "/sample-size-calculator",
     "/cronbach-alpha-calculator",
@@ -162,7 +163,7 @@
         "contains": [
           "statistical test"
         ],
-        "page": "/guides/choose-a-statistical-test"
+        "page": "/statistical-test-chooser"
       }
     ]
   }

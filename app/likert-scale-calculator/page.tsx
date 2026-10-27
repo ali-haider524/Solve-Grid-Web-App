@@ -51,6 +51,10 @@ export default function LikertScaleCalculatorPage() {
               "Single Likert items are ordinal, so many reviewers also expect medians or frequency percentages. For group comparisons on summed scale scores, use a t-test or ANOVA; for single items, a Mann-Whitney or Kruskal-Wallis test is often safer.",
             ],
           },
+          {
+            heading: "References",
+            list: ["Likert, R. (1932). A technique for the measurement of attitudes. Archives of Psychology, 140, 1–55.", "Joshi, A., Kale, S., Chandel, S., & Pal, D. K. (2015). Likert scale: Explored and explained. British Journal of Applied Science & Technology, 7(4), 396–403.", "Sullivan, G. M., & Artino, A. R. (2013). Analyzing and interpreting data from Likert-type scales. Journal of Graduate Medical Education, 5(4), 541–542."],
+          },
         ]}
       />
       <ToolCrossLinks currentSlug="likert-scale-calculator" />

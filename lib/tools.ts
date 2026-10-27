@@ -1151,6 +1151,59 @@ export const tools: ToolInfo[] = [
       },
     ],
   },
+  {
+    slug: "statistical-test-chooser",
+    name: "Statistical Test Chooser",
+    shortName: "Test chooser",
+    category: "statistics",
+    icon: "?",
+    title: "Which Statistical Test Should I Use? Interactive Test Chooser",
+    description:
+      "Answer four questions to find the right statistical test: t-test, ANOVA, chi-square, Mann-Whitney, Wilcoxon, Kruskal-Wallis, or correlation, with assumptions and an APA report sentence.",
+    summary:
+      "Pick the right statistical test for your thesis in four questions, then see the assumptions to check and a ready-to-edit APA-style sentence for your results chapter.",
+    keywords: [
+      "which statistical test should i use",
+      "statistical test chooser",
+      "statistical test flowchart",
+      "how to choose a statistical test",
+      "statistical test for comparing two groups",
+      "statistical test for ordinal data",
+      "statistical test for categorical data",
+      "should i use anova or t test",
+    ],
+    relatedSlugs: ["advanced-statistics", "likert-scale-calculator", "sample-size-calculator"],
+    featured: true,
+    priority: 0.97,
+    useCases: [
+      "Choose between t-tests, ANOVA, and their non-parametric alternatives",
+      "Decide between chi-square, Fisher's exact, and McNemar's test",
+      "Get the APA-style reporting sentence for the chosen test",
+    ],
+    features: [
+      "14 test outcomes",
+      "Parametric and non-parametric alternatives",
+      "Assumption checklist",
+      "Copyable APA report template",
+    ],
+    faqs: [
+      {
+        question: "Can I use a t-test on Likert scale data?",
+        answer:
+          "For a single Likert item, a Mann-Whitney U test is safer because the item is ordinal. For a summed or averaged scale made from several items, a t-test is widely accepted if the scores are roughly normal.",
+      },
+      {
+        question: "What if my data are not normally distributed?",
+        answer:
+          "Choose the ordinal / skewed option. The chooser then recommends the non-parametric test: Mann-Whitney, Wilcoxon, Kruskal-Wallis, Friedman, or Spearman.",
+      },
+      {
+        question: "Does this replace my supervisor or a statistician?",
+        answer:
+          "No. It covers the standard tests used in most theses. Complex designs such as mixed models, covariates, or multiple outcomes need expert advice.",
+      },
+    ],
+  },
 ];
 
 export function getToolPath(tool: Pick<ToolInfo, "slug"> | string) {

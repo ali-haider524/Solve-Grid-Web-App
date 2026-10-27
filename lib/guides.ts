@@ -185,7 +185,7 @@ export const guides: GuideInfo[] = [
     title: "How to choose a statistical test",
     summary:
       "Separate descriptive statistics, t-tests, correlation, and one-way ANOVA by the question and data type.",
-    toolSlugs: ["advanced-statistics", "statistics-calculator"],
+    toolSlugs: ["statistical-test-chooser", "advanced-statistics", "statistics-calculator"],
     topic: "statistics",
   },
   {
@@ -249,6 +249,7 @@ const preferredGuideSlugsByTool: Record<string, string[]> = {
     "choose-a-statistical-test",
     "standard-deviation-formula",
   ],
+  "statistical-test-chooser": ["choose-a-statistical-test", "likert-scale-interpretation"],
   "sample-size-calculator": ["slovin-formula-sample-size", "choose-a-statistical-test"],
   "cronbach-alpha-calculator": ["likert-scale-interpretation", "choose-a-statistical-test"],
   "likert-scale-calculator": ["likert-scale-interpretation", "choose-a-statistical-test"],

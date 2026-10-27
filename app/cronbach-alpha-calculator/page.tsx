@@ -48,6 +48,10 @@ export default function CronbachAlphaCalculatorPage() {
               "Report alpha separately for each subscale, not only for the full questionnaire, and mention any items removed and why.",
             ],
           },
+          {
+            heading: "References",
+            list: ["Cronbach, L. J. (1951). Coefficient alpha and the internal structure of tests. Psychometrika, 16(3), 297–334.", "George, D., & Mallery, P. (2003). SPSS for Windows Step by Step: A Simple Guide and Reference (4th ed.). Allyn & Bacon.", "Tavakol, M., & Dennick, R. (2011). Making sense of Cronbach’s alpha. International Journal of Medical Education, 2, 53–55."],
+          },
         ]}
       />
       <ToolCrossLinks currentSlug="cronbach-alpha-calculator" />

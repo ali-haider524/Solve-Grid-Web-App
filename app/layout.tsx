@@ -83,7 +83,7 @@ export default function RootLayout({
     "@type": "Organization",
     "@id": organizationId,
     name: siteOperatorName,
-    alternateName: siteName,
+    alternateName: ["Solve Grid", "solvegrid.online"],
     url: siteUrl,
     logo: {
       "@type": "ImageObject",
@@ -120,7 +120,7 @@ export default function RootLayout({
         "@type": "WebSite",
         "@id": websiteId,
         name: siteName,
-        alternateName: "SolveGrid Calculators",
+        alternateName: ["Solve Grid", "solvegrid.online", "SolveGrid Statistics Calculators"],
         url: siteUrl,
         description: siteDescription,
         inLanguage: "en",

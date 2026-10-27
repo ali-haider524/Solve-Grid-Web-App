@@ -13,18 +13,18 @@ import {
 } from "../lib/tools";
 
 export const metadata = createStaticPageMetadata(
-  "Free Statistics Calculators for Thesis & Survey Research",
+  "SolveGrid: Free Statistics Calculators for Thesis & Survey Research",
   "Free research statistics calculators: Slovin and Cochran sample size, Cronbach's alpha, Likert weighted mean, standard deviation, t-tests, ANOVA, and correlation, with step-by-step working.",
   "/",
 );
 
 const featuredToolSlugs = [
+  "statistical-test-chooser",
   "sample-size-calculator",
   "cronbach-alpha-calculator",
   "likert-scale-calculator",
   "statistics-calculator",
   "advanced-statistics",
-  "optimization-lab",
 ];
 
 const researchPath = [
@@ -32,7 +32,7 @@ const researchPath = [
   { step: "02", title: "Check reliability", text: "Cronbach's alpha with alpha if item deleted", href: "/cronbach-alpha-calculator" },
   { step: "03", title: "Summarise responses", text: "Likert weighted mean and interpretation", href: "/likert-scale-calculator" },
   { step: "04", title: "Describe the data", text: "Mean, standard deviation, quartiles", href: "/statistics-calculator" },
-  { step: "05", title: "Test hypotheses", text: "t-tests, ANOVA, correlation", href: "/advanced-statistics" },
+  { step: "05", title: "Choose and run the right test", text: "Test chooser, then t-tests, ANOVA, correlation", href: "/statistical-test-chooser" },
 ];
 
 const featuredGuideSlugs = [
@@ -201,7 +201,7 @@ export default function Home() {
         <Link href="/sample-size-calculator">Slovin&apos;s formula</Link>
         <Link href="/cronbach-alpha-calculator">Cronbach&apos;s alpha</Link>
         <Link href="/likert-scale-calculator">Likert weighted mean</Link>
-        <Link href="/guides/choose-a-statistical-test">Which statistical test?</Link>
+        <Link href="/statistical-test-chooser">Which statistical test?</Link>
         <Link href="/statistics-calculator">Standard deviation</Link>
         <Link href="/advanced-statistics">t-test &amp; ANOVA</Link>
       </nav>

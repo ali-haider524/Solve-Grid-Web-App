@@ -60,7 +60,7 @@ function specialCandidates(query) {
     [/slovin|yamane|sample size/, ["/sample-size-calculator", "/guides/slovin-formula-sample-size"]],
     [/cronbach|reliability/, ["/cronbach-alpha-calculator"]],
     [/likert|weighted mean/, ["/likert-scale-calculator", "/guides/likert-scale-interpretation"]],
-    [/statistical test|which test/, ["/guides/choose-a-statistical-test", "/advanced-statistics"]],
+    [/statistical test|which test/, ["/statistical-test-chooser", "/guides/choose-a-statistical-test"]],
     [/unit conversion|conversion formula/, ["/unit-converter", "/guides/unit-conversion-formulas"]],
   ];
   for (const [pattern, pages] of rules) if (pattern.test(text)) return pages;

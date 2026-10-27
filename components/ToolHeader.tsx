@@ -39,6 +39,7 @@ const menuToolSlugsByCategory: Record<ToolCategory, string[]> = {
     "circuit-analysis",
   ],
   statistics: [
+    "statistical-test-chooser",
     "sample-size-calculator",
     "cronbach-alpha-calculator",
     "likert-scale-calculator",

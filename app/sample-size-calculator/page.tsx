@@ -47,6 +47,10 @@ export default function SampleSizeCalculatorPage() {
               "Always round up. If you expect non-response, divide by the expected response rate to decide how many people to invite.",
             ],
           },
+          {
+            heading: "References",
+            list: ["Yamane, T. (1967). Statistics: An Introductory Analysis (2nd ed.). Harper & Row.", "Cochran, W. G. (1977). Sampling Techniques (3rd ed.). John Wiley & Sons.", "Israel, G. D. (1992). Determining Sample Size. University of Florida IFAS Extension, PEOD6."],
+          },
         ]}
       />
       <ToolCrossLinks currentSlug="sample-size-calculator" />
