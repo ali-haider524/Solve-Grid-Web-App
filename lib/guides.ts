@@ -209,7 +209,7 @@ export const guides: GuideInfo[] = [
     title: "How to report ANOVA results in APA style",
     summary:
       "Copy-ready APA templates for one-way, Welch, repeated-measures, and two-way ANOVA with effect sizes and post hoc tests.",
-    toolSlugs: ["advanced-statistics", "effect-size-calculator", "statistical-test-chooser"],
+    toolSlugs: ["one-way-anova-calculator", "effect-size-calculator", "statistical-test-chooser"],
     topic: "statistics",
   },
   {
@@ -217,7 +217,7 @@ export const guides: GuideInfo[] = [
     title: "How to report a t-test in APA style",
     summary:
       "APA templates for independent, Welch, paired, and one-sample t-tests, plus their non-parametric alternatives.",
-    toolSlugs: ["advanced-statistics", "effect-size-calculator", "mann-whitney-u-test-calculator"],
+    toolSlugs: ["t-test-calculator", "effect-size-calculator", "mann-whitney-u-test-calculator"],
     topic: "statistics",
   },
   {
@@ -226,6 +226,22 @@ export const guides: GuideInfo[] = [
     summary:
       "APA templates for chi-square tests of independence and goodness of fit, with N, Cramér's V, and Fisher's exact test.",
     toolSlugs: ["chi-square-calculator", "statistical-test-chooser"],
+    topic: "statistics",
+  },
+  {
+    slug: "how-to-report-regression-apa",
+    title: "How to report regression results in APA style",
+    summary:
+      "APA templates for simple and multiple regression: F, R², adjusted R², B, β, t, p, and CIs, with a coefficients table layout.",
+    toolSlugs: ["linear-regression-calculator", "correlation-calculator", "sobel-test-calculator"],
+    topic: "statistics",
+  },
+  {
+    slug: "how-to-report-correlation-apa",
+    title: "How to report a correlation in APA style",
+    summary:
+      "APA templates for Pearson r, Spearman rho, and Kendall tau with df, p, 95% CI, and a correlation matrix layout.",
+    toolSlugs: ["correlation-calculator", "linear-regression-calculator"],
     topic: "statistics",
   },
 ];
@@ -282,11 +298,11 @@ const preferredGuideSlugsByTool: Record<string, string[]> = {
   "wilcoxon-signed-rank-test-calculator": ["choose-a-statistical-test", "how-to-report-t-test-apa"],
   "kruskal-wallis-test-calculator": ["choose-a-statistical-test", "how-to-report-anova-apa"],
   "intraclass-correlation-calculator": ["choose-a-statistical-test", "likert-scale-interpretation"],
-  "linear-regression-calculator": ["choose-a-statistical-test", "how-to-report-anova-apa"],
-  "correlation-calculator": ["choose-a-statistical-test", "how-to-report-t-test-apa"],
+  "linear-regression-calculator": ["how-to-report-regression-apa", "how-to-report-correlation-apa", "choose-a-statistical-test"],
+  "correlation-calculator": ["how-to-report-correlation-apa", "how-to-report-regression-apa", "choose-a-statistical-test"],
   "one-way-anova-calculator": ["how-to-report-anova-apa", "choose-a-statistical-test"],
   "t-test-calculator": ["how-to-report-t-test-apa", "choose-a-statistical-test"],
-  "sobel-test-calculator": ["how-to-report-t-test-apa", "choose-a-statistical-test"],
+  "sobel-test-calculator": ["how-to-report-regression-apa", "choose-a-statistical-test"],
   "effect-size-calculator": ["how-to-report-t-test-apa", "how-to-report-anova-apa", "choose-a-statistical-test"],
   "sample-size-calculator": ["slovin-formula-sample-size", "choose-a-statistical-test"],
   "cronbach-alpha-calculator": ["likert-scale-interpretation", "choose-a-statistical-test"],

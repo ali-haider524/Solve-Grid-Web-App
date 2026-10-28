@@ -16,6 +16,8 @@
     }
   ],
   "priorityPages": [
+    "/guides/how-to-report-regression-apa",
+    "/guides/how-to-report-correlation-apa",
     "/linear-regression-calculator",
     "/correlation-calculator",
     "/one-way-anova-calculator",
@@ -255,6 +257,20 @@
           "test retest"
         ],
         "page": "/intraclass-correlation-calculator"
+      },
+      {
+        "contains": [
+          "report regression",
+          "regression apa"
+        ],
+        "page": "/guides/how-to-report-regression-apa"
+      },
+      {
+        "contains": [
+          "report correlation",
+          "correlation apa"
+        ],
+        "page": "/guides/how-to-report-correlation-apa"
       },
       {
         "contains": [

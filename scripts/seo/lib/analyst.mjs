@@ -62,6 +62,8 @@ function specialCandidates(query) {
     [/likert|weighted mean/, ["/likert-scale-calculator", "/guides/likert-scale-interpretation"]],
     [/effect size|cohen'?s d|hedges|eta squared/, ["/effect-size-calculator"]],
     [/intraclass|\bicc\b|test.retest/, ["/intraclass-correlation-calculator"]],
+    [/report (a )?regression|regression apa/, ["/guides/how-to-report-regression-apa"]],
+    [/report (a )?correlation|correlation apa|pearson apa/, ["/guides/how-to-report-correlation-apa"]],
     [/regression|r.squared|predictor/, ["/linear-regression-calculator"]],
     [/correlation|pearson|spearman|kendall/, ["/correlation-calculator"]],
     [/kappa|inter.?rater/, ["/cohens-kappa-calculator"]],

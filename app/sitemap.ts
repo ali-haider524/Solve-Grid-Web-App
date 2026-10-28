@@ -52,6 +52,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "correlation-calculator": "2026-10-28",
     "linear-regression-calculator": "2026-10-28",
     "guides/how-to-report-chi-square-apa": "2026-10-28",
+    "guides/how-to-report-regression-apa": "2026-10-28",
+    "guides/how-to-report-correlation-apa": "2026-10-28",
     "statistics-calculator": "2026-10-28",
     "advanced-statistics": "2026-10-28",
     "guides/choose-a-statistical-test": "2026-10-28",
