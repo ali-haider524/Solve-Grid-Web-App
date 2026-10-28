@@ -53,6 +53,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "linear-regression-calculator": "2026-10-28",
     "friedman-test-calculator": "2026-10-28",
     "mcnemar-test-calculator": "2026-10-28",
+    "power-analysis-calculator": "2026-10-28",
     "guides/how-to-report-chi-square-apa": "2026-10-28",
     "guides/how-to-report-regression-apa": "2026-10-28",
     "guides/how-to-report-correlation-apa": "2026-10-28",

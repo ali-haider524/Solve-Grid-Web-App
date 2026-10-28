@@ -296,6 +296,7 @@ const preferredGuideSlugsByTool: Record<string, string[]> = {
   "shapiro-wilk-test-calculator": ["choose-a-statistical-test", "how-to-report-t-test-apa"],
   "cohens-kappa-calculator": ["choose-a-statistical-test", "likert-scale-interpretation"],
   "wilcoxon-signed-rank-test-calculator": ["choose-a-statistical-test", "how-to-report-t-test-apa"],
+  "power-analysis-calculator": ["slovin-formula-sample-size", "choose-a-statistical-test"],
   "friedman-test-calculator": ["choose-a-statistical-test", "how-to-report-anova-apa"],
   "mcnemar-test-calculator": ["how-to-report-chi-square-apa", "choose-a-statistical-test"],
   "kruskal-wallis-test-calculator": ["choose-a-statistical-test", "how-to-report-anova-apa"],

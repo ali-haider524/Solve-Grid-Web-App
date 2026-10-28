@@ -57,6 +57,7 @@ function specialCandidates(query) {
     [/matrix rank|rref|gaussian|row reduction/, ["/matrix-calculator", "/guides/gaussian-elimination-for-linear-systems"]],
     [/optimization|optimisation|linear programming/, ["/optimization-lab", "/guides/graphical-linear-programming-method"]],
     [/polynomial|complex root|roots? of polynomial/, ["/polynomial-solver", "/guides/polynomial-roots-and-complex-roots"]],
+    [/power analysis|statistical power|g.?power|a priori/, ["/power-analysis-calculator"]],
     [/slovin|yamane|sample size/, ["/sample-size-calculator", "/guides/slovin-formula-sample-size"]],
     [/cronbach|reliability/, ["/cronbach-alpha-calculator"]],
     [/likert|weighted mean/, ["/likert-scale-calculator", "/guides/likert-scale-interpretation"]],

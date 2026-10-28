@@ -16,6 +16,7 @@
     }
   ],
   "priorityPages": [
+    "/power-analysis-calculator",
     "/friedman-test-calculator",
     "/mcnemar-test-calculator",
     "/guides/how-to-report-regression-apa",
@@ -156,6 +157,16 @@
           "unit conversion"
         ],
         "page": "/unit-converter"
+      },
+      {
+        "contains": [
+          "power analysis",
+          "statistical power",
+          "g power",
+          "gpower",
+          "a priori"
+        ],
+        "page": "/power-analysis-calculator"
       },
       {
         "contains": [

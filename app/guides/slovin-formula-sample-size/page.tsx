@@ -81,6 +81,11 @@ export default function SlovinFormulaGuide() {
             "Calculate Slovin, Yamane, or Cochran sample sizes with finite population correction and a ready-made methods sentence.",
         },
         {
+          label: "Power Analysis Calculator",
+          href: "/power-analysis-calculator",
+          description: "Testing hypotheses? Find the sample size for t-tests, ANOVA, correlation, or chi-square from effect size, alpha, and power.",
+        },
+        {
           label: "Likert Scale Calculator",
           href: "/likert-scale-calculator",
           description: "After collecting data, compute weighted means and verbal interpretations for each statement.",

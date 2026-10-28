@@ -152,13 +152,13 @@ const categoryEditorial: Record<ToolCategory, CategoryEditorial> = {
     overviewTitle: "Follow the order a research project actually needs.",
     overview: [
       "Most student research follows the same path: decide how many respondents you need, confirm that the questionnaire is reliable, describe the responses, and then test the research hypotheses. SolveGrid keeps each step in a focused calculator so inputs and outputs stay easy to check.",
-      "Start with the Sample Size Calculator (Slovin, Yamane, or Cochran). After data collection, use the Cronbach's Alpha Calculator for reliability and the Likert Scale Calculator for weighted means and verbal interpretation. Use the Statistics Calculator for descriptive statistics and the Advanced Statistics Lab for t-tests, ANOVA, and correlation.",
+      "Start with the Sample Size Calculator (Slovin, Yamane, or Cochran). After data collection, use the Cronbach's Alpha Calculator for reliability and the Likert Scale Calculator for weighted means and verbal interpretation. Use the Statistics Calculator for descriptive statistics, then the t-test, one-way ANOVA, correlation, and regression calculators to test your hypotheses.",
     ],
     topics: [
       {
         title: "Before data collection",
-        text: "Compute the minimum sample with Slovin's formula or Cochran's formula with finite population correction, and adjust for expected non-response.",
-        links: ["sample-size-calculator"],
+        text: "Compute the minimum sample with Slovin's formula or Cochran's formula with finite population correction, or run an a priori power analysis for t-tests, ANOVA, correlation, and chi-square.",
+        links: ["sample-size-calculator", "power-analysis-calculator"],
       },
       {
         title: "Questionnaire reliability and Likert data",

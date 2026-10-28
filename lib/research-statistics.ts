@@ -2014,3 +2014,146 @@ export function mcNemarTest(a: number, b: number, c: number, d: number): McNemar
     pAfter: (a + c) / n,
   };
 }
+
+/* ---------------- Power analysis ---------------- */
+
+function poissonWeights(mu: number, tol = 1e-12) {
+  // returns [startIndex, weights[]] covering the mass of Poisson(mu)
+  if (mu <= 0) return { start: 0, w: [1] };
+  const mode = Math.floor(mu);
+  const logP = (j: number) => -mu + j * Math.log(mu) - lnGamma(j + 1);
+  const w: number[] = [];
+  let lo = mode;
+  while (lo > 0 && Math.exp(logP(lo)) > tol) lo -= 1;
+  let hi = mode;
+  while (Math.exp(logP(hi)) > tol || hi < mode + 5) hi += 1;
+  for (let j = lo; j <= hi; j += 1) w.push(Math.exp(logP(j)));
+  return { start: lo, w };
+}
+
+// Upper tail of the noncentral F distribution P(F' > f)
+export function noncentralFSf(f: number, d1: number, d2: number, lambda: number) {
+  if (f <= 0) return 1;
+  const x = (d1 * f) / (d1 * f + d2);
+  const { start, w } = poissonWeights(lambda / 2);
+  let cdf = 0;
+  w.forEach((wj, i) => {
+    cdf += wj * incompleteBeta(x, d1 / 2 + start + i, d2 / 2);
+  });
+  return Math.min(1, Math.max(0, 1 - cdf));
+}
+
+// Upper tail of the noncentral chi-square distribution
+export function noncentralChiSquareSf(x: number, df: number, lambda: number) {
+  if (x <= 0) return 1;
+  const { start, w } = poissonWeights(lambda / 2);
+  let sf = 0;
+  w.forEach((wj, i) => {
+    sf += wj * chiSquarePValue(x, df + 2 * (start + i));
+  });
+  return Math.min(1, Math.max(0, sf));
+}
+
+function normalCdfP(z: number) {
+  return z >= 0 ? 1 - normalSf(z) : normalSf(-z);
+}
+
+// P(T' > t) for a noncentral t with df degrees of freedom and noncentrality delta
+export function noncentralTSf(t: number, df: number, delta: number) {
+  if (df > 2000) return normalSf(t - delta);
+  const sigma = 1 / Math.sqrt(2 * df);
+  const lo = Math.max(1e-9, 1 - 10 * sigma);
+  const hi = 1 + 14 * sigma + (df < 10 ? 3 : 0);
+  const steps = 400;
+  const h = (hi - lo) / steps;
+  const logC = (df / 2) * Math.log(df) - lnGamma(df / 2) - (df / 2 - 1) * Math.log(2);
+  let sum = 0;
+  for (let i = 0; i <= steps; i += 1) {
+    const s = lo + i * h;
+    const dens = Math.exp(logC + (df - 1) * Math.log(s) - (df * s * s) / 2);
+    sum += dens * (1 - normalCdfP(t * s - delta)) * (i === 0 || i === steps ? 1 : i % 2 === 1 ? 4 : 2);
+  }
+  return Math.min(1, Math.max(0, sum * (h / 3)));
+}
+
+export type PowerDesign = "independent-t" | "paired-t" | "anova" | "correlation" | "chi-square";
+
+export type PowerInput = {
+  design: PowerDesign;
+  effect: number;
+  alpha: number;
+  tails: 1 | 2;
+  groups?: number; // ANOVA k
+  df?: number; // chi-square df
+};
+
+// Power for a given sample size. n = per group for independent t, pairs for paired t, total N otherwise.
+export function powerAt(input: PowerInput, n: number) {
+  const { design, effect, alpha, tails } = input;
+  const es = Math.abs(effect);
+  if (design === "independent-t" || design === "paired-t") {
+    const df = design === "independent-t" ? 2 * n - 2 : n - 1;
+    if (df < 1) return 0;
+    const delta = design === "independent-t" ? es * Math.sqrt(n / 2) : es * Math.sqrt(n);
+    const tc = tQuantileUpper(alpha / tails, df);
+    const upper = noncentralTSf(tc, df, delta);
+    return tails === 2 ? Math.min(1, upper + (1 - noncentralTSf(-tc, df, delta))) : upper;
+  }
+  if (design === "anova") {
+    const k = input.groups ?? 3;
+    const df2 = n - k;
+    if (df2 < 1) return 0;
+    const fc = fQuantile(1 - alpha, k - 1, df2);
+    return noncentralFSf(fc, k - 1, df2, es * es * n);
+  }
+  if (design === "chi-square") {
+    const df = input.df ?? 1;
+    let lo = 0;
+    let hi = 1;
+    while (chiSquarePValue(hi, df) > alpha) hi *= 2;
+    for (let i = 0; i < 200; i += 1) {
+      const mid = (lo + hi) / 2;
+      if (chiSquarePValue(mid, df) > alpha) lo = mid;
+      else hi = mid;
+    }
+    return noncentralChiSquareSf((lo + hi) / 2, df, es * es * n);
+  }
+  // correlation: Fisher z approximation
+  if (n <= 3 || es >= 1) return es >= 1 ? 1 : 0;
+  const zc = normalQuantile(1 - alpha / tails);
+  const mu = Math.atanh(es) * Math.sqrt(n - 3);
+  const upper = normalSf(zc - mu);
+  return tails === 2 ? Math.min(1, upper + normalSf(zc + mu)) : upper;
+}
+
+export type PowerResult = { n: number; total: number; perGroup: number | null; achievedPower: number; label: string };
+
+export function requiredSampleSize(input: PowerInput, power: number): PowerResult {
+  if (!(input.effect !== 0 && Number.isFinite(input.effect))) throw new Error("Enter a non-zero effect size.");
+  if (!(input.alpha > 0 && input.alpha < 0.5)) throw new Error("Alpha should be between 0 and 0.5 (usually .05).");
+  if (!(power > 0 && power < 1)) throw new Error("Power should be between 0 and 1 (usually .80).");
+  if (input.design === "correlation" && Math.abs(input.effect) >= 1) throw new Error("A correlation must be between −1 and 1.");
+  const k = input.groups ?? 3;
+  const min = input.design === "independent-t" ? 2 : input.design === "paired-t" ? 2 : input.design === "anova" ? k + 1 : input.design === "correlation" ? 4 : 2;
+  let hi = min;
+  while (powerAt(input, hi) < power) {
+    hi *= 2;
+    if (hi > 2_000_000) throw new Error("The effect is too small: the required sample is larger than 2,000,000.");
+  }
+  let lo = Math.max(min, Math.floor(hi / 2));
+  if (powerAt(input, lo) >= power) lo = min - 1;
+  while (hi - lo > 1) {
+    const mid = Math.floor((lo + hi) / 2);
+    if (powerAt(input, mid) >= power) hi = mid;
+    else lo = mid;
+  }
+  let n = hi;
+  if (input.design === "anova") {
+    n = Math.ceil(n / k) * k; // equal group sizes
+  }
+  const achievedPower = powerAt(input, n);
+  if (input.design === "independent-t") return { n, total: 2 * n, perGroup: n, achievedPower, label: "per group" };
+  if (input.design === "paired-t") return { n, total: n, perGroup: null, achievedPower, label: "pairs" };
+  if (input.design === "anova") return { n, total: n, perGroup: n / k, achievedPower, label: "total" };
+  return { n, total: n, perGroup: null, achievedPower, label: "total" };
+}

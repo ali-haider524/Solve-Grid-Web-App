@@ -1001,7 +1001,7 @@ export const tools: ToolInfo[] = [
       "finite population correction",
       "raosoft sample size calculator alternative",
     ],
-    relatedSlugs: ["likert-scale-calculator", "cronbach-alpha-calculator", "statistics-calculator"],
+    relatedSlugs: ["power-analysis-calculator", "likert-scale-calculator", "cronbach-alpha-calculator"],
     featured: true,
     priority: 0.96,
     useCases: [
@@ -2010,6 +2010,65 @@ export const tools: ToolInfo[] = [
         question: "How do I report a McNemar test in APA style?",
         answer:
           "Write χ²(1, N = n) = X.XX, p = .XXX, give the before and after percentages, and say how many people changed in each direction.",
+      },
+    ],
+  },
+  {
+    slug: "power-analysis-calculator",
+    name: "Power Analysis Calculator",
+    shortName: "Power analysis",
+    category: "statistics",
+    icon: "1−β",
+    title: "Power Analysis Calculator: Sample Size for Tests",
+    description:
+      "Free a priori power analysis calculator: find the sample size for t-tests, ANOVA, correlation, and chi-square from effect size, alpha, and power.",
+    summary:
+      "Justify your sample size the way supervisors expect: choose the test, set the expected effect size, alpha, and power, and get the required N, a power curve, and a methodology sentence.",
+    keywords: [
+      "power analysis calculator",
+      "sample size calculator power analysis",
+      "a priori power analysis",
+      "g power alternative online",
+      "sample size for t test",
+      "sample size for anova",
+      "statistical power calculator",
+      "how to calculate sample size for research",
+    ],
+    relatedSlugs: ["sample-size-calculator", "effect-size-calculator", "t-test-calculator"],
+    featured: true,
+    priority: 0.95,
+    useCases: [
+      "Justify the sample size in a thesis proposal or ethics application",
+      "Find how many participants per group a t-test or ANOVA needs",
+      "Check the power of a study with a fixed sample",
+    ],
+    features: [
+      "Independent and paired t-tests, one-way ANOVA, correlation, and chi-square",
+      "Exact noncentral t, F, and chi-square power (matches G*Power)",
+      "One- or two-tailed tests and any alpha and power",
+      "Power curve and power check for a fixed N",
+      "Methodology sentence and dropout adjustment",
+    ],
+    faqs: [
+      {
+        question: "What is a power analysis in research?",
+        answer:
+          "It is a calculation of the sample size needed to detect an expected effect with a given probability (power, usually 80%) at a chosen significance level (usually .05). It is done before data collection to justify the sample size.",
+      },
+      {
+        question: "What effect size should I use for a power analysis?",
+        answer:
+          "Use the effect found in previous similar studies or a pilot study if possible. If none exists, a medium effect (d = 0.5, f = 0.25, r = .30, w = .30) is a common, clearly stated default.",
+      },
+      {
+        question: "Is this the same as G*Power?",
+        answer:
+          "It uses the same noncentral distributions as G*Power for t-tests, ANOVA, and chi-square, so the sample sizes match (for example 64 per group for d = 0.5, α = .05, power = .80). Correlation uses the Fisher z approximation, which can differ by one participant.",
+      },
+      {
+        question: "Should I use Slovin's formula or a power analysis?",
+        answer:
+          "Slovin's and Cochran's formulas estimate a proportion or mean from a population (common in surveys). A power analysis is for hypothesis tests such as t-tests and ANOVA. Many reviewers prefer a power analysis when your research questions are tested statistically.",
       },
     ],
   },

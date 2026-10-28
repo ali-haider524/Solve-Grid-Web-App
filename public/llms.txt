@@ -2,7 +2,7 @@
 
 > SolveGrid is an independent browser-based calculator platform focused on research statistics for theses and surveys (sample size, Cronbach's alpha, Likert analysis, t-tests, ANOVA, correlation), with supporting math, engineering, and numerical-methods tools.
 
-SolveGrid provides 31 public tools. Most current calculations run directly in the browser and do not require an account. Tool pages are connected to method guides, related calculators, assumptions, and scope notes where relevant.
+SolveGrid provides 32 public tools. Most current calculations run directly in the browser and do not require an account. Tool pages are connected to method guides, related calculators, assumptions, and scope notes where relevant.
 
 ## Main directories
 
@@ -17,6 +17,7 @@ SolveGrid provides 31 public tools. Most current calculations run directly in th
 ## Featured tools
 
 - [Statistical Test Chooser](https://solvegrid.online/statistical-test-chooser)
+- [Power Analysis Calculator (sample size for t-tests, ANOVA, correlation, chi-square)](https://solvegrid.online/power-analysis-calculator)
 - [t-Test Calculator (independent, paired, one-sample)](https://solvegrid.online/t-test-calculator)
 - [One-Way ANOVA Calculator with Tukey HSD](https://solvegrid.online/one-way-anova-calculator)
 - [Correlation Coefficient Calculator (Pearson, Spearman, Kendall)](https://solvegrid.online/correlation-calculator)
