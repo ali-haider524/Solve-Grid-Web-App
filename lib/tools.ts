@@ -1794,6 +1794,65 @@ export const tools: ToolInfo[] = [
       },
     ],
   },
+  {
+    slug: "correlation-calculator",
+    name: "Correlation Coefficient Calculator",
+    shortName: "Correlation",
+    category: "statistics",
+    icon: "r",
+    title: "Correlation Calculator: Pearson, Spearman & Kendall",
+    description:
+      "Free correlation coefficient calculator. Paste X and Y to get Pearson r, Spearman rho, or Kendall tau with p value, 95% CI, r², scatter plot, and APA text.",
+    summary:
+      "Measure the strength and direction of a relationship between two variables, with the right coefficient for your data, a confidence interval, a scatter plot with the regression line, and a ready APA sentence.",
+    keywords: [
+      "correlation calculator",
+      "correlation coefficient calculator",
+      "pearson correlation calculator",
+      "spearman correlation calculator",
+      "spearman rank correlation calculator",
+      "kendall tau calculator",
+      "r value calculator",
+      "correlation p value calculator",
+    ],
+    relatedSlugs: ["statistical-test-chooser", "effect-size-calculator", "shapiro-wilk-test-calculator"],
+    featured: true,
+    priority: 0.95,
+    useCases: [
+      "Test whether two survey scales or variables are related in a thesis",
+      "Use Spearman's rho for Likert items, ranks, or skewed data",
+      "Get r with a 95% CI and APA sentence for a results chapter",
+    ],
+    features: [
+      "Pearson r, Spearman rho, and Kendall tau-b",
+      "Exact t-based p value and Fisher z 95% CI",
+      "r², means, SDs, and the least-squares line",
+      "Scatter plot of your data",
+      "APA 7 report sentence",
+    ],
+    faqs: [
+      {
+        question: "Should I use Pearson or Spearman correlation?",
+        answer:
+          "Use Pearson when both variables are numeric, roughly normal, and related in a straight line. Use Spearman for ordinal data such as Likert items, skewed variables, outliers, or a curved but consistently rising or falling relationship.",
+      },
+      {
+        question: "What is a strong correlation coefficient?",
+        answer:
+          "A common guide is below .10 negligible, .10 to .29 weak, .30 to .49 moderate, .50 to .69 strong, and .70 or above very strong. The sign shows direction, not strength.",
+      },
+      {
+        question: "How do I report a Pearson correlation in APA style?",
+        answer:
+          "Write r(df) = .XX, p = .XXX, where df = N − 2, for example r(10) = .97, p < .001, 95% CI [.89, .99]. Drop the leading zero because r cannot exceed 1.",
+      },
+      {
+        question: "Does correlation mean causation?",
+        answer:
+          "No. A correlation shows that two variables move together, not that one causes the other. A third variable or reverse direction could explain the relationship.",
+      },
+    ],
+  },
 ];
 
 export function getToolPath(tool: Pick<ToolInfo, "slug"> | string) {

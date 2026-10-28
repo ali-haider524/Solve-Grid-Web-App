@@ -28,6 +28,7 @@ const mw = { toolHref: "/mann-whitney-u-test-calculator", toolLabel: "Run it in 
 const chi = { toolHref: "/chi-square-calculator", toolLabel: "Run it in the Chi-Square Calculator" };
 const tt = { toolHref: "/t-test-calculator", toolLabel: "Run it in the t-Test Calculator" };
 const anova = { toolHref: "/one-way-anova-calculator", toolLabel: "Run it in the One-Way ANOVA Calculator" };
+const corr = { toolHref: "/correlation-calculator", toolLabel: "Run it in the Correlation Calculator" };
 const advanced = { toolHref: "/advanced-statistics", toolLabel: "Run it in the Advanced Statistics Lab" };
 
 export function chooseTest(a: Answers): Recommendation {
@@ -68,7 +69,7 @@ export function chooseTest(a: Answers): Recommendation {
         alternative: "Spearman's rank correlation if either variable is skewed, ordinal, or has outliers.",
         assumptions: ["Both variables continuous", "Linear relationship (check a scatter plot)", "No extreme outliers", "Roughly normal distributions"],
         report: "There was a [positive / negative], [weak / moderate / strong] correlation between [X] and [Y], r(df) = .XX, p = .XXX.",
-        ...advanced,
+        ...corr,
       };
     }
     return {
@@ -77,6 +78,7 @@ export function chooseTest(a: Answers): Recommendation {
       alternative: "Kendall's tau for small samples or many tied ranks.",
       assumptions: ["Variables at least ordinal", "Monotonic relationship (consistently rising or falling)"],
       report: "A Spearman's rank correlation showed a [positive / negative] relationship between [X] and [Y], rₛ(df) = .XX, p = .XXX.",
+      ...corr,
     };
   }
 

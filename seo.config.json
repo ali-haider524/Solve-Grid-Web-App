@@ -16,6 +16,7 @@
     }
   ],
   "priorityPages": [
+    "/correlation-calculator",
     "/one-way-anova-calculator",
     "/t-test-calculator",
     "/",
@@ -253,6 +254,15 @@
           "test retest"
         ],
         "page": "/intraclass-correlation-calculator"
+      },
+      {
+        "contains": [
+          "correlation",
+          "pearson",
+          "spearman",
+          "kendall"
+        ],
+        "page": "/correlation-calculator"
       },
       {
         "contains": [

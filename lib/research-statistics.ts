@@ -1607,3 +1607,149 @@ export function oneWayAnova(input: Array<{ name: string; values: number[] }>): A
     tukey,
   };
 }
+
+/* ---------------- Correlation: Pearson, Spearman, Kendall ---------------- */
+
+export type CorrelationResult = {
+  method: "pearson" | "spearman" | "kendall";
+  n: number;
+  r: number;
+  df: number;
+  stat: number;
+  statLabel: "t" | "z";
+  p: number;
+  ciLow: number;
+  ciHigh: number;
+  rSquared: number;
+  slope: number;
+  intercept: number;
+  meanX: number;
+  meanY: number;
+  sdX: number;
+  sdY: number;
+};
+
+function pearsonR(x: number[], y: number[]) {
+  const n = x.length;
+  const mx = x.reduce((s, v) => s + v, 0) / n;
+  const my = y.reduce((s, v) => s + v, 0) / n;
+  let sxy = 0;
+  let sxx = 0;
+  let syy = 0;
+  for (let i = 0; i < n; i += 1) {
+    sxy += (x[i] - mx) * (y[i] - my);
+    sxx += (x[i] - mx) ** 2;
+    syy += (y[i] - my) ** 2;
+  }
+  if (sxx === 0 || syy === 0) throw new Error("One variable has no variation (all values are the same), so a correlation cannot be computed.");
+  return { r: Math.max(-1, Math.min(1, sxy / Math.sqrt(sxx * syy))), mx, my, sxx, syy, sxy };
+}
+
+function kendallTauB(x: number[], y: number[]) {
+  const n = x.length;
+  let s = 0;
+  let tiesX = 0;
+  let tiesY = 0;
+  for (let i = 0; i < n; i += 1) {
+    for (let j = i + 1; j < n; j += 1) {
+      const dx = Math.sign(x[i] - x[j]);
+      const dy = Math.sign(y[i] - y[j]);
+      if (dx === 0) tiesX += 1;
+      if (dy === 0) tiesY += 1;
+      s += dx * dy;
+    }
+  }
+  const n0 = (n * (n - 1)) / 2;
+  const tau = s / Math.sqrt((n0 - tiesX) * (n0 - tiesY));
+  const groupTerms = (v: number[]) => {
+    const counts = new Map<number, number>();
+    v.forEach((a) => counts.set(a, (counts.get(a) ?? 0) + 1));
+    let a = 0;
+    let b = 0;
+    let c = 0;
+    counts.forEach((t) => {
+      a += t * (t - 1) * (2 * t + 5);
+      b += t * (t - 1) * (t - 2);
+      c += t * (t - 1);
+    });
+    return { a, b, c };
+  };
+  const tx = groupTerms(x);
+  const ty = groupTerms(y);
+  const v0 = n * (n - 1) * (2 * n + 5);
+  const variance =
+    (v0 - tx.a - ty.a) / 18 + (tx.b * ty.b) / (9 * n * (n - 1) * (n - 2)) + (tx.c * ty.c) / (2 * n * (n - 1));
+  const z = s / Math.sqrt(variance);
+  return { tau, z };
+}
+
+export function correlation(x: number[], y: number[], method: "pearson" | "spearman" | "kendall" = "pearson"): CorrelationResult {
+  if (x.length !== y.length) throw new Error(`X has ${x.length} values but Y has ${y.length}. Each X needs a matching Y.`);
+  const n = x.length;
+  if (n < 3) throw new Error("Enter at least 3 pairs of values.");
+  const base = pearsonR(x, y);
+  const slope = base.sxy / base.sxx;
+  const intercept = base.my - slope * base.mx;
+  const sdX = Math.sqrt(base.sxx / (n - 1));
+  const sdY = Math.sqrt(base.syy / (n - 1));
+  let r = base.r;
+  let stat: number;
+  let statLabel: "t" | "z" = "t";
+  let p: number;
+  let se = 1 / Math.sqrt(Math.max(n - 3, 1));
+  if (method === "spearman") {
+    r = pearsonR(averageRanks(x).ranks, averageRanks(y).ranks).r;
+    se = Math.sqrt(1 + (r * r) / 2) / Math.sqrt(Math.max(n - 3, 1)); // Bonett & Wright (2000)
+  }
+  if (method === "kendall") {
+    const k = kendallTauB(x, y);
+    r = k.tau;
+    stat = k.z;
+    statLabel = "z";
+    p = Math.min(1, 2 * normalSf(Math.abs(k.z)));
+    se = Math.sqrt(0.437 / Math.max(n - 4, 1)); // Fieller, Hartley & Pearson (1957)
+  } else {
+    const df = n - 2;
+    stat = Math.abs(r) >= 1 ? Math.sign(r) * Infinity : r * Math.sqrt(df / (1 - r * r));
+    p = Math.abs(r) >= 1 ? 0 : tTwoSidedP(stat, df);
+  }
+  let ciLow = NaN;
+  let ciHigh = NaN;
+  if (n > 3 && Math.abs(r) < 1) {
+    const z = Math.atanh(r);
+    ciLow = Math.tanh(z - 1.959963984540054 * se);
+    ciHigh = Math.tanh(z + 1.959963984540054 * se);
+  }
+  return { method, n, r, df: n - 2, stat, statLabel, p, ciLow, ciHigh, rSquared: r * r, slope, intercept, meanX: base.mx, meanY: base.my, sdX, sdY };
+}
+
+export function correlationBand(r: number) {
+  const a = Math.abs(r);
+  if (a < 0.1) return "negligible";
+  if (a < 0.3) return "weak";
+  if (a < 0.5) return "moderate";
+  if (a < 0.7) return "strong";
+  return "very strong";
+}
+
+export function parsePairs(text: string) {
+  const x: number[] = [];
+  const y: number[] = [];
+  text
+    .split(/\r?\n/)
+    .map((line) => line.trim())
+    .filter(Boolean)
+    .forEach((line, i) => {
+      const parts = line.split(/[\s,;\t]+/).filter(Boolean);
+      if (parts.length !== 2) throw new Error(`Line ${i + 1} should have exactly two numbers (X and Y).`);
+      const a = Number(parts[0]);
+      const b = Number(parts[1]);
+      if (!Number.isFinite(a) || !Number.isFinite(b)) {
+        if (i === 0) return; // header row
+        throw new Error(`Line ${i + 1} contains a value that is not a number.`);
+      }
+      x.push(a);
+      y.push(b);
+    });
+  return { x, y };
+}

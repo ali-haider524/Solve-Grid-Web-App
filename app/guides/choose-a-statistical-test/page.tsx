@@ -102,6 +102,11 @@ export default function ChooseStatisticalTestGuide() {
           description: "Paste 3+ groups to get the ANOVA table, η², Levene's test, Welch's ANOVA, Tukey HSD, and an APA sentence.",
         },
         {
+          label: "Correlation Calculator",
+          href: "/correlation-calculator",
+          description: "Pearson r, Spearman rho, or Kendall tau with p value, 95% CI, scatter plot, and APA text.",
+        },
+        {
           label: "Chi-Square Calculator",
           href: "/chi-square-calculator",
           description: "Run a chi-square test of independence or goodness of fit with Cramér's V and Fisher's exact test.",
