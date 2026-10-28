@@ -127,6 +127,11 @@ export default function ChooseStatisticalTestGuide() {
           description: "Non-parametric tests for paired data (Wilcoxon) and three or more groups (Kruskal-Wallis, with Dunn post hoc).",
         },
         {
+          label: "Friedman & McNemar Calculators",
+          href: "/friedman-test-calculator",
+          description: "Repeated measures on ordinal data (Friedman) and paired yes/no outcomes (McNemar at /mcnemar-test-calculator).",
+        },
+        {
           label: "Shapiro-Wilk Normality Test",
           href: "/shapiro-wilk-test-calculator",
           description: "Check whether your data are normal before choosing a parametric or non-parametric test.",

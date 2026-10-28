@@ -73,6 +73,8 @@ function specialCandidates(query) {
     [/\bt.?test|welch|paired sample/, ["/t-test-calculator"]],
     [/shapiro|normality/, ["/shapiro-wilk-test-calculator"]],
     [/wilcoxon|signed.rank/, ["/wilcoxon-signed-rank-test-calculator"]],
+    [/friedman|kendall.?s w/, ["/friedman-test-calculator"]],
+    [/mcnemar|paired proportion/, ["/mcnemar-test-calculator"]],
     [/kruskal|dunn/, ["/kruskal-wallis-test-calculator"]],
     [/mann.whitney|rank sum/, ["/mann-whitney-u-test-calculator"]],
     [/report (a )?chi/, ["/guides/how-to-report-chi-square-apa"]],

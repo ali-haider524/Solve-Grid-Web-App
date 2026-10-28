@@ -16,6 +16,8 @@
     }
   ],
   "priorityPages": [
+    "/friedman-test-calculator",
+    "/mcnemar-test-calculator",
     "/guides/how-to-report-regression-apa",
     "/guides/how-to-report-correlation-apa",
     "/linear-regression-calculator",
@@ -242,6 +244,20 @@
           "signed rank"
         ],
         "page": "/wilcoxon-signed-rank-test-calculator"
+      },
+      {
+        "contains": [
+          "friedman",
+          "kendall's w"
+        ],
+        "page": "/friedman-test-calculator"
+      },
+      {
+        "contains": [
+          "mcnemar",
+          "paired proportion"
+        ],
+        "page": "/mcnemar-test-calculator"
       },
       {
         "contains": [

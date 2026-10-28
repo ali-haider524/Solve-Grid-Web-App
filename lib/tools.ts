@@ -1909,6 +1909,110 @@ export const tools: ToolInfo[] = [
       },
     ],
   },
+  {
+    slug: "friedman-test-calculator",
+    name: "Friedman Test Calculator",
+    shortName: "Friedman test",
+    category: "statistics",
+    icon: "χ²",
+    title: "Friedman Test Calculator with Kendall's W",
+    description:
+      "Free Friedman test calculator for 3+ repeated measures. Paste data to get χ², df, p, Kendall's W, medians, mean ranks, Bonferroni post hoc tests, and APA text.",
+    summary:
+      "The non-parametric alternative to repeated-measures ANOVA: compare three or more related conditions on ordinal or non-normal data, with effect size and pairwise comparisons.",
+    keywords: [
+      "friedman test calculator",
+      "friedman test online",
+      "non parametric repeated measures anova",
+      "kendall's w calculator",
+      "friedman post hoc test",
+      "how to report friedman test",
+    ],
+    relatedSlugs: ["wilcoxon-signed-rank-test-calculator", "kruskal-wallis-test-calculator", "one-way-anova-calculator"],
+    featured: true,
+    priority: 0.9,
+    useCases: [
+      "Compare Likert ratings from the same participants at three or more time points",
+      "Rank several products or conditions rated by the same judges",
+      "Replace a repeated-measures ANOVA when normality fails",
+    ],
+    features: [
+      "Tie-corrected Friedman χ² with exact df and p",
+      "Kendall's W effect size",
+      "Medians and mean ranks per condition",
+      "Bonferroni-adjusted pairwise comparisons",
+      "APA 7 report sentence",
+    ],
+    faqs: [
+      {
+        question: "When should I use the Friedman test?",
+        answer:
+          "Use it when the same people are measured under three or more conditions and the outcome is ordinal or not normally distributed. It is the non-parametric version of a one-way repeated-measures ANOVA.",
+      },
+      {
+        question: "What post hoc test follows a Friedman test?",
+        answer:
+          "Compare pairs of conditions with a rank-based z test (as here) or with Wilcoxon signed-rank tests, and adjust the p values with Bonferroni for the number of comparisons.",
+      },
+      {
+        question: "How do I report a Friedman test in APA style?",
+        answer:
+          "Write χ²(df, N = n) = X.XX, p = .XXX, W = .XX, then report medians for each condition and any significant pairwise comparisons.",
+      },
+    ],
+  },
+  {
+    slug: "mcnemar-test-calculator",
+    name: "McNemar Test Calculator",
+    shortName: "McNemar test",
+    category: "statistics",
+    icon: "2×2",
+    title: "McNemar Test Calculator (Exact and Chi-Square)",
+    description:
+      "Free McNemar test calculator for paired yes/no data. Enter a before-after 2×2 table to get χ², exact p, continuity correction, odds ratio, and APA text.",
+    summary:
+      "Test whether a proportion changed between two related measurements on the same people, with the exact test for small samples, the odds ratio, and a ready APA sentence.",
+    keywords: [
+      "mcnemar test calculator",
+      "mcnemar test online",
+      "exact mcnemar test",
+      "paired proportions test",
+      "before after chi square test",
+      "how to report mcnemar test",
+    ],
+    relatedSlugs: ["chi-square-calculator", "wilcoxon-signed-rank-test-calculator", "cohens-kappa-calculator"],
+    featured: true,
+    priority: 0.88,
+    useCases: [
+      "Test a change in pass rates before and after training",
+      "Compare a yes/no survey answer at two time points",
+      "Analyse matched case-control pairs",
+    ],
+    features: [
+      "McNemar χ² with and without continuity correction",
+      "Exact binomial p value for small samples",
+      "Odds ratio with 95% CI",
+      "Before and after proportions",
+      "APA 7 report sentence",
+    ],
+    faqs: [
+      {
+        question: "What is the difference between McNemar and chi-square?",
+        answer:
+          "The chi-square test of independence compares separate groups. McNemar's test is for the same people measured twice (or matched pairs) and only uses the people who changed.",
+      },
+      {
+        question: "Should I use the exact McNemar test?",
+        answer:
+          "Use the exact binomial version when the number of people who changed (b + c) is below about 25. With larger numbers, the chi-square version gives almost the same p value.",
+      },
+      {
+        question: "How do I report a McNemar test in APA style?",
+        answer:
+          "Write χ²(1, N = n) = X.XX, p = .XXX, give the before and after percentages, and say how many people changed in each direction.",
+      },
+    ],
+  },
 ];
 
 export function getToolPath(tool: Pick<ToolInfo, "slug"> | string) {

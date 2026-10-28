@@ -51,6 +51,8 @@ const menuToolSlugsByCategory: Record<ToolCategory, string[]> = {
     "mann-whitney-u-test-calculator",
     "wilcoxon-signed-rank-test-calculator",
     "kruskal-wallis-test-calculator",
+    "friedman-test-calculator",
+    "mcnemar-test-calculator",
     "shapiro-wilk-test-calculator",
     "cohens-kappa-calculator",
     "intraclass-correlation-calculator",

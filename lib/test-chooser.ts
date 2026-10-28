@@ -29,6 +29,8 @@ const chi = { toolHref: "/chi-square-calculator", toolLabel: "Run it in the Chi-
 const tt = { toolHref: "/t-test-calculator", toolLabel: "Run it in the t-Test Calculator" };
 const anova = { toolHref: "/one-way-anova-calculator", toolLabel: "Run it in the One-Way ANOVA Calculator" };
 const corr = { toolHref: "/correlation-calculator", toolLabel: "Run it in the Correlation Calculator" };
+const fr = { toolHref: "/friedman-test-calculator", toolLabel: "Run it in the Friedman Test Calculator" };
+const mcn = { toolHref: "/mcnemar-test-calculator", toolLabel: "Run it in the McNemar Test Calculator" };
 const advanced = { toolHref: "/advanced-statistics", toolLabel: "Run it in the Advanced Statistics Lab" };
 
 export function chooseTest(a: Answers): Recommendation {
@@ -39,6 +41,7 @@ export function chooseTest(a: Answers): Recommendation {
         why: "Both measurements are categorical (yes/no) and come from the same people, such as before and after.",
         assumptions: ["Two categories measured twice on the same participants", "Counts of discordant pairs are not tiny"],
         report: "A McNemar's test showed [a / no] significant change in [outcome] from [time 1] to [time 2], χ²(1) = X.XX, p = .XXX.",
+        ...mcn,
       };
     }
     if (a.groups === "one") {
@@ -153,6 +156,7 @@ export function chooseTest(a: Answers): Recommendation {
           why: "The same participants were measured three or more times, and the outcome is ordinal or not normal.",
           assumptions: ["Same participants in every condition", "Outcome at least ordinal"],
           report: "A Friedman test indicated a [significant / non-significant] difference in [outcome] across [conditions], χ²(df) = X.XX, p = .XXX.",
+          ...fr,
         };
   }
   return a.outcome === "normal"

@@ -1912,3 +1912,105 @@ export function linearRegression(names: string[], rows: number[][], outcomeIndex
     maxCooksD,
   };
 }
+
+/* ---------------- Friedman test ---------------- */
+
+export type FriedmanResult = {
+  n: number;
+  k: number;
+  chiSquare: number;
+  df: number;
+  p: number;
+  kendallW: number;
+  conditions: Array<{ name: string; median: number; meanRank: number }>;
+  pairwise: Array<{ a: string; b: string; z: number; p: number; pAdj: number }>;
+};
+
+export function friedmanTest(names: string[], rows: number[][]): FriedmanResult {
+  const k = names.length;
+  const n = rows.length;
+  if (k < 3) throw new Error("The Friedman test needs at least 3 conditions (columns). For 2, use the Wilcoxon signed-rank test.");
+  if (n < 2) throw new Error("Enter at least 2 participants (rows).");
+  const rankSums = new Array<number>(k).fill(0);
+  let tieSum = 0;
+  rows.forEach((row) => {
+    const { ranks, tieTerm } = averageRanks(row);
+    ranks.forEach((r, j) => (rankSums[j] += r));
+    tieSum += tieTerm;
+  });
+  const sumSq = rankSums.reduce((s, r) => s + r * r, 0);
+  let chi = (12 / (n * k * (k + 1))) * sumSq - 3 * n * (k + 1);
+  const correction = 1 - tieSum / (n * (k ** 3 - k));
+  if (correction > 0) chi /= correction;
+  const df = k - 1;
+  const conditions = names.map((name, j) => ({ name, median: median(rows.map((r) => r[j])), meanRank: rankSums[j] / n }));
+  const pairs = (k * (k - 1)) / 2;
+  const se = Math.sqrt((k * (k + 1)) / (6 * n));
+  const pairwise: FriedmanResult["pairwise"] = [];
+  for (let i = 0; i < k; i += 1) {
+    for (let j = i + 1; j < k; j += 1) {
+      const z = (conditions[i].meanRank - conditions[j].meanRank) / se;
+      const p = Math.min(1, 2 * normalSf(Math.abs(z)));
+      pairwise.push({ a: names[i], b: names[j], z, p, pAdj: Math.min(1, p * pairs) });
+    }
+  }
+  return { n, k, chiSquare: chi, df, p: chiSquarePValue(chi, df), kendallW: chi / (n * (k - 1)), conditions, pairwise };
+}
+
+/* ---------------- McNemar test ---------------- */
+
+export type McNemarResult = {
+  a: number;
+  b: number;
+  c: number;
+  d: number;
+  n: number;
+  chiSquare: number;
+  chiSquareCorrected: number;
+  pChi: number;
+  pCorrected: number;
+  pExact: number;
+  oddsRatio: number;
+  orLow: number;
+  orHigh: number;
+  pBefore: number;
+  pAfter: number;
+};
+
+function lnChoose(n: number, k: number) {
+  return lnGamma(n + 1) - lnGamma(k + 1) - lnGamma(n - k + 1);
+}
+
+export function mcNemarTest(a: number, b: number, c: number, d: number): McNemarResult {
+  [a, b, c, d].forEach((v) => {
+    if (!Number.isInteger(v) || v < 0) throw new Error("Enter whole-number counts of 0 or more in all four cells.");
+  });
+  const n = a + b + c + d;
+  if (b + c === 0) throw new Error("There are no discordant pairs (cells b and c are both 0), so no change can be tested.");
+  const chi = (b - c) ** 2 / (b + c);
+  const chiC = Math.max(0, Math.abs(b - c) - 1) ** 2 / (b + c);
+  const m = b + c;
+  const lo = Math.min(b, c);
+  let tail = 0;
+  for (let i = 0; i <= lo; i += 1) tail += Math.exp(lnChoose(m, i) - m * Math.LN2);
+  const pExact = Math.min(1, 2 * tail);
+  const or = c === 0 ? Infinity : b / c;
+  const seLog = b > 0 && c > 0 ? Math.sqrt(1 / b + 1 / c) : NaN;
+  return {
+    a,
+    b,
+    c,
+    d,
+    n,
+    chiSquare: chi,
+    chiSquareCorrected: chiC,
+    pChi: chiSquarePValue(chi, 1),
+    pCorrected: chiSquarePValue(chiC, 1),
+    pExact,
+    oddsRatio: or,
+    orLow: Number.isFinite(seLog) ? Math.exp(Math.log(or) - 1.959963984540054 * seLog) : NaN,
+    orHigh: Number.isFinite(seLog) ? Math.exp(Math.log(or) + 1.959963984540054 * seLog) : NaN,
+    pBefore: (a + b) / n,
+    pAfter: (a + c) / n,
+  };
+}
