@@ -38,31 +38,64 @@ const menuToolSlugsByCategory: Record<ToolCategory, string[]> = {
     "optimization-lab",
     "circuit-analysis",
   ],
-  statistics: [
-    "statistical-test-chooser",
-    "sample-size-calculator",
-    "power-analysis-calculator",
-    "cronbach-alpha-calculator",
-    "likert-scale-calculator",
-    "t-test-calculator",
-    "one-way-anova-calculator",
-    "correlation-calculator",
-    "linear-regression-calculator",
-    "chi-square-calculator",
-    "mann-whitney-u-test-calculator",
-    "wilcoxon-signed-rank-test-calculator",
-    "kruskal-wallis-test-calculator",
-    "friedman-test-calculator",
-    "mcnemar-test-calculator",
-    "shapiro-wilk-test-calculator",
-    "cohens-kappa-calculator",
-    "intraclass-correlation-calculator",
-    "effect-size-calculator",
-    "sobel-test-calculator",
-    "statistics-calculator",
-    "advanced-statistics",
-  ],
+  statistics: [],
 };
+
+// Research statistics is the main section, so its menu is grouped by research
+// step instead of one long list.
+const statisticsMenuGroups: Array<{ title: string; items: Array<[slug: string, label: string]> }> = [
+  {
+    title: "Plan your study",
+    items: [
+      ["statistical-test-chooser", "Statistical test chooser"],
+      ["sample-size-calculator", "Sample size (Slovin, Cochran)"],
+      ["power-analysis-calculator", "Power analysis"],
+    ],
+  },
+  {
+    title: "Questionnaires & reliability",
+    items: [
+      ["cronbach-alpha-calculator", "Cronbach's alpha"],
+      ["likert-scale-calculator", "Likert scale analysis"],
+      ["cohens-kappa-calculator", "Cohen's kappa"],
+      ["intraclass-correlation-calculator", "Intraclass correlation (ICC)"],
+    ],
+  },
+  {
+    title: "Compare groups",
+    items: [
+      ["t-test-calculator", "t-test"],
+      ["one-way-anova-calculator", "One-way ANOVA"],
+      ["chi-square-calculator", "Chi-square test"],
+      ["mcnemar-test-calculator", "McNemar test"],
+    ],
+  },
+  {
+    title: "Non-parametric tests",
+    items: [
+      ["mann-whitney-u-test-calculator", "Mann-Whitney U"],
+      ["wilcoxon-signed-rank-test-calculator", "Wilcoxon signed-rank"],
+      ["kruskal-wallis-test-calculator", "Kruskal-Wallis"],
+      ["friedman-test-calculator", "Friedman test"],
+    ],
+  },
+  {
+    title: "Relationships & effects",
+    items: [
+      ["correlation-calculator", "Correlation (Pearson, Spearman)"],
+      ["linear-regression-calculator", "Linear regression"],
+      ["effect-size-calculator", "Effect size"],
+      ["sobel-test-calculator", "Sobel test (mediation)"],
+    ],
+  },
+  {
+    title: "Check your data",
+    items: [
+      ["shapiro-wilk-test-calculator", "Shapiro-Wilk normality"],
+      ["statistics-calculator", "Descriptive statistics"],
+    ],
+  },
+];
 
 function getMenuTools(category: ToolCategory) {
   const categoryTools = getToolsByCategory(category);
@@ -164,18 +197,37 @@ export default function ToolHeader({ active }: ToolHeaderProps) {
                   </span>
                 </Link>
 
-                <div className={styles.desktopDropdown}>
+                <div
+                  className={`${styles.desktopDropdown} ${
+                    item.category === "statistics" ? styles.megaDropdown : ""
+                  }`}
+                >
                   <div className={styles.dropdownSurface}>
                     <p>{item.label}</p>
 
-                    <div className={styles.dropdownLinks}>
-                      {menuTools.map((tool) => (
-                        <Link href={getToolPath(tool)} key={tool.slug}>
-                          {tool.name}
-                          <span aria-hidden="true">→</span>
-                        </Link>
-                      ))}
-                    </div>
+                    {item.category === "statistics" ? (
+                      <div className={styles.megaGrid}>
+                        {statisticsMenuGroups.map((group) => (
+                          <div className={styles.megaGroup} key={group.title}>
+                            <span>{group.title}</span>
+                            {group.items.map(([slug, label]) => (
+                              <Link href={`/${slug}`} key={slug}>
+                                {label}
+                              </Link>
+                            ))}
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <div className={styles.dropdownLinks}>
+                        {menuTools.map((tool) => (
+                          <Link href={getToolPath(tool)} key={tool.slug}>
+                            {tool.name}
+                            <span aria-hidden="true">→</span>
+                          </Link>
+                        ))}
+                      </div>
+                    )}
 
                     <Link
                       className={styles.dropdownViewAll}
@@ -333,18 +385,34 @@ export default function ToolHeader({ active }: ToolHeaderProps) {
                   </div>
                 </div>
 
-                <div className={styles.mobilePanelTools}>
-                  {selectedMobileTools.map((tool) => (
-                    <Link
-                      href={getToolPath(tool)}
-                      key={tool.slug}
-                      onClick={closeMobile}
-                    >
-                      <span>{tool.name}</span>
-                      <b aria-hidden="true">→</b>
-                    </Link>
-                  ))}
-                </div>
+                {mobileCategoryPanel === "statistics" ? (
+                  statisticsMenuGroups.map((group) => (
+                    <div className={styles.mobilePanelGroup} key={group.title}>
+                      <span>{group.title}</span>
+                      <div className={styles.mobilePanelTools}>
+                        {group.items.map(([slug, label]) => (
+                          <Link href={`/${slug}`} key={slug} onClick={closeMobile}>
+                            <span>{label}</span>
+                            <b aria-hidden="true">→</b>
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  ))
+                ) : (
+                  <div className={styles.mobilePanelTools}>
+                    {selectedMobileTools.map((tool) => (
+                      <Link
+                        href={getToolPath(tool)}
+                        key={tool.slug}
+                        onClick={closeMobile}
+                      >
+                        <span>{tool.name}</span>
+                        <b aria-hidden="true">→</b>
+                      </Link>
+                    ))}
+                  </div>
+                )}
 
                 <Link
                   className={styles.mobilePanelViewAll}

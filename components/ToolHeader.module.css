@@ -571,3 +571,82 @@
     animation-duration: 0.01ms !important;
   }
 }
+
+/* Grouped mega menu for Research statistics. */
+.megaDropdown {
+  width: min(760px, calc(100vw - 48px));
+}
+
+.megaGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 4px 10px;
+  max-height: min(70vh, 520px);
+  overflow-y: auto;
+  padding: 10px 10px 6px;
+}
+
+.megaGroup {
+  display: grid;
+  align-content: start;
+  padding: 4px 2px 8px;
+}
+
+.megaGroup > span {
+  margin: 2px 8px 5px;
+  color: #6a7d99;
+  font-size: 0.63rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.megaGroup a {
+  padding: 6px 8px;
+  border-radius: 7px;
+  color: #243a5a;
+  font-size: 0.76rem;
+  font-weight: 760;
+  line-height: 1.3;
+  text-decoration: none;
+}
+
+.megaGroup a:hover,
+.megaGroup a:focus-visible {
+  outline: none;
+  background: #edf3ff;
+  color: #244bd5;
+}
+
+.mobileCategoryPanel {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+
+.mobilePanelGroup {
+  margin-top: 16px;
+}
+
+.mobilePanelGroup > span {
+  display: block;
+  margin: 0 2px 6px;
+  color: #6a7d99;
+  font-size: 0.66rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.mobilePanelGroup .mobilePanelTools {
+  margin-top: 0;
+  gap: 6px;
+}
+
+.mobilePanelGroup .mobilePanelTools a {
+  min-height: 44px;
+}
+
+.mobileDrawer {
+  max-height: 100dvh;
+}

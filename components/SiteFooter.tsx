@@ -7,12 +7,21 @@ import {
   linkedinUrl,
   youtubeUrl,
 } from "../lib/site";
-import {
-  getCategoryPath,
-  getToolsByCategory,
-  toolCategories,
-} from "../lib/tools";
+import { getCategoryPath, getToolsByCategory, toolCategories } from "../lib/tools";
 import styles from "./SiteFooter.module.css";
+
+// Keep the footer short: the most-used statistics tools, the category hubs
+// (which list every tool), guides, and site information.
+const popularToolLinks = [
+  { href: "/t-test-calculator", label: "t-test calculator" },
+  { href: "/one-way-anova-calculator", label: "One-way ANOVA" },
+  { href: "/chi-square-calculator", label: "Chi-square test" },
+  { href: "/correlation-calculator", label: "Correlation calculator" },
+  { href: "/linear-regression-calculator", label: "Linear regression" },
+  { href: "/power-analysis-calculator", label: "Power analysis" },
+  { href: "/sample-size-calculator", label: "Sample size calculator" },
+  { href: "/cronbach-alpha-calculator", label: "Cronbach's alpha" },
+];
 
 const trustLinks = [
   { href: "/about", label: "About SolveGrid" },
@@ -82,26 +91,32 @@ export default function SiteFooter() {
         </div>
 
         <div className={styles.linksGrid}>
-          {(Object.keys(toolCategories) as Array<keyof typeof toolCategories>).map(
-            (category) => (
-              <div key={category}>
-                <Link
-                  className={styles.categoryLink}
-                  href={getCategoryPath(category)}
-                >
-                  {toolCategories[category].label}
-                </Link>
-                {getToolsByCategory(category).map((tool) => (
-                  <Link href={`/${tool.slug}`} key={tool.slug}>
-                    Use {tool.name}
-                  </Link>
-                ))}
-              </div>
-            ),
-          )}
+          <div>
+            <Link className={styles.categoryLink} href={getCategoryPath("statistics")}>
+              Popular statistics tools
+            </Link>
+            {popularToolLinks.map((link) => (
+              <Link href={link.href} key={link.href}>
+                {link.label}
+              </Link>
+            ))}
+            <Link className={styles.moreLink} href={getCategoryPath("statistics")}>
+              All {getToolsByCategory("statistics").length} statistics calculators →
+            </Link>
+          </div>
 
           <div>
-            <p className={styles.categoryLink}>GUIDES &amp; METHODS</p>
+            <p className={styles.categoryLink}>Tool categories</p>
+            {(Object.keys(toolCategories) as Array<keyof typeof toolCategories>).map((category) => (
+              <Link href={getCategoryPath(category)} key={category}>
+                {toolCategories[category].label}
+              </Link>
+            ))}
+            <Link href="/tools">All tools</Link>
+          </div>
+
+          <div>
+            <p className={styles.categoryLink}>Guides</p>
             {guideLinks.map((link) => (
               <Link href={link.href} key={link.href}>
                 {link.label}
@@ -110,7 +125,7 @@ export default function SiteFooter() {
           </div>
 
           <div>
-            <p className={styles.categoryLink}>SITE INFORMATION</p>
+            <p className={styles.categoryLink}>Site information</p>
             {trustLinks.map((link) => (
               <Link href={link.href} key={link.href}>
                 {link.label}

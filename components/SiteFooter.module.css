@@ -49,3 +49,10 @@
 .socialLinks a:hover {
   color: #fff;
 }
+
+/* Compact four-column footer. */
+.linksGrid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.linksGrid a.moreLink { margin-top: 12px; color: #9ab2ff; font-weight: 850; }
+.linksGrid a.moreLink:hover { color: #fff; }
+@media (max-width: 980px) { .linksGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 350px) { .linksGrid { grid-template-columns: 1fr; } }
