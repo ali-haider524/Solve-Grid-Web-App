@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import ToolHeader from "../../components/ToolHeader";
-import { cohensKappa, fixed, formatP, parseMatrix, type KappaResult } from "../../lib/research-statistics";
+import { cohensKappa, fixed, formatP, parseMatrix, type KappaResult, pText } from "../../lib/research-statistics";
 import styles from "../../components/ResearchLab.module.css";
 
 type Weighting = "none" | "linear" | "quadratic";
@@ -98,7 +98,7 @@ export default function CohensKappaCalculator() {
               <div className={styles.interpretation}>
                 Inter-rater agreement was {result.band.toLowerCase().replace(" (less than chance)", "")},{" "}
                 {weighting === "none" ? "κ" : `weighted κ (${weighting})`} = {fixed(result.kappa, 2).replace(/^(-?)0/, "$1")}, 95% CI [
-                {fixed(result.ciLow, 2).replace(/^(-?)0/, "$1")}, {fixed(result.ciHigh, 2).replace(/^(-?)0/, "$1")}], p = {formatP(result.p)}.
+                {fixed(result.ciLow, 2).replace(/^(-?)0/, "$1")}, {fixed(result.ciHigh, 2).replace(/^(-?)0/, "$1")}], {pText(result.p)}.
               </div>
               <div className={styles.methodNote}>
                 <p>NOTE</p>

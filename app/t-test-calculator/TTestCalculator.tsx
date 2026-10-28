@@ -10,6 +10,7 @@ import {
   oneSampleT,
   pairedTTest,
   parseNumbers,
+  pText,
   type TTestResult,
 } from "../../lib/research-statistics";
 import styles from "../../components/ResearchLab.module.css";
@@ -48,12 +49,12 @@ export default function TTestCalculator() {
     if (r.kind === "independent") {
       const hi = g[0].mean >= g[1].mean ? 0 : 1;
       const lo = 1 - hi;
-      return `${r.welch ? "A Welch's" : "An independent-samples"} t-test showed that ${labels[hi]} (M = ${fixed(g[hi].mean, 2)}, SD = ${fixed(g[hi].sd, 2)}) scored ${sig(r.p)} higher than ${labels[lo]} (M = ${fixed(g[lo].mean, 2)}, SD = ${fixed(g[lo].sd, 2)}), t(${dfText(r.df)}) = ${fixed(Math.abs(r.t), 2)}, p = ${formatP(r.p)}, d = ${fixed(Math.abs(r.d), 2)}, 95% CI of the difference [${fixed(Math.min(Math.abs(r.ciLow), Math.abs(r.ciHigh)) * (r.ciLow * r.ciHigh < 0 ? -1 : 1), 2)}, ${fixed(Math.max(Math.abs(r.ciLow), Math.abs(r.ciHigh)), 2)}].`;
+      return `${r.welch ? "A Welch's" : "An independent-samples"} t-test showed that ${labels[hi]} (M = ${fixed(g[hi].mean, 2)}, SD = ${fixed(g[hi].sd, 2)}) scored ${sig(r.p)} higher than ${labels[lo]} (M = ${fixed(g[lo].mean, 2)}, SD = ${fixed(g[lo].sd, 2)}), t(${dfText(r.df)}) = ${fixed(Math.abs(r.t), 2)}, ${pText(r.p)}, d = ${fixed(Math.abs(r.d), 2)}, 95% CI of the difference [${fixed(Math.min(Math.abs(r.ciLow), Math.abs(r.ciHigh)) * (r.ciLow * r.ciHigh < 0 ? -1 : 1), 2)}, ${fixed(Math.max(Math.abs(r.ciLow), Math.abs(r.ciHigh)), 2)}].`;
     }
     if (r.kind === "paired") {
-      return `A paired-samples t-test showed that scores were ${sig(r.p)} ${r.meanDiff >= 0 ? "higher" : "lower"} after (M = ${fixed(g[1].mean, 2)}, SD = ${fixed(g[1].sd, 2)}) than before (M = ${fixed(g[0].mean, 2)}, SD = ${fixed(g[0].sd, 2)}), t(${r.df}) = ${fixed(r.t, 2)}, p = ${formatP(r.p)}, dz = ${fixed(r.d, 2)}, mean difference = ${fixed(r.meanDiff, 2)}, 95% CI [${fixed(r.ciLow, 2)}, ${fixed(r.ciHigh, 2)}].`;
+      return `A paired-samples t-test showed that scores were ${sig(r.p)} ${r.meanDiff >= 0 ? "higher" : "lower"} after (M = ${fixed(g[1].mean, 2)}, SD = ${fixed(g[1].sd, 2)}) than before (M = ${fixed(g[0].mean, 2)}, SD = ${fixed(g[0].sd, 2)}), t(${r.df}) = ${fixed(r.t, 2)}, ${pText(r.p)}, dz = ${fixed(r.d, 2)}, mean difference = ${fixed(r.meanDiff, 2)}, 95% CI [${fixed(r.ciLow, 2)}, ${fixed(r.ciHigh, 2)}].`;
     }
-    return `A one-sample t-test showed that the mean (M = ${fixed(g[0].mean, 2)}, SD = ${fixed(g[0].sd, 2)}) was ${sig(r.p)} different from ${mu}, t(${r.df}) = ${fixed(r.t, 2)}, p = ${formatP(r.p)}, d = ${fixed(r.d, 2)}.`;
+    return `A one-sample t-test showed that the mean (M = ${fixed(g[0].mean, 2)}, SD = ${fixed(g[0].sd, 2)}) was ${sig(r.p)} different from ${mu}, t(${r.df}) = ${fixed(r.t, 2)}, ${pText(r.p)}, d = ${fixed(r.d, 2)}.`;
   }
 
   return (
@@ -122,7 +123,7 @@ export default function TTestCalculator() {
           <p>RESULT</p>
           {result ? (
             <>
-              <h2>t({dfText(result.df)}) = {fixed(result.t, 2)}, p = {formatP(result.p)}</h2>
+              <h2>t({dfText(result.df)}) = {fixed(result.t, 2)}, {pText(result.p)}</h2>
               <div className={styles.resultRows}>
                 <div><span>t statistic</span><strong>{fixed(result.t, 3)}</strong></div>
                 <div><span>Degrees of freedom</span><strong>{dfText(result.df)}</strong></div>
@@ -139,9 +140,9 @@ export default function TTestCalculator() {
                 <div className={styles.methodNote}>
                   <p>EQUAL VARIANCES CHECK</p>
                   <span>
-                    Levene&apos;s test (median): F(1, {result.groups[0].n + result.groups[1].n - 2}) = {fixed(result.levene.f, 2)}, p ={" "}
-                    {formatP(result.levene.p)}. Student&apos;s t-test (equal variances): t({result.student.df}) = {fixed(result.student.t, 2)}, p ={" "}
-                    {formatP(result.student.p)}. Welch&apos;s version is safe either way.
+                    Levene&apos;s test (median): F(1, {result.groups[0].n + result.groups[1].n - 2}) = {fixed(result.levene.f, 2)},{" "}
+                    {pText(result.levene.p)}. Student&apos;s t-test (equal variances): t({result.student.df}) = {fixed(result.student.t, 2)},{" "}
+                    {pText(result.student.p)}. Welch&apos;s version is safe either way.
                   </span>
                 </div>
               ) : (

@@ -31,6 +31,24 @@ export const siteOperatorName =
   process.env.NEXT_PUBLIC_SITE_OPERATOR?.trim() || siteName;
 export const contactEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL?.trim() || "";
 
+// The person who builds and maintains SolveGrid (shown on the About page and in structured data).
+export const siteAuthor = {
+  name: "Talha",
+  jobTitle: "Software Engineer and Web Developer",
+  description:
+    "Software engineer and web developer with experience in SEO, web development, project management, and e-commerce. Builds and maintains SolveGrid's calculators and guides.",
+  knowsAbout: ["Software engineering", "Web development", "Search engine optimisation", "Project management", "E-commerce", "Research statistics tools"],
+};
+
+/*
+  Google AdSense. Set NEXT_PUBLIC_ADSENSE_CLIENT to the publisher ID from the
+  AdSense dashboard (format ca-pub-1234567890123456). When it is empty, no ad
+  code, verification tag, or ads.txt entry is output.
+*/
+const rawAdsenseClient = process.env.NEXT_PUBLIC_ADSENSE_CLIENT?.trim() || "";
+export const adsenseClient = /^ca-pub-\d{10,20}$/.test(rawAdsenseClient) ? rawAdsenseClient : "";
+export const adsensePublisherId = adsenseClient.replace(/^ca-/, "");
+
 
 function normalizePublicUrl(value: string) {
   if (!value.trim()) return "";

@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import ToolHeader from "../../components/ToolHeader";
-import { fixed, formatP, linearRegression, parseDataTable, type RegressionResult } from "../../lib/research-statistics";
+import { fixed, formatP, linearRegression, parseDataTable, type RegressionResult, pText } from "../../lib/research-statistics";
 import styles from "../../components/ResearchLab.module.css";
 
 const sample = `Score Hours Sleep
@@ -22,7 +22,7 @@ const sample = `Score Hours Sleep
 80 6 8
 57 3 7`;
 
-const pApa = (p: number) => (p < 0.001 ? "p < .001" : `p = ${formatP(p)}`);
+const pApa = (p: number) => (p < 0.001 ? "p < .001" : `${pText(p)}`);
 const noZero = (v: number, d = 2) => fixed(v, d).replace(/^(-?)0\./, "$1.");
 
 function ResidualPlot({ fitted, residuals }: { fitted: number[]; residuals: number[] }) {
@@ -197,7 +197,7 @@ export default function RegressionCalculator() {
                 <div><span>R²</span><strong>{fixed(result.rSquared, 3)}</strong></div>
                 <div><span>Adjusted R²</span><strong>{fixed(result.adjRSquared, 3)}</strong></div>
                 <div><span>Std. error of the estimate</span><strong>{fixed(result.see, 3)}</strong></div>
-                <div><span>F (model)</span><strong>{fixed(result.f, 3)}, p = {formatP(result.p)}</strong></div>
+                <div><span>F (model)</span><strong>{fixed(result.f, 3)}, {pText(result.p)}</strong></div>
                 <div><span>N</span><strong>{result.n}</strong></div>
               </div>
               <div className={styles.tableWrap}>

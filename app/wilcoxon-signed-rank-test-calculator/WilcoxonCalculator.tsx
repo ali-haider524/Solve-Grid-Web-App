@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import ToolHeader from "../../components/ToolHeader";
-import { fixed, formatP, parseNumbers, wilcoxonSignedRank, type WilcoxonResult } from "../../lib/research-statistics";
+import { fixed, formatP, parseNumbers, wilcoxonSignedRank, type WilcoxonResult, pText } from "../../lib/research-statistics";
 import styles from "../../components/ResearchLab.module.css";
 
 export default function WilcoxonCalculator() {
@@ -66,7 +66,7 @@ export default function WilcoxonCalculator() {
           <p>RESULT</p>
           {result ? (
             <>
-              <h2>T = {t(result.t)}, z = {fixed(result.z, 2)}, p = {formatP(result.p)}</h2>
+              <h2>T = {t(result.t)}, z = {fixed(result.z, 2)}, {pText(result.p)}</h2>
               <div className={styles.resultRows}>
                 <div><span>T (smaller rank sum)</span><strong>{t(result.t)}</strong></div>
                 <div><span>W⁺ / W⁻</span><strong>{t(result.wPlus)} / {t(result.wMinus)}</strong></div>
@@ -79,7 +79,7 @@ export default function WilcoxonCalculator() {
               <div className={styles.interpretation}>
                 A Wilcoxon signed-rank test indicated that scores were {result.p < 0.05 ? "significantly" : "not significantly"}{" "}
                 {result.medianAfter >= result.medianBefore ? "higher" : "lower"} after (Mdn = {fixed(result.medianAfter, 2)}) than before
-                (Mdn = {fixed(result.medianBefore, 2)}), T = {t(result.t)}, z = {fixed(result.z, 2)}, p = {formatP(result.p)}, r ={" "}
+                (Mdn = {fixed(result.medianBefore, 2)}), T = {t(result.t)}, z = {fixed(result.z, 2)}, {pText(result.p)}, r ={" "}
                 {fixed(result.r, 2).replace(/^0/, "")}.
               </div>
               <div className={styles.methodNote}>

@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { getTool, getToolPath } from "./tools";
-import { siteName, siteUrl } from "./site";
+import { siteAuthor, siteName, siteUrl } from "./site";
 
 const ogImage = { url: "/og-image.png", width: 1200, height: 630, alt: "SolveGrid statistics calculators for thesis research" };
 
 const sharedMetadata: Pick<Metadata, "authors" | "creator" | "publisher"> = {
-  authors: [{ name: siteName, url: siteUrl }],
+  authors: [{ name: siteAuthor.name, url: `${siteUrl}/about` }],
   creator: siteName,
   publisher: siteName,
 };

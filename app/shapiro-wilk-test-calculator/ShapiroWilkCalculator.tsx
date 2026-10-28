@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import ToolHeader from "../../components/ToolHeader";
-import { fixed, formatP, normalQuantile, parseNumbers, shapiroWilk, type ShapiroResult } from "../../lib/research-statistics";
+import { fixed, formatP, normalQuantile, parseNumbers, shapiroWilk, type ShapiroResult, pText } from "../../lib/research-statistics";
 import styles from "../../components/ResearchLab.module.css";
 
 const sample = "148, 154, 158, 160, 161, 162, 166, 170, 182, 195, 236";
@@ -126,7 +126,7 @@ export default function ShapiroWilkCalculator() {
           <p>RESULT</p>
           {result ? (
             <>
-              <h2>W = {fixed(result.w, 3)}, p = {formatP(result.p)}: {normal ? "no evidence against normality" : "not normal"}</h2>
+              <h2>W = {fixed(result.w, 3)}, {pText(result.p)}: {normal ? "no evidence against normality" : "not normal"}</h2>
               <div className={styles.resultRows}>
                 <div><span>W statistic</span><strong>{fixed(result.w, 4)}</strong></div>
                 <div><span>p value</span><strong>{formatP(result.p)}</strong></div>
@@ -137,7 +137,7 @@ export default function ShapiroWilkCalculator() {
               </div>
               <div className={styles.interpretation}>
                 A Shapiro-Wilk test indicated that the data {normal ? "did not significantly deviate from" : "significantly deviated from"} a
-                normal distribution, W({result.n}) = {fixed(result.w, 2).replace(/^0/, "")}, p = {formatP(result.p)}.
+                normal distribution, W({result.n}) = {fixed(result.w, 2).replace(/^0/, "")}, {pText(result.p)}.
                 {normal
                   ? " Parametric tests such as the t-test or ANOVA are reasonable."
                   : " Consider a non-parametric test such as Mann-Whitney U, Wilcoxon, or Kruskal-Wallis, or a transformation."}

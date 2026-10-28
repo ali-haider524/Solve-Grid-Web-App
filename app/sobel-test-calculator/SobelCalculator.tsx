@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import ToolHeader from "../../components/ToolHeader";
-import { fixed, formatP, sobelTest, type SobelResult } from "../../lib/research-statistics";
+import { fixed, formatP, sobelTest, type SobelResult, pText } from "../../lib/research-statistics";
 import styles from "../../components/ResearchLab.module.css";
 
 export default function SobelCalculator() {
@@ -63,7 +63,7 @@ export default function SobelCalculator() {
           <p>RESULT</p>
           {result ? (
             <>
-              <h2>Indirect effect ab = {fixed(result.indirect, 3)}, z = {fixed(result.sobel.z, 2)}, p = {formatP(result.sobel.p)}</h2>
+              <h2>Indirect effect ab = {fixed(result.indirect, 3)}, z = {fixed(result.sobel.z, 2)}, {pText(result.sobel.p)}</h2>
               <div className={styles.resultRows}>
                 <div><span>Indirect effect (a × b)</span><strong>{fixed(result.indirect, 4)}</strong></div>
                 <div><span>Sobel z, p</span><strong>{fixed(result.sobel.z, 3)}, {formatP(result.sobel.p)}</strong></div>
@@ -77,7 +77,7 @@ export default function SobelCalculator() {
               </div>
               <div className={styles.interpretation}>
                 A Sobel test indicated {result.sobel.p < 0.05 ? "a significant" : "no significant"} indirect effect of X on Y through M, ab ={" "}
-                {fixed(result.indirect, 2)}, z = {fixed(result.sobel.z, 2)}, p = {formatP(result.sobel.p)}.
+                {fixed(result.indirect, 2)}, z = {fixed(result.sobel.z, 2)}, {pText(result.sobel.p)}.
               </div>
               <div className={styles.methodNote}>
                 <p>IMPORTANT</p>

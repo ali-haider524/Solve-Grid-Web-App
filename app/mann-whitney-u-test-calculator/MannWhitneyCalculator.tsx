@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import ToolHeader from "../../components/ToolHeader";
-import { fixed, formatP, mannWhitney, parseNumbers, type MannWhitneyResult } from "../../lib/research-statistics";
+import { fixed, formatP, mannWhitney, parseNumbers, type MannWhitneyResult, pText } from "../../lib/research-statistics";
 import styles from "../../components/ResearchLab.module.css";
 
 export default function MannWhitneyCalculator() {
@@ -80,7 +80,7 @@ export default function MannWhitneyCalculator() {
           <p>RESULT</p>
           {result ? (
             <>
-              <h2>U = {fixed(result.u, 1).replace(/\.0$/, "")}, p = {formatP(result.p)}</h2>
+              <h2>U = {fixed(result.u, 1).replace(/\.0$/, "")}, {pText(result.p)}</h2>
               <div className={styles.resultRows}>
                 <div><span>U (smaller of U₁, U₂)</span><strong>{fixed(result.u, 1).replace(/\.0$/, "")}</strong></div>
                 <div><span>z</span><strong>{fixed(result.z, 3)}</strong></div>
@@ -93,7 +93,7 @@ export default function MannWhitneyCalculator() {
                 A Mann-Whitney U test indicated that scores were {result.p < 0.05 ? "significantly" : "not significantly"} higher
                 for {higher} (Mdn = {fixed(higher === a ? result.median1 : result.median2, 2)}) than for {lower} (Mdn ={" "}
                 {fixed(higher === a ? result.median2 : result.median1, 2)}), U = {fixed(result.u, 1).replace(/\.0$/, "")}, z ={" "}
-                {fixed(result.z, 2)}, p = {formatP(result.p)}, r = {fixed(result.r, 2).replace(/^0/, "")}.
+                {fixed(result.z, 2)}, {pText(result.p)}, r = {fixed(result.r, 2).replace(/^0/, "")}.
               </div>
               <div className={styles.methodNote}>
                 <p>NOTE</p>

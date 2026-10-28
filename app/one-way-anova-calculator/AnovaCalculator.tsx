@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import ToolHeader from "../../components/ToolHeader";
-import { etaBand, fixed, formatP, oneWayAnova, parseNumbers, type AnovaResult } from "../../lib/research-statistics";
+import { etaBand, fixed, formatP, oneWayAnova, parseNumbers, type AnovaResult, pText } from "../../lib/research-statistics";
 import styles from "../../components/ResearchLab.module.css";
 
 const sample = `Lecture: 68, 72, 75, 70, 65, 74, 71, 69
@@ -11,7 +11,7 @@ Flipped: 82, 79, 85, 88, 80, 84, 86, 83, 81`;
 
 const num = (v: number) => (Math.abs(v) >= 1000 ? fixed(v, 1) : fixed(v, 2));
 const dfText = (df: number) => (Number.isInteger(df) ? String(df) : fixed(df, 2));
-const pApa = (p: number) => (p < 0.001 ? "p < .001" : `p = ${formatP(p)}`);
+const pApa = (p: number) => (p < 0.001 ? "p < .001" : `${pText(p)}`);
 
 export default function AnovaCalculator() {
   const [text, setText] = useState(sample);

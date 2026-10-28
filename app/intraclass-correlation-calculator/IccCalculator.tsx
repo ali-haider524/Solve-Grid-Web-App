@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import ToolHeader from "../../components/ToolHeader";
-import { fixed, formatP, iccBand, intraclassCorrelation, parseMatrix, type IccResult } from "../../lib/research-statistics";
+import { fixed, iccBand, intraclassCorrelation, parseMatrix, type IccResult, pText } from "../../lib/research-statistics";
 import styles from "../../components/ResearchLab.module.css";
 
 const sample = `Rater1, Rater2, Rater3, Rater4
@@ -102,7 +102,7 @@ export default function IccCalculator() {
               <div className={styles.resultRows}>
                 <div><span>Recommended model</span><strong>{row.type}</strong></div>
                 <div><span>95% confidence interval</span><strong>{fixed(row.ciLow, 3)} to {fixed(row.ciHigh, 3)}</strong></div>
-                <div><span>F test</span><strong>F({row.df1}, {row.df2}) = {fixed(row.f, 2)}, p = {formatP(row.p)}</strong></div>
+                <div><span>F test</span><strong>F({row.df1}, {row.df2}) = {fixed(row.f, 2)}, {pText(row.p)}</strong></div>
                 <div><span>Subjects × raters</span><strong>{result.subjects} × {result.raters}</strong></div>
               </div>
               <div className={styles.tableWrap}>
@@ -122,7 +122,7 @@ export default function IccCalculator() {
               <div className={styles.interpretation}>
                 Inter-rater reliability was {iccBand(row.value).toLowerCase()}: a {modelName} ICC based on{" "}
                 {unit === "single" ? "a single rater" : `the mean of ${result.raters} raters`} was {strip(fixed(row.value, 2))}, 95% CI [
-                {strip(fixed(row.ciLow, 2))}, {strip(fixed(row.ciHigh, 2))}], F({row.df1}, {row.df2}) = {fixed(row.f, 2)}, p = {formatP(row.p)}.
+                {strip(fixed(row.ciLow, 2))}, {strip(fixed(row.ciHigh, 2))}], F({row.df1}, {row.df2}) = {fixed(row.f, 2)}, {pText(row.p)}.
               </div>
               <div className={styles.methodNote}>
                 <p>INTERPRETATION (KOO &amp; LI, 2016)</p>

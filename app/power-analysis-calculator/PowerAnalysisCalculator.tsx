@@ -90,7 +90,7 @@ export default function PowerAnalysisCalculator() {
           : design === "paired-t"
             ? `N = ${r.total} participants (pairs)`
             : `N = ${r.total}`;
-    return `An a priori power analysis for a ${info.test}${design === "chi-square" ? ` (df = ${input.df})` : ""} indicated that a sample of ${sampleText} is required to detect ${word} (${info.symbol} = ${fixed(es, 2)}) with ${fixed(target * 100, 0)}% power at α = ${String(input.alpha).replace(/^0/, "")}${tailText}.`;
+    return `An a priori power analysis for ${/^[aeiou]/i.test(info.test) ? "an" : "a"} ${info.test}${design === "chi-square" ? ` (df = ${input.df})` : ""} indicated that a sample of ${sampleText} is required to detect ${word} (${info.symbol} = ${fixed(es, 2)}) with ${fixed(target * 100, 0)}% power at α = ${String(input.alpha).replace(/^0/, "")}${tailText}.`;
   }
 
   const checkValue = Number(checkN);

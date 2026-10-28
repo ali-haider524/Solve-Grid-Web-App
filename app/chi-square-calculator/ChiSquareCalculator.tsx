@@ -5,11 +5,12 @@ import ToolHeader from "../../components/ToolHeader";
 import {
   chiSquareGoodness,
   chiSquareIndependence,
+  type ChiSquareResult,
   fixed,
   formatP,
-  parseMatrix,
-  type ChiSquareResult,
   type GoodnessResult,
+  parseMatrix,
+  pText,
 } from "../../lib/research-statistics";
 import styles from "../../components/ResearchLab.module.css";
 
@@ -122,7 +123,7 @@ export default function ChiSquareCalculator() {
           <p>RESULT</p>
           {indep ? (
             <>
-              <h2>χ²({indep.df}) = {fixed(indep.statistic, 2)}, p = {formatP(indep.p)}</h2>
+              <h2>χ²({indep.df}) = {fixed(indep.statistic, 2)}, {pText(indep.p)}</h2>
               <div className={styles.resultRows}>
                 <div><span>Chi-square (χ²)</span><strong>{fixed(indep.statistic, 3)}</strong></div>
                 <div><span>Degrees of freedom</span><strong>{indep.df}</strong></div>
@@ -150,7 +151,7 @@ export default function ChiSquareCalculator() {
               </div>
               <div className={styles.interpretation}>
                 A chi-square test of independence showed {significant(indep.p)} association, χ²({indep.df}, N = {indep.n}) ={" "}
-                {fixed(indep.statistic, 2)}, p = {formatP(indep.p)}, Cramér&apos;s V = {fixed(indep.cramersV, 2).replace(/^0/, "")}.
+                {fixed(indep.statistic, 2)}, {pText(indep.p)}, Cramér&apos;s V = {fixed(indep.cramersV, 2).replace(/^0/, "")}.
               </div>
               <div className={styles.methodNote}>
                 <p>EXPECTED-COUNT CHECK</p>
@@ -169,7 +170,7 @@ export default function ChiSquareCalculator() {
             </>
           ) : good ? (
             <>
-              <h2>χ²({good.df}) = {fixed(good.statistic, 2)}, p = {formatP(good.p)}</h2>
+              <h2>χ²({good.df}) = {fixed(good.statistic, 2)}, {pText(good.p)}</h2>
               <div className={styles.resultRows}>
                 <div><span>Chi-square (χ²)</span><strong>{fixed(good.statistic, 3)}</strong></div>
                 <div><span>Degrees of freedom</span><strong>{good.df}</strong></div>
@@ -178,7 +179,7 @@ export default function ChiSquareCalculator() {
               </div>
               <div className={styles.interpretation}>
                 A chi-square goodness-of-fit test showed {significant(good.p)} difference from the expected distribution,
-                χ²({good.df}, N = {good.n}) = {fixed(good.statistic, 2)}, p = {formatP(good.p)}.
+                χ²({good.df}, N = {good.n}) = {fixed(good.statistic, 2)}, {pText(good.p)}.
               </div>
               {good.minExpected < 5 ? (
                 <div className={styles.methodNote}><p>CHECK</p><span>At least one expected count is below 5, so treat the p value with caution.</span></div>

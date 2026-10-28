@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import ToolHeader from "../../components/ToolHeader";
-import { fixed, formatP, kruskalWallis, parseNumbers, type KruskalResult } from "../../lib/research-statistics";
+import { fixed, formatP, kruskalWallis, parseNumbers, type KruskalResult, pText } from "../../lib/research-statistics";
 import styles from "../../components/ResearchLab.module.css";
 
 const sample = `Lecture: 1, 2, 2, 3, 4, 4, 5
@@ -69,7 +69,7 @@ export default function KruskalWallisCalculator() {
           <p>RESULT</p>
           {result ? (
             <>
-              <h2>H({result.df}) = {fixed(result.h, 2)}, p = {formatP(result.p)}</h2>
+              <h2>H({result.df}) = {fixed(result.h, 2)}, {pText(result.p)}</h2>
               <div className={styles.resultRows}>
                 <div><span>H statistic (tie-corrected)</span><strong>{fixed(result.h, 3)}</strong></div>
                 <div><span>Degrees of freedom</span><strong>{result.df}</strong></div>
@@ -99,7 +99,7 @@ export default function KruskalWallisCalculator() {
               </div>
               <div className={styles.interpretation}>
                 A Kruskal-Wallis H test showed {result.p < 0.05 ? "a statistically significant" : "no statistically significant"} difference
-                between groups, H({result.df}) = {fixed(result.h, 2)}, p = {formatP(result.p)}, ε² = {fixed(result.epsilonSquared, 2).replace(/^0/, "")}.
+                between groups, H({result.df}) = {fixed(result.h, 2)}, {pText(result.p)}, ε² = {fixed(result.epsilonSquared, 2).replace(/^0/, "")}.
                 {result.p < 0.05
                   ? ` Dunn's post hoc tests with Bonferroni correction showed significant differences for ${
                       result.dunn.filter((d) => d.pAdj < 0.05).map((d) => `${d.a} vs ${d.b}`).join(", ") || "no single pair"

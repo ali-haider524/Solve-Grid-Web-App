@@ -2,10 +2,10 @@
 
 import { useState } from "react";
 import ToolHeader from "../../components/ToolHeader";
-import { fixed, formatP, mcNemarTest, type McNemarResult } from "../../lib/research-statistics";
+import { fixed, formatP, mcNemarTest, type McNemarResult, pText } from "../../lib/research-statistics";
 import styles from "../../components/ResearchLab.module.css";
 
-const pApa = (p: number) => (p < 0.001 ? "p < .001" : `p = ${formatP(p)}`);
+const pApa = (p: number) => (p < 0.001 ? "p < .001" : `${pText(p)}`);
 const pct = (v: number) => `${fixed(v * 100, 1)}%`;
 
 export default function McNemarCalculator() {
@@ -75,8 +75,8 @@ export default function McNemarCalculator() {
             <>
               <h2>χ²(1, N = {result.n}) = {fixed(result.chiSquare, 2)}, exact {pApa(result.pExact)}</h2>
               <div className={styles.resultRows}>
-                <div><span>McNemar χ² (no correction)</span><strong>{fixed(result.chiSquare, 3)}, p = {formatP(result.pChi)}</strong></div>
-                <div><span>χ² with continuity correction</span><strong>{fixed(result.chiSquareCorrected, 3)}, p = {formatP(result.pCorrected)}</strong></div>
+                <div><span>McNemar χ² (no correction)</span><strong>{fixed(result.chiSquare, 3)}, {pText(result.pChi)}</strong></div>
+                <div><span>χ² with continuity correction</span><strong>{fixed(result.chiSquareCorrected, 3)}, {pText(result.pCorrected)}</strong></div>
                 <div><span>Exact binomial p (two-sided)</span><strong>{formatP(result.pExact)}</strong></div>
                 <div><span>Discordant pairs (b + c)</span><strong>{result.b + result.c}</strong></div>
                 <div><span>Odds ratio (b ÷ c)</span><strong>{Number.isFinite(result.oddsRatio) ? fixed(result.oddsRatio, 2) : "∞"}{Number.isFinite(result.orLow) ? ` [${fixed(result.orLow, 2)}, ${fixed(result.orHigh, 2)}]` : ""}</strong></div>

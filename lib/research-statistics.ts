@@ -518,6 +518,11 @@ export function chiSquareGoodness(observed: number[], proportions?: number[]): G
   return { statistic, df, p: chiSquarePValue(statistic, df), n, expected, minExpected: Math.min(...expected) };
 }
 
+export function pText(p: number) {
+  if (!Number.isFinite(p)) return "p = —";
+  return p < 0.001 ? "p < .001" : `p = ${formatP(p)}`;
+}
+
 export function formatP(p: number) {
   if (!Number.isFinite(p)) return "—";
   if (p < 0.001) return "< .001";

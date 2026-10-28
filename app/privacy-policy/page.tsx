@@ -4,7 +4,7 @@ import { createStaticPageMetadata } from "../../lib/seo";
 
 export const metadata = createStaticPageMetadata(
   "Privacy Policy",
-  "Read how SolveGrid handles calculator inputs, support messages, cookies, Google Analytics, technical logs, and shareable links.",
+  "Read how SolveGrid handles calculator inputs, support messages, cookies, Google Analytics, Google AdSense advertising, technical logs, and shareable links.",
   "/privacy-policy",
 );
 
@@ -14,7 +14,7 @@ export default function PrivacyPolicyPage() {
       eyebrow="PRIVACY POLICY"
       title="Privacy Policy"
       description="How SolveGrid handles calculator inputs, website information, and support messages."
-      updated="6 July 2026"
+      updated="28 October 2026"
       sections={[
         {
           title: "Scope of this policy",
@@ -56,7 +56,15 @@ export default function PrivacyPolicyPage() {
           paragraphs: [
             "SolveGrid uses Google Analytics to understand how visitors use the website. This may include information such as pages viewed, interactions with site content, browser and device categories, referring source, and approximate location information.",
             "Google Analytics may use cookies or similar identifiers to measure website interactions. We use this information to understand site performance, improve tools and guides, and identify usability issues.",
-            "SolveGrid does not currently display third-party advertising or run remarketing campaigns. If we add advertising, additional analytics features, or other services in the future, we will update this policy and add any consent controls required by applicable law.",
+          ],
+        },
+        {
+          title: "Advertising and Google AdSense",
+          paragraphs: [
+            "SolveGrid is free to use and may display advertising served by Google AdSense to cover hosting and development costs. Ads are shown around the calculators and guides; calculator inputs are processed in your browser and are not shared with advertisers.",
+            "Third-party vendors, including Google, use cookies to serve ads based on a user's prior visits to this website or other websites. Google's use of advertising cookies enables it and its partners to serve ads to users based on their visit to SolveGrid and/or other sites on the internet.",
+            "You may opt out of personalised advertising by visiting Google Ads Settings (https://adssettings.google.com). You can also opt out of some third-party vendors' use of cookies for personalised advertising at www.aboutads.info/choices or www.youronlinechoices.eu. More information is available in Google's explanation of how it uses information from sites that use its services (https://policies.google.com/technologies/partner-sites).",
+            "Visitors in the European Economic Area, the United Kingdom, and Switzerland are asked for consent through a Google-certified consent message before personalised advertising cookies are used. Where consent is not given, Google may show non-personalised ads, which still use cookies for frequency capping, aggregated reporting, and fraud prevention.",
           ],
         },
         {

@@ -2,9 +2,11 @@ import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 import "./globals.css";
 import {
+  adsenseClient,
   contactEmail,
   siteDescription,
   siteName,
+  siteAuthor,
   siteOperatorName,
   siteUrl,
   socialProfiles,
@@ -71,6 +73,7 @@ export const metadata: Metadata = {
         google: googleVerification,
       }
     : undefined,
+  other: adsenseClient ? { "google-adsense-account": adsenseClient } : undefined,
 };
 
 export default function RootLayout({
@@ -81,9 +84,23 @@ export default function RootLayout({
   const organizationId = `${siteUrl}/#organization`;
   const websiteId = `${siteUrl}/#website`;
 
+  const authorId = `${siteUrl}/about#author`;
+
+  const authorSchema = {
+    "@type": "Person",
+    "@id": authorId,
+    name: siteAuthor.name,
+    jobTitle: siteAuthor.jobTitle,
+    description: siteAuthor.description,
+    knowsAbout: siteAuthor.knowsAbout,
+    url: `${siteUrl}/about`,
+    worksFor: { "@id": organizationId },
+  };
+
   const organizationSchema = {
     "@type": "Organization",
     "@id": organizationId,
+    founder: { "@id": authorId },
     name: siteOperatorName,
     alternateName: ["Solve Grid", "solvegrid.online"],
     url: siteUrl,
@@ -118,6 +135,7 @@ export default function RootLayout({
     "@context": "https://schema.org",
     "@graph": [
       organizationSchema,
+      authorSchema,
       {
         "@type": "WebSite",
         "@id": websiteId,
@@ -153,6 +171,15 @@ export default function RootLayout({
             gtag('config', 'G-QDSPD4TGQN');
           `}
         </Script>
+        {adsenseClient ? (
+          <Script
+            async
+            crossOrigin="anonymous"
+            id="google-adsense"
+            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseClient}`}
+            strategy="afterInteractive"
+          />
+        ) : null}
       </body>
     </html>
   );

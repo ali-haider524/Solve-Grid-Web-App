@@ -5,10 +5,11 @@ import ToolHeader from "../../components/ToolHeader";
 import {
   correlation,
   correlationBand,
+  type CorrelationResult,
   fixed,
   formatP,
   parsePairs,
-  type CorrelationResult,
+  pText,
 } from "../../lib/research-statistics";
 import styles from "../../components/ResearchLab.module.css";
 
@@ -91,7 +92,7 @@ export default function CorrelationCalculator() {
   function sentence(r: CorrelationResult) {
     const dir = r.r >= 0 ? "positive" : "negative";
     const sig = r.p < 0.05 ? "statistically significant" : "non-significant";
-    const p = r.p < 0.001 ? "p < .001" : `p = ${formatP(r.p)}`;
+    const p = r.p < 0.001 ? "p < .001" : `${pText(r.p)}`;
     const stat = r.method === "kendall" ? `τb = ${noZero(r.r)}` : `${symbol[r.method]}(${r.df}) = ${noZero(r.r)}`;
     const ci = Number.isFinite(r.ciLow) ? `, 95% CI [${noZero(r.ciLow)}, ${noZero(r.ciHigh)}]` : "";
     return `A ${methodName[r.method]} showed a ${sig}, ${correlationBand(r.r)} ${dir} relationship between ${nameX.toLowerCase() || "X"} and ${
@@ -165,7 +166,7 @@ export default function CorrelationCalculator() {
           {result ? (
             <>
               <h2>
-                {symbol[result.method]} = {fixed(result.r, 3)}, p = {formatP(result.p)}
+                {symbol[result.method]} = {fixed(result.r, 3)}, {pText(result.p)}
               </h2>
               <div className={styles.resultRows}>
                 <div><span>{methodName[result.method]}</span><strong>{fixed(result.r, 3)} ({correlationBand(result.r)})</strong></div>

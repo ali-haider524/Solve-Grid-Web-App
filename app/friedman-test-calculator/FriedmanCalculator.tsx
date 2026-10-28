@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import ToolHeader from "../../components/ToolHeader";
-import { fixed, formatP, friedmanTest, parseDataTable, type FriedmanResult } from "../../lib/research-statistics";
+import { fixed, formatP, friedmanTest, parseDataTable, type FriedmanResult, pText } from "../../lib/research-statistics";
 import styles from "../../components/ResearchLab.module.css";
 
 const sample = `Week1 Week4 Week8
@@ -17,7 +17,7 @@ const sample = `Week1 Week4 Week8
 2 4 5
 3 3 4`;
 
-const pApa = (p: number) => (p < 0.001 ? "p < .001" : `p = ${formatP(p)}`);
+const pApa = (p: number) => (p < 0.001 ? "p < .001" : `${pText(p)}`);
 const wBand = (w: number) => (w >= 0.5 ? "large" : w >= 0.3 ? "moderate" : w >= 0.1 ? "small" : "negligible");
 
 export default function FriedmanCalculator() {
