@@ -1,7 +1,9 @@
 import Link from "next/link";
 import {
   contactEmail,
+  facebookUrl,
   githubUrl,
+  instagramUrl,
   linkedinUrl,
   youtubeUrl,
 } from "../lib/site";
@@ -23,32 +25,19 @@ const trustLinks = [
 
 const guideLinks = [
   { href: "/guides", label: "Browse all calculation guides" },
-  {
-    href: "/guides/gaussian-elimination-for-linear-systems",
-    label: "Learn Gaussian elimination",
-  },
-  {
-    href: "/guides/engineering-notation-and-scientific-notation",
-    label: "Compare engineering and scientific notation",
-  },
-  {
-    href: "/guides/unit-conversion-formulas",
-    label: "Review unit conversion formulas",
-  },
-  {
-    href: "/guides/standard-deviation-formula",
-    label: "Understand standard deviation",
-  },
-  {
-    href: "/guides/euler-method-for-differential-equations",
-    label: "Learn the Euler method",
-  },
+  { href: "/guides/choose-a-statistical-test", label: "Which statistical test should I use?" },
+  { href: "/guides/how-to-report-t-test-apa", label: "How to report a t-test in APA style" },
+  { href: "/guides/how-to-report-regression-apa", label: "How to report regression in APA style" },
+  { href: "/guides/likert-scale-interpretation", label: "Likert scale interpretation" },
+  { href: "/guides/slovin-formula-sample-size", label: "Slovin's formula for sample size" },
 ];
 
 const socialLinks = [
+  { href: facebookUrl, label: "SolveGrid on Facebook" },
+  { href: instagramUrl, label: "SolveGrid on Instagram" },
+  { href: youtubeUrl, label: "SolveGrid on YouTube" },
   { href: githubUrl, label: "SolveGrid on GitHub" },
   { href: linkedinUrl, label: "SolveGrid on LinkedIn" },
-  { href: youtubeUrl, label: "SolveGrid on YouTube" },
 ].filter((link) => Boolean(link.href));
 
 export default function SiteFooter() {
@@ -82,7 +71,7 @@ export default function SiteFooter() {
                 <a
                   href={link.href}
                   key={link.href}
-                  rel="noreferrer"
+                  rel="me noopener noreferrer"
                   target="_blank"
                 >
                   {link.label}
