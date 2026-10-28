@@ -107,6 +107,11 @@ export default function ChooseStatisticalTestGuide() {
           description: "Pearson r, Spearman rho, or Kendall tau with p value, 95% CI, scatter plot, and APA text.",
         },
         {
+          label: "Linear Regression Calculator",
+          href: "/linear-regression-calculator",
+          description: "Simple and multiple regression with R², B, β, t, p, VIF, and an APA sentence.",
+        },
+        {
           label: "Chi-Square Calculator",
           href: "/chi-square-calculator",
           description: "Run a chi-square test of independence or goodness of fit with Cramér's V and Fisher's exact test.",

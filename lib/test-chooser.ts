@@ -66,7 +66,7 @@ export function chooseTest(a: Answers): Recommendation {
       return {
         test: "Pearson correlation",
         why: "Both variables are numeric and roughly normally distributed, and you want the strength of a straight-line relationship.",
-        alternative: "Spearman's rank correlation if either variable is skewed, ordinal, or has outliers.",
+        alternative: "Spearman's rank correlation if either variable is skewed, ordinal, or has outliers. To predict Y from one or more variables, use linear regression.",
         assumptions: ["Both variables continuous", "Linear relationship (check a scatter plot)", "No extreme outliers", "Roughly normal distributions"],
         report: "There was a [positive / negative], [weak / moderate / strong] correlation between [X] and [Y], r(df) = .XX, p = .XXX.",
         ...corr,

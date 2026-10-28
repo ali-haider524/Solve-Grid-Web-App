@@ -1753,3 +1753,162 @@ export function parsePairs(text: string) {
     });
   return { x, y };
 }
+
+/* ---------------- Linear regression (simple and multiple OLS) ---------------- */
+
+export function parseDataTable(text: string): { names: string[]; rows: number[][] } {
+  const lines = text
+    .split(/\r?\n/)
+    .map((line) => line.trim())
+    .filter(Boolean)
+    .map((line) => line.split(/[\t,;]+|\s+/).map((c) => c.trim()).filter(Boolean));
+  if (!lines.length) throw new Error("Paste your data with one row per participant.");
+  let names: string[];
+  if (lines[0].some((c) => !Number.isFinite(Number(c)))) names = lines.shift() as string[];
+  else names = lines[0].map((_, i) => (i === 0 ? "Y" : `X${i}`));
+  const width = names.length;
+  const rows = lines.map((row, r) => {
+    if (row.length !== width) throw new Error(`Row ${r + 1} has ${row.length} values but there are ${width} columns.`);
+    return row.map((c, j) => {
+      const v = Number(c);
+      if (!Number.isFinite(v)) throw new Error(`Row ${r + 1}, column ${j + 1} is not a number ("${c}").`);
+      return v;
+    });
+  });
+  if (new Set(names).size !== names.length) throw new Error("Column names must be different.");
+  return { names, rows };
+}
+
+function invertMatrix(m: number[][]): number[][] {
+  const n = m.length;
+  const a = m.map((row, i) => [...row, ...row.map((_, j) => (i === j ? 1 : 0))]);
+  for (let c = 0; c < n; c += 1) {
+    let pivot = c;
+    for (let r = c + 1; r < n; r += 1) if (Math.abs(a[r][c]) > Math.abs(a[pivot][c])) pivot = r;
+    if (Math.abs(a[pivot][c]) < 1e-12) throw new Error("Predictors are perfectly collinear (one is an exact combination of others). Remove one and try again.");
+    [a[c], a[pivot]] = [a[pivot], a[c]];
+    const div = a[c][c];
+    for (let j = 0; j < 2 * n; j += 1) a[c][j] /= div;
+    for (let r = 0; r < n; r += 1) {
+      if (r === c) continue;
+      const f = a[r][c];
+      if (f !== 0) for (let j = 0; j < 2 * n; j += 1) a[r][j] -= f * a[c][j];
+    }
+  }
+  return a.map((row) => row.slice(n));
+}
+
+export type RegressionCoefficient = { name: string; b: number; se: number; t: number; p: number; ciLow: number; ciHigh: number; beta: number | null; vif: number | null };
+export type RegressionResult = {
+  outcome: string;
+  n: number;
+  k: number;
+  r: number;
+  rSquared: number;
+  adjRSquared: number;
+  see: number;
+  f: number;
+  dfModel: number;
+  dfResidual: number;
+  p: number;
+  ssRegression: number;
+  ssResidual: number;
+  ssTotal: number;
+  coefficients: RegressionCoefficient[];
+  fitted: number[];
+  residuals: number[];
+  y: number[];
+  durbinWatson: number;
+  maxCooksD: number;
+};
+
+function olsFit(y: number[], xs: number[][]) {
+  const n = y.length;
+  const p = xs.length + 1;
+  const X = y.map((_, i) => [1, ...xs.map((col) => col[i])]);
+  const xtx = Array.from({ length: p }, (_, a) => Array.from({ length: p }, (_, b) => X.reduce((s, row) => s + row[a] * row[b], 0)));
+  const xty = Array.from({ length: p }, (_, a) => X.reduce((s, row, i) => s + row[a] * y[i], 0));
+  const inv = invertMatrix(xtx);
+  const coef = inv.map((row) => row.reduce((s, v, j) => s + v * xty[j], 0));
+  const fitted = X.map((row) => row.reduce((s, v, j) => s + v * coef[j], 0));
+  const my = y.reduce((s, v) => s + v, 0) / n;
+  const ssTotal = y.reduce((s, v) => s + (v - my) ** 2, 0);
+  const ssResidual = y.reduce((s, v, i) => s + (v - fitted[i]) ** 2, 0);
+  return { X, inv, coef, fitted, ssTotal, ssResidual, n, p };
+}
+
+export function linearRegression(names: string[], rows: number[][], outcomeIndex: number, predictorIndexes: number[]): RegressionResult {
+  if (!predictorIndexes.length) throw new Error("Choose at least one predictor (X) variable.");
+  const k = predictorIndexes.length;
+  const n = rows.length;
+  if (n < k + 2) throw new Error(`You need at least ${k + 2} rows of data for ${k} predictor${k > 1 ? "s" : ""}.`);
+  const y = rows.map((r) => r[outcomeIndex]);
+  const xs = predictorIndexes.map((j) => rows.map((r) => r[j]));
+  const fit = olsFit(y, xs);
+  if (fit.ssTotal === 0) throw new Error("The outcome has no variation (all values are the same).");
+  const dfResidual = n - k - 1;
+  const mse = fit.ssResidual / dfResidual;
+  const ssRegression = fit.ssTotal - fit.ssResidual;
+  const rSquared = ssRegression / fit.ssTotal;
+  const f = mse === 0 ? Infinity : ssRegression / k / mse;
+  const tCrit = tQuantileUpper(0.025, dfResidual);
+  const sd = (v: number[]) => {
+    const m = v.reduce((s, a) => s + a, 0) / v.length;
+    return Math.sqrt(v.reduce((s, a) => s + (a - m) ** 2, 0) / (v.length - 1));
+  };
+  const sdY = sd(y);
+  const coefficients: RegressionCoefficient[] = fit.coef.map((b, j) => {
+    const se = Math.sqrt(Math.max(0, mse * fit.inv[j][j]));
+    const t = se === 0 ? Infinity : b / se;
+    let vif: number | null = null;
+    if (j > 0 && k > 1) {
+      const others = xs.filter((_, idx) => idx !== j - 1);
+      const aux = olsFit(xs[j - 1], others);
+      const r2 = 1 - aux.ssResidual / aux.ssTotal;
+      vif = r2 >= 1 ? Infinity : 1 / (1 - r2);
+    }
+    return {
+      name: j === 0 ? "(Constant)" : names[predictorIndexes[j - 1]],
+      b,
+      se,
+      t,
+      p: Number.isFinite(t) ? tTwoSidedP(t, dfResidual) : 0,
+      ciLow: b - tCrit * se,
+      ciHigh: b + tCrit * se,
+      beta: j === 0 ? null : (b * sd(xs[j - 1])) / sdY,
+      vif,
+    };
+  });
+  const residuals = y.map((v, i) => v - fit.fitted[i]);
+  let dwNum = 0;
+  for (let i = 1; i < n; i += 1) dwNum += (residuals[i] - residuals[i - 1]) ** 2;
+  // Cook's distance from leverages
+  let maxCooksD = 0;
+  fit.X.forEach((row, i) => {
+    const h = row.reduce((s, v, a) => s + v * row.reduce((t, w, b) => t + fit.inv[a][b] * w, 0), 0);
+    const d = (residuals[i] ** 2 / ((k + 1) * mse)) * (h / (1 - h) ** 2);
+    if (Number.isFinite(d)) maxCooksD = Math.max(maxCooksD, d);
+  });
+  return {
+    outcome: names[outcomeIndex],
+    n,
+    k,
+    r: Math.sqrt(Math.max(0, rSquared)),
+    rSquared,
+    adjRSquared: 1 - ((1 - rSquared) * (n - 1)) / dfResidual,
+    see: Math.sqrt(mse),
+    f,
+    dfModel: k,
+    dfResidual,
+    p: Number.isFinite(f) ? 1 - fCdf(f, k, dfResidual) : 0,
+    ssRegression,
+    ssResidual: fit.ssResidual,
+    ssTotal: fit.ssTotal,
+    coefficients,
+    fitted: fit.fitted,
+    residuals,
+    y,
+    durbinWatson: dwNum / fit.ssResidual,
+    maxCooksD,
+  };
+}

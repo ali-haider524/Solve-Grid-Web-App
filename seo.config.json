@@ -16,6 +16,7 @@
     }
   ],
   "priorityPages": [
+    "/linear-regression-calculator",
     "/correlation-calculator",
     "/one-way-anova-calculator",
     "/t-test-calculator",
@@ -254,6 +255,14 @@
           "test retest"
         ],
         "page": "/intraclass-correlation-calculator"
+      },
+      {
+        "contains": [
+          "regression",
+          "r squared",
+          "predictor"
+        ],
+        "page": "/linear-regression-calculator"
       },
       {
         "contains": [

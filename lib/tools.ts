@@ -522,9 +522,6 @@ export const tools: ToolInfo[] = [
       "iqr calculator",
       "frequency table calculator",
       "grouped data standard deviation calculator",
-      "linear regression calculator",
-      "correlation calculator",
-      "r squared calculator",
       "outlier calculator",
     ],
     relatedSlugs: [
@@ -1850,6 +1847,65 @@ export const tools: ToolInfo[] = [
         question: "Does correlation mean causation?",
         answer:
           "No. A correlation shows that two variables move together, not that one causes the other. A third variable or reverse direction could explain the relationship.",
+      },
+    ],
+  },
+  {
+    slug: "linear-regression-calculator",
+    name: "Linear Regression Calculator",
+    shortName: "Regression",
+    category: "statistics",
+    icon: "β",
+    title: "Linear Regression Calculator: Simple & Multiple",
+    description:
+      "Free simple and multiple linear regression calculator. Paste data to get R², adjusted R², F, B, SE, beta, t, p, 95% CIs, VIF, residual checks, and APA text.",
+    summary:
+      "Run simple or multiple OLS regression from pasted columns, with SPSS-style model summary, ANOVA and coefficients tables, assumption diagnostics, a residual plot, and a ready APA sentence.",
+    keywords: [
+      "linear regression calculator",
+      "multiple regression calculator",
+      "multiple linear regression calculator",
+      "regression analysis calculator",
+      "simple linear regression calculator",
+      "r squared calculator",
+      "standardized beta coefficient calculator",
+      "regression p value calculator",
+    ],
+    relatedSlugs: ["correlation-calculator", "sobel-test-calculator", "effect-size-calculator"],
+    featured: true,
+    priority: 0.95,
+    useCases: [
+      "Test which variables predict an outcome in a thesis or survey",
+      "Get B, β, t, and p for each predictor in an SPSS-style table",
+      "Check multicollinearity, independence, and influential cases",
+    ],
+    features: [
+      "Simple and multiple regression with any number of predictors",
+      "R, R², adjusted R², standard error of the estimate, F test",
+      "Coefficients with B, SE, β, t, p, 95% CI, and VIF",
+      "Durbin-Watson, Cook's distance, and a residual plot",
+      "APA 7 report sentence and regression equation",
+    ],
+    faqs: [
+      {
+        question: "What is the difference between B and beta (β) in regression?",
+        answer:
+          "B is the unstandardised coefficient: the change in Y for a one-unit change in X, in the original units. β is standardised (in SD units), so you can compare which predictor has the stronger effect.",
+      },
+      {
+        question: "What is a good R² value?",
+        answer:
+          "It depends on the field. In social science and survey research, R² of .10 to .30 is common and useful. Use adjusted R² when comparing models with different numbers of predictors.",
+      },
+      {
+        question: "How do I check multicollinearity?",
+        answer:
+          "Look at the VIF for each predictor. Below 5 is usually fine; above 10 means predictors overlap heavily and coefficients become unstable. Remove or combine highly related predictors.",
+      },
+      {
+        question: "How many participants do I need for multiple regression?",
+        answer:
+          "A common rule of thumb is N ≥ 50 + 8k to test the overall model and N ≥ 104 + k to test individual predictors, where k is the number of predictors (Green, 1991).",
       },
     ],
   },

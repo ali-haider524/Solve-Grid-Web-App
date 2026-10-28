@@ -50,6 +50,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "t-test-calculator": "2026-10-28",
     "one-way-anova-calculator": "2026-10-28",
     "correlation-calculator": "2026-10-28",
+    "linear-regression-calculator": "2026-10-28",
     "guides/how-to-report-chi-square-apa": "2026-10-28",
     "statistics-calculator": "2026-10-28",
     "advanced-statistics": "2026-10-28",

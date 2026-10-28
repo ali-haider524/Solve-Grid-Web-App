@@ -46,6 +46,7 @@ const menuToolSlugsByCategory: Record<ToolCategory, string[]> = {
     "t-test-calculator",
     "one-way-anova-calculator",
     "correlation-calculator",
+    "linear-regression-calculator",
     "chi-square-calculator",
     "mann-whitney-u-test-calculator",
     "wilcoxon-signed-rank-test-calculator",
