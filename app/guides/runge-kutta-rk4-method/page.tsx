@@ -1,11 +1,11 @@
-import type { Metadata } from "next";
 import GuideArticle from "../../../components/GuideArticle";
+import { createStaticPageMetadata } from "../../../lib/seo";
 
-export const metadata: Metadata = {
-  title: "Runge-Kutta RK4 Method for Differential Equations",
-  description: "Learn how classical fourth-order Runge-Kutta combines four slope estimates to approximate an ordinary differential equation, with a working online RK4 solver.",
-  alternates: { canonical: "/guides/runge-kutta-rk4-method" },
-};
+export const metadata = createStaticPageMetadata(
+  "Runge-Kutta RK4 Method for Differential Equations",
+  "Learn how classical fourth-order Runge-Kutta combines four slope estimates to approximate an ordinary differential equation, with a working online RK4 solver.",
+  "/guides/runge-kutta-rk4-method",
+);
 
 export default function RungeKuttaGuide() {
   return (

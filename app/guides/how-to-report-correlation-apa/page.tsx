@@ -1,12 +1,11 @@
-import type { Metadata } from "next";
 import GuideArticle from "../../../components/GuideArticle";
+import { createStaticPageMetadata } from "../../../lib/seo";
 
-export const metadata: Metadata = {
-  title: "How to Report a Correlation in APA Style",
-  description:
-    "APA templates for Pearson r, Spearman rho, and Kendall tau: degrees of freedom, p value, 95% CI, strength and direction, plus a correlation matrix table layout.",
-  alternates: { canonical: "/guides/how-to-report-correlation-apa" },
-};
+export const metadata = createStaticPageMetadata(
+  "How to Report a Correlation in APA Style",
+  "APA templates for Pearson r, Spearman rho, and Kendall tau: degrees of freedom, p value, 95% CI, strength and direction, plus a correlation matrix table layout.",
+  "/guides/how-to-report-correlation-apa",
+);
 
 export default function ReportCorrelationGuide() {
   return (

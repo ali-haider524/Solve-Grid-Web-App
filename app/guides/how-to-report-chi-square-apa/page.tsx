@@ -1,12 +1,11 @@
-import type { Metadata } from "next";
 import GuideArticle from "../../../components/GuideArticle";
+import { createStaticPageMetadata } from "../../../lib/seo";
 
-export const metadata: Metadata = {
-  title: "How to Report Chi-Square Results in APA Style (7th ed.)",
-  description:
-    "APA templates for chi-square test of independence and goodness-of-fit results: χ², df, N, p, Cramér's V, and Fisher's exact test, with worked examples.",
-  alternates: { canonical: "/guides/how-to-report-chi-square-apa" },
-};
+export const metadata = createStaticPageMetadata(
+  "How to Report Chi-Square Results in APA Style (7th ed.)",
+  "APA templates for chi-square test of independence and goodness-of-fit results: χ², df, N, p, Cramér's V, and Fisher's exact test, with worked examples.",
+  "/guides/how-to-report-chi-square-apa",
+);
 
 export default function ReportChiSquareGuide() {
   return (

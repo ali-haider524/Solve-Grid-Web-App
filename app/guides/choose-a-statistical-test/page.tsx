@@ -1,12 +1,11 @@
-import type { Metadata } from "next";
 import GuideArticle from "../../../components/GuideArticle";
+import { createStaticPageMetadata } from "../../../lib/seo";
 
-export const metadata: Metadata = {
-  title: "Which Statistical Test Should I Use? (With Table)",
-  description:
-    "Pick the right test by question and data type: t-test, ANOVA, chi-square, Mann-Whitney, Wilcoxon, Kruskal-Wallis, Pearson, or Spearman, with a decision table.",
-  alternates: { canonical: "/guides/choose-a-statistical-test" },
-};
+export const metadata = createStaticPageMetadata(
+  "Which Statistical Test Should I Use? (With Table)",
+  "Pick the right test by question and data type: t-test, ANOVA, chi-square, Mann-Whitney, Wilcoxon, Kruskal-Wallis, Pearson, or Spearman, with a decision table.",
+  "/guides/choose-a-statistical-test",
+);
 
 export default function ChooseStatisticalTestGuide() {
   return (

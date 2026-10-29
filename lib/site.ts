@@ -67,7 +67,7 @@ export const githubUrl = normalizePublicUrl(
   process.env.NEXT_PUBLIC_GITHUB_URL || "",
 );
 export const linkedinUrl = normalizePublicUrl(
-  process.env.NEXT_PUBLIC_LINKEDIN_URL || "",
+  process.env.NEXT_PUBLIC_LINKEDIN_URL || "https://www.linkedin.com/company/solvegrid",
 );
 export const youtubeUrl = normalizePublicUrl(
   process.env.NEXT_PUBLIC_YOUTUBE_URL || "https://www.youtube.com/channel/UCsdJl6GjVUWVZHZQmq0UkUA",

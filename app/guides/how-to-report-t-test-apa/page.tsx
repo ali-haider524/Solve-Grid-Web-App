@@ -1,12 +1,11 @@
-import type { Metadata } from "next";
 import GuideArticle from "../../../components/GuideArticle";
+import { createStaticPageMetadata } from "../../../lib/seo";
 
-export const metadata: Metadata = {
-  title: "How to Report a t-Test in APA Style (7th ed.)",
-  description:
-    "APA templates for independent, paired, and one-sample t-test results: t, df, p, Cohen's d, means and SDs, with worked examples and common mistakes.",
-  alternates: { canonical: "/guides/how-to-report-t-test-apa" },
-};
+export const metadata = createStaticPageMetadata(
+  "How to Report a t-Test in APA Style (7th ed.)",
+  "APA templates for independent, paired, and one-sample t-test results: t, df, p, Cohen's d, means and SDs, with worked examples and common mistakes.",
+  "/guides/how-to-report-t-test-apa",
+);
 
 export default function ReportTTestGuide() {
   return (

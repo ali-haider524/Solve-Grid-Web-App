@@ -1,12 +1,11 @@
-import type { Metadata } from "next";
 import GuideArticle from "../../../components/GuideArticle";
+import { createStaticPageMetadata } from "../../../lib/seo";
 
-export const metadata: Metadata = {
-  title: "How to Report ANOVA Results in APA Style (7th ed.)",
-  description:
-    "Copy-ready APA templates for reporting one-way ANOVA results in text and tables: F, degrees of freedom, p, eta squared, and post hoc tests, with a worked example.",
-  alternates: { canonical: "/guides/how-to-report-anova-apa" },
-};
+export const metadata = createStaticPageMetadata(
+  "How to Report ANOVA Results in APA Style (7th ed.)",
+  "Copy-ready APA templates for reporting one-way ANOVA results in text and tables: F, degrees of freedom, p, eta squared, and post hoc tests, with a worked example.",
+  "/guides/how-to-report-anova-apa",
+);
 
 export default function ReportAnovaGuide() {
   return (

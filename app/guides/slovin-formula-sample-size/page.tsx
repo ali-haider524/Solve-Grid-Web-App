@@ -1,12 +1,11 @@
-import type { Metadata } from "next";
 import GuideArticle from "../../../components/GuideArticle";
+import { createStaticPageMetadata } from "../../../lib/seo";
 
-export const metadata: Metadata = {
-  title: "Slovin's Formula: Sample Size Formula with Examples",
-  description:
-    "Learn Slovin's formula n = N ÷ (1 + Ne²), solve worked examples, compare it with Cochran's formula, and see how to write the sample size in a thesis methodology.",
-  alternates: { canonical: "/guides/slovin-formula-sample-size" },
-};
+export const metadata = createStaticPageMetadata(
+  "Slovin's Formula: Sample Size Formula with Examples",
+  "Learn Slovin's formula n = N ÷ (1 + Ne²), solve worked examples, compare it with Cochran's formula, and see how to write the sample size in a thesis methodology.",
+  "/guides/slovin-formula-sample-size",
+);
 
 export default function SlovinFormulaGuide() {
   return (

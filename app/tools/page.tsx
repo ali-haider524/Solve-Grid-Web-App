@@ -1,15 +1,15 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import SiteFooter from "../../components/SiteFooter";
 import ToolHeader from "../../components/ToolHeader";
 import { getToolsByCategory, toolCategories, tools } from "../../lib/tools";
 import styles from "./tools.module.css";
+import { createStaticPageMetadata } from "../../lib/seo";
 
-export const metadata: Metadata = {
-  title: "Free Online Calculators, Math Tools & Engineering Tools",
-  description: "Browse SolveGrid's free research statistics calculators — sample size, Cronbach's alpha, Likert analysis, t-tests, ANOVA — plus math, graphing, and numerical-methods tools.",
-  alternates: { canonical: "/tools" },
-};
+export const metadata = createStaticPageMetadata(
+  "Free Online Calculators, Math Tools & Engineering Tools",
+  "Browse SolveGrid's free research statistics calculators — sample size, Cronbach's alpha, Likert analysis, t-tests, ANOVA — plus math, graphing, and numerical-methods tools.",
+  "/tools",
+);
 
 export default function ToolsPage() {
   return (

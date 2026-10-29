@@ -1,12 +1,11 @@
-import type { Metadata } from "next";
 import GuideArticle from "../../../components/GuideArticle";
+import { createStaticPageMetadata } from "../../../lib/seo";
 
-export const metadata: Metadata = {
-  title: "Polynomial Roots and Complex Roots – Coefficients, Examples & Residuals",
-  description:
-    "Learn how to find polynomial roots from coefficients, read real and complex roots, and understand residual checks for numerical polynomial answers.",
-  alternates: { canonical: "/guides/polynomial-roots-and-complex-roots" },
-};
+export const metadata = createStaticPageMetadata(
+  "Polynomial Roots and Complex Roots – Coefficients, Examples & Residuals",
+  "Learn how to find polynomial roots from coefficients, read real and complex roots, and understand residual checks for numerical polynomial answers.",
+  "/guides/polynomial-roots-and-complex-roots",
+);
 
 export default function PolynomialRootsGuide() {
   return (

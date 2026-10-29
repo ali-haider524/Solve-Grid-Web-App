@@ -1,11 +1,11 @@
-import type { Metadata } from "next";
 import GuideArticle from "../../../components/GuideArticle";
+import { createStaticPageMetadata } from "../../../lib/seo";
 
-export const metadata: Metadata = {
-  title: "Euler Method for Differential Equations",
-  description: "Learn how Euler's method estimates a first-order differential equation from an initial condition and fixed step size, then test it in SolveGrid's numerical ODE lab.",
-  alternates: { canonical: "/guides/euler-method-for-differential-equations" },
-};
+export const metadata = createStaticPageMetadata(
+  "Euler Method for Differential Equations",
+  "Learn how Euler's method estimates a first-order differential equation from an initial condition and fixed step size, then test it in SolveGrid's numerical ODE lab.",
+  "/guides/euler-method-for-differential-equations",
+);
 
 export default function EulerMethodGuide() {
   return (

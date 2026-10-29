@@ -1,12 +1,11 @@
-import type { Metadata } from "next";
 import GuideArticle from "../../../components/GuideArticle";
+import { createStaticPageMetadata } from "../../../lib/seo";
 
-export const metadata: Metadata = {
-  title: "How to Report Regression Results in APA Style",
-  description:
-    "APA templates for simple and multiple linear regression: F, df, R², adjusted R², B, β, t, p, and 95% CIs, with a worked example and a coefficients table layout.",
-  alternates: { canonical: "/guides/how-to-report-regression-apa" },
-};
+export const metadata = createStaticPageMetadata(
+  "How to Report Regression Results in APA Style",
+  "APA templates for simple and multiple linear regression: F, df, R², adjusted R², B, β, t, p, and 95% CIs, with a worked example and a coefficients table layout.",
+  "/guides/how-to-report-regression-apa",
+);
 
 export default function ReportRegressionGuide() {
   return (
