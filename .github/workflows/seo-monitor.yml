@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   schedule:
     # Tuesday-Sunday: Search Console + GA4 + indexing monitor.
-    - cron: "17 4 * * 2-7"
+      - cron: "17 4 * * 0,2-6"
     # Monday: same monitor plus PageSpeed checks.
     - cron: "47 4 * * 1"
 
