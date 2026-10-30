@@ -114,7 +114,7 @@ export const guides: GuideInfo[] = [
     title: "Standard deviation formula",
     summary:
       "Compare sample and population standard deviation, variance, mean deviations, quartiles, and spread.",
-    toolSlugs: ["statistics-calculator"],
+    toolSlugs: ["statistics-calculator", "shapiro-wilk-test-calculator", "effect-size-calculator"],
     topic: "statistics",
   },
   {
