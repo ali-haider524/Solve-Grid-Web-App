@@ -1,12 +1,10 @@
 name: SolveGrid SEO Monitor
 
+# Manual only. The monitor needs a Google service-account secret
+# (GOOGLE_SERVICE_ACCOUNT_B64). Re-add a schedule after that secret exists.
 on:
   workflow_dispatch:
-  schedule:
-    # Tuesday-Sunday: Search Console + GA4 + indexing monitor.
-    - cron: "17 4 * * 0,2-6"
-    # Monday: same monitor plus PageSpeed checks.
-    - cron: "47 4 * * 1"
+
 permissions:
   contents: read
 
@@ -23,27 +21,43 @@ jobs:
       GA4_PROPERTY_ID: ${{ secrets.GA4_PROPERTY_ID }}
       PAGESPEED_API_KEY: ${{ secrets.PAGESPEED_API_KEY }}
       SEO_INDEXING_ENABLED: "true"
-      PAGESPEED_ENABLED: ${{ github.event_name == 'workflow_dispatch' || github.event.schedule == '47 4 * * 1' }}
+      PAGESPEED_ENABLED: "true"
 
     steps:
+      - name: Check Google credentials
+        id: creds
+        run: |
+          if [ -z "$GOOGLE_SERVICE_ACCOUNT_B64" ]; then
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::GOOGLE_SERVICE_ACCOUNT_B64 secret not set - skipping SEO monitor."
+          else
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Checkout repository
+        if: steps.creds.outputs.ready == 'true'
         uses: actions/checkout@v4
 
       - name: Set up Node
+        if: steps.creds.outputs.ready == 'true'
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "22"
 
       - name: Validate SEO monitor configuration
+        if: steps.creds.outputs.ready == 'true'
         run: node scripts/seo/validate-config.mjs
 
       - name: Run analyzer tests
+        if: steps.creds.outputs.ready == 'true'
         run: node scripts/seo/test-analyzer.mjs
 
       - name: Collect SEO data and recommendations
+        if: steps.creds.outputs.ready == 'true'
         run: node scripts/seo/run-monitor.mjs
 
       - name: Upload SEO report artifact
+        if: steps.creds.outputs.ready == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: solvegrid-seo-report-${{ github.run_id }}
