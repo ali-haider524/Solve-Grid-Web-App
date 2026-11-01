@@ -3,7 +3,7 @@ import { createStaticPageMetadata } from "../../../lib/seo";
 
 export const metadata = createStaticPageMetadata(
   "How to Report ANOVA Results in APA Style (7th ed.)",
-  "Copy-ready APA templates for reporting one-way ANOVA results in text and tables: F, degrees of freedom, p, eta squared, and post hoc tests, with a worked example.",
+  "Copy-ready APA templates for one-way ANOVA results: F, degrees of freedom, p, eta squared, and post hoc tests, with a worked example.",
   "/guides/how-to-report-anova-apa",
 );
 

@@ -37,7 +37,7 @@ export default function FriedmanCalculator() {
   }
 
   return (
-    <main id="main-content" className={styles.page}>
+    <section className={styles.page}>
       <ToolHeader active="statistics" />
       <section className={styles.hero}>
         <p>FRIEDMAN TEST CALCULATOR</p>
@@ -131,6 +131,6 @@ export default function FriedmanCalculator() {
           )}
         </aside>
       </section>
-    </main>
+    </section>
   );
 }

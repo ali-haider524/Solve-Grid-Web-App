@@ -45,7 +45,7 @@ export default function LikertScaleCalculator() {
   const ranges = likertRanges(points, labels);
 
   return (
-    <main id="main-content" className={styles.page}>
+    <section className={styles.page}>
       <ToolHeader active="statistics" />
       <section className={styles.hero}>
         <p>LIKERT SCALE CALCULATOR</p>
@@ -153,6 +153,6 @@ export default function LikertScaleCalculator() {
           </div>
         </aside>
       </section>
-    </main>
+    </section>
   );
 }

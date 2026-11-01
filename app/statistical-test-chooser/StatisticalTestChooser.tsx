@@ -79,7 +79,7 @@ export default function StatisticalTestChooser() {
   }
 
   return (
-    <main id="main-content" className={styles.page}>
+    <section className={styles.page}>
       <ToolHeader active="statistics" />
       <section className={styles.hero}>
         <p>STATISTICAL TEST CHOOSER</p>
@@ -147,6 +147,6 @@ export default function StatisticalTestChooser() {
           ) : null}
         </aside>
       </section>
-    </main>
+    </section>
   );
 }

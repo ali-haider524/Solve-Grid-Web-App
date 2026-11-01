@@ -45,7 +45,7 @@ export default function IccCalculator() {
   const strip = (s: string) => s.replace(/^(-?)0\./, "$1.");
 
   return (
-    <main id="main-content" className={styles.page}>
+    <section className={styles.page}>
       <ToolHeader active="statistics" />
       <section className={styles.hero}>
         <p>INTRACLASS CORRELATION CALCULATOR</p>
@@ -140,6 +140,6 @@ export default function IccCalculator() {
           )}
         </aside>
       </section>
-    </main>
+    </section>
   );
 }

@@ -118,7 +118,7 @@ export default function RegressionCalculator() {
   const maxVif = result ? Math.max(0, ...result.coefficients.map((c) => c.vif ?? 0)) : 0;
 
   return (
-    <main id="main-content" className={styles.page}>
+    <section className={styles.page}>
       <ToolHeader active="statistics" />
       <section className={styles.hero}>
         <p>LINEAR REGRESSION CALCULATOR</p>
@@ -255,6 +255,6 @@ export default function RegressionCalculator() {
           )}
         </aside>
       </section>
-    </main>
+    </section>
   );
 }

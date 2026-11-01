@@ -28,7 +28,7 @@ export default function SobelCalculator() {
   }
 
   return (
-    <main id="main-content" className={styles.page}>
+    <section className={styles.page}>
       <ToolHeader active="statistics" />
       <section className={styles.hero}>
         <p>SOBEL TEST CALCULATOR</p>
@@ -99,6 +99,6 @@ export default function SobelCalculator() {
           )}
         </aside>
       </section>
-    </main>
+    </section>
   );
 }

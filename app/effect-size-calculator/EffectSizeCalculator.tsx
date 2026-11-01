@@ -119,7 +119,7 @@ export default function EffectSizeCalculator() {
   const active = modes.find((m) => m.id === mode) ?? modes[0];
 
   return (
-    <main id="main-content" className={styles.page}>
+    <section className={styles.page}>
       <ToolHeader active="statistics" />
       <section className={styles.hero}>
         <p>EFFECT SIZE CALCULATOR</p>
@@ -200,6 +200,6 @@ export default function EffectSizeCalculator() {
           )}
         </aside>
       </section>
-    </main>
+    </section>
   );
 }

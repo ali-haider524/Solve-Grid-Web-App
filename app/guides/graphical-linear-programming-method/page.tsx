@@ -3,7 +3,7 @@ import { createStaticPageMetadata } from "../../../lib/seo";
 
 export const metadata = createStaticPageMetadata(
   "Graphical Linear Programming Method",
-  "Learn how to solve a two-variable linear programming problem with an objective function, constraints, feasible region, corner points, and objective-value comparison.",
+  "Solve a two-variable linear programming problem graphically: objective function, constraints, feasible region, and corner-point comparison.",
   "/guides/graphical-linear-programming-method",
 );
 

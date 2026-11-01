@@ -31,7 +31,7 @@ export default function CohensKappaCalculator() {
   const label = weighting === "none" ? "Cohen's kappa" : `Weighted kappa (${weighting})`;
 
   return (
-    <main id="main-content" className={styles.page}>
+    <section className={styles.page}>
       <ToolHeader active="statistics" />
       <section className={styles.hero}>
         <p>COHEN&apos;S KAPPA CALCULATOR</p>
@@ -119,6 +119,6 @@ export default function CohensKappaCalculator() {
           )}
         </aside>
       </section>
-    </main>
+    </section>
   );
 }

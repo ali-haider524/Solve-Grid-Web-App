@@ -57,7 +57,7 @@ export default function ChiSquareCalculator() {
   const significant = (p: number) => (p < 0.05 ? "a significant" : "no significant");
 
   return (
-    <main id="main-content" className={styles.page}>
+    <section className={styles.page}>
       <ToolHeader active="statistics" />
       <section className={styles.hero}>
         <p>CHI-SQUARE CALCULATOR</p>
@@ -196,6 +196,6 @@ export default function ChiSquareCalculator() {
           )}
         </aside>
       </section>
-    </main>
+    </section>
   );
 }

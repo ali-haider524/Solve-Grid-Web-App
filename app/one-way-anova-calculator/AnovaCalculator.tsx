@@ -51,7 +51,7 @@ export default function AnovaCalculator() {
   }
 
   return (
-    <main id="main-content" className={styles.page}>
+    <section className={styles.page}>
       <ToolHeader active="statistics" />
       <section className={styles.hero}>
         <p>ONE-WAY ANOVA CALCULATOR</p>
@@ -159,6 +159,6 @@ export default function AnovaCalculator() {
           )}
         </aside>
       </section>
-    </main>
+    </section>
   );
 }

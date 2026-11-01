@@ -3,7 +3,7 @@ import { createStaticPageMetadata } from "../../lib/seo";
 
 export const metadata = createStaticPageMetadata(
   "Scientific & Engineering Calculators Online – Units, Notation & Formulas",
-  "Use free scientific and engineering calculators for trigonometry, logarithms, roots, powers, engineering notation, scientific notation, unit conversion, and technical formulas.",
+  "Free scientific and engineering calculators for trigonometry, logarithms, engineering and scientific notation, unit conversion, and formulas.",
   "/engineering-calculators",
 );
 

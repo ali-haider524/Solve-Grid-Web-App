@@ -3,7 +3,7 @@ import { createStaticPageMetadata } from "../../lib/seo";
 
 export const metadata = createStaticPageMetadata(
   "Math Calculators Online – Equations, Graphs, Matrices & Statistics",
-  "Use free online math calculators for graphing functions, solving linear, quadratic and cubic equations, finding polynomial roots, reducing matrices, calculating rank, and analysing statistics.",
+  "Free online math calculators to graph functions, solve linear, quadratic and cubic equations, find polynomial roots, and reduce matrices.",
   "/math-calculators",
 );
 

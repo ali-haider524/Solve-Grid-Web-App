@@ -101,7 +101,7 @@ export default function CorrelationCalculator() {
   }
 
   return (
-    <main id="main-content" className={styles.page}>
+    <section className={styles.page}>
       <ToolHeader active="statistics" />
       <section className={styles.hero}>
         <p>CORRELATION COEFFICIENT CALCULATOR</p>
@@ -203,6 +203,6 @@ export default function CorrelationCalculator() {
           )}
         </aside>
       </section>
-    </main>
+    </section>
   );
 }

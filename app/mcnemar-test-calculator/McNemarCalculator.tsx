@@ -33,7 +33,7 @@ export default function McNemarCalculator() {
   );
 
   return (
-    <main id="main-content" className={styles.page}>
+    <section className={styles.page}>
       <ToolHeader active="statistics" />
       <section className={styles.hero}>
         <p>MCNEMAR TEST CALCULATOR</p>
@@ -110,6 +110,6 @@ export default function McNemarCalculator() {
           )}
         </aside>
       </section>
-    </main>
+    </section>
   );
 }

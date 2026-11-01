@@ -3,7 +3,7 @@ import { createStaticPageMetadata } from "../../../lib/seo";
 
 export const metadata = createStaticPageMetadata(
   "Slovin's Formula: Sample Size Formula with Examples",
-  "Learn Slovin's formula n = N ÷ (1 + Ne²), solve worked examples, compare it with Cochran's formula, and see how to write the sample size in a thesis methodology.",
+  "Slovin's formula n = N ÷ (1 + Ne²) with worked examples, a comparison with Cochran's formula, and how to justify sample size in a thesis.",
   "/guides/slovin-formula-sample-size",
 );
 

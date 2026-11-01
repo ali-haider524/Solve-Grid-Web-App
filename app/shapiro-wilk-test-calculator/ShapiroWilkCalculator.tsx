@@ -79,7 +79,7 @@ export default function ShapiroWilkCalculator() {
   const normal = result ? result.p >= 0.05 : false;
 
   return (
-    <main id="main-content" className={styles.page}>
+    <section className={styles.page}>
       <ToolHeader active="statistics" />
       <section className={styles.hero}>
         <p>SHAPIRO-WILK TEST CALCULATOR</p>
@@ -164,6 +164,6 @@ export default function ShapiroWilkCalculator() {
           )}
         </aside>
       </section>
-    </main>
+    </section>
   );
 }

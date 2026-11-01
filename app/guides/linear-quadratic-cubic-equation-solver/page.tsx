@@ -3,7 +3,7 @@ import { createStaticPageMetadata } from "../../../lib/seo";
 
 export const metadata = createStaticPageMetadata(
   "Equation Solver Guide – Linear, Quadratic, Cubic & Systems",
-  "Learn how to solve linear, quadratic, cubic, and simultaneous equations using coefficients, formulas, Gaussian elimination, RREF, inverse method, and Cramer’s rule.",
+  "Solve linear, quadratic, cubic and simultaneous equations with formulas, Gaussian elimination, RREF, the inverse method and Cramer’s rule.",
   "/guides/linear-quadratic-cubic-equation-solver",
 );
 

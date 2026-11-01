@@ -14,7 +14,7 @@ import styles from "./guides.module.css";
 export const metadata: Metadata = {
   title: "Calculator Guides – Formulas, Methods & Worked Examples",
   description:
-    "Learn equation solving, graphing, matrices, research statistics, sample size, Likert analysis, engineering notation, unit conversion, numerical methods, and calculator workflows with practical SolveGrid guides.",
+    "Guides with formulas and worked examples: choosing a statistical test, APA reporting, sample size, Likert analysis, standard deviation, and more.",
   alternates: { canonical: "/guides" },
   openGraph: {
     type: "website",

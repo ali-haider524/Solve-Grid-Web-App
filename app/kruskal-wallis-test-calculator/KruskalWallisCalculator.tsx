@@ -36,7 +36,7 @@ export default function KruskalWallisCalculator() {
   const eps = (e: number) => (e >= 0.26 ? "large" : e >= 0.08 ? "medium" : e >= 0.01 ? "small" : "negligible");
 
   return (
-    <main id="main-content" className={styles.page}>
+    <section className={styles.page}>
       <ToolHeader active="statistics" />
       <section className={styles.hero}>
         <p>KRUSKAL-WALLIS TEST CALCULATOR</p>
@@ -122,6 +122,6 @@ export default function KruskalWallisCalculator() {
           )}
         </aside>
       </section>
-    </main>
+    </section>
   );
 }

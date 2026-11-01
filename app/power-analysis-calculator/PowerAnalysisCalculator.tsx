@@ -97,7 +97,7 @@ export default function PowerAnalysisCalculator() {
   const checkPower = result && Number.isFinite(checkValue) && checkValue > 0 ? powerAt(result.input, Math.floor(checkValue)) : null;
 
   return (
-    <main id="main-content" className={styles.page}>
+    <section className={styles.page}>
       <ToolHeader active="statistics" />
       <section className={styles.hero}>
         <p>POWER ANALYSIS CALCULATOR</p>
@@ -233,6 +233,6 @@ export default function PowerAnalysisCalculator() {
           )}
         </aside>
       </section>
-    </main>
+    </section>
   );
 }

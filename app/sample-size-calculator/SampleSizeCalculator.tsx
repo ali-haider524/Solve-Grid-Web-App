@@ -76,7 +76,7 @@ export default function SampleSizeCalculator() {
   }
 
   return (
-    <main id="main-content" className={styles.page}>
+    <section className={styles.page}>
       <ToolHeader active="statistics" />
       <section className={styles.hero}>
         <p>SAMPLE SIZE CALCULATOR</p>
@@ -173,6 +173,6 @@ export default function SampleSizeCalculator() {
           )}
         </aside>
       </section>
-    </main>
+    </section>
   );
 }

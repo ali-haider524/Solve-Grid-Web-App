@@ -3,7 +3,7 @@ import { createStaticPageMetadata } from "../../../lib/seo";
 
 export const metadata = createStaticPageMetadata(
   "Euler Method for Differential Equations",
-  "Learn how Euler's method estimates a first-order differential equation from an initial condition and fixed step size, then test it in SolveGrid's numerical ODE lab.",
+  "How Euler's method estimates a first-order differential equation from an initial value and step size, with a worked example and a free ODE solver.",
   "/guides/euler-method-for-differential-equations",
 );
 

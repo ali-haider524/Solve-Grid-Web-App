@@ -4,6 +4,7 @@ import {
   getRelatedGuides,
   guideTopics,
 } from "../lib/guides";
+import { lastUpdated } from "../lib/content-dates";
 import { siteUrl } from "../lib/site";
 import SiteFooter from "./SiteFooter";
 import ToolHeader from "./ToolHeader";
@@ -73,8 +74,15 @@ export default function GuideArticle({
         url: articleUrl,
         inLanguage: "en",
         isAccessibleForFree: true,
+        dateModified: lastUpdated(`guides/${slug}`),
+        image: {
+          "@type": "ImageObject",
+          url: `${siteUrl}/og-image.png`,
+          width: 1200,
+          height: 630,
+        },
         author: {
-          "@id": `${siteUrl}/#organization`,
+          "@id": `${siteUrl}/about#author`,
         },
         publisher: {
           "@id": `${siteUrl}/#organization`,

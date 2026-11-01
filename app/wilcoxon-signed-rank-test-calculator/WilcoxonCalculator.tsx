@@ -25,7 +25,7 @@ export default function WilcoxonCalculator() {
   const t = (v: number) => fixed(v, 1).replace(/\.0$/, "");
 
   return (
-    <main id="main-content" className={styles.page}>
+    <section className={styles.page}>
       <ToolHeader active="statistics" />
       <section className={styles.hero}>
         <p>WILCOXON SIGNED-RANK TEST CALCULATOR</p>
@@ -102,6 +102,6 @@ export default function WilcoxonCalculator() {
           )}
         </aside>
       </section>
-    </main>
+    </section>
   );
 }

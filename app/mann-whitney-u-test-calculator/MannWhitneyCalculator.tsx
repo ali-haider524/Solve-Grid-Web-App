@@ -30,7 +30,7 @@ export default function MannWhitneyCalculator() {
   const size = (r: number) => (r >= 0.5 ? "large" : r >= 0.3 ? "medium" : r >= 0.1 ? "small" : "negligible");
 
   return (
-    <main id="main-content" className={styles.page}>
+    <section className={styles.page}>
       <ToolHeader active="statistics" />
       <section className={styles.hero}>
         <p>MANN-WHITNEY U TEST CALCULATOR</p>
@@ -117,6 +117,6 @@ export default function MannWhitneyCalculator() {
           )}
         </aside>
       </section>
-    </main>
+    </section>
   );
 }

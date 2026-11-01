@@ -3,7 +3,7 @@ import { createStaticPageMetadata } from "../../../lib/seo";
 
 export const metadata = createStaticPageMetadata(
   "Unit Conversion Formulas – Metric, Imperial, Temperature & Speed",
-  "Learn common unit conversion formulas for metric and imperial values, temperature, speed, pressure, energy, torque, density, data units, and engineering calculations.",
+  "Common unit conversion formulas for metric and imperial units: temperature, speed, pressure, energy, torque, density and data units.",
   "/guides/unit-conversion-formulas",
 );
 

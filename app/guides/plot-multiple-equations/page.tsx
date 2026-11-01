@@ -3,7 +3,7 @@ import { createStaticPageMetadata } from "../../../lib/seo";
 
 export const metadata = createStaticPageMetadata(
   "Plot Equations Online: One, Two or Multiple Functions",
-  "Learn how to plot an equation online, graph two equations on the same axes, compare multiple functions, use tables and trace values, and estimate roots or intersections.",
+  "Plot equations online, graph two or more functions on the same axes, trace values, and find roots and intersections step by step.",
   "/guides/plot-multiple-equations",
 );
 

@@ -46,7 +46,7 @@ export default function CronbachAlphaCalculator() {
     : null;
 
   return (
-    <main id="main-content" className={styles.page}>
+    <section className={styles.page}>
       <ToolHeader active="statistics" />
       <section className={styles.hero}>
         <p>CRONBACH&apos;S ALPHA CALCULATOR</p>
@@ -142,6 +142,6 @@ export default function CronbachAlphaCalculator() {
           )}
         </aside>
       </section>
-    </main>
+    </section>
   );
 }

@@ -7,7 +7,7 @@ import { createStaticPageMetadata } from "../../lib/seo";
 
 export const metadata = createStaticPageMetadata(
   "Free Online Calculators, Math Tools & Engineering Tools",
-  "Browse SolveGrid's free research statistics calculators — sample size, Cronbach's alpha, Likert analysis, t-tests, ANOVA — plus math, graphing, and numerical-methods tools.",
+  "Free statistics calculators for thesis research: sample size, power, Cronbach's alpha, Likert, t-tests, ANOVA, regression, plus math and graphing tools.",
   "/tools",
 );
 
