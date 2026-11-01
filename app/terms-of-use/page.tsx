@@ -10,6 +10,7 @@ export const metadata = createStaticPageMetadata(
 export default function TermsOfUsePage() {
   return (
     <LegalPage
+      path="/terms-of-use"
       eyebrow='TERMS OF USE'
       title='Terms of Use'
       description='Terms for using SolveGrid tools and learning content.'

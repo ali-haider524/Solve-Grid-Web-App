@@ -10,6 +10,7 @@ export const metadata = createStaticPageMetadata(
 export default function MethodologyPage() {
   return (
     <LegalPage
+      path="/methodology"
       eyebrow="METHODS & ACCURACY"
       title="Calculation Methods, Accuracy & Limitations"
       description="How SolveGrid tools use formulas, numerical methods, clear assumptions, and browser-based processing to produce results."

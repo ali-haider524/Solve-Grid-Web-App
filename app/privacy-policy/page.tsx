@@ -11,6 +11,7 @@ export const metadata = createStaticPageMetadata(
 export default function PrivacyPolicyPage() {
   return (
     <LegalPage
+      path="/privacy-policy"
       eyebrow="PRIVACY POLICY"
       title="Privacy Policy"
       description="How SolveGrid handles calculator inputs, website information, and support messages."

@@ -11,6 +11,7 @@ export const metadata = createStaticPageMetadata(
 export default function AboutPage() {
   return (
     <LegalPage
+      path="/about"
       eyebrow="ABOUT SOLVEGRID"
       title="About SolveGrid"
       description="Free, browser-based statistics calculators and reporting guides for students and researchers writing a thesis, dissertation, or survey report."

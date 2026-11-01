@@ -12,6 +12,7 @@ export const metadata = createStaticPageMetadata(
 export default function ContactPage() {
   return (
     <LegalPage
+      path="/contact"
       eyebrow="CONTACT SOLVEGRID"
       title="Contact and feedback"
       description="Report a calculation issue, suggest a tool, or ask a general website question."

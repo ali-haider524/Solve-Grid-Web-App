@@ -10,6 +10,7 @@ export const metadata = createStaticPageMetadata(
 export default function DisclaimerPage() {
   return (
     <LegalPage
+      path="/disclaimer"
       eyebrow='CALCULATION DISCLAIMER'
       title='Disclaimer'
       description='Use results as a helpful calculation aid, not a substitute for professional judgment.'

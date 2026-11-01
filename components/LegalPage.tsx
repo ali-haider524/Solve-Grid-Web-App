@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { siteUrl } from "../lib/site";
 import SiteFooter from "./SiteFooter";
 import ToolHeader from "./ToolHeader";
 import styles from "./LegalPage.module.css";
@@ -14,6 +15,7 @@ type LegalPageProps = {
   title: string;
   description: string;
   updated: string;
+  path: string;
   sections: LegalSection[];
   children?: React.ReactNode;
 };
@@ -23,11 +25,25 @@ export default function LegalPage({
   title,
   description,
   updated,
+  path,
   sections,
   children,
 }: LegalPageProps) {
+  const breadcrumbs = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: siteUrl },
+      { "@type": "ListItem", position: 2, name: title, item: `${siteUrl}${path}` },
+    ],
+  };
+
   return (
     <main id="main-content" className={styles.page}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }}
+      />
       <ToolHeader />
       <article className={styles.article}>
         <nav className={styles.breadcrumbs} aria-label="Breadcrumb">

@@ -77,7 +77,7 @@ export default function GuideArticle({
         dateModified: lastUpdated(`guides/${slug}`),
         image: {
           "@type": "ImageObject",
-          url: `${siteUrl}/og-image.png`,
+          url: `${siteUrl}/og/guides--${slug}.png`,
           width: 1200,
           height: 630,
         },

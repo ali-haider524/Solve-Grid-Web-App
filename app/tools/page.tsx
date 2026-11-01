@@ -4,6 +4,7 @@ import ToolHeader from "../../components/ToolHeader";
 import { getToolsByCategory, toolCategories, tools } from "../../lib/tools";
 import styles from "./tools.module.css";
 import { createStaticPageMetadata } from "../../lib/seo";
+import { siteUrl } from "../../lib/site";
 
 export const metadata = createStaticPageMetadata(
   "Free Online Calculators, Math Tools & Engineering Tools",
@@ -14,6 +15,19 @@ export const metadata = createStaticPageMetadata(
 export default function ToolsPage() {
   return (
     <main id="main-content" className={styles.page}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Home", item: siteUrl },
+              { "@type": "ListItem", position: 2, name: "Tools", item: `${siteUrl}/tools` },
+            ],
+          }),
+        }}
+      />
       <ToolHeader active="tools" />
       <section className={styles.hero}>
         <p>FREE ONLINE CALCULATOR DIRECTORY</p>
