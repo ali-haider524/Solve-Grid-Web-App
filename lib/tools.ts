@@ -71,7 +71,7 @@ export const tools: ToolInfo[] = [
     category: "engineering",
     icon: "√",
     title:
-      "Scientific & Engineering Calculator Online – ENG Notation, Trig, Logs & Constants",
+      "Scientific Calculator Online – ENG Notation, Trig & Logs",
     description:
       "Use a free scientific and engineering calculator for trigonometry, logs, roots, powers, constants, scientific notation, and engineering notation.",
     summary:
@@ -159,7 +159,7 @@ export const tools: ToolInfo[] = [
     shortName: "Graphing",
     category: "math",
     icon: "⌁",
-    title: "Online Graphing Calculator – Graph, Table, Trace & Intersections",
+    title: "Online Graphing Calculator – Graph, Trace & Intersect",
     description:
       "Plot equations online, compare multiple functions, inspect tables, trace points, estimate roots and intersections, and adjust the graph window.",
     summary:
@@ -249,7 +249,7 @@ export const tools: ToolInfo[] = [
     category: "math",
     icon: "x²",
     title:
-      "Equation Solver – Linear, Quadratic, Cubic & System of Equations Calculator",
+      "Equation Solver with Steps – Linear, Quadratic & Cubic",
     description:
       "Solve linear, quadratic, cubic, and 2–8 variable systems online using Gaussian elimination, Gauss-Jordan RREF, inverse, and Cramer’s rule.",
     summary:
@@ -337,7 +337,7 @@ export const tools: ToolInfo[] = [
     shortName: "Polynomials",
     category: "math",
     icon: "f(x)",
-    title: "Polynomial Roots Calculator – Solve Degree 1 to 10 Polynomials",
+    title: "Polynomial Roots Calculator – Degree 1 to 10",
     description:
       "Use an online polynomial roots calculator to solve degree 1 to 10 equations from coefficients and find real or complex roots with numerical residual checks.",
     summary:
@@ -408,7 +408,7 @@ export const tools: ToolInfo[] = [
     shortName: "Matrix",
     category: "math",
     icon: "[ ]",
-    title: "Matrix Calculator – RREF, Rank With Steps, Row Space & Systems",
+    title: "Matrix Calculator – RREF, Rank & Inverse with Steps",
     description:
       "Calculate 2×2 to 10×10 matrices, REF, RREF, rank, row space, inverse, determinant, eigenvalues, arithmetic, and supported linear systems.",
     summary:
@@ -588,7 +588,7 @@ export const tools: ToolInfo[] = [
     shortName: "Units",
     category: "engineering",
     icon: "⇄",
-    title: "Unit Converter – Engineering, Metric, Imperial & Science Units",
+    title: "Unit Converter – Metric, Imperial & Engineering Units",
     description:
       "Convert engineering, scientific, metric, imperial, and everyday units for length, mass, temperature, speed, pressure, energy, torque, density, and more.",
     summary:
@@ -721,7 +721,7 @@ export const tools: ToolInfo[] = [
     shortName: "Symbolic algebra",
     category: "research",
     icon: "∂",
-    title: "Symbolic Algebra Calculator – Simplify, Differentiate & Compare",
+    title: "Symbolic Algebra Calculator – Simplify & Differentiate",
     description:
       "Use an online symbolic algebra workspace to simplify expressions, differentiate, evaluate functions, and compare algebraic forms with clear scope notes.",
     summary:
@@ -770,7 +770,7 @@ export const tools: ToolInfo[] = [
     shortName: "Optimization",
     category: "research",
     icon: "max",
-    title: "Optimization Problem Solver – Linear Programming Calculator",
+    title: "Linear Programming Solver – Optimization Calculator",
     description:
       "Solve two-variable linear programming problems online using objective functions, constraints, feasible regions, corner points, and maximum or minimum values.",
     summary:
@@ -850,7 +850,7 @@ export const tools: ToolInfo[] = [
     category: "research",
     icon: "Ω",
     title:
-      "Circuit Analysis Calculator – Nodal Analysis, Ohm's Law, RC & Resistors",
+      "Circuit Analysis Calculator – Nodal, Ohm's Law & RC",
     description:
       "Analyze DC circuits with Ohm’s law, series and parallel resistance, voltage dividers, RC transients, KCL, conductance matrices, and two-node nodal analysis.",
     summary:

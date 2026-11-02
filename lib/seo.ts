@@ -59,23 +59,26 @@ export function createStaticPageMetadata(
   canonicalPath: string,
 ): Metadata {
   const ogImage = ogImageFor(canonicalPath, `${title} – SolveGrid`);
+  // Titles that already name the brand skip the "| SolveGrid" suffix to avoid "SolveGrid … | SolveGrid".
+  const hasBrand = title.includes(siteName);
+  const fullTitle = hasBrand ? title : `${title} | ${siteName}`;
   return {
     ...sharedMetadata,
-    title,
+    title: hasBrand ? { absolute: title } : title,
     description,
     alternates: { canonical: canonicalPath },
     openGraph: {
       type: "website",
       siteName,
       locale: "en_US",
-      title: `${title} | ${siteName}`,
+      title: fullTitle,
       description,
       url: canonicalPath,
       images: [ogImage],
     },
     twitter: {
       card: "summary_large_image",
-      title: `${title} | ${siteName}`,
+      title: fullTitle,
       description,
       images: [ogImage.url],
     },

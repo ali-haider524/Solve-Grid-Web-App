@@ -40,7 +40,7 @@ export const contentUpdated: Record<string, string> = {
   "guides/likert-scale-interpretation": "2026-10-28",
   "guides/how-to-report-anova-apa": "2026-10-28",
   "guides/how-to-report-t-test-apa": "2026-10-28",
-  "guides/standard-deviation-formula": "2026-10-31",
+  "guides/standard-deviation-formula": "2026-11-03",
 };
 
 export function lastUpdated(path: string): string {

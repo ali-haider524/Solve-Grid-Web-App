@@ -12,34 +12,34 @@ export default function StandardDeviationGuide() {
     <GuideArticle
       eyebrow="STATISTICS GUIDE"
       title="Standard deviation formula: sample vs population"
-      description="Standard deviation measures how spread out values are around the mean. The key choice is whether your data represents a sample or the full population."
+      description="Standard deviation is the typical distance of values from their mean. Sample: s = √(Σ(x − x̄)² ÷ (n − 1)). Population: σ = √(Σ(x − μ)² ÷ n). Use the sample formula unless you measured every member of the group."
       slug="standard-deviation-formula"
       formula="Population: σ = √(Σ(x − μ)² ÷ n); Sample: s = √(Σ(x − x̄)² ÷ (n − 1))"
       example="For the scores 58, 64, 72, 72, 78, 84, 91: the mean is 519 ÷ 7 = 74.14. The squared deviations add up to 768.86. Sample variance = 768.86 ÷ 6 = 128.14, so the sample standard deviation is √128.14 = 11.32. If these seven scores were the whole population, variance = 768.86 ÷ 7 = 109.84 and σ = 10.48."
       steps={[
         {
-          title: "Enter the data in the right format",
-          body: "Use raw values for a normal list, frequency rows when exact values repeat, grouped intervals when you only have class ranges, or paired X/Y values for regression.",
+          title: "Find the mean",
+          body: "Add all the values and divide by how many there are. For the example scores, 519 ÷ 7 = 74.14. Use μ for a population mean and x̄ for a sample mean.",
         },
         {
-          title: "Calculate the mean",
-          body: "Add the values and divide by the number of values. In grouped data, the calculator estimates the mean from class midpoints and frequencies.",
+          title: "Subtract the mean from each value",
+          body: "Each result (x − x̄) is a deviation: how far that value sits above or below the mean. The deviations always add up to zero, which is why they are squared next.",
         },
         {
-          title: "Find each deviation from the mean",
-          body: "Subtract the mean from each value. These deviations show how far each value sits above or below the center of the data.",
+          title: "Square each deviation and add them up",
+          body: "Squaring removes the negative signs and gives extra weight to values far from the mean. The total, Σ(x − x̄)², is the sum of squares. In the example it is 768.86.",
         },
         {
-          title: "Square and add the deviations",
-          body: "Squaring removes negative signs and gives more weight to larger distances from the mean. The total squared deviation is the base for variance.",
-        },
-        {
-          title: "Choose sample or population",
-          body: "Use n for population standard deviation when the entered values are the entire group. Use n − 1 for sample standard deviation when the values represent a sample.",
+          title: "Divide to get the variance",
+          body: "Divide the sum of squares by n − 1 for a sample (768.86 ÷ 6 = 128.14) or by n for a whole population (768.86 ÷ 7 = 109.84). This is the variance, measured in squared units.",
         },
         {
           title: "Take the square root",
-          body: "The square root of variance gives standard deviation, which is easier to interpret because it uses the same unit as the original data.",
+          body: "The square root of the variance is the standard deviation, back in the original units: s = √128.14 = 11.32 for a sample, σ = √109.84 = 10.48 for a population.",
+        },
+        {
+          title: "Check the result makes sense",
+          body: "The SD can never be negative and is zero only when every value is identical. A quick sense check: most values should lie within about two SDs of the mean (here 74.14 ± 22.64, or 51.5 to 96.8).",
         },
       ]}
       reference={{
@@ -57,6 +57,26 @@ export default function StandardDeviationGuide() {
         ],
       }}
       faqs={[
+        {
+          question: "What is the standard deviation formula?",
+          answer:
+            "For a sample: s = √( Σ(x − x̄)² ÷ (n − 1) ). For a whole population: σ = √( Σ(x − μ)² ÷ n ). In both, you subtract the mean from each value, square the results, add them up, divide, and take the square root. The only difference is dividing by n − 1 (sample) or n (population).",
+        },
+        {
+          question: "What do σ, s, μ, x̄, Σ and n mean?",
+          answer:
+            "σ (sigma) is the population standard deviation and s is the sample standard deviation. μ (mu) is the population mean and x̄ (x-bar) is the sample mean. Σ means \"add up\" every value that follows, x is each individual value, and n is the number of values.",
+        },
+        {
+          question: "What is the difference between variance and standard deviation?",
+          answer:
+            "Variance is the average squared deviation from the mean; standard deviation is its square root. Variance is in squared units (points², cm²), so standard deviation is easier to interpret because it is in the same units as the data. In the example, the sample variance is 128.14 and the sample SD is 11.32.",
+        },
+        {
+          question: "What are common mistakes when calculating standard deviation?",
+          answer:
+            "The most common are: dividing by n when the data are a sample (use n − 1); forgetting to square the deviations, so they cancel to zero; reporting the variance instead of its square root; rounding the mean too early, which makes the final SD drift; and using the mean and SD for strongly skewed data, where the median and IQR describe the data better.",
+        },
         {
           question: "Should I use the sample or population standard deviation?",
           answer:

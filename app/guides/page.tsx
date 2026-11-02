@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import SiteFooter from "../../components/SiteFooter";
 import ToolHeader from "../../components/ToolHeader";
@@ -10,20 +9,13 @@ import {
 } from "../../lib/guides";
 import { siteName, siteUrl } from "../../lib/site";
 import styles from "./guides.module.css";
+import { createStaticPageMetadata } from "../../lib/seo";
 
-export const metadata: Metadata = {
-  title: "Calculator Guides – Formulas, Methods & Worked Examples",
-  description:
-    "Guides with formulas and worked examples: choosing a statistical test, APA reporting, sample size, Likert analysis, standard deviation, and more.",
-  alternates: { canonical: "/guides" },
-  openGraph: {
-    type: "website",
-    title: "Calculator Guides – Formulas, Methods & Worked Examples",
-    description:
-      "Browse practical guides for algebra, graphing, research statistics, engineering calculations, and numerical methods.",
-    url: "/guides",
-  },
-};
+export const metadata = createStaticPageMetadata(
+  "Statistics & Calculator Guides – Formulas and Worked Examples",
+  "Guides with formulas and worked examples: choosing a statistical test, APA reporting, sample size, Likert analysis, standard deviation, and more.",
+  "/guides",
+);
 
 const topicOrder: GuideTopic[] = [
   "statistics",
