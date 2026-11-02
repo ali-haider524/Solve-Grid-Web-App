@@ -59,6 +59,26 @@ export default function ChooseStatisticalTestGuide() {
       }}
       faqs={[
         {
+          question: "How do I decide which statistical test to use?",
+          answer:
+            "Answer four questions in order: (1) Are you comparing groups, looking for a relationship, or testing an association between categories? (2) Is the outcome numeric, ordinal, or categorical? (3) How many groups or time points are there? (4) Are the measurements independent or paired? The decision table above maps each combination to a test, and the Statistical Test Chooser walks through the same questions interactively.",
+        },
+        {
+          question: "Which test should I use for a pre-test and post-test?",
+          answer:
+            "If the same people take both tests and the score differences are roughly normal, use a paired t-test. If the differences are skewed or the outcome is ordinal, use the Wilcoxon signed-rank test. For a yes/no outcome measured before and after, use McNemar's test. With three or more time points, use repeated-measures ANOVA or the Friedman test.",
+        },
+        {
+          question: "Should I use correlation or regression?",
+          answer:
+            "Use correlation to describe how strongly two variables move together (Pearson r or Spearman rho). Use regression when you want to predict an outcome from one or more predictors and report how much it changes per unit of each predictor (B, β and R²).",
+        },
+        {
+          question: "What is the difference between parametric and non-parametric tests?",
+          answer:
+            "Parametric tests (t-test, ANOVA, Pearson) compare means and assume roughly normal data with similar spread. Non-parametric tests (Mann-Whitney, Wilcoxon, Kruskal-Wallis, Spearman) compare ranks, so they suit ordinal data, skewed data and small samples, at the cost of slightly less power when the data really are normal.",
+        },
+        {
           question: "Should I use an ANOVA or a t-test?",
           answer:
             "Use a t-test for exactly two groups and a one-way ANOVA for three or more. Running several t-tests instead of one ANOVA raises the chance of a false positive: with three groups, three t-tests at α = .05 give about a 14% familywise error rate.",
@@ -121,14 +141,24 @@ export default function ChooseStatisticalTestGuide() {
           description: "Compare two independent groups on ordinal or skewed data with exact p values and effect size.",
         },
         {
-          label: "Wilcoxon & Kruskal-Wallis Calculators",
-          href: "/kruskal-wallis-test-calculator",
-          description: "Non-parametric tests for paired data (Wilcoxon) and three or more groups (Kruskal-Wallis, with Dunn post hoc).",
+          label: "Wilcoxon Signed-Rank Calculator",
+          href: "/wilcoxon-signed-rank-test-calculator",
+          description: "Non-parametric test for paired data, such as pre-test and post-test scores.",
         },
         {
-          label: "Friedman & McNemar Calculators",
+          label: "Kruskal-Wallis Calculator",
+          href: "/kruskal-wallis-test-calculator",
+          description: "Compare three or more independent groups on ordinal or skewed data, with Dunn post hoc tests.",
+        },
+        {
+          label: "Friedman Test Calculator",
           href: "/friedman-test-calculator",
-          description: "Repeated measures on ordinal data (Friedman) and paired yes/no outcomes (McNemar at /mcnemar-test-calculator).",
+          description: "Repeated measures on ordinal data: the same people rated under three or more conditions.",
+        },
+        {
+          label: "McNemar Test Calculator",
+          href: "/mcnemar-test-calculator",
+          description: "Paired yes/no outcomes, such as pass/fail before and after an intervention.",
         },
         {
           label: "Shapiro-Wilk Normality Test",

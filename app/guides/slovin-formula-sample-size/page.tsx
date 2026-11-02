@@ -57,6 +57,26 @@ export default function SlovinFormulaGuide() {
       }}
       faqs={[
         {
+          question: "What is the difference between Slovin's and Cochran's formula?",
+          answer:
+            "Slovin's formula only uses the population size and margin of error. Cochran's formula also uses a confidence level (z) and an expected proportion (p), usually 95% and 0.5. For N = 2,500 at a 5% margin, Slovin gives 345, while Cochran gives n₀ = 1.96² × 0.5 × 0.5 ÷ 0.05² = 384.16, and after the finite population correction n = 384.16 ÷ (1 + 383.16 ÷ 2,500) = 334. Cochran is easier to defend because every assumption is stated.",
+        },
+        {
+          question: "What confidence level does Slovin's formula use?",
+          answer:
+            "The formula itself has no confidence level, which is its main weakness. Some textbooks say it implies about 95%, but that is not part of the formula. If your adviser asks for a confidence level, use Cochran's formula, which states it directly.",
+        },
+        {
+          question: "What if I don't know the population size?",
+          answer:
+            "Slovin's formula needs N, so it cannot be used. Use Cochran's formula without the finite population correction: at 95% confidence, a 5% margin and p = 0.5, the minimum is 385 respondents.",
+        },
+        {
+          question: "How do I divide the sample across groups (stratified sampling)?",
+          answer:
+            "Use proportional allocation: each group's share of the sample equals its share of the population. With N = 2,500 split into 1,200, 800 and 500 students and n = 345, the groups get 345 × 1,200 ÷ 2,500 = 165.6, 110.4 and 69. Round each up to 166, 111 and 69 (346 in total) so no group falls below its minimum.",
+        },
+        {
           question: "Is Slovin's formula the same as Yamane's formula?",
           answer:
             "Yes. Both are n = N ÷ (1 + N·e²). Taro Yamane published it in 1967, and the name 'Slovin' is widely used in Philippine and Southeast Asian research. Cite the name your institution uses.",

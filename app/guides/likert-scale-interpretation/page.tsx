@@ -56,6 +56,26 @@ export default function LikertInterpretationGuide() {
       }}
       faqs={[
         {
+          question: "How do I compute the weighted mean of a Likert statement?",
+          answer:
+            "Multiply each score by its number of responses, add them, and divide by the total respondents. Example with 50 respondents: 18 Strongly Agree (5), 22 Agree (4), 6 Neutral (3), 3 Disagree (2) and 1 Strongly Disagree (1). Weighted mean = (90 + 88 + 18 + 6 + 1) ÷ 50 = 203 ÷ 50 = 4.06, which falls in 3.41–4.20, so the statement is interpreted as Agree. The standard deviation is 0.96.",
+        },
+        {
+          question: "What is the range for a 7-point Likert scale?",
+          answer:
+            "The width is (7 − 1) ÷ 7 = 0.857. Ranges: 1.00–1.86 Strongly Disagree, 1.87–2.71 Disagree, 2.72–3.57 Somewhat Disagree, 3.58–4.43 Neutral, 4.44–5.29 Somewhat Agree, 5.30–6.14 Agree, and 6.15–7.00 Strongly Agree.",
+        },
+        {
+          question: "Can I use other labels, such as frequency or satisfaction?",
+          answer:
+            "Yes. Keep the same mean ranges and swap the labels to match your questionnaire. For a 5-point frequency scale: Always, Often, Sometimes, Rarely, Never. For satisfaction: Very Satisfied, Satisfied, Neutral, Dissatisfied, Very Dissatisfied. For extent: Very High, High, Moderate, Low, Very Low.",
+        },
+        {
+          question: "How do I write Likert results in a thesis?",
+          answer:
+            "Put each statement's weighted mean, SD, verbal interpretation and rank in a table, then summarise in the text, for example: \"Respondents agreed that the online modules were easy to follow (M = 4.06, SD = 0.96). The overall mean for the Usability dimension was 3.92, interpreted as Agree.\" Discuss the highest- and lowest-ranked statements.",
+        },
+        {
           question: "What is the range for a 4-point Likert scale?",
           answer:
             "With a width of 0.75: 1.00–1.75 Strongly Disagree, 1.76–2.50 Disagree, 2.51–3.25 Agree, and 3.26–4.00 Strongly Agree.",
