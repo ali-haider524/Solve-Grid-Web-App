@@ -8,6 +8,7 @@ const trustPages = [
   "about",
   "contact",
   "methodology",
+  "validation",
   "privacy-policy",
   "terms-of-use",
   "disclaimer",

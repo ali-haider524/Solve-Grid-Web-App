@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import ToolHeader from "../../components/ToolHeader";
-import { cronbachAlpha, fixed, parseMatrix, type CronbachResult } from "../../lib/research-statistics";
+import { cronbachAlpha, fixed, mcdonaldOmega, parseMatrix, reverseScore, type CronbachResult, type OmegaResult } from "../../lib/research-statistics";
 import styles from "../../components/ResearchLab.module.css";
 
 const sample = `Q1	Q2	Q3	Q4	Q5
@@ -21,6 +21,7 @@ export default function CronbachAlphaCalculator() {
   const [scaleMin, setScaleMin] = useState("1");
   const [scaleMax, setScaleMax] = useState("5");
   const [result, setResult] = useState<CronbachResult | null>(null);
+  const [omega, setOmega] = useState<OmegaResult | null>(null);
   const [error, setError] = useState("");
 
   function calculate() {
@@ -34,9 +35,18 @@ export default function CronbachAlphaCalculator() {
       if (reversedItems.some((value) => !Number.isInteger(value) || value < 1)) {
         throw new Error("List reverse-coded items by column number, for example: 4, 7");
       }
-      setResult(cronbachAlpha(parseMatrix(data), reversedItems, Number(scaleMin), Number(scaleMax)));
+      const matrix = parseMatrix(data);
+      setResult(cronbachAlpha(matrix, reversedItems, Number(scaleMin), Number(scaleMax)));
+      try {
+        const reversedSet = new Set(reversedItems);
+        const recoded = matrix.map((row) => row.map((value, c) => (reversedSet.has(c + 1) ? reverseScore(value, Number(scaleMin), Number(scaleMax)) : value)));
+        setOmega(mcdonaldOmega(recoded));
+      } catch {
+        setOmega(null);
+      }
     } catch (caught) {
       setResult(null);
+      setOmega(null);
       setError(caught instanceof Error ? caught.message : "Check the data.");
     }
   }
@@ -100,6 +110,12 @@ export default function CronbachAlphaCalculator() {
                 <div><span>Items</span><strong>{result.items}</strong></div>
                 <div><span>Cronbach&apos;s alpha</span><strong>{fixed(result.alpha)}</strong></div>
                 <div><span>Standardized alpha</span><strong>{fixed(result.standardizedAlpha)}</strong></div>
+                {omega ? (
+                  <div>
+                    <span>McDonald&apos;s omega (ω total, one factor)</span>
+                    <strong>{fixed(omega.omega)}{omega.heywood ? " (check: Heywood case)" : ""}</strong>
+                  </div>
+                ) : null}
               </div>
               <div className={styles.tableWrap}>
                 <table>

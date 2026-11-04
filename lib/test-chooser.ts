@@ -32,6 +32,7 @@ const corr = { toolHref: "/correlation-calculator", toolLabel: "Run it in the Co
 const fr = { toolHref: "/friedman-test-calculator", toolLabel: "Run it in the Friedman Test Calculator" };
 const mcn = { toolHref: "/mcnemar-test-calculator", toolLabel: "Run it in the McNemar Test Calculator" };
 const advanced = { toolHref: "/advanced-statistics", toolLabel: "Run it in the Advanced Statistics Lab" };
+const rmAnova = { toolHref: "/repeated-measures-anova-calculator", toolLabel: "Run it in the Repeated Measures ANOVA Calculator" };
 
 export function chooseTest(a: Answers): Recommendation {
   if (a.goal === "association" || (a.goal === "compare" && a.outcome === "categorical")) {
@@ -150,6 +151,7 @@ export function chooseTest(a: Answers): Recommendation {
           alternative: "Friedman test if the data are ordinal or clearly non-normal.",
           assumptions: ["Same participants in every condition", "Roughly normal residuals", "Sphericity (check Mauchly's test; use Greenhouse-Geisser if violated)"],
           report: "A repeated-measures ANOVA showed a [significant / non-significant] effect of [time / condition] on [outcome], F(df1, df2) = X.XX, p = .XXX, partial η² = .XX.",
+          ...rmAnova,
         }
       : {
           test: "Friedman test",

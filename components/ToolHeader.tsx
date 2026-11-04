@@ -66,7 +66,10 @@ const statisticsMenuGroups: Array<{ title: string; items: Array<[slug: string, l
     items: [
       ["t-test-calculator", "t-test"],
       ["one-way-anova-calculator", "One-way ANOVA"],
+      ["two-way-anova-calculator", "Two-way ANOVA"],
+      ["repeated-measures-anova-calculator", "Repeated measures ANOVA"],
       ["chi-square-calculator", "Chi-square test"],
+      ["fishers-exact-test-calculator", "Fisher's exact test"],
       ["mcnemar-test-calculator", "McNemar test"],
     ],
   },
@@ -84,6 +87,7 @@ const statisticsMenuGroups: Array<{ title: string; items: Array<[slug: string, l
     items: [
       ["correlation-calculator", "Correlation (Pearson, Spearman)"],
       ["linear-regression-calculator", "Linear regression"],
+      ["logistic-regression-calculator", "Logistic regression"],
       ["effect-size-calculator", "Effect size"],
       ["sobel-test-calculator", "Sobel test (mediation)"],
     ],
@@ -93,6 +97,9 @@ const statisticsMenuGroups: Array<{ title: string; items: Array<[slug: string, l
     items: [
       ["shapiro-wilk-test-calculator", "Shapiro-Wilk normality"],
       ["statistics-calculator", "Descriptive statistics"],
+      ["confidence-interval-calculator", "Confidence interval"],
+      ["margin-of-error-calculator", "Margin of error"],
+      ["p-value-calculator", "p value from a statistic"],
     ],
   },
 ];

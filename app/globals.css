@@ -686,3 +686,4 @@ canvas, img, svg { max-width: 100%; }
 .home-page h2[id],.home-page h3[id],.home-page section[id]{scroll-margin-top:92px}
 @media(max-width:900px){.home-page #what-is-solvegrid{grid-template-columns:1fr}.home-page .home-steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:640px){.home-page .home-answer-section{width:min(100% - 28px,1180px);padding:40px 0 4px}.home-page .home-steps,.home-page .home-terms{grid-template-columns:1fr}}
+.home-page .home-figure{margin:22px 0 0}.home-page .home-figure img{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:18px;background:#f5f8ff}

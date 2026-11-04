@@ -121,6 +121,10 @@ const calculatorComparison = [
   { task: "Compare three or more group means", tool: "One-Way ANOVA Calculator", href: "/one-way-anova-calculator", method: "F test with Tukey HSD post hoc", report: "F, df, p and eta squared" },
   { task: "Test a link between two categories", tool: "Chi-Square Calculator", href: "/chi-square-calculator", method: "Chi-square test of independence", report: "χ², df, p and Cramér's V" },
   { task: "Measure a relationship between two scores", tool: "Correlation Calculator", href: "/correlation-calculator", method: "Pearson, Spearman or Kendall", report: "r or rho, n and p" },
+  { task: "Test two factors and their interaction", tool: "Two-Way ANOVA Calculator", href: "/two-way-anova-calculator", method: "Type III F tests", report: "F, df, p and partial eta squared" },
+  { task: "Compare three or more time points", tool: "Repeated Measures ANOVA Calculator", href: "/repeated-measures-anova-calculator", method: "F test with Greenhouse-Geisser correction", report: "F, corrected df, p and partial eta squared" },
+  { task: "Predict a yes/no outcome", tool: "Logistic Regression Calculator", href: "/logistic-regression-calculator", method: "Maximum-likelihood logistic model", report: "χ², Nagelkerke R², odds ratios" },
+  { task: "Report the precision of an estimate", tool: "Confidence Interval Calculator", href: "/confidence-interval-calculator", method: "t interval or Wilson interval", report: "Estimate with 95% CI [low, high]" },
 ];
 
 const surveyAnalysisSteps = [
@@ -346,6 +350,16 @@ export default function Home() {
             calculator that does it and shows the working.
           </p>
         </div>
+        <figure className="home-figure">
+          <img
+            src="/images/thesis-statistics-workflow.svg"
+            alt="Six-step workflow for thesis survey data: sample size, reliability, Likert means, descriptive statistics, choosing a test, and APA reporting"
+            width={1200}
+            height={300}
+            loading="lazy"
+            decoding="async"
+          />
+        </figure>
         <ol className="home-steps">
           {surveyAnalysisSteps.map((step) => (
             <li key={step.href}>

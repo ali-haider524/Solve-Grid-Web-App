@@ -14,7 +14,7 @@ export default function MethodologyPage() {
       eyebrow="METHODS & ACCURACY"
       title="Calculation Methods, Accuracy & Limitations"
       description="How SolveGrid tools use formulas, numerical methods, clear assumptions, and browser-based processing to produce results."
-      updated="30 July 2026"
+      updated="5 November 2026"
       sections={[
         {
           title: "Calculation methods used in SolveGrid",
@@ -26,8 +26,14 @@ export default function MethodologyPage() {
             "Formula-based research calculations such as Slovin and Cochran sample size, Cronbach's alpha, and Likert weighted means",
             "Algebraic and matrix methods for equations, row reduction, inverses, determinants, rank, and supported linear systems",
             "Numerical methods for selected differential-equation and simulation workspaces",
-            "Statistical calculations for descriptive statistics, regression, t-tests, correlation, and one-way ANOVA",
+            "Statistical calculations for descriptive statistics, t-tests, one-way, two-way and repeated measures ANOVA, correlation, linear and logistic regression, chi-square, Fisher's exact and non-parametric tests",
             "Defined conversion relationships for supported scientific and engineering units",
+          ],
+        },
+        {
+          title: "How statistics results are validated",
+          paragraphs: [
+            "The statistics calculators are re-run on fixed datasets and compared with independent reference values from SciPy and NumPy. The latest run, with every check and the size of any difference, is published on the Calculator Validation page (solvegrid.online/validation).",
           ],
         },
         {

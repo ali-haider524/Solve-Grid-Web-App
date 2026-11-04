@@ -1,0 +1,9 @@
+.wrap{margin-top:18px;padding:20px;border:1px solid #dbe5f2;border-radius:18px;background:#fff}
+.eyebrow{margin:0;color:#3157e8;font-size:.66rem;font-weight:900;letter-spacing:.14em}
+.wrap h2{margin:8px 0 0;color:#172640;font-size:1.2rem;letter-spacing:-.04em;scroll-margin-top:92px}
+.note{margin:8px 0 0;color:#63758f;font-size:.82rem;line-height:1.6}
+.citation{margin:12px 0 0;padding:12px 14px;border-left:3px solid #3157e8;border-radius:8px;background:#f4f7ff;color:#24385a;font-size:.86rem;line-height:1.6;overflow-wrap:anywhere}
+.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.actions button{padding:9px 12px;border:1px solid #c9d8f4;border-radius:9px;background:#fff;color:#3157e8;cursor:pointer;font:850 .78rem inherit}
+.actions button:hover{background:#eef3ff}
+.message{margin:10px 0 0;color:#16794a;font-size:.8rem}

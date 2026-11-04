@@ -12,7 +12,7 @@ export const contentUpdated: Record<string, string> = {
   "privacy-policy": "2026-10-28",
   "statistical-test-chooser": "2026-10-28",
   "sample-size-calculator": "2026-11-04",
-  "cronbach-alpha-calculator": "2026-11-04",
+  "cronbach-alpha-calculator": "2026-11-05",
   "likert-scale-calculator": "2026-11-04",
   "chi-square-calculator": "2026-11-04",
   "mann-whitney-u-test-calculator": "2026-10-28",
@@ -41,6 +41,15 @@ export const contentUpdated: Record<string, string> = {
   "guides/how-to-report-anova-apa": "2026-10-28",
   "guides/how-to-report-t-test-apa": "2026-10-28",
   "guides/standard-deviation-formula": "2026-11-03",
+  "p-value-calculator": "2026-11-05",
+  "confidence-interval-calculator": "2026-11-05",
+  "margin-of-error-calculator": "2026-11-05",
+  "fishers-exact-test-calculator": "2026-11-05",
+  "two-way-anova-calculator": "2026-11-05",
+  "repeated-measures-anova-calculator": "2026-11-05",
+  "logistic-regression-calculator": "2026-11-05",
+  "methodology": "2026-11-05",
+  "validation": "2026-11-05",
 };
 
 export function lastUpdated(path: string): string {

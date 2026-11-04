@@ -1,4 +1,7 @@
 import Link from "next/link";
+import CiteAndExport from "./CiteAndExport";
+import { lastUpdated } from "../lib/content-dates";
+import { siteUrl } from "../lib/site";
 import { getGuidesForTool } from "../lib/guides";
 import {
   getCategoryPath,
@@ -71,6 +74,14 @@ export default function ToolCrossLinks({ currentSlug }: ToolCrossLinksProps) {
             ))}
           </aside>
         </div>
+
+        {currentTool.category === "statistics" ? (
+          <CiteAndExport
+            name={currentTool.name}
+            url={`${siteUrl}/${currentTool.slug}`}
+            year={lastUpdated(currentTool.slug).slice(0, 4)}
+          />
+        ) : null}
 
         {relatedGuides.length ? (
           <section

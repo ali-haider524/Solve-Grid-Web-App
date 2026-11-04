@@ -1446,7 +1446,7 @@ export function oneSampleT(values: number[], mu: number): TTestResult {
 
 /* ---------------- One-way ANOVA with Tukey HSD ---------------- */
 
-function normalCdf(z: number) {
+export function normalCdf(z: number) {
   return z >= 0 ? 1 - normalSf(z) : normalSf(-z);
 }
 
@@ -2161,4 +2161,587 @@ export function requiredSampleSize(input: PowerInput, power: number): PowerResul
   if (input.design === "paired-t") return { n, total: n, perGroup: null, achievedPower, label: "pairs" };
   if (input.design === "anova") return { n, total: n, perGroup: n / k, achievedPower, label: "total" };
   return { n, total: n, perGroup: null, achievedPower, label: "total" };
+}
+
+/* ---------------- p value from a test statistic ---------------- */
+
+export type StatisticKind = "z" | "t" | "f" | "chi" | "r";
+export type TailKind = "two" | "left" | "right";
+
+export type PValueResult = { kind: StatisticKind; statistic: number; p: number; tail: TailKind; df1?: number; df2?: number; tFromR?: number };
+
+/** Upper-tail probability of the standard normal (exported wrapper). */
+export function normalUpper(z: number) {
+  return normalSf(z);
+}
+
+export function pValueFromStatistic(kind: StatisticKind, statistic: number, tail: TailKind, df1?: number, df2?: number): PValueResult {
+  if (!Number.isFinite(statistic)) throw new Error("Enter the test statistic as a number.");
+  const needDf = (v: number | undefined, label: string) => {
+    if (v === undefined || !Number.isFinite(v) || v <= 0) throw new Error(`Enter ${label} as a positive number.`);
+    return v;
+  };
+  if (kind === "z") {
+    const upper = normalSf(statistic);
+    const p = tail === "two" ? 2 * normalSf(Math.abs(statistic)) : tail === "right" ? upper : 1 - upper;
+    return { kind, statistic, tail, p: Math.min(1, p) };
+  }
+  if (kind === "t" || kind === "r") {
+    let t = statistic;
+    let df = 0;
+    if (kind === "r") {
+      if (Math.abs(statistic) >= 1) throw new Error("A correlation coefficient must be between −1 and 1.");
+      const n = needDf(df1, "the sample size n");
+      if (n < 3) throw new Error("A correlation test needs n of at least 3.");
+      df = n - 2;
+      t = (statistic * Math.sqrt(df)) / Math.sqrt(1 - statistic * statistic);
+    } else {
+      df = needDf(df1, "the degrees of freedom");
+    }
+    const two = tTwoSidedP(t, df);
+    const upper = t >= 0 ? two / 2 : 1 - two / 2;
+    const p = tail === "two" ? two : tail === "right" ? upper : 1 - upper;
+    return { kind, statistic, tail, p: Math.min(1, Math.max(0, p)), df1: kind === "r" ? df1 : df, tFromR: kind === "r" ? t : undefined };
+  }
+  if (statistic < 0) throw new Error(kind === "f" ? "An F statistic cannot be negative." : "A chi-square statistic cannot be negative.");
+  if (kind === "f") {
+    const d1 = needDf(df1, "the numerator df");
+    const d2 = needDf(df2, "the denominator df");
+    return { kind, statistic, tail: "right", p: Math.min(1, Math.max(0, 1 - fCdf(statistic, d1, d2))), df1: d1, df2: d2 };
+  }
+  const df = needDf(df1, "the degrees of freedom");
+  return { kind, statistic, tail: "right", p: chiSquarePValue(statistic, df), df1: df };
+}
+
+/* ---------------- Confidence intervals ---------------- */
+
+export type MeanCiResult = { mean: number; sd: number; n: number; se: number; critical: number; df: number; margin: number; low: number; high: number; confidence: number };
+
+export function confidenceIntervalMean(mean: number, sd: number, n: number, confidence: number): MeanCiResult {
+  if (![mean, sd, n].every(Number.isFinite)) throw new Error("Enter the mean, standard deviation and sample size.");
+  if (sd < 0) throw new Error("The standard deviation cannot be negative.");
+  if (n < 2 || !Number.isInteger(n)) throw new Error("The sample size must be a whole number of at least 2.");
+  if (!(confidence > 0 && confidence < 1)) throw new Error("Choose a confidence level between 0 and 100%.");
+  const df = n - 1;
+  const se = sd / Math.sqrt(n);
+  const critical = tQuantileUpper((1 - confidence) / 2, df);
+  const margin = critical * se;
+  return { mean, sd, n, se, critical, df, margin, low: mean - margin, high: mean + margin, confidence };
+}
+
+export type ProportionCiResult = {
+  successes: number;
+  n: number;
+  p: number;
+  z: number;
+  confidence: number;
+  waldLow: number;
+  waldHigh: number;
+  wilsonLow: number;
+  wilsonHigh: number;
+  margin: number;
+};
+
+export function confidenceIntervalProportion(successes: number, n: number, confidence: number): ProportionCiResult {
+  if (!Number.isInteger(successes) || !Number.isInteger(n) || n < 1 || successes < 0 || successes > n)
+    throw new Error("Enter whole numbers, with successes between 0 and the sample size.");
+  if (!(confidence > 0 && confidence < 1)) throw new Error("Choose a confidence level between 0 and 100%.");
+  const p = successes / n;
+  const z = normalQuantile(1 - (1 - confidence) / 2);
+  const margin = z * Math.sqrt((p * (1 - p)) / n);
+  const denom = 1 + (z * z) / n;
+  const centre = (p + (z * z) / (2 * n)) / denom;
+  const half = (z * Math.sqrt((p * (1 - p)) / n + (z * z) / (4 * n * n))) / denom;
+  return {
+    successes,
+    n,
+    p,
+    z,
+    confidence,
+    waldLow: Math.max(0, p - margin),
+    waldHigh: Math.min(1, p + margin),
+    wilsonLow: Math.max(0, centre - half),
+    wilsonHigh: Math.min(1, centre + half),
+    margin,
+  };
+}
+
+/* ---------------- Margin of error ---------------- */
+
+export type MarginOfErrorResult = { z: number; se: number; margin: number; fpc: number; confidence: number; kind: "proportion" | "mean" };
+
+export function marginOfError(
+  kind: "proportion" | "mean",
+  n: number,
+  confidence: number,
+  options: { proportion?: number; sd?: number; population?: number },
+): MarginOfErrorResult {
+  if (!Number.isFinite(n) || n < 2) throw new Error("The sample size must be at least 2.");
+  if (!(confidence > 0 && confidence < 1)) throw new Error("Choose a confidence level between 0 and 100%.");
+  const z = normalQuantile(1 - (1 - confidence) / 2);
+  let se: number;
+  if (kind === "proportion") {
+    const p = options.proportion ?? 0.5;
+    if (!(p >= 0 && p <= 1)) throw new Error("The proportion must be between 0 and 1 (for example 0.5 for 50%).");
+    se = Math.sqrt((p * (1 - p)) / n);
+  } else {
+    const sd = options.sd;
+    if (sd === undefined || !Number.isFinite(sd) || sd < 0) throw new Error("Enter the standard deviation.");
+    se = sd / Math.sqrt(n);
+  }
+  let fpc = 1;
+  const N = options.population;
+  if (N !== undefined && Number.isFinite(N) && N > 0) {
+    if (N < n) throw new Error("The population cannot be smaller than the sample.");
+    fpc = N > 1 ? Math.sqrt((N - n) / (N - 1)) : 1;
+  }
+  return { z, se, margin: z * se * fpc, fpc, confidence, kind };
+}
+
+/* ---------------- Fisher's exact test (2 × 2) ---------------- */
+
+export type FisherResult = {
+  a: number;
+  b: number;
+  c: number;
+  d: number;
+  n: number;
+  pTwoSided: number;
+  pLess: number;
+  pGreater: number;
+  oddsRatio: number;
+  orLow: number;
+  orHigh: number;
+};
+
+export function fisherExactTest(a: number, b: number, c: number, d: number): FisherResult {
+  const cells = [a, b, c, d];
+  if (cells.some((v) => !Number.isInteger(v) || v < 0)) throw new Error("Every cell must be a whole-number count of 0 or more.");
+  const n = a + b + c + d;
+  if (n === 0) throw new Error("Enter at least one count.");
+  const r1 = a + b;
+  const r2 = c + d;
+  const c1 = a + c;
+  const prob = (x: number) =>
+    Math.exp(
+      lnFactorial(r1) + lnFactorial(r2) + lnFactorial(c1) + lnFactorial(n - c1) -
+        lnFactorial(n) - lnFactorial(x) - lnFactorial(r1 - x) - lnFactorial(c1 - x) - lnFactorial(r2 - c1 + x),
+    );
+  let pLess = 0;
+  let pGreater = 0;
+  for (let x = Math.max(0, c1 - r2); x <= Math.min(r1, c1); x += 1) {
+    const px = prob(x);
+    if (x <= a) pLess += px;
+    if (x >= a) pGreater += px;
+  }
+  const oddsRatio = b * c === 0 ? (a * d === 0 ? Number.NaN : Infinity) : (a * d) / (b * c);
+  let orLow = Number.NaN;
+  let orHigh = Number.NaN;
+  if (cells.every((v) => v > 0)) {
+    const se = Math.sqrt(1 / a + 1 / b + 1 / c + 1 / d);
+    orLow = Math.exp(Math.log(oddsRatio) - 1.959963984540054 * se);
+    orHigh = Math.exp(Math.log(oddsRatio) + 1.959963984540054 * se);
+  }
+  return { a, b, c, d, n, pTwoSided: fisherExact2x2(a, b, c, d), pLess: Math.min(1, pLess), pGreater: Math.min(1, pGreater), oddsRatio, orLow, orHigh };
+}
+
+/* ---------------- Two-way ANOVA (Type III sums of squares) ---------------- */
+
+export type TwoWayTerm = { name: string; ss: number; df: number; ms: number; f: number; p: number; partialEta: number };
+export type TwoWayCell = { a: string; b: string; n: number; mean: number; sd: number };
+export type TwoWayResult = { factorA: string; factorB: string; levelsA: string[]; levelsB: string[]; n: number; terms: TwoWayTerm[]; error: { ss: number; df: number; ms: number }; total: { ss: number; df: number }; cells: TwoWayCell[]; balanced: boolean };
+
+function sseOf(y: number[], cols: number[][]) {
+  if (!cols.length) {
+    const m = y.reduce((s, v) => s + v, 0) / y.length;
+    return y.reduce((s, v) => s + (v - m) ** 2, 0);
+  }
+  return olsFit(y, cols).ssResidual;
+}
+
+/** Parses long-format rows: factor A level, factor B level, numeric outcome. */
+export function parseTwoWayData(text: string) {
+  const lines = text
+    .split(/\r?\n/)
+    .map((line) => line.trim())
+    .filter(Boolean)
+    .map((line) => line.split(/[\t,;]+|\s+/).map((cell) => cell.trim()).filter(Boolean));
+  if (!lines.length) throw new Error("Paste one row per participant: factor A, factor B, score.");
+  let names = ["Factor A", "Factor B", "Score"];
+  if (!Number.isFinite(Number(lines[0][2]))) names = lines.shift() as string[];
+  const rows = lines.map((row, i) => {
+    if (row.length < 3) throw new Error(`Row ${i + 1} needs three values: factor A, factor B and the score.`);
+    const y = Number(row[2]);
+    if (!Number.isFinite(y)) throw new Error(`Row ${i + 1}: the score "${row[2]}" is not a number.`);
+    return { a: row[0], b: row[1], y };
+  });
+  return { names: names.slice(0, 3), rows };
+}
+
+export function twoWayAnova(rows: Array<{ a: string; b: string; y: number }>, factorA = "Factor A", factorB = "Factor B"): TwoWayResult {
+  const levelsA = [...new Set(rows.map((r) => r.a))];
+  const levelsB = [...new Set(rows.map((r) => r.b))];
+  if (levelsA.length < 2 || levelsB.length < 2) throw new Error("Each factor needs at least two levels.");
+  const cells: TwoWayCell[] = [];
+  for (const a of levelsA)
+    for (const b of levelsB) {
+      const v = rows.filter((r) => r.a === a && r.b === b).map((r) => r.y);
+      if (!v.length) throw new Error(`There are no scores for ${a} × ${b}. Every combination of levels needs data.`);
+      const m = v.reduce((s, x) => s + x, 0) / v.length;
+      const sd = v.length > 1 ? Math.sqrt(v.reduce((s, x) => s + (x - m) ** 2, 0) / (v.length - 1)) : Number.NaN;
+      cells.push({ a, b, n: v.length, mean: m, sd });
+    }
+  const n = rows.length;
+  const p = levelsA.length * levelsB.length;
+  if (n <= p) throw new Error("You need more scores than cells so the error term can be estimated (at least one cell with two or more scores).");
+  const y = rows.map((r) => r.y);
+  // Sum-to-zero (effect) coding.
+  const code = (levels: string[], value: string) => levels.slice(0, -1).map((lv) => (value === lv ? 1 : value === levels[levels.length - 1] ? -1 : 0));
+  const aCols = levelsA.slice(0, -1).map((_, j) => rows.map((r) => code(levelsA, r.a)[j]));
+  const bCols = levelsB.slice(0, -1).map((_, j) => rows.map((r) => code(levelsB, r.b)[j]));
+  const abCols: number[][] = [];
+  aCols.forEach((ac) => bCols.forEach((bc) => abCols.push(ac.map((v, i) => v * bc[i]))));
+  const sseFull = sseOf(y, [...aCols, ...bCols, ...abCols]);
+  const dfError = n - p;
+  const msError = sseFull / dfError;
+  const term = (name: string, without: number[][], df: number): TwoWayTerm => {
+    const ss = Math.max(0, sseOf(y, without) - sseFull);
+    const ms = ss / df;
+    const f = msError === 0 ? Infinity : ms / msError;
+    return { name, ss, df, ms, f, p: Number.isFinite(f) ? 1 - fCdf(f, df, dfError) : 0, partialEta: ss / (ss + sseFull) };
+  };
+  const terms = [
+    term(factorA, [...bCols, ...abCols], levelsA.length - 1),
+    term(factorB, [...aCols, ...abCols], levelsB.length - 1),
+    term(`${factorA} × ${factorB}`, [...aCols, ...bCols], (levelsA.length - 1) * (levelsB.length - 1)),
+  ];
+  const my = y.reduce((s, v) => s + v, 0) / n;
+  const ssTotal = y.reduce((s, v) => s + (v - my) ** 2, 0);
+  const balanced = cells.every((c) => c.n === cells[0].n);
+  return { factorA, factorB, levelsA, levelsB, n, terms, error: { ss: sseFull, df: dfError, ms: msError }, total: { ss: ssTotal, df: n - 1 }, cells, balanced };
+}
+
+/* ---------------- Repeated-measures ANOVA (one within-subjects factor) ---------------- */
+
+export type RmPairwise = { a: string; b: string; meanDiff: number; t: number; df: number; p: number; pAdj: number };
+export type RmAnovaResult = {
+  names: string[];
+  n: number;
+  k: number;
+  means: number[];
+  sds: number[];
+  ssConditions: number;
+  ssSubjects: number;
+  ssError: number;
+  dfConditions: number;
+  dfError: number;
+  f: number;
+  p: number;
+  partialEta: number;
+  ggEpsilon: number;
+  hfEpsilon: number;
+  pGG: number;
+  pHF: number;
+  mauchlyW: number;
+  mauchlyChi: number;
+  mauchlyDf: number;
+  mauchlyP: number;
+  pairwise: RmPairwise[];
+};
+
+function determinant(m: number[][]) {
+  const a = m.map((row) => [...row]);
+  const n = a.length;
+  let det = 1;
+  for (let c = 0; c < n; c += 1) {
+    let pivot = c;
+    for (let r = c + 1; r < n; r += 1) if (Math.abs(a[r][c]) > Math.abs(a[pivot][c])) pivot = r;
+    if (Math.abs(a[pivot][c]) < 1e-15) return 0;
+    if (pivot !== c) {
+      [a[c], a[pivot]] = [a[pivot], a[c]];
+      det = -det;
+    }
+    det *= a[c][c];
+    for (let r = c + 1; r < n; r += 1) {
+      const f = a[r][c] / a[c][c];
+      for (let j = c; j < n; j += 1) a[r][j] -= f * a[c][j];
+    }
+  }
+  return det;
+}
+
+/** Orthonormal Helmert-type contrasts: (k − 1) × k. */
+function orthonormalContrasts(k: number) {
+  const rows: number[][] = [];
+  for (let i = 1; i < k; i += 1) {
+    const row = Array.from({ length: k }, (_, j) => (j < i ? 1 : j === i ? -i : 0));
+    const norm = Math.sqrt(row.reduce((s, v) => s + v * v, 0));
+    rows.push(row.map((v) => v / norm));
+  }
+  return rows;
+}
+
+export function repeatedMeasuresAnova(names: string[], rows: number[][]): RmAnovaResult {
+  const k = names.length;
+  const n = rows.length;
+  if (k < 3) throw new Error("Use at least three conditions (columns). For two, use the paired t-test.");
+  if (n < 3) throw new Error("You need at least three participants (rows).");
+  const means = names.map((_, j) => rows.reduce((s, r) => s + r[j], 0) / n);
+  const sds = names.map((_, j) => Math.sqrt(rows.reduce((s, r) => s + (r[j] - means[j]) ** 2, 0) / (n - 1)));
+  const grand = means.reduce((s, v) => s + v, 0) / k;
+  const subjMeans = rows.map((r) => r.reduce((s, v) => s + v, 0) / k);
+  const ssConditions = n * means.reduce((s, m) => s + (m - grand) ** 2, 0);
+  const ssSubjects = k * subjMeans.reduce((s, m) => s + (m - grand) ** 2, 0);
+  const ssTotal = rows.reduce((s, r) => s + r.reduce((t, v) => t + (v - grand) ** 2, 0), 0);
+  const ssError = Math.max(0, ssTotal - ssConditions - ssSubjects);
+  const dfConditions = k - 1;
+  const dfError = (k - 1) * (n - 1);
+  const f = ssError === 0 ? Infinity : ssConditions / dfConditions / (ssError / dfError);
+  const pOf = (eps: number) => (Number.isFinite(f) ? 1 - fCdf(f, dfConditions * eps, dfError * eps) : 0);
+  // Covariance matrix of the conditions.
+  const cov = names.map((_, a) => names.map((__, b) => rows.reduce((s, r) => s + (r[a] - means[a]) * (r[b] - means[b]), 0) / (n - 1)));
+  const C = orthonormalContrasts(k);
+  const S = C.map((ci) => C.map((cj) => ci.reduce((s, va, a) => s + va * cj.reduce((t, vb, b) => t + cov[a][b] * vb, 0), 0)));
+  const p1 = k - 1;
+  const trS = S.reduce((s, row, i) => s + row[i], 0);
+  const trS2 = S.reduce((s, row, i) => s + row.reduce((t, v, j) => t + v * S[j][i], 0), 0);
+  const ggEpsilon = trS2 > 0 ? Math.min(1, Math.max(1 / p1, (trS * trS) / (p1 * trS2))) : 1;
+  const hfRaw = (n * p1 * ggEpsilon - 2) / (p1 * (n - 1 - p1 * ggEpsilon));
+  const hfEpsilon = Math.min(1, Math.max(ggEpsilon, hfRaw));
+  let mauchlyW = Number.NaN;
+  let mauchlyChi = Number.NaN;
+  let mauchlyP = Number.NaN;
+  const mauchlyDf = (p1 * (p1 + 1)) / 2 - 1;
+  if (n > p1 && trS > 0) {
+    mauchlyW = determinant(S) / (trS / p1) ** p1;
+    const factor = 1 - (2 * p1 * p1 + p1 + 2) / (6 * p1 * (n - 1));
+    mauchlyChi = -(n - 1) * factor * Math.log(Math.max(mauchlyW, 1e-300));
+    mauchlyP = mauchlyDf > 0 ? chiSquarePValue(Math.max(0, mauchlyChi), mauchlyDf) : Number.NaN;
+  }
+  const pairs: RmPairwise[] = [];
+  const m = (k * (k - 1)) / 2;
+  for (let a = 0; a < k; a += 1)
+    for (let b = a + 1; b < k; b += 1) {
+      const diffs = rows.map((r) => r[a] - r[b]);
+      const md = diffs.reduce((s, v) => s + v, 0) / n;
+      const sd = Math.sqrt(diffs.reduce((s, v) => s + (v - md) ** 2, 0) / (n - 1));
+      const t = sd === 0 ? (md === 0 ? 0 : Infinity) : md / (sd / Math.sqrt(n));
+      const p = Number.isFinite(t) ? tTwoSidedP(t, n - 1) : 0;
+      pairs.push({ a: names[a], b: names[b], meanDiff: md, t, df: n - 1, p, pAdj: Math.min(1, p * m) });
+    }
+  return {
+    names,
+    n,
+    k,
+    means,
+    sds,
+    ssConditions,
+    ssSubjects,
+    ssError,
+    dfConditions,
+    dfError,
+    f,
+    p: pOf(1),
+    partialEta: ssConditions / (ssConditions + ssError),
+    ggEpsilon,
+    hfEpsilon,
+    pGG: pOf(ggEpsilon),
+    pHF: pOf(hfEpsilon),
+    mauchlyW,
+    mauchlyChi,
+    mauchlyDf,
+    mauchlyP,
+    pairwise: pairs,
+  };
+}
+
+/* ---------------- Binary logistic regression (IRLS / Newton-Raphson) ---------------- */
+
+export type LogisticCoefficient = { name: string; b: number; se: number; wald: number; p: number; oddsRatio: number; orLow: number; orHigh: number };
+export type LogisticResult = {
+  outcome: string;
+  n: number;
+  events: number;
+  k: number;
+  coefficients: LogisticCoefficient[];
+  minus2LL: number;
+  nullMinus2LL: number;
+  modelChi: number;
+  modelDf: number;
+  modelP: number;
+  coxSnell: number;
+  nagelkerke: number;
+  mcFadden: number;
+  accuracy: number;
+  iterations: number;
+};
+
+export function logisticRegression(names: string[], rows: number[][], outcomeIndex: number, predictorIndexes: number[]): LogisticResult {
+  if (!predictorIndexes.length) throw new Error("Choose at least one predictor (X) variable.");
+  const y = rows.map((r) => r[outcomeIndex]);
+  if (y.some((v) => v !== 0 && v !== 1)) throw new Error("The outcome must be coded 0 and 1 (for example 0 = no, 1 = yes).");
+  const n = y.length;
+  const k = predictorIndexes.length;
+  const events = y.reduce((s, v) => s + v, 0);
+  if (events === 0 || events === n) throw new Error("The outcome needs both 0s and 1s.");
+  if (n < k + 3) throw new Error(`You need at least ${k + 3} rows for ${k} predictor${k > 1 ? "s" : ""}.`);
+  const X = rows.map((r) => [1, ...predictorIndexes.map((j) => r[j])]);
+  const p = k + 1;
+  let beta = Array(p).fill(0);
+  beta[0] = Math.log(events / (n - events));
+  const logLik = (b: number[]) =>
+    X.reduce((s, row, i) => {
+      const eta = row.reduce((t, v, j) => t + v * b[j], 0);
+      const log1pe = eta > 0 ? eta + Math.log1p(Math.exp(-eta)) : Math.log1p(Math.exp(eta));
+      return s + y[i] * eta - log1pe;
+    }, 0);
+  let inv: number[][] = [];
+  let iterations = 0;
+  let ll = logLik(beta);
+  for (iterations = 1; iterations <= 100; iterations += 1) {
+    const mu = X.map((row) => 1 / (1 + Math.exp(-row.reduce((t, v, j) => t + v * beta[j], 0))));
+    const w = mu.map((m) => m * (1 - m));
+    const info = Array.from({ length: p }, (_, a) => Array.from({ length: p }, (__, b) => X.reduce((s, row, i) => s + w[i] * row[a] * row[b], 0)));
+    const grad = Array.from({ length: p }, (_, a) => X.reduce((s, row, i) => s + row[a] * (y[i] - mu[i]), 0));
+    inv = invertMatrix(info);
+    const step = inv.map((row) => row.reduce((s, v, j) => s + v * grad[j], 0));
+    let scale = 1;
+    let next = beta.map((b, j) => b + step[j]);
+    let llNext = logLik(next);
+    while (llNext < ll - 1e-10 && scale > 1e-4) {
+      scale /= 2;
+      next = beta.map((b, j) => b + scale * step[j]);
+      llNext = logLik(next);
+    }
+    const change = Math.max(...step.map((s) => Math.abs(s * scale)));
+    beta = next;
+    const improved = Math.abs(llNext - ll);
+    ll = llNext;
+    if (change < 1e-10 || improved < 1e-12) break;
+    if (Math.max(...beta.map(Math.abs)) > 30) throw new Error("The model does not converge, usually because a predictor separates the 0s and 1s perfectly. Remove that predictor or collect more data.");
+  }
+  // Final information matrix at the solution.
+  const mu = X.map((row) => 1 / (1 + Math.exp(-row.reduce((t, v, j) => t + v * beta[j], 0))));
+  const info = Array.from({ length: p }, (_, a) => Array.from({ length: p }, (__, b) => X.reduce((s, row, i) => s + mu[i] * (1 - mu[i]) * row[a] * row[b], 0)));
+  inv = invertMatrix(info);
+  const z975 = 1.959963984540054;
+  const coefficients = beta.map((b, j) => {
+    const se = Math.sqrt(Math.max(0, inv[j][j]));
+    const zv = b / se;
+    return {
+      name: j === 0 ? "(Constant)" : names[predictorIndexes[j - 1]],
+      b,
+      se,
+      wald: zv * zv,
+      p: 2 * normalSf(Math.abs(zv)),
+      oddsRatio: Math.exp(b),
+      orLow: Math.exp(b - z975 * se),
+      orHigh: Math.exp(b + z975 * se),
+    };
+  });
+  const nullLL = events * Math.log(events / n) + (n - events) * Math.log(1 - events / n);
+  const minus2LL = -2 * ll;
+  const nullMinus2LL = -2 * nullLL;
+  const modelChi = Math.max(0, nullMinus2LL - minus2LL);
+  const coxSnell = 1 - Math.exp(-modelChi / n);
+  const maxCs = 1 - Math.exp((2 * nullLL) / n);
+  const correct = mu.reduce((s, m, i) => s + ((m >= 0.5 ? 1 : 0) === y[i] ? 1 : 0), 0);
+  return {
+    outcome: names[outcomeIndex],
+    n,
+    events,
+    k,
+    coefficients,
+    minus2LL,
+    nullMinus2LL,
+    modelChi,
+    modelDf: k,
+    modelP: chiSquarePValue(modelChi, k),
+    coxSnell,
+    nagelkerke: coxSnell / maxCs,
+    mcFadden: 1 - ll / nullLL,
+    accuracy: correct / n,
+    iterations,
+  };
+}
+
+/* ---------------- McDonald's omega (one-factor, minimum residual / iterated principal axis) ---------------- */
+
+function jacobiEigen(matrix: number[][]) {
+  const n = matrix.length;
+  const a = matrix.map((row) => [...row]);
+  const v: number[][] = a.map((_, i) => a.map((__, j) => (i === j ? 1 : 0)));
+  for (let sweep = 0; sweep < 100; sweep += 1) {
+    let off = 0;
+    for (let i = 0; i < n; i += 1) for (let j = i + 1; j < n; j += 1) off += a[i][j] ** 2;
+    if (off < 1e-22) break;
+    for (let p = 0; p < n; p += 1)
+      for (let q = p + 1; q < n; q += 1) {
+        if (Math.abs(a[p][q]) < 1e-300) continue;
+        const theta = (a[q][q] - a[p][p]) / (2 * a[p][q]);
+        const t = Math.sign(theta || 1) / (Math.abs(theta) + Math.sqrt(theta * theta + 1));
+        const c = 1 / Math.sqrt(t * t + 1);
+        const s = t * c;
+        for (let k = 0; k < n; k += 1) {
+          const akp = a[k][p];
+          const akq = a[k][q];
+          a[k][p] = c * akp - s * akq;
+          a[k][q] = s * akp + c * akq;
+        }
+        for (let k = 0; k < n; k += 1) {
+          const apk = a[p][k];
+          const aqk = a[q][k];
+          a[p][k] = c * apk - s * aqk;
+          a[q][k] = s * apk + c * aqk;
+        }
+        for (let k = 0; k < n; k += 1) {
+          const vkp = v[k][p];
+          const vkq = v[k][q];
+          v[k][p] = c * vkp - s * vkq;
+          v[k][q] = s * vkp + c * vkq;
+        }
+      }
+  }
+  return { values: a.map((row, i) => row[i]), vectors: v };
+}
+
+export type OmegaResult = { omega: number; loadings: number[]; iterations: number; heywood: boolean };
+
+/** McDonald's omega total from a one-factor solution of the item correlation matrix. */
+export function mcdonaldOmega(matrix: number[][]): OmegaResult {
+  const n = matrix.length;
+  const k = matrix[0]?.length ?? 0;
+  if (k < 3) throw new Error("Omega needs at least three items.");
+  if (n < 3) throw new Error("Omega needs at least three respondents.");
+  const means = Array.from({ length: k }, (_, j) => matrix.reduce((s, r) => s + r[j], 0) / n);
+  const sds = means.map((m, j) => Math.sqrt(matrix.reduce((s, r) => s + (r[j] - m) ** 2, 0) / (n - 1)));
+  if (sds.some((sd) => sd === 0)) throw new Error("An item has no variation, so omega cannot be estimated.");
+  const R = means.map((_, a) => means.map((__, b) => matrix.reduce((s, r) => s + ((r[a] - means[a]) / sds[a]) * ((r[b] - means[b]) / sds[b]), 0) / (n - 1)));
+  // Start communalities at squared multiple correlations.
+  let h: number[];
+  try {
+    const inv = invertMatrix(R);
+    h = inv.map((row, i) => Math.min(0.995, Math.max(0.005, 1 - 1 / row[i])));
+  } catch {
+    h = R.map((row, i) => Math.max(...row.filter((_, j) => j !== i).map(Math.abs)));
+  }
+  let loadings = Array(k).fill(0);
+  let iterations = 0;
+  for (iterations = 1; iterations <= 1000; iterations += 1) {
+    const reduced = R.map((row, i) => row.map((v, j) => (i === j ? h[i] : v)));
+    const { values, vectors } = jacobiEigen(reduced);
+    let top = 0;
+    for (let i = 1; i < k; i += 1) if (values[i] > values[top]) top = i;
+    const lambda = Math.max(0, values[top]);
+    loadings = vectors.map((row) => row[top] * Math.sqrt(lambda));
+    if (loadings.reduce((s, v) => s + v, 0) < 0) loadings = loadings.map((v) => -v);
+    const next = loadings.map((l) => l * l);
+    const change = Math.max(...next.map((v, i) => Math.abs(v - h[i])));
+    h = next;
+    if (change < 1e-9) break;
+  }
+  const heywood = h.some((v) => v >= 1);
+  const sumL = loadings.reduce((s, v) => s + v, 0);
+  const uniq = loadings.reduce((s, v) => s + Math.max(0, 1 - v * v), 0);
+  return { omega: (sumL * sumL) / (sumL * sumL + uniq), loadings, iterations, heywood };
 }

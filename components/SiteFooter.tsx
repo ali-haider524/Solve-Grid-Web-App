@@ -27,6 +27,7 @@ const trustLinks = [
   { href: "/about", label: "About SolveGrid" },
   { href: "/contact", label: "Contact and feedback" },
   { href: "/methodology", label: "Calculation methods and accuracy" },
+  { href: "/validation", label: "Calculator validation results" },
   { href: "/privacy-policy", label: "Privacy Policy" },
   { href: "/terms-of-use", label: "Terms of Use" },
   { href: "/disclaimer", label: "Calculator disclaimer" },

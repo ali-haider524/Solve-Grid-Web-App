@@ -70,8 +70,15 @@ export default function CronbachAlphaCalculatorPage() {
               ],
             },
             {
+              heading: "McDonald's omega",
+              formula: "ω = (Σλ)² ÷ ((Σλ)² + Σ(1 − λ²))",
+              paragraphs: [
+                "λ are the standardised loadings of each item on one common factor, estimated by minimum residual (iterated principal axis) factoring of the item correlation matrix. Unlike alpha, omega does not assume every item has the same loading. When the loadings are similar the two values are close.",
+              ],
+            },
+            {
               heading: "References",
-              list: ["Cronbach, L. J. (1951). Coefficient alpha and the internal structure of tests. Psychometrika, 16(3), 297–334.", "George, D., & Mallery, P. (2003). SPSS for Windows Step by Step: A Simple Guide and Reference (4th ed.). Allyn & Bacon.", "Tavakol, M., & Dennick, R. (2011). Making sense of Cronbach’s alpha. International Journal of Medical Education, 2, 53–55."],
+              list: ["Cronbach, L. J. (1951). Coefficient alpha and the internal structure of tests. Psychometrika, 16(3), 297–334.", "George, D., & Mallery, P. (2003). SPSS for Windows Step by Step: A Simple Guide and Reference (4th ed.). Allyn & Bacon.", "Tavakol, M., & Dennick, R. (2011). Making sense of Cronbach’s alpha. International Journal of Medical Education, 2, 53–55.", "McDonald, R. P. (1999). Test theory: A unified treatment. Lawrence Erlbaum.", "Hayes, A. F., & Coutts, J. J. (2020). Use omega rather than Cronbach’s alpha for estimating reliability. But…. Communication Methods and Measures, 14(1), 1–24."],
             },
           ]}
         />

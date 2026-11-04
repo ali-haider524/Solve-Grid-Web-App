@@ -1087,6 +1087,11 @@ export const tools: ToolInfo[] = [
     ],
     faqs: [
       {
+        question: "What is McDonald's omega and should I report it?",
+        answer:
+          "Omega estimates reliability from a one-factor model, so it does not assume every item measures the construct equally well, as alpha does. Many reviewers now ask for both. The calculator reports omega total from a minimum-residual one-factor solution next to alpha.",
+      },
+      {
         question: "Can Cronbach's alpha be too high?",
         answer:
           "Yes. Values above about 0.95 often mean several items ask the same thing in slightly different words. Check the item-total correlations and consider removing a repeated item to shorten the questionnaire.",
@@ -2124,6 +2129,396 @@ export const tools: ToolInfo[] = [
         question: "Should I use Slovin's formula or a power analysis?",
         answer:
           "Slovin's and Cochran's formulas estimate a proportion or mean from a population (common in surveys). A power analysis is for hypothesis tests such as t-tests and ANOVA. Many reviewers prefer a power analysis when your research questions are tested statistically.",
+      },
+    ],
+  },
+  {
+    slug: "p-value-calculator",
+    name: "P Value Calculator",
+    shortName: "p value",
+    category: "statistics",
+    icon: "p",
+    title: "P Value Calculator from z, t, F, Chi-Square or r",
+    description:
+      "Free p value calculator: enter a z, t, F, chi-square or correlation r with its degrees of freedom to get the exact one- or two-tailed p value and APA text.",
+    summary:
+      "Turn any test statistic into an exact p value: z, t, F, chi-square or a correlation coefficient, one- or two-tailed, with a plain-language decision at your alpha level.",
+    keywords: [
+      "p value calculator",
+      "p value from t",
+      "p value from z score",
+      "p value from f statistic",
+      "chi square p value calculator",
+      "p value from correlation coefficient",
+    ],
+    relatedSlugs: ["t-test-calculator", "chi-square-calculator", "correlation-calculator"],
+    featured: true,
+    priority: 0.9,
+    useCases: [
+      "Find the p value for a t statistic reported in a paper",
+      "Check a p value from SPSS or Excel output",
+      "Convert a correlation r and n into a p value",
+    ],
+    features: [
+      "z, t, F, chi-square and r statistics",
+      "Two-tailed, left-tailed and right-tailed p values",
+      "Decision at α = .05, .01 or .10",
+      "APA-style p value formatting",
+    ],
+    faqs: [
+      {
+        question: "How do I find a p value from a t statistic?",
+        answer:
+          "Enter the t value and its degrees of freedom, then choose two-tailed unless your hypothesis predicted a direction. For example, t = 2.50 with df = 20 gives a two-tailed p = .021.",
+      },
+      {
+        question: "Should I use a one-tailed or two-tailed p value?",
+        answer:
+          "Use two-tailed unless you stated a directional hypothesis before collecting data. A one-tailed p is half the two-tailed p when the result is in the predicted direction.",
+      },
+      {
+        question: "Why are F and chi-square p values always right-tailed?",
+        answer:
+          "Both statistics are squared quantities that grow as the effect gets larger, so only the upper tail counts as evidence against the null hypothesis.",
+      },
+      {
+        question: "How do I report a p value in APA style?",
+        answer:
+          "Give the exact value to two or three decimals without a leading zero, such as p = .021. Write p < .001 for very small values.",
+      },
+    ],
+  },
+  {
+    slug: "confidence-interval-calculator",
+    name: "Confidence Interval Calculator",
+    shortName: "Confidence interval",
+    category: "statistics",
+    icon: "[ ]",
+    title: "Confidence Interval Calculator for a Mean or Proportion",
+    description:
+      "Free confidence interval calculator for a mean (t interval) or a proportion (Wilson and Wald). Get the margin of error, the interval and an APA sentence.",
+    summary:
+      "Calculate a 90%, 95% or 99% confidence interval for a mean from M, SD and n, or for a proportion with the Wilson score and Wald methods, with every step shown.",
+    keywords: [
+      "confidence interval calculator",
+      "95 confidence interval calculator",
+      "confidence interval for mean",
+      "confidence interval for proportion",
+      "wilson score interval calculator",
+      "how to calculate confidence interval",
+    ],
+    relatedSlugs: ["margin-of-error-calculator", "statistics-calculator", "sample-size-calculator"],
+    featured: true,
+    priority: 0.9,
+    useCases: [
+      "Report a 95% CI for a scale mean in your results chapter",
+      "Give a CI for the percentage of respondents who agreed",
+      "Check the precision of a survey estimate",
+    ],
+    features: [
+      "t-based interval for a mean",
+      "Wilson score and Wald intervals for a proportion",
+      "90%, 95%, 99% or custom confidence",
+      "Standard error, critical value and margin of error",
+    ],
+    faqs: [
+      {
+        question: "How do you calculate a 95% confidence interval for a mean?",
+        answer:
+          "Find the standard error SD ÷ √n, multiply it by the t critical value for n − 1 degrees of freedom, then add and subtract the result from the mean. For M = 50, SD = 10 and n = 25 the 95% CI is 45.87 to 54.13.",
+      },
+      {
+        question: "Which interval should I use for a proportion?",
+        answer:
+          "Use the Wilson score interval. It stays inside 0 to 1 and is more accurate than the Wald interval for small samples or proportions near 0% or 100%.",
+      },
+      {
+        question: "What does a 95% confidence interval mean?",
+        answer:
+          "If you repeated the study many times, about 95% of the intervals built this way would contain the true population value. It does not mean there is a 95% chance this one interval contains it.",
+      },
+      {
+        question: "How do I report a confidence interval in APA style?",
+        answer:
+          "Put the interval in square brackets after the estimate, for example M = 50.00, 95% CI [45.87, 54.13].",
+      },
+    ],
+  },
+  {
+    slug: "margin-of-error-calculator",
+    name: "Margin of Error Calculator",
+    shortName: "Margin of error",
+    category: "statistics",
+    icon: "±",
+    title: "Margin of Error Calculator for Surveys (with FPC)",
+    description:
+      "Free margin of error calculator for survey research. Enter sample size, confidence level and proportion or SD, with an optional finite population correction.",
+    summary:
+      "Work out the margin of error of a survey from the sample size and confidence level, for a percentage or a mean, with an optional finite population correction for small populations.",
+    keywords: [
+      "margin of error calculator",
+      "survey margin of error",
+      "margin of error formula",
+      "margin of error for sample size",
+      "finite population correction",
+      "calculate margin of error",
+    ],
+    relatedSlugs: ["sample-size-calculator", "confidence-interval-calculator", "power-analysis-calculator"],
+    featured: true,
+    priority: 0.9,
+    useCases: [
+      "State the margin of error of a completed survey",
+      "Check whether a sample of 200 is precise enough",
+      "Explain survey precision in your methodology chapter",
+    ],
+    features: [
+      "Margin of error for a proportion or a mean",
+      "90%, 95%, 99% or custom confidence",
+      "Finite population correction",
+      "Plain-language result for your methods chapter",
+    ],
+    faqs: [
+      {
+        question: "What is the margin of error for a sample of 385?",
+        answer:
+          "At 95% confidence with p = 0.5 the margin of error is ±4.99 percentage points, which is why 385 is the usual sample size for a 5% margin with a large population.",
+      },
+      {
+        question: "What is the margin of error formula?",
+        answer:
+          "For a proportion, MOE = z × √(p(1 − p) ÷ n). For a mean, MOE = z × SD ÷ √n. Multiply by √((N − n) ÷ (N − 1)) when the sample is a large share of a known population.",
+      },
+      {
+        question: "Why use p = 0.5?",
+        answer:
+          "p = 0.5 gives the largest possible margin of error, so it is the safe choice when you do not know the true proportion in advance.",
+      },
+      {
+        question: "What is an acceptable margin of error for a thesis?",
+        answer:
+          "Most survey-based theses use ±5% at 95% confidence. Some small or exploratory studies accept ±10%; check your department's guidance.",
+      },
+    ],
+  },
+  {
+    slug: "fishers-exact-test-calculator",
+    name: "Fisher's Exact Test Calculator",
+    shortName: "Fisher's exact test",
+    category: "statistics",
+    icon: "2×2",
+    title: "Fisher's Exact Test Calculator (2×2 Table)",
+    description:
+      "Free Fisher's exact test calculator for a 2×2 table. Get the two-sided and one-sided exact p values, odds ratio with 95% CI and an APA sentence.",
+    summary:
+      "Test the link between two yes/no variables when the sample is small or expected counts are below 5, with exact two-sided and one-sided p values and the odds ratio.",
+    keywords: [
+      "fisher exact test calculator",
+      "fisher's exact test online",
+      "fisher exact test 2x2",
+      "exact test small sample",
+      "fisher exact vs chi square",
+      "odds ratio calculator 2x2",
+    ],
+    relatedSlugs: ["chi-square-calculator", "mcnemar-test-calculator", "effect-size-calculator"],
+    featured: true,
+    priority: 0.88,
+    useCases: [
+      "Compare pass rates of two small groups",
+      "Test a 2×2 table where expected counts are below 5",
+      "Report an odds ratio for a small case-control study",
+    ],
+    features: [
+      "Exact two-sided p value",
+      "Left- and right-sided one-tailed p values",
+      "Odds ratio with 95% CI (Woolf)",
+      "APA 7 report sentence",
+    ],
+    faqs: [
+      {
+        question: "When should I use Fisher's exact test instead of chi-square?",
+        answer:
+          "Use Fisher's exact test when any expected count in a 2×2 table is below 5, or when the total sample is small. It gives an exact p value instead of a chi-square approximation.",
+      },
+      {
+        question: "Does Fisher's exact test give an effect size?",
+        answer:
+          "Report the odds ratio. An odds ratio of 1 means no association; values above 1 mean the outcome is more likely in the first row.",
+      },
+      {
+        question: "How do I report Fisher's exact test in APA style?",
+        answer:
+          "Write the percentages in each group, then the test: Fisher's exact test, p = .035, OR = 20.00, 95% CI [1.42, 282.45].",
+      },
+    ],
+  },
+  {
+    slug: "two-way-anova-calculator",
+    name: "Two-Way ANOVA Calculator",
+    shortName: "Two-way ANOVA",
+    category: "statistics",
+    icon: "A×B",
+    title: "Two-Way ANOVA Calculator with Interaction (Type III)",
+    description:
+      "Free two-way ANOVA calculator. Paste factor A, factor B and score to get main effects, interaction, Type III SS, partial eta squared and APA text.",
+    summary:
+      "Test two factors and their interaction on one numeric outcome, for balanced or unbalanced designs, with Type III sums of squares, partial eta squared, cell means and an APA write-up.",
+    keywords: [
+      "two way anova calculator",
+      "two-way anova online",
+      "two factor anova calculator",
+      "anova with interaction",
+      "type iii sum of squares",
+      "how to report two way anova apa",
+    ],
+    relatedSlugs: ["one-way-anova-calculator", "repeated-measures-anova-calculator", "effect-size-calculator"],
+    featured: true,
+    priority: 0.9,
+    useCases: [
+      "Test the effect of teaching method and gender on exam scores",
+      "Check for an interaction between two factors",
+      "Analyse a 2 × 3 factorial experiment",
+    ],
+    features: [
+      "Main effects and interaction",
+      "Type III sums of squares (matches SPSS default)",
+      "Partial eta squared for each effect",
+      "Cell means and SDs",
+      "APA 7 report sentence",
+    ],
+    faqs: [
+      {
+        question: "What does a two-way ANOVA test?",
+        answer:
+          "It tests the effect of two categorical factors on one numeric outcome, and whether the effect of one factor depends on the level of the other (the interaction).",
+      },
+      {
+        question: "What is an interaction effect?",
+        answer:
+          "An interaction means the difference between levels of one factor changes across levels of the other. If the interaction is significant, interpret the main effects with care and look at the cell means.",
+      },
+      {
+        question: "Why Type III sums of squares?",
+        answer:
+          "Type III is the SPSS default and gives each effect after adjusting for all others, which matters when the groups have different sizes. In a balanced design Types I, II and III give the same answer.",
+      },
+      {
+        question: "How do I report a two-way ANOVA in APA style?",
+        answer:
+          "Report each effect: F(df effect, df error) = X.XX, p = .XXX, partial η² = .XX, starting with the interaction.",
+      },
+    ],
+  },
+  {
+    slug: "repeated-measures-anova-calculator",
+    name: "Repeated Measures ANOVA Calculator",
+    shortName: "Repeated measures ANOVA",
+    category: "statistics",
+    icon: "RM",
+    title: "Repeated Measures ANOVA Calculator (with Sphericity)",
+    description:
+      "Free one-way repeated measures ANOVA calculator. Get F, Mauchly's test, Greenhouse-Geisser and Huynh-Feldt corrections, partial eta squared and post hoc tests.",
+    summary:
+      "Compare three or more measurements on the same participants, with Mauchly's sphericity test, Greenhouse-Geisser and Huynh-Feldt corrections, Bonferroni post hoc tests and APA text.",
+    keywords: [
+      "repeated measures anova calculator",
+      "within subjects anova calculator",
+      "repeated measures anova online",
+      "greenhouse geisser correction",
+      "mauchly test of sphericity",
+      "how to report repeated measures anova",
+    ],
+    relatedSlugs: ["friedman-test-calculator", "one-way-anova-calculator", "t-test-calculator"],
+    featured: true,
+    priority: 0.9,
+    useCases: [
+      "Compare pre-test, post-test and follow-up scores",
+      "Test change across three or more time points",
+      "Compare the same participants under several conditions",
+    ],
+    features: [
+      "Repeated-measures F test",
+      "Mauchly's test of sphericity",
+      "Greenhouse-Geisser and Huynh-Feldt corrected p values",
+      "Bonferroni-adjusted paired comparisons",
+      "Partial eta squared",
+    ],
+    faqs: [
+      {
+        question: "When should I use a repeated measures ANOVA?",
+        answer:
+          "Use it when the same participants are measured three or more times or under three or more conditions, and the outcome is numeric. For two measurements use a paired t-test.",
+      },
+      {
+        question: "What is sphericity?",
+        answer:
+          "Sphericity means the variances of the differences between every pair of conditions are equal. Mauchly's test checks it; if p < .05, report the Greenhouse-Geisser corrected result.",
+      },
+      {
+        question: "What if my data are not normal?",
+        answer:
+          "Use the Friedman test, the non-parametric alternative for three or more related measurements.",
+      },
+      {
+        question: "How do I report a repeated measures ANOVA?",
+        answer:
+          "State whether sphericity was met, then report F with the (corrected) degrees of freedom, p and partial η², for example F(2, 18) = 62.82, p < .001, partial η² = .87. If sphericity is violated, use the Greenhouse-Geisser degrees of freedom instead.",
+      },
+    ],
+  },
+  {
+    slug: "logistic-regression-calculator",
+    name: "Logistic Regression Calculator",
+    shortName: "Logistic regression",
+    category: "statistics",
+    icon: "0|1",
+    title: "Logistic Regression Calculator with Odds Ratios",
+    description:
+      "Free binary logistic regression calculator. Paste a 0/1 outcome and predictors to get B, Wald, p, odds ratios with 95% CI, model chi-square and Nagelkerke R².",
+    summary:
+      "Predict a yes/no outcome from one or more predictors, with coefficients, Wald tests, odds ratios and 95% confidence intervals, the model chi-square, pseudo R² values and accuracy.",
+    keywords: [
+      "logistic regression calculator",
+      "binary logistic regression online",
+      "odds ratio logistic regression",
+      "nagelkerke r square",
+      "logistic regression spss alternative",
+      "how to report logistic regression apa",
+    ],
+    relatedSlugs: ["linear-regression-calculator", "chi-square-calculator", "fishers-exact-test-calculator"],
+    featured: true,
+    priority: 0.88,
+    useCases: [
+      "Predict whether a student passes from study hours and attendance",
+      "Model a yes/no survey answer from several predictors",
+      "Report odds ratios in a thesis results chapter",
+    ],
+    features: [
+      "Maximum-likelihood coefficients (B) and SE",
+      "Wald χ², p value and odds ratio with 95% CI",
+      "Model χ² (likelihood ratio) test",
+      "Cox & Snell, Nagelkerke and McFadden R²",
+      "Classification accuracy at 0.5",
+    ],
+    faqs: [
+      {
+        question: "When should I use logistic regression?",
+        answer:
+          "Use binary logistic regression when the outcome has two categories, such as pass or fail, and you want to predict it from one or more numeric or 0/1 predictors.",
+      },
+      {
+        question: "How do I interpret an odds ratio?",
+        answer:
+          "An odds ratio above 1 means the odds of the outcome rise as the predictor increases by one unit; below 1 means they fall. An OR of 1.79 means 79% higher odds per unit.",
+      },
+      {
+        question: "Which R² should I report?",
+        answer:
+          "Most theses report Nagelkerke R², which SPSS shows next to Cox & Snell R². Treat it as a rough guide to model fit, not as variance explained.",
+      },
+      {
+        question: "How do I report logistic regression in APA style?",
+        answer:
+          "Report the model test χ²(df, N = n) = X.XX, p = .XXX, Nagelkerke R², then each predictor's B, SE, Wald, p and OR with its 95% CI.",
       },
     ],
   },
