@@ -576,7 +576,7 @@ export const tools: ToolInfo[] = [
           "Grouped data results are estimates because each class interval is represented by its midpoint. Use raw data when exact values are available.",
       },
       {
-        question: "How do you find the standard deviation??",
+        question: "How do you find the standard deviation?",
         answer:
           "To find the standard deviation, calculate the mean of the dataset, subtract the mean from each value, square the differences, find the average of those squared differences (variance), and take the square root of the variance. Our Statistics Calculator performs these calculations instantly for both sample and population datasets..",
       },
@@ -1018,6 +1018,16 @@ export const tools: ToolInfo[] = [
     ],
     faqs: [
       {
+        question: "What is the sample size for a population of 1,000?",
+        answer:
+          "With Slovin's formula and a 5% margin of error, n = 1,000 ÷ (1 + 1,000 × 0.05²) = 285.71, so you need at least 286 respondents. With Cochran's formula at 95% confidence, p = 0.5 and the finite population correction, the answer is 278.",
+      },
+      {
+        question: "Can I use Slovin's formula if I don't know the population size?",
+        answer:
+          "No. Slovin's formula needs a known population size. If the population is unknown or very large, use Cochran's formula without the finite population correction: at 95% confidence and a 5% margin of error it gives 385 respondents.",
+      },
+      {
         question: "Are Slovin's formula and Taro Yamane's formula the same?",
         answer:
           "Yes. Both use n = N ÷ (1 + N·e²). Yamane (1967) popularised the expression; many theses cite it under either name. Cite the source your adviser or department expects.",
@@ -1077,6 +1087,21 @@ export const tools: ToolInfo[] = [
     ],
     faqs: [
       {
+        question: "Can Cronbach's alpha be too high?",
+        answer:
+          "Yes. Values above about 0.95 often mean several items ask the same thing in slightly different words. Check the item-total correlations and consider removing a repeated item to shorten the questionnaire.",
+      },
+      {
+        question: "How many items do I need to calculate Cronbach's alpha?",
+        answer:
+          "Alpha needs at least two items that measure the same construct, and most scales use three or more. Alpha tends to rise as you add items, so a long scale can look reliable even when the items are only weakly related.",
+      },
+      {
+        question: "What does alpha if item deleted mean?",
+        answer:
+          "It is the alpha you would get if that one item were removed. If deleting an item raises alpha clearly, the item may be poorly worded, need reverse coding, or measure a different idea.",
+      },
+      {
         question: "What is a good Cronbach's alpha?",
         answer:
           "A common rule of thumb (George & Mallery) is ≥ 0.9 excellent, ≥ 0.8 good, ≥ 0.7 acceptable, ≥ 0.6 questionable, ≥ 0.5 poor, and below 0.5 unacceptable. Very high values above 0.95 can signal redundant items.",
@@ -1130,6 +1155,16 @@ export const tools: ToolInfo[] = [
       "Editable verbal labels",
     ],
     faqs: [
+      {
+        question: "What is a good mean score on a 5-point Likert scale?",
+        answer:
+          "With the common 0.80-wide ranges, a mean of 3.41 to 4.20 is interpreted as Agree and 4.21 to 5.00 as Strongly Agree. The midpoint 3.00 sits in the Neutral band (2.61 to 3.40). Whether a mean is good depends on how the statement is worded.",
+      },
+      {
+        question: "How do I calculate a Likert weighted mean by hand?",
+        answer:
+          "Multiply each scale point by the number of people who chose it, add the products, and divide by the total number of respondents. For example, 40×5 + 30×4 + 15×3 + 10×2 + 5×1 = 390, and 390 ÷ 100 = 3.90 (Agree).",
+      },
       {
         question: "How is the interpretation range calculated?",
         answer:
@@ -1237,6 +1272,11 @@ export const tools: ToolInfo[] = [
       "Fisher's exact p for 2 × 2 tables",
     ],
     faqs: [
+      {
+        question: "What is a chi-square test used for?",
+        answer:
+          "It tests whether two categorical variables are related, for example year level and preferred learning mode. Enter counts, not percentages, and check that expected counts are at least 5 in most cells.",
+      },
       {
         question: "When should I use Fisher's exact test instead of chi-square?",
         answer:
@@ -1711,6 +1751,16 @@ export const tools: ToolInfo[] = [
     ],
     faqs: [
       {
+        question: "What is a t-test used for?",
+        answer:
+          "A t-test compares two means: two separate groups, the same people measured twice, or one group against a fixed value. It tells you whether the difference is larger than random sampling would usually produce.",
+      },
+      {
+        question: "What p value is significant for a t-test?",
+        answer:
+          "Most theses use a significance level of .05. If p is below .05 you reject the null hypothesis of no difference. Always report the t value, degrees of freedom, exact p value and an effect size such as Cohen's d.",
+      },
+      {
         question: "Should I use Welch's or Student's t-test?",
         answer:
           "Use Welch's t-test by default for two independent groups. It does not assume equal variances and loses almost nothing when variances are equal. Student's t-test is shown as a comparison and matches SPSS's \"Equal variances assumed\" row.",
@@ -1769,6 +1819,11 @@ export const tools: ToolInfo[] = [
       "APA 7 report sentence",
     ],
     faqs: [
+      {
+        question: "What is the difference between a t-test and ANOVA?",
+        answer:
+          "A t-test compares exactly two means. A one-way ANOVA compares three or more means in one test, which avoids the inflated false-positive rate of running many separate t-tests.",
+      },
       {
         question: "What post hoc test should I use after ANOVA?",
         answer:

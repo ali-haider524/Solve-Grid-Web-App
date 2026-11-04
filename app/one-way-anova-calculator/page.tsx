@@ -18,6 +18,12 @@ export default function OneWayAnovaPage() {
           title="One-way ANOVA formulas, assumptions, post hoc tests, and APA reporting"
           sections={[
             {
+              heading: "What is a one-way ANOVA?",
+              paragraphs: [
+                "A one-way ANOVA tests whether three or more group means differ on one numeric outcome. It compares the spread between groups with the spread inside groups to produce an F statistic. A significant F tells you at least one mean differs; a post hoc test such as Tukey HSD shows which pairs differ."
+              ]
+            },
+            {
               heading: "When to use a one-way ANOVA",
               paragraphs: [
                 "Use it to compare the means of three or more independent groups on one numeric outcome, for example exam scores under lecture, blended, and flipped teaching. With only two groups, use a t-test (the results are equivalent: F = t²). If the same people are measured in every condition, use a repeated-measures ANOVA instead.",

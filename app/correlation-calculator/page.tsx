@@ -18,6 +18,12 @@ export default function CorrelationPage() {
           title="Correlation coefficient formulas, interpretation, and APA reporting"
           sections={[
             {
+              heading: "What is a correlation coefficient?",
+              paragraphs: [
+                "A correlation coefficient is a number from −1 to +1 that shows how strongly two variables move together. Positive values mean both rise together, negative values mean one falls as the other rises, and values near zero mean little linear relationship. Pearson's r suits numeric data; Spearman's rho suits ranks or Likert scores."
+              ]
+            },
+            {
               heading: "Pearson, Spearman, or Kendall?",
               list: [
                 "Pearson r: both variables numeric, a straight-line relationship, no extreme outliers (e.g. study hours and exam score)",

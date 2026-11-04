@@ -18,7 +18,7 @@ export default function PowerAnalysisPage() {
           title="Power analysis: what it is, how sample size is calculated, and how to report it"
           sections={[
             {
-              heading: "What a power analysis tells you",
+              heading: "What is a power analysis?",
               paragraphs: [
                 "Statistical power is the probability that your study detects an effect that really exists (1 − β). An a priori power analysis, run before data collection, finds the smallest sample that gives the power you want, usually 80%, for an expected effect size and significance level (α = .05). Supervisors and ethics committees ask for it to show that the study is neither underpowered nor wastefully large.",
               ],

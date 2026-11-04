@@ -18,6 +18,25 @@ export default function SampleSizeCalculatorPage() {
           title="How to calculate sample size for a thesis or survey"
           sections={[
             {
+              heading: "What is Slovin's formula?",
+              paragraphs: [
+                "Slovin's formula, n = N ÷ (1 + Ne²), gives the minimum sample size from two numbers: the population size (N) and the margin of error (e). Thesis and survey researchers use it when they know the population size but little else about it. It does not let you set a confidence level, so use Cochran's formula when one is required."
+              ]
+            },
+            {
+              heading: "Worked example: Slovin's formula for 1,000 people",
+              paragraphs: [
+                "Population N = 1,000 and margin of error e = 5% (0.05)."
+              ],
+              steps: [
+                "Square the margin of error: 0.05² = 0.0025.",
+                "Multiply by the population: 1,000 × 0.0025 = 2.5.",
+                "Add one: 1 + 2.5 = 3.5.",
+                "Divide the population by that value: 1,000 ÷ 3.5 = 285.71.",
+                "Round up, never down: you need at least 286 respondents."
+              ]
+            },
+            {
               heading: "Slovin's formula (Taro Yamane)",
               formula: "n = N ÷ (1 + N·e²)",
               paragraphs: [

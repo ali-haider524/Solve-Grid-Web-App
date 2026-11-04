@@ -73,7 +73,7 @@ export const youtubeUrl = normalizePublicUrl(
   process.env.NEXT_PUBLIC_YOUTUBE_URL || "https://www.youtube.com/channel/UCsdJl6GjVUWVZHZQmq0UkUA",
 );
 export const facebookUrl = normalizePublicUrl(
-  process.env.NEXT_PUBLIC_FACEBOOK_URL || "https://www.facebook.com/profile.php?id=61591579615761",
+  process.env.NEXT_PUBLIC_FACEBOOK_URL || "https://www.facebook.com/profile.php?id=61595958102468",
 );
 export const instagramUrl = normalizePublicUrl(
   process.env.NEXT_PUBLIC_INSTAGRAM_URL || "https://www.instagram.com/solvegrid.online",

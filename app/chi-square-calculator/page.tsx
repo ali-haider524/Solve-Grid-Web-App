@@ -18,6 +18,12 @@ export default function ChiSquareCalculatorPage() {
           title="Chi-square test: formula, solved example, and reporting"
           sections={[
             {
+              heading: "What is a chi-square test?",
+              paragraphs: [
+                "A chi-square test of independence checks whether two categorical variables are related, such as gender and preferred study method. It compares the counts you observed in each cell of a table with the counts you would expect if the variables were unrelated. Large gaps give a large chi-square value and a small p value."
+              ]
+            },
+            {
               heading: "Formula",
               formula: "χ² = Σ (O − E)² ÷ E,   E = (row total × column total) ÷ N,   df = (r − 1)(c − 1)",
               paragraphs: [

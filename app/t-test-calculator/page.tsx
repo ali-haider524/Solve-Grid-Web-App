@@ -18,6 +18,25 @@ export default function TTestPage() {
           title="t-test formulas, which version to use, and how to report it"
           sections={[
             {
+              heading: "What is a t-test?",
+              paragraphs: [
+                "A t-test checks whether the gap between two means is bigger than random chance would usually produce. Use an independent t-test for two separate groups, a paired t-test for before-and-after scores from the same people, and a one-sample t-test to compare one mean with a fixed target value."
+              ]
+            },
+            {
+              heading: "Worked example: Welch's t-test for two groups",
+              paragraphs: [
+                "Group A (n = 8): mean 13.13, SD 2.03. Group B (n = 8): mean 10.00, SD 1.31."
+              ],
+              steps: [
+                "Find the mean difference: 13.13 − 10.00 = 3.13.",
+                "Find the standard error: √(2.03²/8 + 1.31²/8) = 0.85.",
+                "Divide: t = 3.13 ÷ 0.85 = 3.66.",
+                "Welch degrees of freedom: df = 11.96, giving a two-tailed p = .003.",
+                "Write it up: t(11.96) = 3.66, p = .003, d = 1.83, so Group A scored higher."
+              ]
+            },
+            {
               heading: "Which t-test should I use?",
               list: [
                 "Independent-samples t-test: two separate groups of people (e.g. online vs in-person students)",

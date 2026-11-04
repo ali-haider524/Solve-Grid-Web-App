@@ -18,6 +18,25 @@ export default function CronbachAlphaCalculatorPage() {
           title="Cronbach's alpha formula, interpretation, and reporting"
           sections={[
             {
+              heading: "What is Cronbach's alpha?",
+              paragraphs: [
+                "Cronbach's alpha is a reliability score that shows how consistently a group of questionnaire items measures the same idea. It is usually between 0 and 1. A value of 0.70 or higher is the common minimum for research, and values above about 0.95 can mean some items repeat each other."
+              ]
+            },
+            {
+              heading: "Worked example: four items, six respondents",
+              paragraphs: [
+                "Six people answered four 5-point items. Their total scores were 17, 13, 19, 10, 18 and 11."
+              ],
+              steps: [
+                "Find each item's sample variance: 1.10, 1.47, 1.37 and 0.67.",
+                "Add them: Σσ²ᵢ = 4.60.",
+                "Find the variance of the total scores: σ²ₜ = 14.67.",
+                "Divide and subtract from 1: 1 − 4.60 ÷ 14.67 = 0.686.",
+                "Multiply by k ÷ (k − 1) = 4 ÷ 3: α = 0.915, which is Excellent."
+              ]
+            },
+            {
               heading: "Formula",
               formula: "α = (k ÷ (k − 1)) × (1 − Σσ²ᵢ ÷ σ²ₜ)",
               paragraphs: [

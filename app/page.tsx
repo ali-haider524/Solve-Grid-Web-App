@@ -1,9 +1,10 @@
 import Link from "next/link";
 import SiteFooter from "../components/SiteFooter";
 import ToolHeader from "../components/ToolHeader";
+import { lastUpdated } from "../lib/content-dates";
 import { guides } from "../lib/guides";
 import { createStaticPageMetadata } from "../lib/seo";
-import { siteName, siteUrl } from "../lib/site";
+import { siteUrl } from "../lib/site";
 import {
   getCategoryPath,
   getToolBySlug,
@@ -71,6 +72,16 @@ const homepageFaqs = [
       "It depends on your question and data type: t-tests compare two means, one-way ANOVA compares three or more, and correlation measures a relationship between two numeric variables. The 'How to choose a statistical test' guide walks through the decision.",
   },
   {
+    question: "Can I use SolveGrid results in my thesis?",
+    answer:
+      "Yes. Each calculator shows the working and gives a write-up sentence you can adapt for your methods or results chapter. Cite the statistical method itself, such as Slovin's formula or Cronbach's alpha, and confirm your university's required format with your supervisor.",
+  },
+  {
+    question: "Does SolveGrid replace SPSS?",
+    answer:
+      "For the tests it covers, such as t-tests, ANOVA, chi-square, correlation and Cronbach's alpha, SolveGrid reports the standard outputs: the test statistic, degrees of freedom, p value and effect size. You still need software like SPSS, jamovi or R for factor analysis, structural equation models or mixed models.",
+  },
+  {
     question: "Is my research data uploaded?",
     answer:
       "No. Calculations run in your browser. Data you paste is not sent to SolveGrid's servers.",
@@ -82,7 +93,54 @@ const homepageFaqs = [
   },
 ];
 
-const homepageReviewedDate = "2026-07-30";
+const homepageReviewedDate = lastUpdated("");
+const homepageReviewedLabel = new Date(`${homepageReviewedDate}T00:00:00Z`).toLocaleDateString("en-GB", {
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+  timeZone: "UTC",
+});
+
+const homeSummary =
+  "SolveGrid is a free set of statistics calculators for thesis and survey research. It works out sample size, questionnaire reliability, Likert means and common tests such as the t-test, ANOVA and chi-square. Every result shows the formula, the working and a sentence you can adapt for your methods or results chapter.";
+
+const tableOfContents = [
+  { href: "#which-calculator-do-i-need", label: "Which calculator do I need?" },
+  { href: "#how-to-analyse-survey-data", label: "How to analyse survey data" },
+  { href: "#tools", label: "Popular calculators" },
+  { href: "#statistics-terms", label: "Key statistics terms" },
+  { href: "#frequently-asked-questions", label: "FAQs" },
+];
+
+const calculatorComparison = [
+  { task: "Decide how many respondents you need", tool: "Sample Size Calculator", href: "/sample-size-calculator", method: "Slovin, Yamane or Cochran formula", report: "Required sample size and margin of error" },
+  { task: "Check if your questionnaire is reliable", tool: "Cronbach's Alpha Calculator", href: "/cronbach-alpha-calculator", method: "Cronbach's alpha, alpha if item deleted", report: "α value and its label (e.g. Good)" },
+  { task: "Summarise agree–disagree answers", tool: "Likert Scale Calculator", href: "/likert-scale-calculator", method: "Weighted mean with interpretation ranges", report: "Mean, SD and verbal interpretation" },
+  { task: "Describe your numeric data", tool: "Statistics Calculator", href: "/statistics-calculator", method: "Mean, median, standard deviation, quartiles", report: "M, SD and range for each variable" },
+  { task: "Compare two group means", tool: "t-Test Calculator", href: "/t-test-calculator", method: "Welch, Student, paired or one-sample t-test", report: "t, df, p and Cohen's d" },
+  { task: "Compare three or more group means", tool: "One-Way ANOVA Calculator", href: "/one-way-anova-calculator", method: "F test with Tukey HSD post hoc", report: "F, df, p and eta squared" },
+  { task: "Test a link between two categories", tool: "Chi-Square Calculator", href: "/chi-square-calculator", method: "Chi-square test of independence", report: "χ², df, p and Cramér's V" },
+  { task: "Measure a relationship between two scores", tool: "Correlation Calculator", href: "/correlation-calculator", method: "Pearson, Spearman or Kendall", report: "r or rho, n and p" },
+];
+
+const surveyAnalysisSteps = [
+  { title: "Work out your sample size", text: "Use Slovin's or Cochran's formula before you collect data, and round up.", href: "/sample-size-calculator" },
+  { title: "Check reliability", text: "Run Cronbach's alpha on each scale. Aim for 0.70 or higher.", href: "/cronbach-alpha-calculator" },
+  { title: "Summarise each statement", text: "Find the Likert weighted mean and its verbal label for every item.", href: "/likert-scale-calculator" },
+  { title: "Describe your variables", text: "Report the mean and standard deviation of each scale score.", href: "/statistics-calculator" },
+  { title: "Choose the right test", text: "Match your question and data type to a test with the test chooser.", href: "/statistical-test-chooser" },
+  { title: "Run the test and write it up", text: "Report the statistic, degrees of freedom, p value and effect size in APA style.", href: "/guides/how-to-report-t-test-apa" },
+];
+
+const statisticsTerms = [
+  { term: "Sample size", definition: "The number of people you need to survey so your results represent the whole population within a chosen margin of error." },
+  { term: "Margin of error", definition: "How far your sample result may be from the true population value. Thesis surveys often use 5%." },
+  { term: "Cronbach's alpha", definition: "A score from 0 to 1 showing how consistently a set of questionnaire items measures the same idea. 0.70 is the usual minimum." },
+  { term: "Weighted mean", definition: "The average Likert answer, found by multiplying each scale point by its count and dividing by the number of respondents." },
+  { term: "Standard deviation", definition: "How spread out the scores are around the mean. A small value means answers are close together." },
+  { term: "p value", definition: "The chance of seeing a result at least this large if there were really no effect. Below .05 is usually called significant." },
+  { term: "Effect size", definition: "How big a difference or relationship is, such as Cohen's d or eta squared. It shows practical importance, not only significance." },
+];
 
 export default function Home() {
   const featuredTools = featuredToolSlugs
@@ -104,18 +162,27 @@ export default function Home() {
           "Free statistics calculators for your thesis: Slovin sample size, Cronbach's alpha, Likert weighted mean, chi-square, t-tests, ANOVA, and a test chooser.",
         inLanguage: "en",
         isPartOf: { "@id": `${siteUrl}/#website` },
-        publisher: {
-          "@type": "Organization",
-          name: siteName,
-          url: siteUrl,
-        },
+        about: { "@id": `${siteUrl}/#organization` },
+        publisher: { "@id": `${siteUrl}/#organization` },
+        author: { "@id": `${siteUrl}/about#author` },
         dateModified: homepageReviewedDate,
+        primaryImageOfPage: {
+          "@type": "ImageObject",
+          url: `${siteUrl}/og/home.png`,
+          width: 1200,
+          height: 630,
+        },
+        speakable: {
+          "@type": "SpeakableSpecification",
+          cssSelector: ["#what-is-solvegrid-summary", "#which-calculator-do-i-need-answer"],
+        },
         mainEntity: { "@id": `${siteUrl}/#featured-tools` },
       },
       {
         "@type": "ItemList",
         "@id": `${siteUrl}/#featured-tools`,
         name: "Featured SolveGrid calculators",
+        itemListOrder: "https://schema.org/ItemListUnordered",
         numberOfItems: featuredTools.length,
         itemListElement: featuredTools.map((tool, index) => ({
           "@type": "ListItem",
@@ -127,6 +194,9 @@ export default function Home() {
       {
         "@type": "FAQPage",
         "@id": `${siteUrl}/#faq`,
+        name: "Frequently asked questions about SolveGrid",
+        description:
+          "Answers about free access, sample size, questionnaire reliability, choosing a statistical test, thesis use and data privacy.",
         mainEntity: homepageFaqs.map((faq) => ({
           "@type": "Question",
           name: faq.question,
@@ -206,10 +276,92 @@ export default function Home() {
         <Link href="/advanced-statistics">t-test &amp; ANOVA</Link>
       </nav>
 
+      <section className="home-answer-section" id="what-is-solvegrid" aria-labelledby="what-is-solvegrid-heading">
+        <div>
+          <p className="eyebrow">IN ONE PARAGRAPH</p>
+          <h2 id="what-is-solvegrid-heading">What is SolveGrid?</h2>
+          <p id="what-is-solvegrid-summary" className="home-lead">
+            {homeSummary}
+          </p>
+        </div>
+        <nav className="home-toc" aria-label="On this page">
+          <p>ON THIS PAGE</p>
+          <ol>
+            {tableOfContents.map((item) => (
+              <li key={item.href}>
+                <a href={item.href}>{item.label}</a>
+              </li>
+            ))}
+          </ol>
+        </nav>
+      </section>
+
+      <section className="home-answer-section home-table-section" id="which-calculator-do-i-need" aria-labelledby="which-calculator-heading">
+        <div className="section-heading">
+          <p className="eyebrow">QUICK COMPARISON</p>
+          <h2 id="which-calculator-heading">Which statistics calculator do I need for my thesis?</h2>
+          <p id="which-calculator-do-i-need-answer">
+            It depends on the research task. Use the sample size calculator before data
+            collection, Cronbach&apos;s alpha to test questionnaire reliability, and the
+            Likert calculator to summarise answers. Then use a t-test for two groups,
+            ANOVA for three or more groups, chi-square for categories, and correlation
+            for relationships.
+          </p>
+        </div>
+        <div className="home-table-wrap">
+          <table>
+            <caption>Thesis statistics tasks and the calculator to use for each</caption>
+            <thead>
+              <tr>
+                <th scope="col">Research task</th>
+                <th scope="col">Calculator</th>
+                <th scope="col">Method used</th>
+                <th scope="col">What you report</th>
+              </tr>
+            </thead>
+            <tbody>
+              {calculatorComparison.map((row) => (
+                <tr key={row.href}>
+                  <th scope="row">{row.task}</th>
+                  <td>
+                    <Link href={row.href}>{row.tool}</Link>
+                  </td>
+                  <td>{row.method}</td>
+                  <td>{row.report}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section className="home-answer-section" id="how-to-analyse-survey-data" aria-labelledby="survey-steps-heading">
+        <div className="section-heading">
+          <p className="eyebrow">STEP BY STEP</p>
+          <h2 id="survey-steps-heading">How do you analyse survey data for a thesis?</h2>
+          <p>
+            Most thesis surveys follow the same six steps: plan the sample, check the
+            questionnaire is reliable, summarise each statement, describe the variables,
+            choose the right test, and report the result. Each step below links to the
+            calculator that does it and shows the working.
+          </p>
+        </div>
+        <ol className="home-steps">
+          {surveyAnalysisSteps.map((step) => (
+            <li key={step.href}>
+              <h3 id={`step-${step.href.split("/").pop()}`}>
+                <Link href={step.href}>{step.title}</Link>
+              </h3>
+              <p>{step.text}</p>
+            </li>
+          ))}
+        </ol>
+      </section>
+
       <section className="tools-section" id="tools">
         <div className="section-heading">
           <p className="eyebrow">RESEARCH STATISTICS TOOLS</p>
-          <h2>Choose the right calculator, then move naturally to the next step.</h2>
+          <h2 id="popular-calculators-heading">Which calculators do students use most?</h2>
           <p>
             Each tool is built for a specific problem and includes links to related
             calculators, formulas, method guides, examples, and important scope notes.
@@ -226,7 +378,7 @@ export default function Home() {
               key={tool.slug}
             >
               <div className="tool-icon">{tool.icon}</div>
-              <h3>{tool.name}</h3>
+              <h3 id={`tool-${tool.slug}`}>{tool.name}</h3>
               <p>{tool.summary}</p>
               <span>Use {tool.name} →</span>
             </Link>
@@ -241,7 +393,7 @@ export default function Home() {
       <section className="home-category-section" aria-labelledby="home-categories-heading">
         <div className="section-heading">
           <p className="eyebrow">BROWSE BY SUBJECT</p>
-          <h2 id="home-categories-heading">Start with a calculator collection.</h2>
+          <h2 id="home-categories-heading">Which calculator collection fits my subject?</h2>
           <p>
             Category hubs explain which tool to use, what each method can solve, and
             which guides can help you verify or understand the result.
@@ -251,7 +403,7 @@ export default function Home() {
           {(Object.keys(toolCategories) as ToolCategory[]).map((category) => (
             <Link href={getCategoryPath(category)} key={category}>
               <span>{toolCategories[category].label.toUpperCase()}</span>
-              <h3>{toolCategories[category].label}</h3>
+              <h3 id={`category-${category}`}>{toolCategories[category].label}</h3>
               <p>{toolCategories[category].intro}</p>
               <b>Browse {toolCategories[category].label} →</b>
             </Link>
@@ -262,7 +414,13 @@ export default function Home() {
       <section className="how-section" id="how-it-works">
         <div>
           <p className="eyebrow">HOW SOLVEGRID CALCULATES RESULTS</p>
-          <h2>Clear calculation methods, not black-box answers.</h2>
+          <h2 id="how-solvegrid-calculates">How does SolveGrid calculate results?</h2>
+          <p className="how-answer">
+            Every calculator uses a published formula or standard statistical procedure,
+            the same one taught in research methods courses. You see the inputs, each step
+            of the working and the assumptions, so you can check the result instead of
+            trusting a black box.
+          </p>
         </div>
 
         <div className="how-list">
@@ -313,7 +471,7 @@ export default function Home() {
         <div className="home-trust-grid">
           <article>
             <strong>{tools.length}</strong>
-            <h3>Working online calculators</h3>
+            <h3 id="trust-working-calculators">Working online calculators</h3>
             <p>
               Focused tools for research statistics, plus supporting math and
               numerical-methods workspaces.
@@ -321,7 +479,7 @@ export default function Home() {
           </article>
           <article>
             <strong>Browser based</strong>
-            <h3>No account required</h3>
+            <h3 id="trust-no-account">No account required</h3>
             <p>
               Current public calculations run directly in the browser and can be
               used without signing up.
@@ -329,7 +487,9 @@ export default function Home() {
           </article>
           <article>
             <strong>Reviewed</strong>
-            <h3>30 July 2026</h3>
+            <h3 id="trust-reviewed">
+              <time dateTime={homepageReviewedDate}>{homepageReviewedLabel}</time>
+            </h3>
             <p>
               Methods, limitations, and important-result guidance are documented
               and updated when clearer explanations or corrections are needed.
@@ -347,7 +507,7 @@ export default function Home() {
         <header>
           <div>
             <p className="eyebrow">FORMULAS &amp; METHOD GUIDES</p>
-            <h2 id="home-guides-heading">Understand the workflow behind the answer.</h2>
+            <h2 id="home-guides-heading">Where can I learn the formulas behind each result?</h2>
           </div>
           <Link href="/guides">Browse all guides →</Link>
         </header>
@@ -355,7 +515,7 @@ export default function Home() {
           {featuredGuides.map((guide) => (
             <Link href={`/guides/${guide.slug}`} key={guide.slug}>
               <span>GUIDE</span>
-              <h3>{guide.title}</h3>
+              <h3 id={`guide-${guide.slug}`}>{guide.title}</h3>
               <p>{guide.summary}</p>
               <b>Read {guide.title} →</b>
             </Link>
@@ -366,7 +526,7 @@ export default function Home() {
       <section className="research-spotlight">
         <div>
           <p className="eyebrow">RESEARCH &amp; SIMULATION LABS</p>
-          <h2>Numerical modelling deserves a dedicated workspace.</h2>
+          <h2 id="research-labs-heading">Numerical modelling deserves a dedicated workspace.</h2>
           <p>
             Explore differential equations, symbolic algebra, optimization, circuit
             analysis, and statistical inference, then connect graphs, matrices, units,
@@ -375,6 +535,22 @@ export default function Home() {
         </div>
 
         <Link href="/research-tools">Explore research labs →</Link>
+      </section>
+
+      <section className="home-answer-section" id="statistics-terms" aria-labelledby="statistics-terms-heading">
+        <div className="section-heading">
+          <p className="eyebrow">GLOSSARY</p>
+          <h2 id="statistics-terms-heading">What do common thesis statistics terms mean?</h2>
+          <p>Short, plain-language definitions of the terms you will see in every results chapter.</p>
+        </div>
+        <dl className="home-terms">
+          {statisticsTerms.map((item) => (
+            <div key={item.term}>
+              <dt>{item.term}</dt>
+              <dd>{item.definition}</dd>
+            </div>
+          ))}
+        </dl>
       </section>
 
       <section
@@ -402,7 +578,7 @@ export default function Home() {
 
       <section className="learn-section" id="learn">
         <p className="eyebrow">MADE FOR REAL PROBLEMS</p>
-        <h2>
+        <h2 id="made-for-real-problems">
           Free statistics calculators for students, supervisors, and
           independent researchers.
         </h2>
@@ -411,7 +587,9 @@ export default function Home() {
           high-stakes engineering, medical, financial, legal, safety, academic,
           and research results using suitable standards and qualified review.
         </p>
-        <small>Homepage last reviewed: 30 July 2026</small>
+        <small>
+          Homepage last reviewed: <time dateTime={homepageReviewedDate}>{homepageReviewedLabel}</time>
+        </small>
       </section>
 
       <SiteFooter />

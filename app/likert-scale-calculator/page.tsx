@@ -18,6 +18,25 @@ export default function LikertScaleCalculatorPage() {
           title="How to compute and interpret a Likert scale weighted mean"
           sections={[
             {
+              heading: "What is a Likert weighted mean?",
+              paragraphs: [
+                "A Likert weighted mean is the average answer to one survey statement. You multiply each scale point by how many people chose it, add the results, and divide by the number of respondents. The mean is then matched to a verbal label, such as Agree or Neutral, using equal-width interpretation ranges."
+              ]
+            },
+            {
+              heading: "Worked example: 100 answers on a 5-point scale",
+              paragraphs: [
+                "Responses: 40 Strongly Agree (5), 30 Agree (4), 15 Neutral (3), 10 Disagree (2), 5 Strongly Disagree (1)."
+              ],
+              steps: [
+                "Multiply each point by its count: 200 + 120 + 45 + 20 + 5.",
+                "Add them: the weighted total is 390.",
+                "Divide by the 100 respondents: weighted mean = 3.90.",
+                "Find the range: 3.90 falls in 3.41 – 4.20, so the label is Agree.",
+                "Report the spread too: the standard deviation is 1.18."
+              ]
+            },
+            {
               heading: "Weighted mean formula",
               formula: "x̄w = Σ(f × w) ÷ Σf",
               paragraphs: [
