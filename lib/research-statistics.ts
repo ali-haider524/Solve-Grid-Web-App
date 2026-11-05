@@ -2745,3 +2745,449 @@ export function mcdonaldOmega(matrix: number[][]): OmegaResult {
   const uniq = loadings.reduce((s, v) => s + Math.max(0, 1 - v * v), 0);
   return { omega: (sumL * sumL) / (sumL * sumL + uniq), loadings, iterations, heywood };
 }
+
+/* ---------------- Kendall's W (coefficient of concordance) ---------------- */
+
+export type KendallWResult = { raters: number; objects: number; w: number; chiSquare: number; df: number; p: number; meanRanks: Array<{ name: string; meanRank: number }>; band: string };
+
+export function kendallWBand(w: number) {
+  if (w < 0.1) return "Very weak agreement";
+  if (w < 0.3) return "Weak agreement";
+  if (w < 0.5) return "Moderate agreement";
+  if (w < 0.7) return "Strong agreement";
+  return "Very strong agreement";
+}
+
+/** rows = raters (or judges), columns = the objects or items being rated/ranked. */
+export function kendallsW(objectNames: string[], raterRows: number[][]): KendallWResult {
+  const f = friedmanTest(objectNames, raterRows);
+  return {
+    raters: f.n,
+    objects: f.k,
+    w: f.kendallW,
+    chiSquare: f.chiSquare,
+    df: f.df,
+    p: f.p,
+    meanRanks: f.conditions.map((c) => ({ name: c.name, meanRank: c.meanRank })),
+    band: kendallWBand(f.kendallW),
+  };
+}
+
+/* ---------------- Fleiss' kappa (many raters, categorical ratings) ---------------- */
+
+export type FleissResult = {
+  subjects: number;
+  raters: number;
+  categories: number;
+  kappa: number;
+  pBar: number;
+  peBar: number;
+  se: number;
+  z: number;
+  p: number;
+  ciLow: number;
+  ciHigh: number;
+  perCategory: Array<{ name: string; proportion: number; kappa: number; z: number; p: number }>;
+  band: string;
+};
+
+/** counts[i][j] = number of raters who put subject i in category j. Every row must sum to the same number of raters. */
+export function fleissKappa(categoryNames: string[], counts: number[][]): FleissResult {
+  const N = counts.length;
+  const k = categoryNames.length;
+  if (N < 2) throw new Error("Enter at least two subjects (rows).");
+  if (k < 2) throw new Error("Enter at least two categories (columns).");
+  if (counts.some((row) => row.length !== k || row.some((v) => !Number.isInteger(v) || v < 0)))
+    throw new Error("Each cell must be a whole-number count of raters.");
+  const n = counts[0].reduce((s, v) => s + v, 0);
+  if (n < 2) throw new Error("Each subject needs at least two ratings.");
+  if (counts.some((row) => row.reduce((s, v) => s + v, 0) !== n))
+    throw new Error(`Every row must add up to the same number of raters (row 1 adds up to ${n}).`);
+  const pj = categoryNames.map((_, j) => counts.reduce((s, r) => s + r[j], 0) / (N * n));
+  const Pi = counts.map((r) => (r.reduce((s, v) => s + v * v, 0) - n) / (n * (n - 1)));
+  const pBar = Pi.reduce((s, v) => s + v, 0) / N;
+  const peBar = pj.reduce((s, v) => s + v * v, 0);
+  const kappa = (pBar - peBar) / (1 - peBar);
+  const sumPQ = pj.reduce((s, p) => s + p * (1 - p), 0);
+  const sumPQ2 = pj.reduce((s, p) => s + p * (1 - p) * (1 - 2 * p), 0);
+  // Fleiss, Nee & Landis (1979) standard error under H0: kappa = 0.
+  const se = sumPQ > 0 ? (Math.sqrt(2) / (sumPQ * Math.sqrt(N * n * (n - 1)))) * Math.sqrt(sumPQ * sumPQ - sumPQ2) : Number.NaN;
+  const z = kappa / se;
+  const perCategory = categoryNames.map((name, j) => {
+    const p = pj[j];
+    const kj = p > 0 && p < 1 ? 1 - counts.reduce((s, r) => s + r[j] * (n - r[j]), 0) / (N * n * (n - 1) * p * (1 - p)) : Number.NaN;
+    const sej = Math.sqrt(2 / (N * n * (n - 1)));
+    return { name, proportion: p, kappa: kj, z: kj / sej, p: Number.isFinite(kj) ? 2 * normalSf(Math.abs(kj / sej)) : Number.NaN };
+  });
+  return {
+    subjects: N,
+    raters: n,
+    categories: k,
+    kappa,
+    pBar,
+    peBar,
+    se,
+    z,
+    p: Number.isFinite(z) ? 2 * normalSf(Math.abs(z)) : Number.NaN,
+    ciLow: kappa - 1.959963984540054 * se,
+    ciHigh: kappa + 1.959963984540054 * se,
+    perCategory,
+    band: kappaBand(kappa),
+  };
+}
+
+/** Converts rater-by-subject labels (rows = subjects, columns = raters) into subject × category counts. */
+export function ratingsToCounts(rows: string[][]) {
+  const categories = [...new Set(rows.flat())].sort((a, b) => (Number.isFinite(Number(a)) && Number.isFinite(Number(b)) ? Number(a) - Number(b) : a.localeCompare(b)));
+  const counts = rows.map((row) => categories.map((c) => row.filter((v) => v === c).length));
+  return { categories, counts };
+}
+
+/* ---------------- One-way ANCOVA (one factor, one covariate) ---------------- */
+
+export type AncovaResult = {
+  factor: string;
+  covariate: string;
+  n: number;
+  groups: Array<{ name: string; n: number; mean: number; covariateMean: number; adjustedMean: number; se: number }>;
+  terms: TwoWayTerm[];
+  error: { ss: number; df: number; ms: number };
+  slope: number;
+  slopes: { f: number; df1: number; df2: number; p: number };
+};
+
+export function parseAncovaData(text: string) {
+  const lines = text
+    .split(/\r?\n/)
+    .map((line) => line.trim())
+    .filter(Boolean)
+    .map((line) => line.split(/[\t,;]+|\s+/).map((cell) => cell.trim()).filter(Boolean));
+  if (!lines.length) throw new Error("Paste one row per participant: group, covariate, outcome.");
+  let names = ["Group", "Covariate", "Outcome"];
+  if (!Number.isFinite(Number(lines[0][1])) || !Number.isFinite(Number(lines[0][2]))) names = lines.shift() as string[];
+  const rows = lines.map((row, i) => {
+    if (row.length < 3) throw new Error(`Row ${i + 1} needs three values: group, covariate and outcome.`);
+    const x = Number(row[1]);
+    const y = Number(row[2]);
+    if (!Number.isFinite(x) || !Number.isFinite(y)) throw new Error(`Row ${i + 1}: the covariate and outcome must be numbers.`);
+    return { g: row[0], x, y };
+  });
+  return { names: names.slice(0, 3), rows };
+}
+
+export function ancova(rows: Array<{ g: string; x: number; y: number }>, factor = "Group", covariate = "Covariate"): AncovaResult {
+  const levels = [...new Set(rows.map((r) => r.g))];
+  if (levels.length < 2) throw new Error("You need at least two groups.");
+  const n = rows.length;
+  if (n < levels.length + 3) throw new Error("You need more participants than groups plus two.");
+  levels.forEach((lv) => {
+    if (rows.filter((r) => r.g === lv).length < 2) throw new Error(`Group "${lv}" needs at least two participants.`);
+  });
+  const y = rows.map((r) => r.y);
+  const x = rows.map((r) => r.x);
+  const gCols = levels.slice(0, -1).map((lv) => rows.map((r) => (r.g === lv ? 1 : r.g === levels[levels.length - 1] ? -1 : 0)));
+  const full = olsFit(y, [...gCols, x]);
+  const sseFull = full.ssResidual;
+  const dfError = n - levels.length - 1;
+  const msError = sseFull / dfError;
+  const term = (name: string, cols: number[][], df: number): TwoWayTerm => {
+    const ss = Math.max(0, sseOf(y, cols) - sseFull);
+    const ms = ss / df;
+    const f = msError === 0 ? Infinity : ms / msError;
+    return { name, ss, df, ms, f, p: Number.isFinite(f) ? 1 - fCdf(f, df, dfError) : 0, partialEta: ss / (ss + sseFull) };
+  };
+  const terms = [term(covariate, gCols, 1), term(factor, [x], levels.length - 1)];
+  const slope = full.coef[full.coef.length - 1];
+  const xBar = x.reduce((s, v) => s + v, 0) / n;
+  // Adjusted means and their SEs from the fitted model at the grand mean of the covariate.
+  const groups = levels.map((lv, idx) => {
+    const members = rows.filter((r) => r.g === lv);
+    const m = members.reduce((s, r) => s + r.y, 0) / members.length;
+    const cm = members.reduce((s, r) => s + r.x, 0) / members.length;
+    const row = [1, ...levels.slice(0, -1).map((_, j) => (idx === j ? 1 : idx === levels.length - 1 ? -1 : 0)), xBar];
+    const adjusted = row.reduce((s, v, j) => s + v * full.coef[j], 0);
+    const variance = row.reduce((s, v, a) => s + v * row.reduce((t, w, b) => t + full.inv[a][b] * w, 0), 0) * msError;
+    return { name: lv, n: members.length, mean: m, covariateMean: cm, adjustedMean: adjusted, se: Math.sqrt(Math.max(0, variance)) };
+  });
+  // Homogeneity of regression slopes: add group × covariate interaction.
+  const inter = gCols.map((col) => col.map((v, i) => v * x[i]));
+  const withInter = olsFit(y, [...gCols, x, ...inter]);
+  const df1 = levels.length - 1;
+  const df2 = n - 2 * levels.length;
+  const fSl = df2 > 0 ? ((sseFull - withInter.ssResidual) / df1) / (withInter.ssResidual / df2) : Number.NaN;
+  return {
+    factor,
+    covariate,
+    n,
+    groups,
+    terms,
+    error: { ss: sseFull, df: dfError, ms: msError },
+    slope,
+    slopes: { f: fSl, df1, df2, p: Number.isFinite(fSl) ? 1 - fCdf(fSl, df1, df2) : Number.NaN },
+  };
+}
+
+/* ---------------- One-way MANOVA ---------------- */
+
+export type ManovaStat = { name: string; value: number; f: number; df1: number; df2: number; p: number; partialEta: number };
+export type ManovaResult = {
+  dvs: string[];
+  factor: string;
+  n: number;
+  groups: Array<{ name: string; n: number; means: number[] }>;
+  eigenvalues: number[];
+  stats: ManovaStat[];
+  univariate: Array<{ dv: string; f: number; df1: number; df2: number; p: number; partialEta: number }>;
+};
+
+function choleskyLower(m: number[][]) {
+  const n = m.length;
+  const L = Array.from({ length: n }, () => Array(n).fill(0));
+  for (let i = 0; i < n; i += 1)
+    for (let j = 0; j <= i; j += 1) {
+      let s = m[i][j];
+      for (let k = 0; k < j; k += 1) s -= L[i][k] * L[j][k];
+      if (i === j) {
+        if (s <= 1e-12) throw new Error("The error matrix is singular: a dependent variable may be constant or an exact combination of the others.");
+        L[i][j] = Math.sqrt(s);
+      } else L[i][j] = s / L[j][j];
+    }
+  return L;
+}
+
+export function parseManovaData(text: string) {
+  const lines = text
+    .split(/\r?\n/)
+    .map((line) => line.trim())
+    .filter(Boolean)
+    .map((line) => line.split(/[\t,;]+|\s+/).map((cell) => cell.trim()).filter(Boolean));
+  if (lines.length < 2) throw new Error("Paste a header row (group, then dependent variables) and one row per participant.");
+  const header = lines.shift() as string[];
+  if (header.length < 3) throw new Error("Use one group column and at least two dependent variables.");
+  const rows = lines.map((row, i) => {
+    if (row.length !== header.length) throw new Error(`Row ${i + 1} has ${row.length} values but the header has ${header.length}.`);
+    const vals = row.slice(1).map(Number);
+    if (vals.some((v) => !Number.isFinite(v))) throw new Error(`Row ${i + 1}: dependent variables must be numbers.`);
+    return { g: row[0], y: vals };
+  });
+  return { factor: header[0], dvs: header.slice(1), rows };
+}
+
+export function manova(factor: string, dvs: string[], rows: Array<{ g: string; y: number[] }>): ManovaResult {
+  const levels = [...new Set(rows.map((r) => r.g))];
+  const p = dvs.length;
+  const g = levels.length;
+  const n = rows.length;
+  if (g < 2) throw new Error("You need at least two groups.");
+  if (p < 2) throw new Error("Use at least two dependent variables. For one, use ANOVA.");
+  const dfH = g - 1;
+  const dfE = n - g;
+  if (dfE < p) throw new Error("You need more participants: N − number of groups must be at least the number of dependent variables.");
+  const grand = dvs.map((_, j) => rows.reduce((s, r) => s + r.y[j], 0) / n);
+  const groups = levels.map((lv) => {
+    const members = rows.filter((r) => r.g === lv);
+    return { name: lv, n: members.length, means: dvs.map((_, j) => members.reduce((s, r) => s + r.y[j], 0) / members.length), members };
+  });
+  const H = dvs.map((_, a) => dvs.map((__, b) => groups.reduce((s, gr) => s + gr.n * (gr.means[a] - grand[a]) * (gr.means[b] - grand[b]), 0)));
+  const E = dvs.map((_, a) => dvs.map((__, b) => groups.reduce((s, gr) => s + gr.members.reduce((t, r) => t + (r.y[a] - gr.means[a]) * (r.y[b] - gr.means[b]), 0), 0)));
+  // Eigenvalues of E⁻¹H via the symmetric form L⁻¹ H L⁻ᵀ.
+  const L = choleskyLower(E);
+  const Linv = invertMatrix(L);
+  const tmp = Linv.map((row) => dvs.map((_, b) => row.reduce((s, v, k) => s + v * H[k][b], 0)));
+  const A = tmp.map((row) => dvs.map((_, b) => row.reduce((s, v, k) => s + v * Linv[b][k], 0)));
+  const eig = jacobiEigen(A.map((row, i) => row.map((v, j) => (v + A[j][i]) / 2))).values.map((v) => Math.max(0, v)).sort((a, b) => b - a);
+  const s = Math.min(p, dfH);
+  const lam = eig.slice(0, s);
+  const m = (Math.abs(p - dfH) - 1) / 2;
+  const nn = (dfE - p - 1) / 2;
+  const pf = (f: number, d1: number, d2: number) => (Number.isFinite(f) && d2 > 0 ? 1 - fCdf(f, d1, d2) : Number.NaN);
+  const pillai = lam.reduce((t, l) => t + l / (1 + l), 0);
+  const wilks = lam.reduce((t, l) => t / (1 + l), 1);
+  const hotelling = lam.reduce((t, l) => t + l, 0);
+  const roy = lam[0] ?? 0;
+  const stats: ManovaStat[] = [];
+  {
+    const d1 = s * (2 * m + s + 1);
+    const d2 = s * (2 * nn + s + 1);
+    const f = (d2 / d1) * (pillai / (s - pillai));
+    stats.push({ name: "Pillai's trace", value: pillai, f, df1: d1, df2: d2, p: pf(f, d1, d2), partialEta: pillai / s });
+  }
+  {
+    const denom = p * p + dfH * dfH - 5;
+    const t = denom > 0 ? Math.sqrt((p * p * dfH * dfH - 4) / denom) : 1;
+    const d1 = p * dfH;
+    const d2 = (dfE - (p - dfH + 1) / 2) * t - (p * dfH - 2) / 2;
+    const w1t = wilks ** (1 / t);
+    const f = ((1 - w1t) / w1t) * (d2 / d1);
+    stats.push({ name: "Wilks' lambda", value: wilks, f, df1: d1, df2: d2, p: pf(f, d1, d2), partialEta: 1 - w1t });
+  }
+  {
+    const d1 = s * (2 * m + s + 1);
+    const d2 = 2 * (s * nn + 1);
+    const f = (d2 * hotelling) / (s * s * (2 * m + s + 1));
+    stats.push({ name: "Hotelling's trace", value: hotelling, f, df1: d1, df2: d2, p: pf(f, d1, d2), partialEta: hotelling / s / (hotelling / s + 1) });
+  }
+  {
+    const r = Math.max(p, dfH);
+    const d2 = dfE - r + dfH;
+    const f = (roy * d2) / r;
+    stats.push({ name: "Roy's largest root", value: roy, f, df1: r, df2: d2, p: pf(f, r, d2), partialEta: roy / (1 + roy) });
+  }
+  const univariate = dvs.map((dv, j) => {
+    const ssB = H[j][j];
+    const ssW = E[j][j];
+    const f = ssW === 0 ? Infinity : ssB / dfH / (ssW / dfE);
+    return { dv, f, df1: dfH, df2: dfE, p: pf(f, dfH, dfE), partialEta: ssB / (ssB + ssW) };
+  });
+  return { dvs, factor, n, groups: groups.map(({ name, n: gn, means }) => ({ name, n: gn, means })), eigenvalues: lam, stats, univariate };
+}
+
+/* ---------------- Exploratory factor analysis (principal axis, varimax) ---------------- */
+
+export type EfaResult = {
+  names: string[];
+  n: number;
+  nFactors: number;
+  eigenvalues: number[];
+  loadings: number[][];
+  communalities: number[];
+  ssLoadings: number[];
+  propVariance: number[];
+  kmo: number;
+  kmoItems: number[];
+  bartlettChi: number;
+  bartlettDf: number;
+  bartlettP: number;
+  rotation: "varimax" | "none";
+  iterations: number;
+  heywood: boolean;
+};
+
+export function kmoBand(v: number) {
+  if (v >= 0.9) return "Marvellous";
+  if (v >= 0.8) return "Meritorious";
+  if (v >= 0.7) return "Middling";
+  if (v >= 0.6) return "Mediocre";
+  if (v >= 0.5) return "Miserable";
+  return "Unacceptable";
+}
+
+function varimax(loadings: number[][], maxIter = 500, tol = 1e-10) {
+  const p = loadings.length;
+  const k = loadings[0].length;
+  if (k < 2) return loadings.map((row) => [...row]);
+  const h = loadings.map((row) => Math.sqrt(row.reduce((s, v) => s + v * v, 0)) || 1);
+  const A = loadings.map((row, i) => row.map((v) => v / h[i]));
+  for (let iter = 0; iter < maxIter; iter += 1) {
+    let changed = 0;
+    for (let a = 0; a < k - 1; a += 1)
+      for (let b = a + 1; b < k; b += 1) {
+        let U = 0;
+        let V = 0;
+        let C = 0;
+        let D = 0;
+        for (let i = 0; i < p; i += 1) {
+          const u = A[i][a] ** 2 - A[i][b] ** 2;
+          const v = 2 * A[i][a] * A[i][b];
+          U += u;
+          V += v;
+          C += u * u - v * v;
+          D += 2 * u * v;
+        }
+        const num = D - (2 * U * V) / p;
+        const den = C - (U * U - V * V) / p;
+        const phi = Math.atan2(num, den) / 4;
+        if (Math.abs(phi) > tol) {
+          changed += 1;
+          const c = Math.cos(phi);
+          const s = Math.sin(phi);
+          for (let i = 0; i < p; i += 1) {
+            const x = A[i][a];
+            const y = A[i][b];
+            A[i][a] = c * x + s * y;
+            A[i][b] = -s * x + c * y;
+          }
+        }
+      }
+    if (!changed) break;
+  }
+  return A.map((row, i) => row.map((v) => v * h[i]));
+}
+
+export function exploratoryFactorAnalysis(names: string[], rows: number[][], nFactorsInput: number | "kaiser", rotation: "varimax" | "none" = "varimax"): EfaResult {
+  const p = names.length;
+  const n = rows.length;
+  if (p < 3) throw new Error("Factor analysis needs at least three variables.");
+  if (n <= p) throw new Error("You need more participants (rows) than variables (columns).");
+  const means = names.map((_, j) => rows.reduce((s, r) => s + r[j], 0) / n);
+  const sds = means.map((m, j) => Math.sqrt(rows.reduce((s, r) => s + (r[j] - m) ** 2, 0) / (n - 1)));
+  if (sds.some((v) => v === 0)) throw new Error("A variable has no variation. Remove it and try again.");
+  const R = names.map((_, a) => names.map((__, b) => rows.reduce((s, r) => s + ((r[a] - means[a]) / sds[a]) * ((r[b] - means[b]) / sds[b]), 0) / (n - 1)));
+  const eigenvalues = jacobiEigen(R).values.sort((a, b) => b - a);
+  const kaiser = Math.max(1, eigenvalues.filter((v) => v > 1).length);
+  const nFactors = nFactorsInput === "kaiser" ? kaiser : Math.round(nFactorsInput);
+  if (nFactors < 1 || nFactors >= p) throw new Error(`Choose between 1 and ${p - 1} factors.`);
+  const Rinv = invertMatrix(R);
+  // KMO
+  const partial = R.map((row, i) => row.map((_, j) => -Rinv[i][j] / Math.sqrt(Rinv[i][i] * Rinv[j][j])));
+  let r2 = 0;
+  let q2 = 0;
+  const kmoItems = names.map((_, i) => {
+    let ri = 0;
+    let qi = 0;
+    for (let j = 0; j < p; j += 1)
+      if (j !== i) {
+        ri += R[i][j] ** 2;
+        qi += partial[i][j] ** 2;
+      }
+    r2 += ri;
+    q2 += qi;
+    return ri / (ri + qi);
+  });
+  const kmo = r2 / (r2 + q2);
+  const detR = determinant(R);
+  const bartlettChi = -(n - 1 - (2 * p + 5) / 6) * Math.log(Math.max(detR, 1e-300));
+  const bartlettDf = (p * (p - 1)) / 2;
+  // Iterated principal axis factoring.
+  let h = Rinv.map((row, i) => Math.min(0.995, Math.max(0.005, 1 - 1 / row[i])));
+  let loadings: number[][] = [];
+  let iterations = 0;
+  for (iterations = 1; iterations <= 1000; iterations += 1) {
+    const reduced = R.map((row, i) => row.map((v, j) => (i === j ? h[i] : v)));
+    const { values, vectors } = jacobiEigen(reduced);
+    const order = values.map((v, i) => [v, i]).sort((a, b) => b[0] - a[0]).slice(0, nFactors);
+    loadings = names.map((_, i) => order.map(([v, idx]) => vectors[i][idx] * Math.sqrt(Math.max(0, v))));
+    const next = loadings.map((row) => row.reduce((s, v) => s + v * v, 0));
+    const change = Math.max(...next.map((v, i) => Math.abs(v - h[i])));
+    h = next;
+    if (change < 1e-8) break;
+  }
+  if (rotation === "varimax") loadings = varimax(loadings);
+  // Sort factors by variance and make each factor's largest loadings positive.
+  const ss = Array.from({ length: nFactors }, (_, f) => loadings.reduce((s, row) => s + row[f] ** 2, 0));
+  const order = ss.map((v, i) => [v, i]).sort((a, b) => b[0] - a[0]).map(([, i]) => i);
+  loadings = loadings.map((row) => order.map((f) => row[f]));
+  for (let f = 0; f < nFactors; f += 1) {
+    const sum = loadings.reduce((s, row) => s + row[f], 0);
+    if (sum < 0) loadings.forEach((row) => (row[f] = -row[f]));
+  }
+  const ssLoadings = Array.from({ length: nFactors }, (_, f) => loadings.reduce((s, row) => s + row[f] ** 2, 0));
+  return {
+    names,
+    n,
+    nFactors,
+    eigenvalues,
+    loadings,
+    communalities: loadings.map((row) => row.reduce((s, v) => s + v * v, 0)),
+    ssLoadings,
+    propVariance: ssLoadings.map((v) => v / p),
+    kmo,
+    kmoItems,
+    bartlettChi,
+    bartlettDf,
+    bartlettP: chiSquarePValue(bartlettChi, bartlettDf),
+    rotation,
+    iterations,
+    heywood: h.some((v) => v >= 1),
+  };
+}

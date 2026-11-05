@@ -123,6 +123,8 @@ const calculatorComparison = [
   { task: "Measure a relationship between two scores", tool: "Correlation Calculator", href: "/correlation-calculator", method: "Pearson, Spearman or Kendall", report: "r or rho, n and p" },
   { task: "Test two factors and their interaction", tool: "Two-Way ANOVA Calculator", href: "/two-way-anova-calculator", method: "Type III F tests", report: "F, df, p and partial eta squared" },
   { task: "Compare three or more time points", tool: "Repeated Measures ANOVA Calculator", href: "/repeated-measures-anova-calculator", method: "F test with Greenhouse-Geisser correction", report: "F, corrected df, p and partial eta squared" },
+  { task: "Check the structure of a questionnaire", tool: "Factor Analysis Calculator", href: "/factor-analysis-calculator", method: "Principal axis factoring, varimax", report: "KMO, Bartlett, loadings, % variance" },
+  { task: "Compare groups controlling for a pre-test", tool: "ANCOVA Calculator", href: "/ancova-calculator", method: "ANCOVA with adjusted means", report: "F, df, p, adjusted means" },
   { task: "Predict a yes/no outcome", tool: "Logistic Regression Calculator", href: "/logistic-regression-calculator", method: "Maximum-likelihood logistic model", report: "χ², Nagelkerke R², odds ratios" },
   { task: "Report the precision of an estimate", tool: "Confidence Interval Calculator", href: "/confidence-interval-calculator", method: "t interval or Wilson interval", report: "Estimate with 95% CI [low, high]" },
 ];

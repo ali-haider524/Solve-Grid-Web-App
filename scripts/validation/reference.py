@@ -72,6 +72,56 @@ def uls(l):
     res=Ro-np.outer(l,l); np.fill_diagonal(res,0); return (res**2).sum()
 lo=np.abs(optimize.minimize(uls,np.full(Xo.shape[1],.5),method='BFGS',options={'gtol':1e-12}).x)
 chk("McDonald's omega",'ω total (one factor, minres)',js['omega']['omega'],lo.sum()**2/(lo.sum()**2+(1-lo**2).sum()))
+
+# Kendall's W (tie-corrected), independent formula
+from scipy.stats import rankdata
+M=np.array(d['kw_raters'],float); m,nobj=M.shape; Rk=np.array([rankdata(r) for r in M]); Rs=Rk.sum(0); S=((Rs-Rs.mean())**2).sum()
+T=sum(((np.unique(r,return_counts=True)[1]**3)-np.unique(r,return_counts=True)[1]).sum() for r in M)
+Wref=12*S/(m*m*(nobj**3-nobj)-m*T); chk("Kendall's W",'W (tie-corrected)',js['kendallW']['w'],Wref)
+chk("Kendall's W",'p',js['kendallW']['p'],stats.chi2.sf(m*(nobj-1)*Wref,nobj-1))
+# Fleiss' kappa: published example (Fleiss 1971 data as used in the Wikipedia worked example) and generic formula
+C=np.array(d['fleiss'],float); N,k=C.shape; nr=C[0].sum(); pj=C.sum(0)/(N*nr); Pi=((C**2).sum(1)-nr)/(nr*(nr-1)); kap=(Pi.mean()-(pj**2).sum())/(1-(pj**2).sum())
+chk("Fleiss' kappa",'κ',js['fleiss']['kappa'],kap)
+chk("Fleiss' kappa",'κ (published 14-rater example, 0.210)',js['fleiss_pub']['kappa'],0.2099,2e-3)
+# ANCOVA with treatment coding (independent of the sum coding used in SolveGrid)
+A=d['ancova']; grp=np.array([r[0] for r in A]); xa=np.array([r[1] for r in A]); ya=np.array([r[2] for r in A]); lv=sorted(set(grp))
+D=np.column_stack([(grp==l).astype(float) for l in lv[1:]])
+def sse(M):
+    M=np.column_stack([np.ones(len(ya)),M]); b=np.linalg.lstsq(M,ya,rcond=None)[0]; return ((ya-M@b)**2).sum(),b
+s_full,bf=sse(np.column_stack([D,xa])); s_nog,_=sse(xa[:,None]); s_nox,_=sse(D)
+dfe=len(ya)-len(lv)-1; Fg=((s_nog-s_full)/(len(lv)-1))/(s_full/dfe); Fx=(s_nox-s_full)/(s_full/dfe)
+chk('ANCOVA','F (group, adjusted)',js['ancova']['terms'][1]['f'],Fg); chk('ANCOVA','p (group)',js['ancova']['terms'][1]['p'],stats.f.sf(Fg,len(lv)-1,dfe)); chk('ANCOVA','F (covariate)',js['ancova']['terms'][0]['f'],Fx)
+for i,l in enumerate(lv):
+    adj=bf[0]+(bf[i] if i>0 else 0)+bf[-1]*xa.mean(); chk('ANCOVA',f'adjusted mean ({l})',js['ancova']['groups'][[g['name'] for g in js['ancova']['groups']].index(l)]['adjustedMean'],adj)
+# MANOVA via numpy eigenvalues of E^-1 H
+Mv=d['manova']; gm=np.array([r[0] for r in Mv]); Ym=np.array([r[1:] for r in Mv],float); lv=sorted(set(gm)); pp=Ym.shape[1]; q=len(lv)-1; dfe=len(Ym)-len(lv)
+mu=Ym.mean(0); H=sum((gm==l).sum()*np.outer(Ym[gm==l].mean(0)-mu,Ym[gm==l].mean(0)-mu) for l in lv); E=sum(((Ym[gm==l]-Ym[gm==l].mean(0)).T@(Ym[gm==l]-Ym[gm==l].mean(0))) for l in lv)
+ev=np.sort(np.real(np.linalg.eigvals(np.linalg.solve(E,H))))[::-1][:min(pp,q)]
+pil=(ev/(1+ev)).sum(); wil=np.prod(1/(1+ev)); hot=ev.sum(); roy=ev[0]
+chk('One-way MANOVA',"Pillai's trace",js['manova']['stats'][0]['value'],pil); chk('One-way MANOVA',"Wilks' lambda",js['manova']['stats'][1]['value'],wil)
+chk('One-way MANOVA',"Hotelling's trace",js['manova']['stats'][2]['value'],hot); chk('One-way MANOVA',"Roy's largest root",js['manova']['stats'][3]['value'],roy)
+s_=min(pp,q); m_=(abs(pp-q)-1)/2; n_=(dfe-pp-1)/2; Fp=(2*n_+s_+1)/(2*m_+s_+1)*pil/(s_-pil)
+chk('One-way MANOVA',"Pillai F",js['manova']['stats'][0]['f'],Fp); chk('One-way MANOVA',"Pillai p",js['manova']['stats'][0]['p'],stats.f.sf(Fp,s_*(2*m_+s_+1),s_*(2*n_+s_+1)))
+# EFA: KMO, Bartlett, PAF communalities via ULS optimisation (rotation invariant), varimax via SVD algorithm
+Xe=np.array(d['efa']); Re=np.corrcoef(Xe.T); Ri=np.linalg.inv(Re); Pm=-Ri/np.sqrt(np.outer(np.diag(Ri),np.diag(Ri))); off=~np.eye(9,dtype=bool)
+kmo=(Re[off]**2).sum()/((Re[off]**2).sum()+(Pm[off]**2).sum()); chk('Factor analysis (EFA)','KMO',js['efa']['kmo'],kmo)
+bc=-(len(Xe)-1-(2*9+5)/6)*np.log(np.linalg.det(Re)); chk('Factor analysis (EFA)',"Bartlett's χ²",js['efa']['bartlettChi'],bc)
+def ulsk(v):
+    Lm=v.reshape(9,3); res=Re-Lm@Lm.T; np.fill_diagonal(res,0); return (res**2).sum()
+Lr=optimize.minimize(ulsk,np.full(27,.3)+np.random.default_rng(1).normal(0,.05,27),method='BFGS',options={'gtol':1e-12,'maxiter':20000}).x.reshape(9,3)
+hc=(Lr**2).sum(1)
+for i in (0,4,8): chk('Factor analysis (EFA)',f'communality (item {i+1})',js['efa']['communalities'][i],hc[i],2e-3)
+def varimax_ref(Phi,gamma=1,q=500,tol=1e-12):
+    h=np.sqrt((Phi**2).sum(1)); A=Phi/h[:,None]; p_,k_=A.shape; Rm=np.eye(k_); dd=0
+    for _ in range(q):
+        L_=A@Rm; u,s,vh=np.linalg.svd(A.T@(L_**3-(gamma/p_)*L_@np.diag((L_**2).sum(0)))); Rm=u@vh; d_old=dd; dd=s.sum()
+        if d_old and dd/d_old<1+tol: break
+    return (A@Rm)*h[:,None]
+Vr=varimax_ref(Lr); Jl=np.array(js['efa']['loadings'])
+for f in range(3):
+    j=int(np.argmax([abs(np.corrcoef(Jl[:,f],Vr[:,c])[0,1]) for c in range(3)]))
+    chk('Factor analysis (EFA)',f'varimax loading max |λ| (factor {f+1})',np.abs(Jl[:,f]).max(),np.abs(Vr[:,j]).max(),2e-3)
+
 json.dump(rows,open('validation.json','w'),ensure_ascii=False,indent=1)
 bad=[r for r in rows if not r['ok']]
 print(len(rows),'checks;',len(bad),'mismatches')

@@ -50,6 +50,11 @@ export const contentUpdated: Record<string, string> = {
   "logistic-regression-calculator": "2026-11-05",
   "methodology": "2026-11-05",
   "validation": "2026-11-05",
+  "kendalls-w-calculator": "2026-11-05",
+  "fleiss-kappa-calculator": "2026-11-05",
+  "ancova-calculator": "2026-11-05",
+  "manova-calculator": "2026-11-05",
+  "factor-analysis-calculator": "2026-11-05",
 };
 
 export function lastUpdated(path: string): string {

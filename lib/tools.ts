@@ -1070,7 +1070,7 @@ export const tools: ToolInfo[] = [
       "cronbach alpha interpretation",
       "reverse coded items cronbach alpha",
     ],
-    relatedSlugs: ["likert-scale-calculator", "sample-size-calculator", "statistics-calculator"],
+    relatedSlugs: ["factor-analysis-calculator", "likert-scale-calculator", "sample-size-calculator", "statistics-calculator"],
     featured: true,
     priority: 0.95,
     useCases: [
@@ -1425,7 +1425,7 @@ export const tools: ToolInfo[] = [
       "kappa statistic calculator",
       "intercoder reliability",
     ],
-    relatedSlugs: ["intraclass-correlation-calculator", "cronbach-alpha-calculator", "statistical-test-chooser"],
+    relatedSlugs: ["fleiss-kappa-calculator", "intraclass-correlation-calculator", "cronbach-alpha-calculator", "statistical-test-chooser"],
     featured: true,
     priority: 0.93,
     useCases: [
@@ -1808,7 +1808,7 @@ export const tools: ToolInfo[] = [
       "f test calculator anova",
       "anova p value calculator",
     ],
-    relatedSlugs: ["t-test-calculator", "kruskal-wallis-test-calculator", "effect-size-calculator"],
+    relatedSlugs: ["t-test-calculator", "two-way-anova-calculator", "ancova-calculator", "kruskal-wallis-test-calculator", "effect-size-calculator"],
     featured: true,
     priority: 0.96,
     useCases: [
@@ -2519,6 +2519,291 @@ export const tools: ToolInfo[] = [
         question: "How do I report logistic regression in APA style?",
         answer:
           "Report the model test χ²(df, N = n) = X.XX, p = .XXX, Nagelkerke R², then each predictor's B, SE, Wald, p and OR with its 95% CI.",
+      },
+    ],
+  },
+  {
+    slug: "kendalls-w-calculator",
+    name: "Kendall's W Calculator",
+    shortName: "Kendall's W",
+    category: "statistics",
+    icon: "W",
+    title: "Kendall's W Calculator (Coefficient of Concordance)",
+    description:
+      "Free Kendall's W calculator: measure agreement between several raters ranking the same items, with tie correction, chi-square test, mean ranks and APA text.",
+    summary:
+      "Check how consistently three or more judges rank or score the same items, with the tie-corrected coefficient of concordance, its significance test and a ready APA sentence.",
+    keywords: [
+      "kendall's w calculator",
+      "kendall coefficient of concordance",
+      "inter-rater agreement ranking",
+      "kendall w online",
+      "how to interpret kendall's w",
+      "delphi study consensus kendall w",
+    ],
+    relatedSlugs: ["fleiss-kappa-calculator", "friedman-test-calculator", "intraclass-correlation-calculator"],
+    featured: true,
+    priority: 0.86,
+    useCases: [
+      "Check agreement between judges ranking essays or projects",
+      "Measure consensus in a Delphi study round",
+      "Test whether experts rank priorities in the same order",
+    ],
+    features: [
+      "Tie-corrected Kendall's W",
+      "Chi-square significance test",
+      "Mean rank for each item",
+      "Strength-of-agreement label",
+      "APA 7 report sentence",
+    ],
+    faqs: [
+      {
+        question: "What is Kendall's W?",
+        answer:
+          "Kendall's W, the coefficient of concordance, measures how much several raters agree when ranking the same set of items. It runs from 0 (no agreement) to 1 (all raters give identical rankings).",
+      },
+      {
+        question: "What is a good Kendall's W value?",
+        answer:
+          "A common guide is below .10 very weak, .10 to .29 weak, .30 to .49 moderate, .50 to .69 strong and .70 or above very strong agreement. In Delphi studies, W of .70 or more is often used as a sign of consensus.",
+      },
+      {
+        question: "Is Kendall's W the same as the Friedman test?",
+        answer:
+          "They use the same rank sums. The Friedman test asks whether items differ; Kendall's W rescales the same chi-square to show how strongly raters agree: W = χ² ÷ (m(n − 1)).",
+      },
+      {
+        question: "How do I report Kendall's W?",
+        answer:
+          "Write W, the chi-square, degrees of freedom, number of raters and p, for example W = .87, χ²(5, N = 5) = 21.84, p < .001.",
+      },
+    ],
+  },
+  {
+    slug: "fleiss-kappa-calculator",
+    name: "Fleiss' Kappa Calculator",
+    shortName: "Fleiss' kappa",
+    category: "statistics",
+    icon: "κ",
+    title: "Fleiss' Kappa Calculator for Multiple Raters",
+    description:
+      "Free Fleiss' kappa calculator for 3+ raters. Paste counts or raw ratings to get kappa, SE, z test, 95% CI, per-category kappa and Landis & Koch labels.",
+    summary:
+      "Measure agreement when three or more raters sort the same subjects into categories, from category counts or raw ratings, with significance test, confidence interval and per-category kappa.",
+    keywords: [
+      "fleiss kappa calculator",
+      "fleiss' kappa online",
+      "inter-rater reliability multiple raters",
+      "kappa for more than two raters",
+      "fleiss kappa interpretation",
+      "how to report fleiss kappa",
+    ],
+    relatedSlugs: ["cohens-kappa-calculator", "intraclass-correlation-calculator", "kendalls-w-calculator"],
+    featured: true,
+    priority: 0.86,
+    useCases: [
+      "Check agreement among several coders of interview themes",
+      "Measure reliability of a checklist rated by a panel",
+      "Report inter-rater reliability for a content analysis",
+    ],
+    features: [
+      "Fleiss' kappa with SE and z test",
+      "95% confidence interval",
+      "Kappa for each category",
+      "Accepts counts or raw ratings",
+      "Landis & Koch interpretation",
+    ],
+    faqs: [
+      {
+        question: "When should I use Fleiss' kappa instead of Cohen's kappa?",
+        answer:
+          "Use Cohen's kappa for exactly two raters. Use Fleiss' kappa when three or more raters each classify the same subjects into categories, even if different raters rate different subjects.",
+      },
+      {
+        question: "What is a good Fleiss' kappa?",
+        answer:
+          "Landis and Koch (1977) describe .01–.20 as slight, .21–.40 fair, .41–.60 moderate, .61–.80 substantial and .81–1.00 almost perfect agreement. Many studies aim for .60 or higher.",
+      },
+      {
+        question: "Do all subjects need the same number of raters?",
+        answer:
+          "Yes. Fleiss' kappa assumes each subject is rated by the same number of raters, although they do not have to be the same people.",
+      },
+      {
+        question: "How do I report Fleiss' kappa?",
+        answer:
+          "Report kappa, its 95% CI and p, plus the number of raters and subjects: κ = .21, 95% CI [.18, .24], p < .001, indicating fair agreement among 14 raters.",
+      },
+    ],
+  },
+  {
+    slug: "ancova-calculator",
+    name: "ANCOVA Calculator",
+    shortName: "ANCOVA",
+    category: "statistics",
+    icon: "F|x",
+    title: "ANCOVA Calculator with Adjusted Means",
+    description:
+      "Free one-way ANCOVA calculator. Compare groups while controlling for a covariate: adjusted F test, adjusted means, homogeneity of slopes check and APA text.",
+    summary:
+      "Compare group means after controlling for a covariate such as a pre-test, with Type III F tests, adjusted (estimated marginal) means, the homogeneity of regression slopes check and an APA write-up.",
+    keywords: [
+      "ancova calculator",
+      "one way ancova online",
+      "analysis of covariance calculator",
+      "adjusted means calculator",
+      "pretest posttest ancova",
+      "how to report ancova apa",
+    ],
+    relatedSlugs: ["one-way-anova-calculator", "two-way-anova-calculator", "linear-regression-calculator"],
+    featured: true,
+    priority: 0.88,
+    useCases: [
+      "Compare post-test scores of teaching methods while controlling for the pre-test",
+      "Adjust group comparisons for age or prior ability",
+      "Analyse a quasi-experimental pretest-posttest design",
+    ],
+    features: [
+      "Type III F test for the group effect",
+      "Covariate effect and slope",
+      "Adjusted means with standard errors",
+      "Homogeneity of regression slopes test",
+      "Partial eta squared and APA text",
+    ],
+    faqs: [
+      {
+        question: "What does an ANCOVA do?",
+        answer:
+          "An ANCOVA compares group means on an outcome after removing the effect of a covariate, a continuous variable such as a pre-test score. It gives a fairer comparison when groups started at different levels.",
+      },
+      {
+        question: "What are adjusted means?",
+        answer:
+          "Adjusted means are the group means you would expect if every group had the same average covariate score. Report and compare these, not the raw means, after an ANCOVA.",
+      },
+      {
+        question: "What is the homogeneity of regression slopes assumption?",
+        answer:
+          "It means the covariate relates to the outcome in the same way in every group. The calculator tests the group × covariate interaction; if it is significant, a standard ANCOVA can be misleading.",
+      },
+      {
+        question: "How do I report an ANCOVA in APA style?",
+        answer:
+          "Report the group effect after the covariate: F(2, 20) = 12.60, p < .001, partial η² = .56, and give the adjusted means with their standard errors.",
+      },
+    ],
+  },
+  {
+    slug: "manova-calculator",
+    name: "MANOVA Calculator",
+    shortName: "MANOVA",
+    category: "statistics",
+    icon: "Λ",
+    title: "One-Way MANOVA Calculator (Pillai, Wilks)",
+    description:
+      "Free one-way MANOVA calculator. Test group differences on several dependent variables with Pillai's trace, Wilks' lambda, Hotelling, Roy and follow-up ANOVAs.",
+    summary:
+      "Test whether groups differ on two or more outcomes together, with all four multivariate statistics and their F approximations, partial eta squared, follow-up ANOVAs and an APA write-up.",
+    keywords: [
+      "manova calculator",
+      "one way manova online",
+      "pillai's trace calculator",
+      "wilks lambda calculator",
+      "multivariate analysis of variance",
+      "how to report manova apa",
+    ],
+    relatedSlugs: ["one-way-anova-calculator", "two-way-anova-calculator", "repeated-measures-anova-calculator"],
+    featured: true,
+    priority: 0.86,
+    useCases: [
+      "Compare reading, writing and maths scores across schools",
+      "Test a programme's effect on several wellbeing measures",
+      "Analyse a questionnaire with several related subscales",
+    ],
+    features: [
+      "Pillai's trace, Wilks' lambda, Hotelling's trace and Roy's root",
+      "F approximations with exact df",
+      "Multivariate partial eta squared",
+      "Follow-up univariate ANOVAs",
+      "APA 7 report sentence",
+    ],
+    faqs: [
+      {
+        question: "When should I use a MANOVA?",
+        answer:
+          "Use a one-way MANOVA when you compare two or more groups on two or more related numeric outcomes at once, instead of running a separate ANOVA for each outcome.",
+      },
+      {
+        question: "Which MANOVA statistic should I report?",
+        answer:
+          "Pillai's trace is the safest default because it is the most robust to unequal group sizes and assumption violations. Wilks' lambda is also widely reported.",
+      },
+      {
+        question: "What should I do after a significant MANOVA?",
+        answer:
+          "Look at the follow-up ANOVAs for each dependent variable, using a Bonferroni-adjusted alpha (for example .05 ÷ 3), and then post hoc tests for the outcomes that differ.",
+      },
+      {
+        question: "How do I report a MANOVA in APA style?",
+        answer:
+          "Report the statistic, F, both df, p and partial η²: Pillai's V = .39, F(6, 52) = 2.07, p = .072, partial η² = .19.",
+      },
+    ],
+  },
+  {
+    slug: "factor-analysis-calculator",
+    name: "Factor Analysis Calculator",
+    shortName: "Factor analysis (EFA)",
+    category: "statistics",
+    icon: "EFA",
+    title: "Exploratory Factor Analysis Calculator (EFA)",
+    description:
+      "Free exploratory factor analysis calculator: KMO, Bartlett's test, scree plot, principal axis loadings with varimax rotation, communalities and APA text.",
+    summary:
+      "Find the underlying factors in questionnaire items with KMO and Bartlett's test, eigenvalues and a scree plot, principal axis factoring, varimax rotation, communalities and a write-up.",
+    keywords: [
+      "factor analysis calculator",
+      "exploratory factor analysis online",
+      "efa calculator",
+      "kmo and bartlett test calculator",
+      "varimax rotation calculator",
+      "factor loadings calculator",
+    ],
+    relatedSlugs: ["cronbach-alpha-calculator", "correlation-calculator", "likert-scale-calculator"],
+    featured: true,
+    priority: 0.88,
+    useCases: [
+      "Check the structure of a new questionnaire before reliability analysis",
+      "Decide how many dimensions a scale has",
+      "Find items that cross-load or load weakly",
+    ],
+    features: [
+      "KMO overall and per item",
+      "Bartlett's test of sphericity",
+      "Eigenvalues and scree plot",
+      "Principal axis factoring with varimax rotation",
+      "Communalities and variance explained",
+    ],
+    faqs: [
+      {
+        question: "What is exploratory factor analysis?",
+        answer:
+          "Exploratory factor analysis (EFA) groups questionnaire items that are strongly correlated into a smaller number of factors, so you can see which items measure the same underlying idea.",
+      },
+      {
+        question: "What KMO value is acceptable?",
+        answer:
+          "KMO of .60 or higher is usually needed, and .80 or higher is good. Bartlett's test should be significant (p < .05), showing the items are correlated enough to factor.",
+      },
+      {
+        question: "How many factors should I keep?",
+        answer:
+          "Start with factors that have eigenvalues above 1 (Kaiser's rule), check the elbow of the scree plot, and keep a solution that makes theoretical sense. You can set the number of factors yourself.",
+      },
+      {
+        question: "What is a good factor loading?",
+        answer:
+          "Loadings of .40 or higher are commonly treated as meaningful. An item should load strongly on one factor and weakly on the others; items below .40 everywhere are candidates for removal.",
       },
     ],
   },

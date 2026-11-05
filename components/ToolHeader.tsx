@@ -59,6 +59,9 @@ const statisticsMenuGroups: Array<{ title: string; items: Array<[slug: string, l
       ["likert-scale-calculator", "Likert scale analysis"],
       ["cohens-kappa-calculator", "Cohen's kappa"],
       ["intraclass-correlation-calculator", "Intraclass correlation (ICC)"],
+      ["fleiss-kappa-calculator", "Fleiss' kappa"],
+      ["kendalls-w-calculator", "Kendall's W"],
+      ["factor-analysis-calculator", "Factor analysis (EFA)"],
     ],
   },
   {
@@ -68,6 +71,8 @@ const statisticsMenuGroups: Array<{ title: string; items: Array<[slug: string, l
       ["one-way-anova-calculator", "One-way ANOVA"],
       ["two-way-anova-calculator", "Two-way ANOVA"],
       ["repeated-measures-anova-calculator", "Repeated measures ANOVA"],
+      ["ancova-calculator", "ANCOVA"],
+      ["manova-calculator", "MANOVA"],
       ["chi-square-calculator", "Chi-square test"],
       ["fishers-exact-test-calculator", "Fisher's exact test"],
       ["mcnemar-test-calculator", "McNemar test"],

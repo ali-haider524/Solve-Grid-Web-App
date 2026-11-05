@@ -26,7 +26,7 @@ export default function MethodologyPage() {
             "Formula-based research calculations such as Slovin and Cochran sample size, Cronbach's alpha, and Likert weighted means",
             "Algebraic and matrix methods for equations, row reduction, inverses, determinants, rank, and supported linear systems",
             "Numerical methods for selected differential-equation and simulation workspaces",
-            "Statistical calculations for descriptive statistics, t-tests, one-way, two-way and repeated measures ANOVA, correlation, linear and logistic regression, chi-square, Fisher's exact and non-parametric tests",
+            "Statistical calculations for descriptive statistics, t-tests, one-way, two-way and repeated measures ANOVA, correlation, linear and logistic regression, chi-square, Fisher's exact and non-parametric tests, ANCOVA, MANOVA, exploratory factor analysis, and reliability and agreement statistics (Cronbach's alpha, McDonald's omega, Cohen's and Fleiss' kappa, Kendall's W, ICC)",
             "Defined conversion relationships for supported scientific and engineering units",
           ],
         },

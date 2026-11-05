@@ -37,6 +37,11 @@ const toolLinks: Record<string, string> = {
   "Two-way ANOVA (Type III)": "/two-way-anova-calculator",
   "Repeated-measures ANOVA": "/repeated-measures-anova-calculator",
   "Logistic regression": "/logistic-regression-calculator",
+  "Kendall's W": "/kendalls-w-calculator",
+  "Fleiss' kappa": "/fleiss-kappa-calculator",
+  "ANCOVA": "/ancova-calculator",
+  "One-way MANOVA": "/manova-calculator",
+  "Factor analysis (EFA)": "/factor-analysis-calculator",
 };
 
 const show = (v: number) => (Math.abs(v) < 0.001 && v !== 0 ? v.toExponential(4) : Number(v.toPrecision(7)).toString());
