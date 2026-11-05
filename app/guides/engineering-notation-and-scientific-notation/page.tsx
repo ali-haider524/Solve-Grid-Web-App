@@ -2,7 +2,7 @@ import GuideArticle from "../../../components/GuideArticle";
 import { createStaticPageMetadata } from "../../../lib/seo";
 
 export const metadata = createStaticPageMetadata(
-  "Engineering Notation vs Scientific Notation: SI Prefix Guide",
+  "Engineering vs Scientific Notation: SI Prefixes",
   "Compare engineering notation and scientific notation, learn ENG notation and SI prefixes, and convert kilo, milli, micro, nano, and other powers of ten.",
   "/guides/engineering-notation-and-scientific-notation",
 );

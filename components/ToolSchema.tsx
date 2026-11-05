@@ -4,6 +4,7 @@ import {
   getToolPath,
   toolCategories,
 } from "../lib/tools";
+import { lastUpdated } from "../lib/content-dates";
 import { siteUrl } from "../lib/site";
 
 type ToolSchemaProps = { slug: string };
@@ -29,6 +30,10 @@ export default function ToolSchema({ slug }: ToolSchemaProps) {
         url: pageUrl,
         inLanguage: "en",
         isPartOf: { "@id": `${siteUrl}/#website` },
+        author: { "@id": `${siteUrl}/about#author` },
+        publisher: { "@id": `${siteUrl}/#organization` },
+        dateModified: lastUpdated(tool.slug),
+        primaryImageOfPage: { "@type": "ImageObject", url: `${siteUrl}/og/${tool.slug}.png`, width: 1200, height: 630 },
         mainEntity: { "@id": applicationId },
       },
       {

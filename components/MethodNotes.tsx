@@ -24,8 +24,29 @@ export function headingId(text: string): string {
 // Long-form, crawlable method notes rendered under a calculator.
 export default function MethodNotes({ eyebrow, title, sections }: MethodNotesProps) {
   const titleId = `method-${headingId(title)}`;
+  // Worked examples with numbered steps are also described as HowTo structured data.
+  const howTos = sections
+    .filter((section) => section.steps?.length)
+    .map((section) => ({
+      "@type": "HowTo",
+      name: section.heading,
+      description: section.paragraphs?.join(" ") || title,
+      step: (section.steps ?? []).map((step, index) => ({
+        "@type": "HowToStep",
+        position: index + 1,
+        name: `Step ${index + 1}`,
+        text: step,
+        url: `#${headingId(section.heading)}`,
+      })),
+    }));
   return (
     <section className={styles.wrap} aria-labelledby={titleId}>
+      {howTos.length ? (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify({ "@context": "https://schema.org", "@graph": howTos }) }}
+        />
+      ) : null}
       <p className={styles.eyebrow}>{eyebrow}</p>
       <h2 className={styles.title} id={titleId}>
         {title}

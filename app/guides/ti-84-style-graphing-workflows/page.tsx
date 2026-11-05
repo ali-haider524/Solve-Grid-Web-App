@@ -2,7 +2,7 @@ import GuideArticle from "../../../components/GuideArticle";
 import { createStaticPageMetadata } from "../../../lib/seo";
 
 export const metadata = createStaticPageMetadata(
-  "TI-84 Style Online Calculator Workflows – Graph, Table & Solve",
+  "TI-84 Style Online Calculator: Graph, Table, Solve",
   "TI-84 style online workflows for graphing, tables, roots, intersections, matrices and statistics. SolveGrid is not affiliated with Texas Instruments.",
   "/guides/ti-84-style-graphing-workflows",
 );

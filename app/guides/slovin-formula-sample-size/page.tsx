@@ -1,4 +1,5 @@
 import GuideArticle from "../../../components/GuideArticle";
+import VideoExplainer from "../../../components/VideoExplainer";
 import { createStaticPageMetadata } from "../../../lib/seo";
 
 export const metadata = createStaticPageMetadata(
@@ -110,6 +111,15 @@ export default function SlovinFormulaGuide() {
           description: "After collecting data, compute weighted means and verbal interpretations for each statement.",
         },
       ]}
-    />
+    >
+      <VideoExplainer
+        id="9bwsdXiJhKg"
+        title="Slovin's Formula: How Many Respondents Do I Need for My Thesis? (Sample Size Example)"
+        description="Find your thesis sample size with Slovin's formula step by step: a population of 2,500 at a 5% margin of error gives 344.83, rounded up to 345 respondents."
+        uploadDate="2026-11-03T12:37:20-08:00"
+        duration="PT45S"
+        pageUrl="https://solvegrid.online/guides/slovin-formula-sample-size"
+      />
+    </GuideArticle>
   );
 }

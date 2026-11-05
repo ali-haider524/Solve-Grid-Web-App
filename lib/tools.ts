@@ -2194,7 +2194,7 @@ export const tools: ToolInfo[] = [
     shortName: "Confidence interval",
     category: "statistics",
     icon: "[ ]",
-    title: "Confidence Interval Calculator for a Mean or Proportion",
+    title: "Confidence Interval Calculator (Mean or Proportion)",
     description:
       "Free confidence interval calculator for a mean (t interval) or a proportion (Wilson and Wald). Get the margin of error, the interval and an APA sentence.",
     summary:

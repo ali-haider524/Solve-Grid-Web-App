@@ -43,6 +43,7 @@ type GuideProps = {
   reference?: GuideReference;
   faqs?: GuideFaq[];
   toolLinks: GuideLink[];
+  children?: React.ReactNode;
 };
 
 export default function GuideArticle({
@@ -56,6 +57,7 @@ export default function GuideArticle({
   reference,
   faqs = [],
   toolLinks,
+  children,
 }: GuideProps) {
   const articleUrl = `${siteUrl}/guides/${slug}`;
   const currentGuide = getGuideBySlug(slug);
@@ -267,6 +269,8 @@ export default function GuideArticle({
             </Link>
           </aside>
         </section>
+
+        {children}
 
         {relatedGuides.length ? (
           <section className={styles.relatedGuides} aria-labelledby={`${slug}-related-guides`}>

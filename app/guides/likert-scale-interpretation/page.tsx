@@ -2,7 +2,7 @@ import GuideArticle from "../../../components/GuideArticle";
 import { createStaticPageMetadata } from "../../../lib/seo";
 
 export const metadata = createStaticPageMetadata(
-  "Likert Scale Interpretation: Weighted Mean Range Tables",
+  "Likert Scale Interpretation: Weighted Mean Ranges",
   "Interpret Likert weighted means with 4-, 5- and 7-point range tables, see how the interval width is calculated, and report results in a thesis.",
   "/guides/likert-scale-interpretation",
 );

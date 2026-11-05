@@ -2,7 +2,7 @@ import GuideArticle from "../../../components/GuideArticle";
 import { createStaticPageMetadata } from "../../../lib/seo";
 
 export const metadata = createStaticPageMetadata(
-  "Two-Node Nodal Analysis Guide – KCL, Conductance Matrix & Node Voltages",
+  "Two-Node Nodal Analysis: KCL and Node Voltages",
   "Learn two-node nodal analysis with Kirchhoff current law, conductance matrices, current injections, node voltages, and a worked resistor-circuit example.",
   "/guides/two-node-nodal-analysis",
 );

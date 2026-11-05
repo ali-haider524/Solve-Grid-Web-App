@@ -12,7 +12,7 @@ import styles from "./guides.module.css";
 import { createStaticPageMetadata } from "../../lib/seo";
 
 export const metadata = createStaticPageMetadata(
-  "Statistics & Calculator Guides – Formulas and Worked Examples",
+  "Statistics Guides: Formulas and Worked Examples",
   "Guides with formulas and worked examples: choosing a statistical test, APA reporting, sample size, Likert analysis, standard deviation, and more.",
   "/guides",
 );

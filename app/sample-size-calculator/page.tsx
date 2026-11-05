@@ -1,4 +1,5 @@
 import MethodNotes from "../../components/MethodNotes";
+import VideoExplainer from "../../components/VideoExplainer";
 import SiteFooter from "../../components/SiteFooter";
 import ToolCrossLinks from "../../components/ToolCrossLinks";
 import ToolSchema from "../../components/ToolSchema";
@@ -13,6 +14,14 @@ export default function SampleSizeCalculatorPage() {
       <ToolSchema slug="sample-size-calculator" />
       <main id="main-content">
         <SampleSizeCalculator />
+        <VideoExplainer
+          id="9bwsdXiJhKg"
+          title="Slovin's Formula: How Many Respondents Do I Need for My Thesis? (Sample Size Example)"
+          description="Find your thesis sample size with Slovin's formula step by step: a population of 2,500 at a 5% margin of error gives 344.83, rounded up to 345 respondents."
+          uploadDate="2026-11-03T12:37:20-08:00"
+          duration="PT45S"
+          pageUrl="https://solvegrid.online/sample-size-calculator"
+        />
         <MethodNotes
           eyebrow="METHOD"
           title="How to calculate sample size for a thesis or survey"

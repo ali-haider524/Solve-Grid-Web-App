@@ -687,3 +687,44 @@ canvas, img, svg { max-width: 100%; }
 @media(max-width:900px){.home-page #what-is-solvegrid{grid-template-columns:1fr}.home-page .home-steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:640px){.home-page .home-answer-section{width:min(100% - 28px,1180px);padding:40px 0 4px}.home-page .home-steps,.home-page .home-terms{grid-template-columns:1fr}}
 .home-page .home-figure{margin:22px 0 0}.home-page .home-figure img{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:18px;background:#f5f8ff}
+/* ---------- Mobile readability and tap-target floor (applies site-wide) ----------
+   Body text at least 16px, small UI labels at least 12px, and every standalone
+   control or link at least 48 × 48 px on phones. Inline links inside sentences
+   keep the surrounding text size. */
+@media (max-width: 640px) {
+  html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+  body { font-size: 16px; }
+  main p, main li, main dd, main dt, main td, main blockquote, main figcaption,
+  main summary, main label, main details p, main code, main pre,
+  footer p, footer li, footer a {
+    font-size: 16px !important;
+    line-height: 1.6 !important;
+  }
+  input, select, textarea, button { font-size: 16px !important; }
+  /* Inline text keeps its parent size but never drops below 14px. */
+  main span, main strong, main b, main small { font-size: max(14px, 1em) !important; }
+  /* Eyebrows, status chips, table headers and other uppercase micro-labels: legible 12px minimum. */
+  main [class*="eyebrow"], main [class*="hero"] > p:first-child, main thead th,
+  main [class*="status"], main caption, main [class*="resultCard"] > p:first-child { font-size: 12px !important; }
+
+  /* Tap targets: 48px minimum for buttons, form controls, summaries and standalone links. */
+  button, select, input:not([type="checkbox"]):not([type="radio"]), summary,
+  [role="button"] {
+    min-height: 48px !important;
+  }
+  button, [role="button"] { min-width: 48px; }
+  input[type="checkbox"], input[type="radio"] { width: 24px !important; height: 24px !important; flex: 0 0 24px !important; margin: 12px; }
+  main h2 a, main h3 a { display: inline-flex; align-items: center; min-height: 48px; }
+  main nav a { font-size: max(14px, 1em) !important; }
+  header a, header button, nav a, footer a,
+  main a:not(p a):not(li > a:only-child:not([class])):not(td a):not(dd a):not(blockquote a) {
+    min-height: 48px;
+    min-width: 48px;
+  }
+  /* Make inline-level standalone links honour the 48px height without un-hiding anything. */
+  footer a:not([hidden]), main ul:not([class]) > li > a:only-child { display: inline-flex; align-items: center; }
+  footer li, nav li { margin-block: 0 !important; }
+  main td a, main dd a { display: inline-flex; align-items: center; min-height: 48px; }
+  /* Keep adjacent targets apart. */
+  [class*="chipRow"], [class*="tabRow"], [class*="actions"], [class*="hero-actions"] { gap: 8px !important; }
+}

@@ -2,7 +2,7 @@ import GuideArticle from "../../../components/GuideArticle";
 import { createStaticPageMetadata } from "../../../lib/seo";
 
 export const metadata = createStaticPageMetadata(
-  "Polynomial Roots and Complex Roots – Coefficients, Examples & Residuals",
+  "Polynomial Roots & Complex Roots: Worked Examples",
   "Learn how to find polynomial roots from coefficients, read real and complex roots, and understand residual checks for numerical polynomial answers.",
   "/guides/polynomial-roots-and-complex-roots",
 );

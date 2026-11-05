@@ -1,6 +1,6 @@
 import LegalPage from "../../components/LegalPage";
 import { createStaticPageMetadata } from "../../lib/seo";
-import { siteAuthor } from "../../lib/site";
+import { siteAuthor, siteUrl } from "../../lib/site";
 
 export const metadata = createStaticPageMetadata(
   "About SolveGrid and Its Author",
@@ -9,7 +9,19 @@ export const metadata = createStaticPageMetadata(
 );
 
 export default function AboutPage() {
+  const profileSchema = {
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    "@id": `${siteUrl}/about#profile`,
+    url: `${siteUrl}/about`,
+    name: "About SolveGrid and its author",
+    isPartOf: { "@id": `${siteUrl}/#website` },
+    mainEntity: { "@id": `${siteUrl}/about#author` },
+    about: { "@id": `${siteUrl}/#organization` },
+  };
   return (
+    <>
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(profileSchema) }} />
     <LegalPage
       path="/about"
       eyebrow="ABOUT SOLVEGRID"
@@ -58,5 +70,6 @@ export default function AboutPage() {
         },
       ]}
     />
+    </>
   );
 }

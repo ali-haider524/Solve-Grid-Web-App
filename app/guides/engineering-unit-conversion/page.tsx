@@ -2,7 +2,7 @@ import GuideArticle from "../../../components/GuideArticle";
 import { createStaticPageMetadata } from "../../../lib/seo";
 
 export const metadata = createStaticPageMetadata(
-  "Engineering Unit Conversion – Pressure, Torque, Energy, Power & Density",
+  "Engineering Unit Conversion: Pressure, Torque, Power",
   "Learn engineering unit conversion for pressure, force, torque, energy, power, density, frequency, speed, acceleration, and SI-prefix based calculations.",
   "/guides/engineering-unit-conversion",
 );

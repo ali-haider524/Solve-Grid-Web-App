@@ -2,7 +2,7 @@ import GuideArticle from "../../../components/GuideArticle";
 import { createStaticPageMetadata } from "../../../lib/seo";
 
 export const metadata = createStaticPageMetadata(
-  "Unit Conversion Formulas – Metric, Imperial, Temperature & Speed",
+  "Unit Conversion Formulas: Metric and Imperial",
   "Common unit conversion formulas for metric and imperial units: temperature, speed, pressure, energy, torque, density and data units.",
   "/guides/unit-conversion-formulas",
 );
