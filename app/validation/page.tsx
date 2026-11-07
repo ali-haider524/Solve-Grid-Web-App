@@ -1,6 +1,7 @@
 import Link from "next/link";
 import LegalPage from "../../components/LegalPage";
 import { createStaticPageMetadata } from "../../lib/seo";
+import { siteUrl } from "../../lib/site";
 import { validationReference, validationRows, validationRunDate } from "../../lib/validation-results";
 import styles from "./validation.module.css";
 
@@ -51,7 +52,24 @@ export default function ValidationPage() {
   const passed = validationRows.filter((row) => row.ok).length;
   const maxDiff = Math.max(...validationRows.map((row) => Math.abs(row.solvegrid - row.reference)));
   const tests = new Set(validationRows.map((row) => row.test)).size;
+  const datasetSchema = {
+    "@context": "https://schema.org",
+    "@type": "Dataset",
+    "@id": `${siteUrl}/validation#dataset`,
+    name: "SolveGrid statistics calculator validation results",
+    description: `${validationRows.length} numerical checks across ${tests} statistical tests comparing SolveGrid's browser calculations with independent reference implementations in ${validationReference}. ${passed} of ${validationRows.length} checks matched; largest absolute difference ${maxDiff.toExponential(1)}.`,
+    url: `${siteUrl}/validation`,
+    dateModified: validationRunDate,
+    creator: { "@id": `${siteUrl}/#organization` },
+    publisher: { "@id": `${siteUrl}/#organization` },
+    isAccessibleForFree: true,
+    keywords: ["statistics calculator validation", "SciPy", "NumPy", "t-test", "ANOVA", "chi-square", "Cronbach's alpha", "factor analysis"],
+    measurementTechnique: "Re-computation of each statistic on fixed datasets with SciPy and NumPy; agreement within 0.1% relative tolerance",
+    variableMeasured: [...new Set(validationRows.map((row) => row.test))],
+  };
   return (
+    <>
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(datasetSchema) }} />
     <LegalPage
       path="/validation"
       eyebrow="VALIDATION"
@@ -113,5 +131,6 @@ export default function ValidationPage() {
         </div>
       </section>
     </LegalPage>
+    </>
   );
 }

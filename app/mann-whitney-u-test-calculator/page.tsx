@@ -24,6 +24,20 @@ export default function MannWhitneyPage() {
               ],
             },
             {
+              heading: "Worked example: two groups of ten",
+              paragraphs: [
+                "Group 1 (median 13.5) and Group 2 (median 10.0), n = 10 each, with some tied scores."
+              ],
+              steps: [
+                "Rank all 20 scores together, giving ties the average rank.",
+                "Sum the ranks in each group and compute U for each; the smaller is U = 12.",
+                "With ties, use the normal approximation with continuity correction: z = 2.90.",
+                "Two-sided p = .004.",
+                "Effect size r = z ÷ √N = .65, a large effect.",
+                "Report: U = 12, z = 2.90, p = .004, r = .65."
+              ]
+            },
+            {
               heading: "Formula",
               formula: "U₁ = R₁ − n₁(n₁ + 1) ÷ 2,   U₂ = n₁n₂ − U₁,   U = min(U₁, U₂)",
               paragraphs: [

@@ -18,6 +18,20 @@ export default function KruskalWallisPage() {
           title="Kruskal-Wallis test: formula, post hoc tests, and reporting"
           sections={[
             {
+              heading: "Worked example: three groups of ten",
+              paragraphs: [
+                "Medians were 13.5, 10.0 and 16.5 (n = 10 per group)."
+              ],
+              steps: [
+                "Rank all 30 scores together; mean ranks are 15.6, 6.7 and 24.2.",
+                "Compute H with the tie correction: H = 19.92.",
+                "df = number of groups − 1 = 2, so p < .001.",
+                "Effect size: ε² = .69.",
+                "Follow up with Dunn's pairwise tests (Bonferroni-adjusted) to see which groups differ.",
+                "Report: H(2) = 19.92, p < .001, ε² = .69."
+              ]
+            },
+            {
               heading: "When to use it",
               list: [
                 "Three or more independent groups (different people in each)",

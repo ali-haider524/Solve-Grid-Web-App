@@ -5,7 +5,7 @@ import {
   guideTopics,
 } from "../lib/guides";
 import { lastUpdated } from "../lib/content-dates";
-import { siteUrl } from "../lib/site";
+import { siteAuthor, siteUrl } from "../lib/site";
 import SiteFooter from "./SiteFooter";
 import ToolHeader from "./ToolHeader";
 import styles from "./GuideArticle.module.css";
@@ -173,6 +173,14 @@ export default function GuideArticle({
           <p>{eyebrow}</p>
           <h1>{title}</h1>
           <span>{description}</span>
+          <p className={styles.byline}>
+            By <Link href="/about" rel="author">{siteAuthor.name}</Link>, {siteAuthor.jobTitle.toLowerCase()} ·{" "}
+            Updated{" "}
+            <time dateTime={lastUpdated(`guides/${slug}`)}>
+              {new Date(`${lastUpdated(`guides/${slug}`)}T00:00:00Z`).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" })}
+            </time>{" "}
+            · Results checked against <Link href="/validation">SciPy reference values</Link>
+          </p>
           {topic ? (
             <Link className={styles.topicLink} href={`/guides#${currentGuide?.topic}`}>
               Explore {topic.label.toLowerCase()} →

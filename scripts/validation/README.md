@@ -10,4 +10,4 @@ node run-solvegrid.cjs > js.json
 python3 reference.py          # needs numpy + scipy; writes validation.json
 ```
 
-`lib/validation-results.ts` is generated from `validation.json` and shown on /validation.
+`reference.py` also rewrites `lib/validation-results.ts` (with today's date), which the /validation page and /llms-full.txt read. Commit it after each run.

@@ -24,6 +24,19 @@ export default function OneWayAnovaPage() {
               ]
             },
             {
+              heading: "Worked example: three groups of ten",
+              paragraphs: [
+                "Group A: M = 13.40, SD = 2.22; Group B: M = 10.30, SD = 1.49; Group C: M = 16.50, SD = 1.58 (n = 10 each)."
+              ],
+              steps: [
+                "Between-groups df = 2, within-groups df = 27.",
+                "F = MS between ÷ MS within = 29.82, p < .001.",
+                "Effect size: η² = .69, a large effect.",
+                "Tukey HSD: every pair differs (A vs B and A vs C p = .002; B vs C p < .001).",
+                "Report: F(2, 27) = 29.82, p < .001, η² = .69."
+              ]
+            },
+            {
               heading: "When to use a one-way ANOVA",
               paragraphs: [
                 "Use it to compare the means of three or more independent groups on one numeric outcome, for example exam scores under lecture, blended, and flipped teaching. With only two groups, use a t-test (the results are equivalent: F = t²). If the same people are measured in every condition, use a repeated-measures ANOVA instead.",

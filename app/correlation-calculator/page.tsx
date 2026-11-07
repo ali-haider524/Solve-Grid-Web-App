@@ -24,6 +24,20 @@ export default function CorrelationPage() {
               ]
             },
             {
+              heading: "Worked example: study hours and exam scores",
+              paragraphs: [
+                "15 students reported weekly study hours (mean 5.47) and exam scores (mean 67.27)."
+              ],
+              steps: [
+                "Compute Pearson's r from the paired data: r = .792.",
+                "Degrees of freedom: n − 2 = 13.",
+                "Test it: t = r√13 ÷ √(1 − r²) gives p < .001.",
+                "95% confidence interval for r: [.47, .93].",
+                "Shared variance: r² = .63, so hours account for about 63% of the variation in scores.",
+                "Report: r(13) = .79, p < .001, 95% CI [.47, .93], a very strong positive correlation."
+              ]
+            },
+            {
               heading: "Pearson, Spearman, or Kendall?",
               list: [
                 "Pearson r: both variables numeric, a straight-line relationship, no extreme outliers (e.g. study hours and exam score)",
