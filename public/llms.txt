@@ -53,6 +53,8 @@ SolveGrid provides 32 public tools. Most current calculations run directly in th
 - [How to report a t-test in APA style](https://solvegrid.online/guides/how-to-report-t-test-apa)
 - [Statistical treatment of data in a thesis](https://solvegrid.online/guides/statistical-treatment-of-data)
 - [Slovin's formula sample size table (N = 50 to 100,000)](https://solvegrid.online/guides/slovin-sample-size-table)
+- [Pearson r interpretation table](https://solvegrid.online/guides/pearson-r-interpretation-table)
+- [Frequency and percentage formula for a thesis](https://solvegrid.online/guides/frequency-and-percentage-formula)
 - [Sample Size Calculator (Slovin, Yamane, Cochran)](https://solvegrid.online/sample-size-calculator)
 - [Cronbach's Alpha Calculator](https://solvegrid.online/cronbach-alpha-calculator)
 - [Likert Scale Weighted Mean Calculator](https://solvegrid.online/likert-scale-calculator)

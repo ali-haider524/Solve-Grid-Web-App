@@ -46,6 +46,22 @@ export const guideTopics: Record<
 
 export const guides: GuideInfo[] = [
   {
+    slug: "pearson-r-interpretation-table",
+    title: "Pearson r interpretation table",
+    summary:
+      "Label the strength and direction of a correlation, check significance and r², and write it up for a thesis.",
+    toolSlugs: ["correlation-calculator", "linear-regression-calculator"],
+    topic: "statistics",
+  },
+  {
+    slug: "frequency-and-percentage-formula",
+    title: "Frequency and percentage formula for a thesis",
+    summary:
+      "Use P = (f ÷ N) × 100 for the profile of respondents, with a worked table, ranking and a sample interpretation.",
+    toolSlugs: ["likert-scale-calculator", "statistics-calculator"],
+    topic: "statistics",
+  },
+  {
     slug: "statistical-treatment-of-data",
     title: "Statistical treatment of data in a thesis",
     summary:
@@ -330,7 +346,8 @@ const preferredGuideSlugsByTool: Record<string, string[]> = {
   "kruskal-wallis-test-calculator": ["choose-a-statistical-test", "how-to-report-anova-apa"],
   "intraclass-correlation-calculator": ["choose-a-statistical-test", "likert-scale-interpretation"],
   "linear-regression-calculator": ["how-to-report-regression-apa", "how-to-report-correlation-apa", "choose-a-statistical-test"],
-  "correlation-calculator": ["how-to-report-correlation-apa", "how-to-report-regression-apa", "choose-a-statistical-test"],
+  "correlation-calculator": [
+    "pearson-r-interpretation-table", "how-to-report-correlation-apa", "how-to-report-regression-apa", "choose-a-statistical-test"],
   "one-way-anova-calculator": ["how-to-report-anova-apa", "choose-a-statistical-test"],
   "t-test-calculator": ["how-to-report-t-test-apa", "choose-a-statistical-test"],
   "sobel-test-calculator": ["how-to-report-regression-apa", "choose-a-statistical-test"],
