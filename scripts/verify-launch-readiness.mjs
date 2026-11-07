@@ -52,6 +52,8 @@ if (fs.existsSync(guidesFile)) {
     })) {
       if (!directoryEntry.isDirectory()) continue;
       const folder = path.join(guidesRoot, directoryEntry.name);
+      // Removed guides answer 410 Gone from a route.ts and have no page.
+      if (fs.existsSync(path.join(folder, "route.ts"))) continue;
       const page = path.join(folder, "page.tsx");
       if (!fs.existsSync(page)) {
         errors.push(`Guide folder has no page.tsx: ${directoryEntry.name}`);

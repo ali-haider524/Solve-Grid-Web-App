@@ -19,11 +19,14 @@ type GuideLink = {
 type GuideReference = {
   title: string;
   description?: string;
-  columns: [string, string, string];
+  columns: string[];
   rows: Array<{
     first: string;
     second: string;
     third: string;
+    fourth?: string;
+    fifth?: string;
+    sixth?: string;
   }>;
 };
 
@@ -215,6 +218,9 @@ export default function GuideArticle({
                           <th scope="row">{row.first}</th>
                           <td>{row.second}</td>
                           <td>{row.third}</td>
+                          {row.fourth !== undefined ? <td>{row.fourth}</td> : null}
+                          {row.fifth !== undefined ? <td>{row.fifth}</td> : null}
+                          {row.sixth !== undefined ? <td>{row.sixth}</td> : null}
                         </tr>
                       ))}
                     </tbody>

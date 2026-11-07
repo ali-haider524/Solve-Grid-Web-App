@@ -46,6 +46,22 @@ export const guideTopics: Record<
 
 export const guides: GuideInfo[] = [
   {
+    slug: "statistical-treatment-of-data",
+    title: "Statistical treatment of data in a thesis",
+    summary:
+      "Match each research question to the right statistical tool, with formulas, a reporting table and a sample Chapter 3 write-up.",
+    toolSlugs: ["statistical-test-chooser", "likert-scale-calculator", "sample-size-calculator", "cronbach-alpha-calculator"],
+    topic: "statistics",
+  },
+  {
+    slug: "slovin-sample-size-table",
+    title: "Slovin's formula sample size table",
+    summary:
+      "Look up the minimum sample size for populations from 50 to 100,000 at 1%, 3%, 5% and 10% margins of error, with Cochran values.",
+    toolSlugs: ["sample-size-calculator", "margin-of-error-calculator"],
+    topic: "statistics",
+  },
+  {
     slug: "plot-multiple-equations",
     title: "Plot one, two, or multiple equations",
     summary:
@@ -290,7 +306,7 @@ const preferredGuideSlugsByTool: Record<string, string[]> = {
     "how-to-report-t-test-apa",
     "how-to-report-anova-apa",
   ],
-  "statistical-test-chooser": ["choose-a-statistical-test", "likert-scale-interpretation"],
+  "statistical-test-chooser": ["statistical-treatment-of-data", "choose-a-statistical-test", "likert-scale-interpretation"],
   "chi-square-calculator": ["how-to-report-chi-square-apa", "choose-a-statistical-test"],
   "mann-whitney-u-test-calculator": ["choose-a-statistical-test", "how-to-report-t-test-apa"],
   "shapiro-wilk-test-calculator": ["choose-a-statistical-test", "how-to-report-t-test-apa"],
@@ -319,9 +335,10 @@ const preferredGuideSlugsByTool: Record<string, string[]> = {
   "t-test-calculator": ["how-to-report-t-test-apa", "choose-a-statistical-test"],
   "sobel-test-calculator": ["how-to-report-regression-apa", "choose-a-statistical-test"],
   "effect-size-calculator": ["how-to-report-t-test-apa", "how-to-report-anova-apa", "choose-a-statistical-test"],
-  "sample-size-calculator": ["slovin-formula-sample-size", "choose-a-statistical-test"],
+  "sample-size-calculator": [
+    "slovin-sample-size-table", "slovin-formula-sample-size", "statistical-treatment-of-data"],
   "cronbach-alpha-calculator": ["likert-scale-interpretation", "choose-a-statistical-test"],
-  "likert-scale-calculator": ["likert-scale-interpretation", "choose-a-statistical-test"],
+  "likert-scale-calculator": ["likert-scale-interpretation", "statistical-treatment-of-data", "choose-a-statistical-test"],
   "differential-equation-solver": [
     "euler-method-for-differential-equations",
     "runge-kutta-rk4-method",

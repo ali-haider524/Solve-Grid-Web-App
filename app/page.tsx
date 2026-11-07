@@ -37,6 +37,8 @@ const researchPath = [
 ];
 
 const featuredGuideSlugs = [
+  "statistical-treatment-of-data",
+  "slovin-sample-size-table",
   "choose-a-statistical-test",
   "slovin-formula-sample-size",
   "likert-scale-interpretation",

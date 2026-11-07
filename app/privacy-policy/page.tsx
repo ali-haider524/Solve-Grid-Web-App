@@ -79,7 +79,7 @@ export default function PrivacyPolicyPage() {
           title: "Your choices",
           paragraphs: [
             "You can clear calculator fields, avoid creating share links, control or delete cookies through your browser settings, and choose not to contact us by email.",
-            `For privacy questions or requests about information you have provided directly to SolveGrid, contact us at ${contactEmail || "solvegridsupport@gmail.com"}.`,
+            `For privacy questions or requests about information you have provided directly to SolveGrid, contact us at ${contactEmail}.`,
         ],
        },
         {

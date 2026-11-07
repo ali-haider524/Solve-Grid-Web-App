@@ -50,6 +50,8 @@ export const contentUpdated: Record<string, string> = {
   "logistic-regression-calculator": "2026-11-05",
   "methodology": "2026-11-05",
   "validation": "2026-11-05",
+  "guides/statistical-treatment-of-data": "2026-11-07",
+  "guides/slovin-sample-size-table": "2026-11-07",
   "kendalls-w-calculator": "2026-11-05",
   "fleiss-kappa-calculator": "2026-11-05",
   "ancova-calculator": "2026-11-05",

@@ -29,7 +29,8 @@ export const siteUrl = normalizeSiteUrl(
 // Configure these before public launch. They are intentionally not faked.
 export const siteOperatorName =
   process.env.NEXT_PUBLIC_SITE_OPERATOR?.trim() || siteName;
-export const contactEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL?.trim() || "";
+// Domain mailbox is the public contact address (more trustworthy than a free webmail address).
+export const contactEmail = "support@solvegrid.online";
 
 // The person who builds and maintains SolveGrid (shown on the About page and in structured data).
 export const siteAuthor = {
