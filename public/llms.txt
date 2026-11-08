@@ -2,7 +2,7 @@
 
 > SolveGrid is an independent browser-based calculator platform focused on research statistics for theses and surveys (sample size, Cronbach's alpha, Likert analysis, t-tests, ANOVA, correlation), with supporting math, engineering, and numerical-methods tools.
 
-SolveGrid provides 44 public tools, 34 of them statistics calculators. Every statistic is checked against SciPy/NumPy reference values: https://solvegrid.online/validation. A full-text version of this file with formulas, interpretation ranges and FAQs is at https://solvegrid.online/llms-full.txt. Most current calculations run directly in the browser and do not require an account. Tool pages are connected to method guides, related calculators, assumptions, and scope notes where relevant.
+SolveGrid provides 43 public tools, 33 of them statistics calculators. Every statistic is checked against SciPy/NumPy reference values: https://solvegrid.online/validation. A full-text version of this file with formulas, interpretation ranges and FAQs is at https://solvegrid.online/llms-full.txt. Most current calculations run directly in the browser and do not require an account. Tool pages are connected to method guides, related calculators, assumptions, and scope notes where relevant.
 
 ## Main directories
 
@@ -58,7 +58,6 @@ SolveGrid provides 44 public tools, 34 of them statistics calculators. Every sta
 - [Sample Size Calculator (Slovin, Yamane, Cochran)](https://solvegrid.online/sample-size-calculator)
 - [Cronbach's Alpha Calculator](https://solvegrid.online/cronbach-alpha-calculator)
 - [Likert Scale Weighted Mean Calculator](https://solvegrid.online/likert-scale-calculator)
-- [Advanced Statistics Lab (t-tests, ANOVA, correlation)](https://solvegrid.online/advanced-statistics)
 - [Scientific and Engineering Calculator](https://solvegrid.online/scientific-calculator)
 - [Graphing Calculator](https://solvegrid.online/graphing-calculator)
 - [Equation Solver](https://solvegrid.online/equation-solver)

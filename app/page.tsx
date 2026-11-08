@@ -25,7 +25,7 @@ const featuredToolSlugs = [
   "cronbach-alpha-calculator",
   "likert-scale-calculator",
   "statistics-calculator",
-  "advanced-statistics",
+  "t-test-calculator",
 ];
 
 const researchPath = [
@@ -281,7 +281,8 @@ export default function Home() {
         <Link href="/likert-scale-calculator">Likert weighted mean</Link>
         <Link href="/statistical-test-chooser">Which statistical test?</Link>
         <Link href="/statistics-calculator">Standard deviation</Link>
-        <Link href="/advanced-statistics">t-test &amp; ANOVA</Link>
+        <Link href="/t-test-calculator">t-test</Link>
+        <Link href="/one-way-anova-calculator">ANOVA</Link>
       </nav>
 
       <section className="home-answer-section" id="what-is-solvegrid" aria-labelledby="what-is-solvegrid-heading">

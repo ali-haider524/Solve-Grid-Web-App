@@ -83,7 +83,7 @@ export default function StatisticalTestChooser() {
       <ToolHeader active="statistics" />
       <section className={styles.hero}>
         <p>STATISTICAL TEST CHOOSER</p>
-        <h1>Which statistical test should I use?</h1>
+        <h1>Statistical test chooser: answer four questions, get the right test.</h1>
         <span>
           Answer four questions about your research question and data. You get the recommended test, a
           safer alternative, the assumptions to check, and an APA-style sentence to report it.

@@ -2,8 +2,8 @@ import GuideArticle from "../../../components/GuideArticle";
 import { createStaticPageMetadata } from "../../../lib/seo";
 
 export const metadata = createStaticPageMetadata(
-  "Equation Solver Guide: Linear, Quadratic, Cubic",
-  "Solve linear, quadratic, cubic and simultaneous equations with formulas, Gaussian elimination, RREF, the inverse method and Cramer’s rule.",
+  "How to Solve Linear, Quadratic & Cubic Equations",
+  "How to solve linear, quadratic and cubic equations by hand: identify the form, apply the formula, check the roots, and when to switch to a matrix method.",
   "/guides/linear-quadratic-cubic-equation-solver",
 );
 

@@ -146,7 +146,7 @@ const categoryEditorial: Record<ToolCategory, CategoryEditorial> = {
   },
   statistics: {
     eyebrow: "RESEARCH STATISTICS CALCULATORS",
-    heading: "Statistics calculators for theses, dissertations, and survey research.",
+    heading: "All research statistics calculators, grouped by what you need to do.",
     lead:
       "Plan your sample, check questionnaire reliability, summarise Likert responses, and run common hypothesis tests, with every step shown so you can explain it in your methods and results chapters.",
     overviewTitle: "Follow the order a research project actually needs.",
@@ -168,7 +168,7 @@ const categoryEditorial: Record<ToolCategory, CategoryEditorial> = {
       {
         title: "Describe and test your data",
         text: "Calculate mean, standard deviation, quartiles, and frequency tables, then run t-tests, one-way ANOVA, and Pearson correlation with stated assumptions.",
-        links: ["statistical-test-chooser", "t-test-calculator", "one-way-anova-calculator", "two-way-anova-calculator", "repeated-measures-anova-calculator", "ancova-calculator", "manova-calculator", "correlation-calculator", "linear-regression-calculator", "logistic-regression-calculator", "chi-square-calculator", "fishers-exact-test-calculator", "mann-whitney-u-test-calculator", "wilcoxon-signed-rank-test-calculator", "kruskal-wallis-test-calculator", "friedman-test-calculator", "mcnemar-test-calculator", "shapiro-wilk-test-calculator", "effect-size-calculator", "sobel-test-calculator", "statistics-calculator", "confidence-interval-calculator", "margin-of-error-calculator", "p-value-calculator", "fleiss-kappa-calculator", "kendalls-w-calculator", "factor-analysis-calculator", "advanced-statistics"],
+        links: ["statistical-test-chooser", "t-test-calculator", "one-way-anova-calculator", "two-way-anova-calculator", "repeated-measures-anova-calculator", "ancova-calculator", "manova-calculator", "correlation-calculator", "linear-regression-calculator", "logistic-regression-calculator", "chi-square-calculator", "fishers-exact-test-calculator", "mann-whitney-u-test-calculator", "wilcoxon-signed-rank-test-calculator", "kruskal-wallis-test-calculator", "friedman-test-calculator", "mcnemar-test-calculator", "shapiro-wilk-test-calculator", "effect-size-calculator", "sobel-test-calculator", "statistics-calculator", "confidence-interval-calculator", "margin-of-error-calculator", "p-value-calculator", "fleiss-kappa-calculator", "kendalls-w-calculator", "factor-analysis-calculator"],
       },
     ],
     workflow: [
@@ -227,7 +227,7 @@ const categoryEditorial: Record<ToolCategory, CategoryEditorial> = {
       {
         title: "Inference and circuit models",
         text: "Use focused statistical tests or ideal DC circuit models with clearly labelled assumptions.",
-        links: ["advanced-statistics", "circuit-analysis"],
+        links: ["statistical-test-chooser", "circuit-analysis"],
       },
     ],
     workflow: [
@@ -268,9 +268,10 @@ export default function ToolCategoryHub({ category }: ToolCategoryHubProps) {
   const categoryInfo = toolCategories[category];
   const editorial = categoryEditorial[category];
   const categoryTools = getToolsByCategory(category);
+  // List every guide in this section so the hub works as the chapter index.
   const guideLinks = getGuidesForTools(
     categoryTools.map((tool) => tool.slug),
-    6,
+    40,
   );
   const categoryUrl = `${siteUrl}${getCategoryPath(category)}`;
 

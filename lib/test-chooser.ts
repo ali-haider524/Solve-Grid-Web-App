@@ -31,7 +31,6 @@ const anova = { toolHref: "/one-way-anova-calculator", toolLabel: "Run it in the
 const corr = { toolHref: "/correlation-calculator", toolLabel: "Run it in the Correlation Calculator" };
 const fr = { toolHref: "/friedman-test-calculator", toolLabel: "Run it in the Friedman Test Calculator" };
 const mcn = { toolHref: "/mcnemar-test-calculator", toolLabel: "Run it in the McNemar Test Calculator" };
-const advanced = { toolHref: "/advanced-statistics", toolLabel: "Run it in the Advanced Statistics Lab" };
 const rmAnova = { toolHref: "/repeated-measures-anova-calculator", toolLabel: "Run it in the Repeated Measures ANOVA Calculator" };
 
 export function chooseTest(a: Answers): Recommendation {

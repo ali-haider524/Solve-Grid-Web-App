@@ -49,7 +49,7 @@ export default function LikertScaleCalculator() {
       <ToolHeader active="statistics" />
       <section className={styles.hero}>
         <p>LIKERT SCALE CALCULATOR</p>
-        <h1>Likert scale weighted mean calculator with verbal interpretation.</h1>
+        <h1>Likert scale calculator: weighted mean, SD and rank for every statement.</h1>
         <span>
           Enter how many respondents chose each option for every statement. Get the weighted mean, standard
           deviation, rank, and interpretation table for your results chapter.

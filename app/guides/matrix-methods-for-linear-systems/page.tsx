@@ -2,8 +2,8 @@ import GuideArticle from "../../../components/GuideArticle";
 import { createStaticPageMetadata } from "../../../lib/seo";
 
 export const metadata = createStaticPageMetadata(
-  "Matrix Methods for Linear Systems",
-  "Compare Gaussian elimination, Gauss-Jordan RREF, matrix inverse, rank, pivot columns, row space, and Cramer’s rule for solving linear systems online.",
+  "Gaussian vs Inverse vs Cramer's Rule: Which Method?",
+  "Compare the matrix methods for a linear system: Gaussian elimination, Gauss-Jordan RREF, the inverse method, rank checks and Cramer’s rule, and when each one fits.",
   "/guides/matrix-methods-for-linear-systems",
 );
 
@@ -11,7 +11,7 @@ export default function MatrixMethodsGuide() {
   return (
     <GuideArticle
       eyebrow="LINEAR ALGEBRA GUIDE"
-      title="Matrix methods for solving linear systems"
+      title="Which matrix method should you use for a linear system?"
       description="A linear system can be written as A·x = b, where A contains coefficients, x contains unknown values, and b contains constants. This guide explains when Gaussian elimination, Gauss-Jordan RREF, the inverse method, rank checks, pivot columns, row-space reasoning, and Cramer’s rule are useful."
       slug="matrix-methods-for-linear-systems"
       formula="A·x = b"

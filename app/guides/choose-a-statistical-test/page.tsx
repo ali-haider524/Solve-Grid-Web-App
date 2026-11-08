@@ -166,9 +166,9 @@ export default function ChooseStatisticalTestGuide() {
           description: "Check whether your data are normal before choosing a parametric or non-parametric test.",
         },
         {
-          label: "Advanced Statistics Lab",
-          href: "/advanced-statistics",
-          description: "Run Welch t-tests, one-way ANOVA, and Pearson correlation with p values.",
+          label: "Two-Way ANOVA Calculator",
+          href: "/two-way-anova-calculator",
+          description: "Two grouping factors? Test both main effects and their interaction.",
         },
         {
           label: "Statistics Calculator",

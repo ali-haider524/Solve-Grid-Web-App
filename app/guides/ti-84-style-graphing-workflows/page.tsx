@@ -2,7 +2,7 @@ import GuideArticle from "../../../components/GuideArticle";
 import { createStaticPageMetadata } from "../../../lib/seo";
 
 export const metadata = createStaticPageMetadata(
-  "TI-84 Style Online Calculator: Graph, Table, Solve",
+  "How to Graph, Make Tables & Solve Like a TI-84",
   "TI-84 style online workflows for graphing, tables, roots, intersections, matrices and statistics. SolveGrid is not affiliated with Texas Instruments.",
   "/guides/ti-84-style-graphing-workflows",
 );
@@ -11,7 +11,7 @@ export default function TiStyleGraphingWorkflowsGuide() {
   return (
     <GuideArticle
       eyebrow="ONLINE GRAPHING WORKFLOW GUIDE"
-      title="TI-84 style online calculator workflows for graphing, tables, and solving"
+      title="How to graph, make tables, and solve like a TI-84, online"
       description="This independent guide shows how to handle common graphing-calculator workflows online: enter equations, adjust the graph window, view a table, trace values, estimate roots and intersections, then move to a focused SolveGrid tool for equations, polynomial roots, matrices, statistics, scientific calculations, or unit conversion. SolveGrid is independent and is not affiliated with Texas Instruments."
       slug="ti-84-style-graphing-workflows"
       formula="y = f(x)"

@@ -420,7 +420,7 @@ export default function StatisticsCalculator() {
       <ToolHeader active="math" />
       <section className={styles.hero}>
         <p>FREE ADVANCED STATISTICS CALCULATOR</p>
-        <h1>Statistics calculator for standard deviation, variance, quartiles, and regression.</h1>
+        <h1>Standard deviation calculator with variance, quartiles, and descriptive statistics.</h1>
         <span>Calculate mean, median, mode, sample or population standard deviation, variance, quartiles, IQR, frequency tables, grouped data estimates, correlation, and linear regression from one focused workspace.</span>
       </section>
 

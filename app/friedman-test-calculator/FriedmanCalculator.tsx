@@ -41,7 +41,7 @@ export default function FriedmanCalculator() {
       <ToolHeader active="statistics" />
       <section className={styles.hero}>
         <p>FRIEDMAN TEST CALCULATOR</p>
-        <h1>Friedman test calculator with Kendall&apos;s W and post hoc tests.</h1>
+        <h1>Friedman test calculator with effect size and post hoc tests.</h1>
         <span>
           Compare three or more related conditions (the same people measured repeatedly) when data are ordinal or not normal.
           Get χ², df, p, Kendall&apos;s W, medians, mean ranks, Bonferroni pairwise comparisons, and an APA sentence.

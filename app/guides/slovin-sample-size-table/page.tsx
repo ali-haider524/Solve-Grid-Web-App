@@ -2,7 +2,7 @@ import GuideArticle from "../../../components/GuideArticle";
 import { createStaticPageMetadata } from "../../../lib/seo";
 
 export const metadata = createStaticPageMetadata(
-  "Slovin's Formula Sample Size Table (N = 50 to 100,000)",
+  "Slovin Table: Sample Size for N = 50 to 100,000",
   "Ready-made Slovin's formula sample size table for populations from 50 to 100,000 at 1%, 3%, 5% and 10% margins of error, with Cochran's 95% values.",
   "/guides/slovin-sample-size-table",
 );
@@ -11,7 +11,7 @@ export default function SlovinTableGuide() {
   return (
     <GuideArticle
       eyebrow="SAMPLE SIZE TABLE"
-      title="Slovin's formula sample size table for populations from 50 to 100,000"
+      title="Slovin table: sample sizes for populations from 50 to 100,000"
       description="Look up the minimum sample size for your population without calculating: find your population size (N) in the table and read across to your margin of error. Every value is rounded up, as thesis panels expect."
       slug="slovin-sample-size-table"
       formula="n = N ÷ (1 + N × e²)"

@@ -217,7 +217,7 @@ export const guides: GuideInfo[] = [
     title: "How to choose a statistical test",
     summary:
       "Separate descriptive statistics, t-tests, correlation, and one-way ANOVA by the question and data type.",
-    toolSlugs: ["statistical-test-chooser", "advanced-statistics", "statistics-calculator"],
+    toolSlugs: ["statistical-test-chooser", "t-test-calculator", "one-way-anova-calculator"],
     topic: "statistics",
   },
   {
@@ -316,11 +316,6 @@ const preferredGuideSlugsByTool: Record<string, string[]> = {
     "standard-deviation-formula",
     "choose-a-statistical-test",
     "likert-scale-interpretation",
-  ],
-  "advanced-statistics": [
-    "choose-a-statistical-test",
-    "how-to-report-t-test-apa",
-    "how-to-report-anova-apa",
   ],
   "statistical-test-chooser": ["statistical-treatment-of-data", "choose-a-statistical-test", "likert-scale-interpretation"],
   "chi-square-calculator": ["how-to-report-chi-square-apa", "choose-a-statistical-test"],

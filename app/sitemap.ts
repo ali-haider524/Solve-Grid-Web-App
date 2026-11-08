@@ -1,73 +1,65 @@
 import type { MetadataRoute } from "next";
-import { guideSlugs } from "../lib/guides";
+import { guides, type GuideTopic } from "../lib/guides";
 import { lastUpdated } from "../lib/content-dates";
 import { siteUrl } from "../lib/site";
-import { toolCategories, tools, type ToolCategory } from "../lib/tools";
+import { getToolsByCategory, toolCategories, type ToolCategory } from "../lib/tools";
+
+// The sitemap is written in "table of contents" order so it mirrors the site hierarchy:
+//   1. Home
+//   2. Each section hub, followed straight away by the calculators in that section
+//   3. The guides index, followed by guides grouped by topic
+//   4. Trust and legal pages
+// Priority falls one step per level (home > hub > page > trust). Every URL appears once.
+
+const sectionOrder: ToolCategory[] = ["statistics", "math", "engineering", "research"];
+const guideTopicOrder: GuideTopic[] = ["statistics", "algebra", "graphing", "engineering", "research"];
 
 const trustPages = [
   "about",
-  "contact",
   "methodology",
   "validation",
+  "contact",
   "privacy-policy",
   "terms-of-use",
   "disclaimer",
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const updated = (key: string) => ({ lastModified: new Date(lastUpdated(key)) });
+  const entry = (
+    path: string,
+    key: string,
+    priority: number,
+    changeFrequency: "weekly" | "monthly" | "yearly",
+  ): MetadataRoute.Sitemap[number] => ({
+    url: path ? `${siteUrl}/${path}` : siteUrl,
+    lastModified: new Date(lastUpdated(key)),
+    changeFrequency,
+    priority,
+  });
 
-  const coreRoutes: MetadataRoute.Sitemap = [
-    {
-      url: siteUrl,
-      ...updated(""),
-      changeFrequency: "weekly",
-      priority: 1,
-    },
-    { url: `${siteUrl}/tools`, ...updated("tools"), changeFrequency: "weekly", priority: 0.96 },
-    { url: `${siteUrl}/guides`, ...updated("guides"), changeFrequency: "weekly", priority: 0.9 },
-  ];
+  const routes: MetadataRoute.Sitemap = [entry("", "", 1, "weekly"), entry("tools", "tools", 0.9, "weekly")];
 
-  const categoryRoutes: MetadataRoute.Sitemap = (
-    Object.keys(toolCategories) as ToolCategory[]
-  ).map((category) => ({
-    url: `${siteUrl}/${toolCategories[category].slug}`,
-    ...updated(toolCategories[category].slug),
-    changeFrequency: "weekly",
-    priority: category === "math" || category === "engineering" ? 0.92 : 0.88,
-  }));
+  for (const category of sectionOrder) {
+    const hub = toolCategories[category].slug;
+    routes.push(entry(hub, hub, category === "statistics" ? 0.95 : 0.85, "weekly"));
+    const sectionTools = [...getToolsByCategory(category)].sort((a, b) => b.priority - a.priority);
+    for (const tool of sectionTools) {
+      routes.push(entry(tool.slug, tool.slug, category === "statistics" ? 0.8 : 0.7, "monthly"));
+    }
+  }
 
+  routes.push(entry("guides", "guides", 0.85, "weekly"));
+  for (const topic of guideTopicOrder) {
+    for (const guide of guides.filter((item) => item.topic === topic)) {
+      routes.push(
+        entry(`guides/${guide.slug}`, `guides/${guide.slug}`, topic === "statistics" ? 0.7 : 0.6, "monthly"),
+      );
+    }
+  }
 
-  const toolRoutes: MetadataRoute.Sitemap = tools.map((tool) => ({
-    url: `${siteUrl}/${tool.slug}`,
-    ...updated(tool.slug),
-    changeFrequency: "weekly",
-    priority: tool.priority,
-  }));
+  for (const slug of trustPages) {
+    routes.push(entry(slug, slug, slug === "methodology" || slug === "validation" ? 0.5 : 0.3, "yearly"));
+  }
 
-  const guideRoutes: MetadataRoute.Sitemap = guideSlugs.map((slug) => ({
-    url: `${siteUrl}/guides/${slug}`,
-    ...updated(`guides/${slug}`),
-    changeFrequency: "monthly",
-    priority: slug === "choose-a-statistical-test" ? 0.9 : 0.76,
-  }));
-
-  const trustRoutes: MetadataRoute.Sitemap = trustPages.map((slug) => ({
-    url: `${siteUrl}/${slug}`,
-    ...updated(slug),
-    changeFrequency: "yearly",
-    priority: slug === "methodology" || slug === "about" ? 0.5 : 0.35,
-  }));
-
-  const routes = [
-    ...coreRoutes,
-    ...categoryRoutes,
-    ...toolRoutes,
-    ...guideRoutes,
-    ...trustRoutes,
-  ];
-
-  return routes.filter(
-    (route, index) => routes.findIndex((item) => item.url === route.url) === index,
-  );
+  return routes.filter((route, index) => routes.findIndex((item) => item.url === route.url) === index);
 }

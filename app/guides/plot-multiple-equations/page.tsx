@@ -2,7 +2,7 @@ import GuideArticle from "../../../components/GuideArticle";
 import { createStaticPageMetadata } from "../../../lib/seo";
 
 export const metadata = createStaticPageMetadata(
-  "Plot Equations Online: One, Two or Multiple Functions",
+  "How to Plot Multiple Equations on the Same Graph",
   "Plot equations online, graph two or more functions on the same axes, trace values, and find roots and intersections step by step.",
   "/guides/plot-multiple-equations",
 );

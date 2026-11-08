@@ -170,11 +170,9 @@ export const tools: ToolInfo[] = [
       "ti-84 online alternative",
       "ti-84 style graphing calculator",
       "graph equations online",
-      "plot equations online",
       "function graph calculator",
       "online graphing calculator with table",
       "graph table calculator",
-      "graph multiple equations",
       "graphing calculator with table",
       "trace graph calculator",
       "graph intersections calculator",
@@ -350,7 +348,6 @@ export const tools: ToolInfo[] = [
       "root of polynomial calculator",
       "degree 10 polynomial solver",
       "quartic equation solver",
-      "cubic equation solver",
       "complex roots calculator",
       "polynomial equation solver",
       "coefficient polynomial solver",
@@ -505,16 +502,15 @@ export const tools: ToolInfo[] = [
     shortName: "Statistics",
     category: "statistics",
     icon: "σ",
-    title: "Standard Deviation & Statistics Calculator",
+    title: "Standard Deviation Calculator (Sample & Population)",
     description:
       "Calculate sample or population standard deviation, variance, mean, median, quartiles, IQR, frequency tables, and regression from raw or grouped data.",
     summary:
       "Analyse raw data, frequency tables, grouped intervals, or paired X/Y values using descriptive statistics, sample and population standard deviation, variance, quartiles, IQR, outlier checks, and regression results.",
     keywords: [
-      "statistics calculator",
       "standard deviation calculator",
-      "sample standard deviation formula",
-      "formula for sample standard deviation",
+      "descriptive statistics calculator",
+      "sample standard deviation calculator",
       "population standard deviation calculator",
       "variance calculator",
       "mean median mode calculator",
@@ -525,7 +521,7 @@ export const tools: ToolInfo[] = [
       "outlier calculator",
     ],
     relatedSlugs: [
-      "advanced-statistics",
+      "t-test-calculator",
       "likert-scale-calculator",
       "sample-size-calculator",
     ],
@@ -684,7 +680,7 @@ export const tools: ToolInfo[] = [
     ],
     relatedSlugs: [
       "optimization-lab",
-      "advanced-statistics",
+      "circuit-analysis",
       "graphing-calculator",
     ],
     featured: true,
@@ -859,7 +855,6 @@ export const tools: ToolInfo[] = [
       "circuit analysis calculator",
       "dc circuit analysis calculator",
       "nodal analysis calculator",
-      "two node nodal analysis",
       "node voltage calculator",
       "resistor network calculator",
       "conductance matrix calculator",
@@ -928,57 +923,6 @@ export const tools: ToolInfo[] = [
     ],
   },
   {
-    slug: "advanced-statistics",
-    name: "Advanced Statistics Lab",
-    shortName: "Advanced statistics",
-    category: "statistics",
-    icon: "t",
-    title: "t-Test, ANOVA & Correlation Calculator",
-    description:
-      "Run one-sample and Welch t-tests, one-way ANOVA, and Pearson correlation online with p values, assumptions, and clear outputs. Free, browser-based.",
-    summary:
-      "Use an inference-focused statistics workspace for t-tests, correlation, simple regression, and one-way ANOVA with visible assumptions.",
-    keywords: [
-      "advanced statistics calculator",
-      "one sample t test calculator",
-      "welch t test calculator",
-      "one way anova calculator",
-      "pearson correlation calculator",
-      "linear regression significance calculator",
-    ],
-    relatedSlugs: [
-      "statistics-calculator",
-      "cronbach-alpha-calculator",
-      "sample-size-calculator",
-    ],
-    featured: true,
-    priority: 0.9,
-    useCases: [
-      "One-sample and Welch t-tests",
-      "Pearson correlation and simple regression",
-      "One-way ANOVA with assumptions",
-    ],
-    features: [
-      "Two-sided p values",
-      "Confidence interval for a sample mean",
-      "Welch unequal-variance t-test",
-      "Correlation, R², slope, and intercept",
-      "One-way ANOVA",
-    ],
-    faqs: [
-      {
-        question: "Do p values prove a research conclusion?",
-        answer:
-          "No. Statistical outputs depend on assumptions, study design, data quality, and the question being asked.",
-      },
-      {
-        question: "Which ANOVA is included?",
-        answer:
-          "This workspace provides a one-way ANOVA for three or more independent groups entered as numeric lists.",
-      },
-    ],
-  },
-  {
     slug: "sample-size-calculator",
     name: "Sample Size Calculator",
     shortName: "Sample size",
@@ -992,7 +936,6 @@ export const tools: ToolInfo[] = [
     keywords: [
       "sample size calculator",
       "slovin formula calculator",
-      "slovin's formula",
       "taro yamane sample size calculator",
       "yamane formula",
       "cochran formula calculator",
@@ -1129,7 +1072,7 @@ export const tools: ToolInfo[] = [
     shortName: "Likert weighted mean",
     category: "statistics",
     icon: "Σw",
-    title: "Likert Weighted Mean & Interpretation Calculator",
+    title: "Likert Scale Calculator – Weighted Mean, SD & Rank",
     description:
       "Get the weighted mean, SD, rank, and verbal interpretation for each Likert statement on 4-, 5-, or 7-point scales. Ready for your thesis results chapter.",
     summary:
@@ -1137,12 +1080,9 @@ export const tools: ToolInfo[] = [
     keywords: [
       "likert scale calculator",
       "weighted mean calculator likert scale",
-      "weighted mean interpretation",
-      "likert scale interpretation",
-      "5 point likert scale interpretation",
-      "4 point likert scale range",
-      "how to analyze likert scale data",
-      "likert scale mean range interpretation",
+      "likert scale weighted mean calculator",
+      "likert scale mean and standard deviation",
+      "likert data analysis calculator",
     ],
     relatedSlugs: ["cronbach-alpha-calculator", "sample-size-calculator", "statistics-calculator"],
     featured: true,
@@ -1193,22 +1133,22 @@ export const tools: ToolInfo[] = [
     shortName: "Test chooser",
     category: "statistics",
     icon: "?",
-    title: "Which Statistical Test Should I Use? Test Chooser",
+    title: "Statistical Test Chooser: 4-Question Decision Tree",
     description:
       "Answer 4 questions to pick the right test: t-test, ANOVA, chi-square, Mann-Whitney, Wilcoxon, Kruskal-Wallis, or correlation. Includes an APA sentence.",
     summary:
       "Pick the right statistical test for your thesis in four questions, then see the assumptions to check and a ready-to-edit APA-style sentence for your results chapter.",
     keywords: [
-      "which statistical test should i use",
       "statistical test chooser",
+      "statistical test selector",
+      "statistical test decision tree",
       "statistical test flowchart",
-      "how to choose a statistical test",
       "statistical test for comparing two groups",
       "statistical test for ordinal data",
       "statistical test for categorical data",
       "should i use anova or t test",
     ],
-    relatedSlugs: ["advanced-statistics", "likert-scale-calculator", "sample-size-calculator"],
+    relatedSlugs: ["t-test-calculator", "one-way-anova-calculator", "chi-square-calculator"],
     featured: true,
     priority: 0.97,
     useCases: [
@@ -1257,7 +1197,6 @@ export const tools: ToolInfo[] = [
       "chi square test of independence calculator",
       "chi square goodness of fit calculator",
       "cramers v calculator",
-      "fisher exact test calculator",
       "chi-square test solved examples",
       "chi square test is used for what type of data",
     ],
@@ -1372,7 +1311,7 @@ export const tools: ToolInfo[] = [
       "how to interpret shapiro wilk test",
       "q-q plot online",
     ],
-    relatedSlugs: ["statistical-test-chooser", "mann-whitney-u-test-calculator", "advanced-statistics"],
+    relatedSlugs: ["statistical-test-chooser", "mann-whitney-u-test-calculator", "t-test-calculator"],
     featured: true,
     priority: 0.94,
     useCases: [
@@ -1478,7 +1417,7 @@ export const tools: ToolInfo[] = [
       "effect size r mann whitney",
       "convert r to d",
     ],
-    relatedSlugs: ["statistical-test-chooser", "advanced-statistics", "mann-whitney-u-test-calculator"],
+    relatedSlugs: ["statistical-test-chooser", "t-test-calculator", "mann-whitney-u-test-calculator"],
     featured: true,
     priority: 0.94,
     useCases: [
@@ -1579,7 +1518,7 @@ export const tools: ToolInfo[] = [
       "non parametric anova calculator",
       "kruskal wallis post hoc",
     ],
-    relatedSlugs: ["mann-whitney-u-test-calculator", "statistical-test-chooser", "advanced-statistics"],
+    relatedSlugs: ["mann-whitney-u-test-calculator", "statistical-test-chooser", "one-way-anova-calculator"],
     featured: true,
     priority: 0.93,
     useCases: [
@@ -1685,7 +1624,7 @@ export const tools: ToolInfo[] = [
       "goodman test mediation",
       "how to report sobel test",
     ],
-    relatedSlugs: ["advanced-statistics", "effect-size-calculator", "statistical-test-chooser"],
+    relatedSlugs: ["t-test-calculator", "effect-size-calculator", "statistical-test-chooser"],
     featured: true,
     priority: 0.9,
     useCases: [
@@ -1975,7 +1914,7 @@ export const tools: ToolInfo[] = [
     shortName: "Friedman test",
     category: "statistics",
     icon: "χ²",
-    title: "Friedman Test Calculator with Kendall's W",
+    title: "Friedman Test Calculator with Post Hoc Tests",
     description:
       "Free Friedman test calculator for 3+ repeated measures. Paste data to get χ², df, p, Kendall's W, medians, mean ranks, Bonferroni post hoc tests, and APA text.",
     summary:
@@ -1984,7 +1923,6 @@ export const tools: ToolInfo[] = [
       "friedman test calculator",
       "friedman test online",
       "non parametric repeated measures anova",
-      "kendall's w calculator",
       "friedman post hoc test",
       "how to report friedman test",
     ],
@@ -2079,7 +2017,7 @@ export const tools: ToolInfo[] = [
     shortName: "Power analysis",
     category: "statistics",
     icon: "1−β",
-    title: "Power Analysis Calculator: Sample Size for Tests",
+    title: "A Priori Power Analysis Calculator (t, ANOVA, r, χ²)",
     description:
       "Free a priori power analysis calculator: find the sample size for t-tests, ANOVA, correlation, and chi-square from effect size, alpha, and power.",
     summary:
@@ -2092,7 +2030,6 @@ export const tools: ToolInfo[] = [
       "sample size for t test",
       "sample size for anova",
       "statistical power calculator",
-      "how to calculate sample size for research",
     ],
     relatedSlugs: ["sample-size-calculator", "effect-size-calculator", "t-test-calculator"],
     featured: true,
@@ -2250,7 +2187,7 @@ export const tools: ToolInfo[] = [
     shortName: "Margin of error",
     category: "statistics",
     icon: "±",
-    title: "Margin of Error Calculator for Surveys (with FPC)",
+    title: "Margin of Error Calculator for Survey Results",
     description:
       "Free margin of error calculator for survey research. Enter sample size, confidence level and proportion or SD, with an optional finite population correction.",
     summary:
@@ -2260,7 +2197,6 @@ export const tools: ToolInfo[] = [
       "survey margin of error",
       "margin of error formula",
       "margin of error for sample size",
-      "finite population correction",
       "calculate margin of error",
     ],
     relatedSlugs: ["sample-size-calculator", "confidence-interval-calculator", "power-analysis-calculator"],

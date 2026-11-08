@@ -10,7 +10,7 @@ import styles from "./research-tools.module.css";
 
 export const metadata: Metadata = createStaticPageMetadata(
   "Research Tools & Numerical Analysis Labs",
-  "Explore SolveGrid research workspaces for differential equations, symbolic algebra, linear programming, DC circuit analysis, and advanced statistical inference.",
+  "Explore SolveGrid research workspaces for differential equations, symbolic algebra, linear programming, and DC circuit analysis.",
   "/research-tools",
 );
 

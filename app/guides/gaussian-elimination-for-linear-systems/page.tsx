@@ -2,7 +2,7 @@ import GuideArticle from "../../../components/GuideArticle";
 import { createStaticPageMetadata } from "../../../lib/seo";
 
 export const metadata = createStaticPageMetadata(
-  "Gaussian Elimination for Linear Systems",
+  "Gaussian Elimination Step by Step (Worked Example)",
   "Learn Gaussian elimination with row operations, augmented matrices, REF, RREF, rank checks, pivots, and back-substitution for linear systems.",
   "/guides/gaussian-elimination-for-linear-systems",
 );

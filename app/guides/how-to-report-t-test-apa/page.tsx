@@ -84,9 +84,9 @@ export default function ReportTTestGuide() {
           description: "Run independent (Welch or Student), paired, and one-sample t-tests and copy the APA sentence.",
         },
         {
-          label: "Advanced Statistics Lab",
-          href: "/advanced-statistics",
-          description: "Run one-sample and Welch t-tests with p values and confidence intervals.",
+          label: "Wilcoxon Signed-Rank Test Calculator",
+          href: "/wilcoxon-signed-rank-test-calculator",
+          description: "Paired data skewed or ordinal? Use the non-parametric alternative to the paired t-test.",
         },
         {
           label: "Effect Size Calculator",

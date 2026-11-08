@@ -101,7 +101,7 @@ export default function PowerAnalysisCalculator() {
       <ToolHeader active="statistics" />
       <section className={styles.hero}>
         <p>POWER ANALYSIS CALCULATOR</p>
-        <h1>Power analysis calculator: sample size for t-tests, ANOVA, correlation, and chi-square.</h1>
+        <h1>A priori power analysis calculator for t-tests, ANOVA, correlation, and chi-square.</h1>
         <span>
           Find the minimum sample size for your study from the effect size, alpha, and desired power, the same a priori analysis
           G*Power runs, with a power curve and a sentence for your methodology chapter.
