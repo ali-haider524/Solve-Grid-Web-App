@@ -1,7 +1,7 @@
 import Link from "next/link";
 import CiteAndExport from "./CiteAndExport";
 import { lastUpdated } from "../lib/content-dates";
-import { siteUrl } from "../lib/site";
+import { siteAuthor, siteUrl } from "../lib/site";
 import { getGuidesForTool } from "../lib/guides";
 import {
   getCategoryPath,
@@ -79,8 +79,13 @@ export default function ToolCrossLinks({ currentSlug }: ToolCrossLinksProps) {
 
         {currentTool.category === "statistics" ? (
           <p className={styles.validationNote}>
-            Results from this {currentTool.name.toLowerCase()} are checked against SciPy and NumPy reference
-            values. <Link href="/validation">See the calculator validation results</Link>.
+            Built and maintained by <Link href="/about" rel="author">{siteAuthor.name}</Link>, {siteAuthor.jobTitle.toLowerCase()} ·
+            Updated{" "}
+            <time dateTime={lastUpdated(currentTool.slug)}>
+              {new Date(`${lastUpdated(currentTool.slug)}T00:00:00Z`).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" })}
+            </time>
+            . Results from this {currentTool.name.toLowerCase()} are checked against SciPy and NumPy reference
+            values: <Link href="/validation">see the calculator validation results</Link>.
           </p>
         ) : null}
 

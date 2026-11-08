@@ -1,4 +1,5 @@
 import GuideArticle from "../../../components/GuideArticle";
+import MethodNotes from "../../../components/MethodNotes";
 import { createStaticPageMetadata } from "../../../lib/seo";
 
 export const metadata = createStaticPageMetadata(
@@ -176,6 +177,58 @@ export default function ChooseStatisticalTestGuide() {
           description: "Get descriptive statistics, standard deviation, quartiles, and frequency tables first.",
         },
       ]}
-    />
+    >
+      <MethodNotes
+        eyebrow="FROM RESEARCH QUESTION TO TEST"
+        title="Thesis research questions mapped to the right test, plus the mistakes panels catch"
+        sections={[
+          {
+            heading: "Typical thesis research questions and the test for each",
+            list: [
+              "What is the profile of the respondents (sex, age, year level)? → frequency and percentage.",
+              "What is the level of the respondents' perception or satisfaction? → weighted mean with a Likert interpretation scale (add the SD).",
+              "Is there a significant difference in perception by sex (2 groups)? → independent t-test, or Mann-Whitney U for ordinal or skewed scores.",
+              "Is there a significant difference by year level or age group (3+ groups)? → one-way ANOVA, or Kruskal-Wallis H.",
+              "Is there a significant relationship between two scale scores (e.g. study habits and grades)? → Pearson r, or Spearman rho.",
+              "Is a category (e.g. strand) associated with another category (e.g. preferred course)? → chi-square test of independence (Fisher's exact for small 2×2 tables).",
+              "Did scores change from pre-test to post-test? → paired t-test, or Wilcoxon signed-rank.",
+              "Which factors predict the outcome? → multiple linear regression (logistic regression for a yes/no outcome).",
+            ],
+          },
+          {
+            heading: "Five mistakes thesis panels often catch",
+            list: [
+              "Running several t-tests instead of one ANOVA for 3+ groups, which inflates the chance of a false positive (three t-tests at α = .05 give about a 14% chance of at least one false result).",
+              "Using chi-square on means or on Likert averages. Chi-square needs counts in categories.",
+              "Treating pre-test and post-test scores of the same students as two independent groups. The design is paired.",
+              "Running Pearson r on a single Likert item. Use Spearman rho for single ordinal items; Pearson is defensible for composite scale scores.",
+              "Reporting only p. Panels increasingly expect an effect size (d, η², r or Cramér's V) and the descriptive statistics behind it.",
+            ],
+          },
+          {
+            heading: "How many respondents each test needs",
+            paragraphs: [
+              "These are the minimum totals for 80% power at α = .05 (two-tailed) for a medium effect, the same numbers G*Power gives. Smaller expected effects need far larger samples; run your own numbers in the power analysis calculator.",
+            ],
+            list: [
+              "Independent t-test (d = 0.5): 64 per group, 128 in total.",
+              "One-way ANOVA with 3 groups (f = 0.25): about 53 per group, 159 in total.",
+              "Pearson correlation (r = .30): 84 participants.",
+              "Chi-square test, 2 × 2 table (w = 0.30): 88 participants.",
+            ],
+          },
+          {
+            heading: "Where to find each test in SPSS",
+            list: [
+              "Independent and paired t-tests: Analyze → Compare Means → Independent-Samples / Paired-Samples T Test.",
+              "One-way ANOVA: Analyze → Compare Means → One-Way ANOVA (tick Post Hoc → Tukey).",
+              "Pearson and Spearman: Analyze → Correlate → Bivariate.",
+              "Chi-square: Analyze → Descriptive Statistics → Crosstabs → Statistics → Chi-square.",
+              "Mann-Whitney U and Kruskal-Wallis: Analyze → Nonparametric Tests → Legacy Dialogs → 2 / K Independent Samples.",
+            ],
+          },
+      ]}
+      />
+    </GuideArticle>
   );
 }

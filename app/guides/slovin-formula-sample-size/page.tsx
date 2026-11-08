@@ -1,4 +1,5 @@
 import GuideArticle from "../../../components/GuideArticle";
+import MethodNotes from "../../../components/MethodNotes";
 import VideoExplainer from "../../../components/VideoExplainer";
 import { createStaticPageMetadata } from "../../../lib/seo";
 
@@ -119,6 +120,39 @@ export default function SlovinFormulaGuide() {
         uploadDate="2026-11-03T12:37:20-08:00"
         duration="PT45S"
         pageUrl="https://solvegrid.online/guides/slovin-formula-sample-size"
+      />
+      <MethodNotes
+        eyebrow="MORE ON SLOVIN'S FORMULA"
+        title="Margin of error from Slovin's formula, how to cite it, and where it comes from"
+        sections={[
+          {
+            heading: "How to get the margin of error from Slovin's formula",
+            formula: "e = √( (N − n) ÷ (N × n) )",
+            paragraphs: [
+              "Rearrange n = N ÷ (1 + Ne²) when you already know how many people answered and need the margin of error for your limitations section.",
+            ],
+            steps: [
+              "Population N = 1,000; you collected n = 286 responses.",
+              "N − n = 714 and N × n = 286,000.",
+              "e = √(714 ÷ 286,000) = √0.0025 = 0.050.",
+              "Report it: \"With 286 of 1,000 students, the margin of error is about 5%.\"",
+            ],
+          },
+          {
+            heading: "How to cite Slovin's formula in your thesis",
+            paragraphs: [
+              "No original publication by a statistician named Slovin has ever been located, so many universities ask students to cite the identical formula from Taro Yamane's textbook instead: Yamane, T. (1967). Statistics: An introductory analysis (2nd ed.). Harper and Row. If your school's template already cites \"Slovin (1960)\", follow the template, but be ready to explain that the formula assumes a 95% confidence level and p = 0.5.",
+            ],
+          },
+          {
+            heading: "Copy-and-paste versions",
+            list: [
+              "n = N / (1 + N·e²)",
+              "n = N ÷ (1 + Ne²), where n = sample size, N = population size, e = margin of error (0.05 for 5%)",
+              "Margin of error from a sample: e = √((N − n) / (N·n))",
+            ],
+          },
+      ]}
       />
     </GuideArticle>
   );

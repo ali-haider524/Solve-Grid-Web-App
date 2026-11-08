@@ -421,7 +421,7 @@ export default function StatisticsCalculator() {
       <section className={styles.hero}>
         <p>FREE ADVANCED STATISTICS CALCULATOR</p>
         <h1>Standard deviation calculator with variance, quartiles, and descriptive statistics.</h1>
-        <span>Calculate mean, median, mode, sample or population standard deviation, variance, quartiles, IQR, frequency tables, grouped data estimates, correlation, and linear regression from one focused workspace.</span>
+        <span>Standard deviation is the typical distance of your values from their mean. Paste raw data, a frequency table or grouped classes to get the sample or population SD with steps, plus the variance, mean, median, quartiles and IQR.</span>
       </section>
 
       <section className={styles.workspace}>
@@ -465,9 +465,9 @@ export default function StatisticsCalculator() {
           <p>STATISTICS FORMULAS EXPLAINED</p>
           <h2 id="statistics-guide-title">Understand the result before you use it.</h2>
           <span>
-            This statistics calculator is built for class assignments, research summaries, lab data,
-            and business reports where users need both a number and a clear method. Choose the data
-            format first, then decide whether the problem needs sample or population statistics.
+            Standard deviation tells you how far values typically sit from the mean: small means the
+            answers are similar, large means they are spread out. Choose the data format first, then
+            decide whether your values are a sample (most theses) or the whole population.
           </span>
         </div>
 

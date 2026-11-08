@@ -1,4 +1,5 @@
 import GuideArticle from "../../../components/GuideArticle";
+import MethodNotes from "../../../components/MethodNotes";
 import { createStaticPageMetadata } from "../../../lib/seo";
 
 export const metadata = createStaticPageMetadata(
@@ -131,6 +132,63 @@ export default function StandardDeviationGuide() {
           description: "Compare two group means using their scores, with M and SD reported for each group.",
         },
       ]}
-    />
+    >
+      <MethodNotes
+        eyebrow="BEYOND RAW SCORES"
+        title="Standard deviation formulas for frequency tables, grouped data, Excel and SPSS"
+        sections={[
+          {
+            heading: "Standard deviation formula for a frequency table",
+            formula: "s = √( Σf(x − x̄)² ÷ (N − 1) ),   x̄ = Σfx ÷ N",
+            paragraphs: [
+              "Use this when your data come as values with counts, such as the number of respondents who chose each Likert option. Multiply each squared deviation by its frequency f before adding.",
+            ],
+            steps: [
+              "Responses 1–5 with frequencies 2, 3, 8, 5, 2 (N = 20).",
+              "Mean: Σfx = 62, so x̄ = 62 ÷ 20 = 3.10.",
+              "Sum of squares: Σf(x − x̄)² = 23.80.",
+              "Sample SD: s = √(23.80 ÷ 19) = 1.12. Population SD: σ = √(23.80 ÷ 20) = 1.09.",
+            ],
+          },
+          {
+            heading: "Standard deviation formula for grouped data (class intervals)",
+            formula: "s = √( Σf(m − x̄)² ÷ (N − 1) ),   m = class midpoint",
+            paragraphs: [
+              "When you only have class intervals (10–19, 20–29, …), replace each value with its class midpoint m. The answer is an estimate, because the real values inside each class are unknown.",
+            ],
+            steps: [
+              "Classes 10–19, 20–29, 30–39, 40–49 with f = 4, 7, 6, 3 (N = 20); midpoints 14.5, 24.5, 34.5, 44.5.",
+              "Mean: x̄ = Σfm ÷ N = 570 ÷ 20 = 28.5.",
+              "Σf(m − x̄)² = 1,880.",
+              "s = √(1,880 ÷ 19) = 9.95 (sample); σ = √(1,880 ÷ 20) = 9.70 (population).",
+            ],
+          },
+          {
+            heading: "Shortcut (computational) formula",
+            formula: "s = √( [Σx² − (Σx)² ÷ n] ÷ (n − 1) )",
+            paragraphs: [
+              "This gives the same answer without listing every deviation, which is why textbooks and calculators use it. For 58, 64, 72, 72, 78, 84, 91: Σx = 519 and Σx² = 39,249, so s = √((39,249 − 519² ÷ 7) ÷ 6) = 11.32, matching the worked example above.",
+            ],
+          },
+          {
+            heading: "Standard deviation in Excel, Google Sheets, SPSS and on a calculator",
+            list: [
+              "Excel and Google Sheets, sample SD: =STDEV.S(A2:A51). Population SD: =STDEV.P(A2:A51). The older =STDEV() is the sample version.",
+              "SPSS: Analyze → Descriptive Statistics → Descriptives (or Frequencies). SPSS always reports the sample SD, dividing by n − 1.",
+              "Casio and TI calculators: sx or Sx is the sample SD; σx is the population SD.",
+              "SolveGrid: the Standard Deviation Calculator shows both, for raw, frequency-table or grouped data, with each step.",
+            ],
+          },
+          {
+            heading: "Copy-and-paste versions of the formula",
+            list: [
+              "Sample: s = √( Σ(x − x̄)² / (n − 1) )",
+              "Population: σ = √( Σ(x − μ)² / N )",
+              "Plain text for Word or email: s = sqrt( sum((x - mean)^2) / (n - 1) )",
+            ],
+          },
+      ]}
+      />
+    </GuideArticle>
   );
 }
