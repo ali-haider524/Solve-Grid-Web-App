@@ -3,7 +3,7 @@ import VideoExplainer from "../../../components/VideoExplainer";
 import { createStaticPageMetadata } from "../../../lib/seo";
 
 export const metadata = createStaticPageMetadata(
-  "Slovin's Formula: Sample Size Formula with Examples",
+  "Slovin's Formula for Sample Size: Example & Calculation",
   "Slovin's formula n = N ÷ (1 + Ne²) with worked examples, a comparison with Cochran's formula, and how to justify sample size in a thesis.",
   "/guides/slovin-formula-sample-size",
 );

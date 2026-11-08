@@ -12,8 +12,8 @@ import styles from "./guides.module.css";
 import { createStaticPageMetadata } from "../../lib/seo";
 
 export const metadata = createStaticPageMetadata(
-  "Statistics Guides: Formulas and Worked Examples",
-  "Guides with formulas and worked examples: choosing a statistical test, APA reporting, sample size, Likert analysis, standard deviation, and more.",
+  "Statistics Guides for Thesis: Formulas, Tables & APA Examples",
+  "Thesis statistics guides with formulas and worked examples: which test to use, Slovin sample size, Likert interpretation, standard deviation and APA 7 reporting.",
   "/guides",
 );
 

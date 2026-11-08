@@ -161,7 +161,7 @@ Home  /  — brand, statistics calculators for thesis
 | `/guides/pearson-r-interpretation-table` | pearson r interpretation table | correlation strength table, interpret correlation coefficient | correlation calculator (→ tool) |
 | `/guides/frequency-and-percentage-formula` | frequency and percentage formula | percentage formula thesis, profile of respondents | — |
 | `/guides/statistical-treatment-of-data` | statistical treatment of data | statistical treatment of data in thesis, sample write-up | — |
-| `/guides/slovin-sample-size-table` | slovin table | slovin sample size table, sample size table by population | slovin's formula (→ guide) |
+| `/guides/slovin-sample-size-table` | slovin formula table | slovin sample size table, sample size table by population (note: "slovin table" alone returns tablet results) | slovin's formula (→ guide) |
 | `/guides/plot-multiple-equations` | how to plot multiple equations on one graph | graph two equations, plot several functions | online graphing calculator (→ tool) |
 | `/guides/linear-quadratic-cubic-equation-solver` | how to solve linear, quadratic and cubic equations | quadratic formula steps, cubic equation method | equation solver (→ tool) |
 | `/guides/polynomial-roots-and-complex-roots` | polynomial roots and complex roots | complex conjugate roots, rational root examples | polynomial roots calculator (→ tool) |
@@ -187,6 +187,13 @@ Home  /  — brand, statistics calculators for thesis
 | `/guides/how-to-report-regression-apa` | how to report regression APA | regression APA table | regression calculator (→ tool) |
 | `/guides/how-to-report-correlation-apa` | how to report correlation APA | correlation APA format, correlation table APA | pearson r interpretation (→ table guide) |
 
+## Title formula (on-page audit, 2026-11-08)
+
+- Pattern: **primary keyword first + the modifier searchers type + a proof point**. The modifiers come from Google autocomplete, e.g. "online", "free", "with steps", "p value", "2x2", "post hoc", "APA 7", "example", "table".
+- Keep it to 60 characters or fewer. "| SolveGrid" is added only when it still fits (`withBrandIfFits` in `lib/seo.ts`). Google already shows the site name above the link.
+- Meta descriptions: 140–160 characters. Open with the searcher's task, list the outputs they get, and end with a differentiator (steps, APA text, free).
+- Questions from People Also Ask go into the page FAQ (visible text + FAQPage schema), not into new pages.
+
 ## Changes made on 2026-11-08 (cannibalization fixes)
 
 | Conflict found | Pages that competed | Fix |
@@ -198,7 +205,7 @@ Home  /  — brand, statistics calculators for thesis
 | "slovin's formula" | `/sample-size-calculator` vs `/guides/slovin-formula-sample-size` vs `/guides/slovin-sample-size-table` | The tool owns "slovin formula calculator", the guide owns "slovin's formula", and the table guide is now "Slovin Table: …". |
 | "likert scale interpretation" | `/likert-scale-calculator` vs `/guides/likert-scale-interpretation` | The tool is now "Likert Scale Calculator – Weighted Mean, SD & Rank" and the interpretation keywords were removed from it. |
 | "kendall's w calculator" | `/friedman-test-calculator` vs `/kendalls-w-calculator` | Removed Kendall's W from the Friedman title, H1 and keywords. |
-| "sample size for research" | `/power-analysis-calculator` vs `/sample-size-calculator` | Power is now "A Priori Power Analysis Calculator (t, ANOVA, r, χ²)". |
+| "sample size for research" | `/power-analysis-calculator` vs `/sample-size-calculator` | Power keeps only the long tail "power analysis calculator sample size" (t-test, ANOVA, r). Survey sample size stays with `/sample-size-calculator`. |
 | "finite population correction" | `/margin-of-error-calculator` vs `/sample-size-calculator` | Kept on sample size. MOE retitled to "… for Survey Results". |
 | "fisher exact test calculator" | `/chi-square-calculator` vs `/fishers-exact-test-calculator` | Removed from chi-square. |
 | "cubic equation solver" | `/equation-solver` vs `/polynomial-solver` vs the equation guide | The tool `/equation-solver` keeps it. The guide is now "How to Solve Linear, Quadratic & Cubic Equations". |

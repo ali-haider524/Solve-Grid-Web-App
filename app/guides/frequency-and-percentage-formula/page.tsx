@@ -2,7 +2,7 @@ import GuideArticle from "../../../components/GuideArticle";
 import { createStaticPageMetadata } from "../../../lib/seo";
 
 export const metadata = createStaticPageMetadata(
-  "Frequency and Percentage Formula for a Thesis (Examples)",
+  "Frequency and Percentage Formula in Research (with Examples)",
   "The percentage formula P = (f ÷ N) × 100 for the profile of respondents, with a worked table, ranking, multiple-response items and a sample interpretation.",
   "/guides/frequency-and-percentage-formula",
 );

@@ -15,7 +15,9 @@ type ToolCrossLinksProps = { currentSlug: string };
 
 export default function ToolCrossLinks({ currentSlug }: ToolCrossLinksProps) {
   const currentTool = getToolBySlug(currentSlug);
-  const relatedTools = getRelatedTools(currentSlug);
+  const currentForLimit = getToolBySlug(currentSlug);
+  // Statistics tools link to five planned neighbours (assumption check, alternative, next step, effect size).
+  const relatedTools = getRelatedTools(currentSlug, currentForLimit?.category === "statistics" ? 5 : 3);
   const relatedGuides = getGuidesForTool(currentSlug, 3);
 
   if (!currentTool) return null;
@@ -76,6 +78,13 @@ export default function ToolCrossLinks({ currentSlug }: ToolCrossLinksProps) {
         </div>
 
         {currentTool.category === "statistics" ? (
+          <p className={styles.validationNote}>
+            Results from this {currentTool.name.toLowerCase()} are checked against SciPy and NumPy reference
+            values. <Link href="/validation">See the calculator validation results</Link>.
+          </p>
+        ) : null}
+
+        {currentTool.category === "statistics" ? (
           <CiteAndExport
             name={currentTool.name}
             url={`${siteUrl}/${currentTool.slug}`}
@@ -112,10 +121,10 @@ export default function ToolCrossLinks({ currentSlug }: ToolCrossLinksProps) {
           </div>
           <div className={styles.directoryLinks}>
             <Link className={styles.allToolsLink} href={categoryPath}>
-              More in this category →
+              All {categoryInfo.label.toLowerCase()} →
             </Link>
             <Link className={styles.allToolsLink} href="/tools">
-              Browse all tools →
+              All SolveGrid calculators →
             </Link>
           </div>
         </div>

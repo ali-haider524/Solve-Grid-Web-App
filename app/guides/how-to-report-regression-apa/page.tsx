@@ -2,7 +2,7 @@ import GuideArticle from "../../../components/GuideArticle";
 import { createStaticPageMetadata } from "../../../lib/seo";
 
 export const metadata = createStaticPageMetadata(
-  "How to Report Regression Results in APA Style",
+  "How to Report Regression Results in APA 7 (Text & Table)",
   "APA templates for simple and multiple linear regression: F, df, R², adjusted R², B, β, t, p, and 95% CIs, with a worked example and a coefficients table layout.",
   "/guides/how-to-report-regression-apa",
 );

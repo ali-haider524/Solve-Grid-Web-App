@@ -2,7 +2,7 @@ import GuideArticle from "../../../components/GuideArticle";
 import { createStaticPageMetadata } from "../../../lib/seo";
 
 export const metadata = createStaticPageMetadata(
-  "Which Statistical Test Should I Use? (With Table)",
+  "Which Statistical Test Should I Use? Table & Flowchart",
   "Pick the right test by question and data type: t-test, ANOVA, chi-square, Mann-Whitney, Wilcoxon, Kruskal-Wallis, Pearson, or Spearman, with a decision table.",
   "/guides/choose-a-statistical-test",
 );

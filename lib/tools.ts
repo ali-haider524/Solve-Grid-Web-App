@@ -498,13 +498,13 @@ export const tools: ToolInfo[] = [
   },
   {
     slug: "statistics-calculator",
-    name: "Statistics Calculator",
-    shortName: "Statistics",
+    name: "Standard Deviation Calculator",
+    shortName: "Standard deviation",
     category: "statistics",
     icon: "σ",
-    title: "Standard Deviation Calculator (Sample & Population)",
+    title: "Standard Deviation Calculator with Steps: Sample & Population",
     description:
-      "Calculate sample or population standard deviation, variance, mean, median, quartiles, IQR, frequency tables, and regression from raw or grouped data.",
+      "Free standard deviation calculator with steps: sample or population SD, variance, mean, median, quartiles and IQR from raw, frequency or grouped data.",
     summary:
       "Analyse raw data, frequency tables, grouped intervals, or paired X/Y values using descriptive statistics, sample and population standard deviation, variance, quartiles, IQR, outlier checks, and regression results.",
     keywords: [
@@ -520,11 +520,7 @@ export const tools: ToolInfo[] = [
       "grouped data standard deviation calculator",
       "outlier calculator",
     ],
-    relatedSlugs: [
-      "t-test-calculator",
-      "likert-scale-calculator",
-      "sample-size-calculator",
-    ],
+    relatedSlugs: ["shapiro-wilk-test-calculator", "t-test-calculator", "confidence-interval-calculator", "likert-scale-calculator", "margin-of-error-calculator"],
     featured: true,
     priority: 0.95,
     useCases: [
@@ -928,9 +924,9 @@ export const tools: ToolInfo[] = [
     shortName: "Sample size",
     category: "statistics",
     icon: "n",
-    title: "Sample Size Calculator – Slovin, Yamane & Cochran",
+    title: "Sample Size Calculator for Thesis: Slovin, Yamane, Cochran",
     description:
-      "Free sample size calculator using Slovin, Taro Yamane, or Cochran's formula with finite population correction. Every step shown, plus a methods sentence.",
+      "Free sample size calculator for thesis surveys. Enter your population to get n with Slovin, Yamane or Cochran, every step shown, plus a methods sentence.",
     summary:
       "Find the minimum sample size for a survey or thesis using Slovin/Yamane or Cochran's formula, with confidence level, margin of error, population size, response-rate adjustment, and a copy-ready methods sentence.",
     keywords: [
@@ -944,7 +940,7 @@ export const tools: ToolInfo[] = [
       "finite population correction",
       "raosoft sample size calculator alternative",
     ],
-    relatedSlugs: ["power-analysis-calculator", "likert-scale-calculator", "cronbach-alpha-calculator"],
+    relatedSlugs: ["power-analysis-calculator", "margin-of-error-calculator", "cronbach-alpha-calculator", "likert-scale-calculator", "confidence-interval-calculator"],
     featured: true,
     priority: 0.96,
     useCases: [
@@ -960,6 +956,16 @@ export const tools: ToolInfo[] = [
       "Step-by-step working and methods sentence",
     ],
     faqs: [
+      {
+        question: "What is the sample size for a population of 200?",
+        answer:
+          "With Slovin's formula at a 5% margin of error, n = 200 ÷ (1 + 200 × 0.05²) = 200 ÷ 1.5 = 133.3, so you need 134 respondents (always round up).",
+      },
+      {
+        question: "Is 30 or 40 respondents enough for a thesis?",
+        answer:
+          "Only if your population is very small or your design calls for it. Rules of thumb such as 30 per group come from the central limit theorem, not from your population. Base the number on Slovin or Cochran for a survey, or on a power analysis for a hypothesis test, and state the formula in your methods chapter.",
+      },
       {
         question: "What is the sample size for a population of 1,000?",
         answer:
@@ -998,7 +1004,7 @@ export const tools: ToolInfo[] = [
     shortName: "Cronbach's alpha",
     category: "statistics",
     icon: "α",
-    title: "Cronbach's Alpha Calculator with Alpha If Deleted",
+    title: "Cronbach's Alpha Calculator Online (Free, Alpha If Deleted)",
     description:
       "Paste survey data to get Cronbach's alpha, item-total correlations, and alpha if item deleted. Handles reverse-coded Likert items. Free, no sign-up.",
     summary:
@@ -1013,7 +1019,7 @@ export const tools: ToolInfo[] = [
       "cronbach alpha interpretation",
       "reverse coded items cronbach alpha",
     ],
-    relatedSlugs: ["factor-analysis-calculator", "likert-scale-calculator", "sample-size-calculator", "statistics-calculator"],
+    relatedSlugs: ["factor-analysis-calculator", "likert-scale-calculator", "intraclass-correlation-calculator", "sample-size-calculator", "statistics-calculator"],
     featured: true,
     priority: 0.95,
     useCases: [
@@ -1029,6 +1035,11 @@ export const tools: ToolInfo[] = [
       "Interpretation band and APA-style sentence",
     ],
     faqs: [
+      {
+        question: "Is a Cronbach's alpha of 0.7 reliable? Is 0.6 acceptable?",
+        answer:
+          "0.70 is the usual minimum for acceptable reliability, 0.80 is good and 0.90 is excellent. Values from 0.60 to 0.69 are often called questionable: some supervisors accept them for short new scales or pilot studies, but you should justify it and check alpha if item deleted first.",
+      },
       {
         question: "What is McDonald's omega and should I report it?",
         answer:
@@ -1072,9 +1083,9 @@ export const tools: ToolInfo[] = [
     shortName: "Likert weighted mean",
     category: "statistics",
     icon: "Σw",
-    title: "Likert Scale Calculator – Weighted Mean, SD & Rank",
+    title: "Likert Scale Calculator: Weighted Mean for 4, 5 or 7 Points",
     description:
-      "Get the weighted mean, SD, rank, and verbal interpretation for each Likert statement on 4-, 5-, or 7-point scales. Ready for your thesis results chapter.",
+      "Free Likert scale calculator: paste response counts to get the weighted mean, SD, rank and verbal label for every statement on 4, 5 or 7-point scales.",
     summary:
       "Turn questionnaire frequency counts into weighted means, standard deviations, rankings, and a verbal interpretation table ready for a thesis results chapter.",
     keywords: [
@@ -1084,7 +1095,7 @@ export const tools: ToolInfo[] = [
       "likert scale mean and standard deviation",
       "likert data analysis calculator",
     ],
-    relatedSlugs: ["cronbach-alpha-calculator", "sample-size-calculator", "statistics-calculator"],
+    relatedSlugs: ["cronbach-alpha-calculator", "statistics-calculator", "mann-whitney-u-test-calculator", "kruskal-wallis-test-calculator", "factor-analysis-calculator"],
     featured: true,
     priority: 0.95,
     useCases: [
@@ -1133,9 +1144,9 @@ export const tools: ToolInfo[] = [
     shortName: "Test chooser",
     category: "statistics",
     icon: "?",
-    title: "Statistical Test Chooser: 4-Question Decision Tree",
+    title: "Statistical Test Chooser: Free Decision Tree (4 Questions)",
     description:
-      "Answer 4 questions to pick the right test: t-test, ANOVA, chi-square, Mann-Whitney, Wilcoxon, Kruskal-Wallis, or correlation. Includes an APA sentence.",
+      "Not sure which statistical test to use? Answer 4 questions about your data to get the right test, its assumptions and a ready APA results sentence.",
     summary:
       "Pick the right statistical test for your thesis in four questions, then see the assumptions to check and a ready-to-edit APA-style sentence for your results chapter.",
     keywords: [
@@ -1148,7 +1159,7 @@ export const tools: ToolInfo[] = [
       "statistical test for categorical data",
       "should i use anova or t test",
     ],
-    relatedSlugs: ["t-test-calculator", "one-way-anova-calculator", "chi-square-calculator"],
+    relatedSlugs: ["t-test-calculator", "one-way-anova-calculator", "chi-square-calculator", "correlation-calculator", "mann-whitney-u-test-calculator"],
     featured: true,
     priority: 0.97,
     useCases: [
@@ -1186,7 +1197,7 @@ export const tools: ToolInfo[] = [
     shortName: "Chi-square",
     category: "statistics",
     icon: "χ²",
-    title: "Chi-Square Test Calculator with Cramér's V",
+    title: "Chi-Square Calculator (2x2 & Larger) with P Value & Cramér's V",
     description:
       "Free chi-square test of independence and goodness-of-fit calculator with p value, expected counts, Cramér's V, Fisher's exact test, and an APA sentence.",
     summary:
@@ -1200,7 +1211,7 @@ export const tools: ToolInfo[] = [
       "chi-square test solved examples",
       "chi square test is used for what type of data",
     ],
-    relatedSlugs: ["statistical-test-chooser", "likert-scale-calculator", "sample-size-calculator"],
+    relatedSlugs: ["fishers-exact-test-calculator", "mcnemar-test-calculator", "logistic-regression-calculator", "effect-size-calculator", "p-value-calculator"],
     featured: true,
     priority: 0.95,
     useCases: [
@@ -1216,6 +1227,11 @@ export const tools: ToolInfo[] = [
       "Fisher's exact p for 2 × 2 tables",
     ],
     faqs: [
+      {
+        question: "What is the difference between a t-test and a chi-square test?",
+        answer:
+          "A t-test compares the means of a numeric outcome between two groups. A chi-square test compares counts of a categorical outcome, for example whether the proportion who answered yes differs between groups. Use chi-square when both variables are categories.",
+      },
       {
         question: "What is a chi-square test used for?",
         answer:
@@ -1244,7 +1260,7 @@ export const tools: ToolInfo[] = [
     shortName: "Mann-Whitney U",
     category: "statistics",
     icon: "U",
-    title: "Mann-Whitney U Test Calculator with Effect Size",
+    title: "Mann-Whitney U Test Calculator: P Value, Medians, Effect Size",
     description:
       "Compare two independent groups with the Mann-Whitney U test. Get U, z, exact or approximate p, medians, mean ranks, effect size r, and an APA sentence.",
     summary:
@@ -1258,7 +1274,7 @@ export const tools: ToolInfo[] = [
       "mann whitney effect size",
       "non parametric test two groups",
     ],
-    relatedSlugs: ["wilcoxon-signed-rank-test-calculator", "kruskal-wallis-test-calculator", "effect-size-calculator"],
+    relatedSlugs: ["t-test-calculator", "wilcoxon-signed-rank-test-calculator", "kruskal-wallis-test-calculator", "effect-size-calculator", "shapiro-wilk-test-calculator"],
     featured: true,
     priority: 0.94,
     useCases: [
@@ -1274,6 +1290,16 @@ export const tools: ToolInfo[] = [
       "APA report sentence",
     ],
     faqs: [
+      {
+        question: "What is the Mann-Whitney U test used for?",
+        answer:
+          "It compares two independent groups on an ordinal or non-normal outcome, such as Likert scores of male and female respondents. It tests whether values in one group tend to be higher than in the other.",
+      },
+      {
+        question: "When should I use Mann-Whitney U instead of a t-test?",
+        answer:
+          "Use the independent t-test when the outcome is continuous and roughly normal in each group. Use Mann-Whitney U when the outcome is ordinal (Likert items, ranks), clearly skewed, or the groups are small with outliers. Check normality first with the Shapiro-Wilk test.",
+      },
       {
         question: "Does this match SPSS?",
         answer:
@@ -1297,7 +1323,7 @@ export const tools: ToolInfo[] = [
     shortName: "Shapiro-Wilk",
     category: "statistics",
     icon: "W",
-    title: "Shapiro-Wilk Test Calculator with Q-Q Plot",
+    title: "Shapiro-Wilk Test Calculator: Normality Test with Q-Q Plot",
     description:
       "Test whether data are normally distributed with the Shapiro-Wilk test. Get W, p value, skewness, kurtosis, a histogram, a Q-Q plot, and an APA sentence.",
     summary:
@@ -1311,7 +1337,7 @@ export const tools: ToolInfo[] = [
       "how to interpret shapiro wilk test",
       "q-q plot online",
     ],
-    relatedSlugs: ["statistical-test-chooser", "mann-whitney-u-test-calculator", "t-test-calculator"],
+    relatedSlugs: ["t-test-calculator", "mann-whitney-u-test-calculator", "one-way-anova-calculator", "statistics-calculator", "wilcoxon-signed-rank-test-calculator"],
     featured: true,
     priority: 0.94,
     useCases: [
@@ -1350,7 +1376,7 @@ export const tools: ToolInfo[] = [
     shortName: "Cohen's kappa",
     category: "statistics",
     icon: "κ",
-    title: "Cohen's Kappa Calculator – Inter-Rater Agreement",
+    title: "Cohen's Kappa Calculator: Inter-Rater Reliability (Weighted)",
     description:
       "Calculate Cohen's kappa and weighted kappa for two raters. Get the 95% CI, p value, percent agreement, Landis and Koch interpretation, and an APA sentence.",
     summary:
@@ -1364,7 +1390,7 @@ export const tools: ToolInfo[] = [
       "kappa statistic calculator",
       "intercoder reliability",
     ],
-    relatedSlugs: ["fleiss-kappa-calculator", "intraclass-correlation-calculator", "cronbach-alpha-calculator", "statistical-test-chooser"],
+    relatedSlugs: ["fleiss-kappa-calculator", "intraclass-correlation-calculator", "kendalls-w-calculator", "cronbach-alpha-calculator", "mcnemar-test-calculator"],
     featured: true,
     priority: 0.93,
     useCases: [
@@ -1402,7 +1428,7 @@ export const tools: ToolInfo[] = [
     shortName: "Effect size",
     category: "statistics",
     icon: "d",
-    title: "Effect Size Calculator – Cohen's d, Hedges' g & η²",
+    title: "Effect Size Calculator: Cohen's d, Hedges' g & Eta Squared",
     description:
       "Calculate Cohen's d, Hedges' g, Glass's delta, partial eta squared, and r from means and SDs or from t, F, and z values, with 95% CI and benchmarks.",
     summary:
@@ -1417,7 +1443,7 @@ export const tools: ToolInfo[] = [
       "effect size r mann whitney",
       "convert r to d",
     ],
-    relatedSlugs: ["statistical-test-chooser", "t-test-calculator", "mann-whitney-u-test-calculator"],
+    relatedSlugs: ["t-test-calculator", "one-way-anova-calculator", "power-analysis-calculator", "p-value-calculator", "confidence-interval-calculator"],
     featured: true,
     priority: 0.94,
     useCases: [
@@ -1455,7 +1481,7 @@ export const tools: ToolInfo[] = [
     shortName: "Wilcoxon signed-rank",
     category: "statistics",
     icon: "T",
-    title: "Wilcoxon Signed-Rank Test Calculator (Paired)",
+    title: "Wilcoxon Signed-Rank Test Calculator for Paired Data",
     description:
       "Run a Wilcoxon signed-rank test on paired before/after data. Get T, W+, W−, z, exact or approximate p, medians, effect size r, and an APA sentence.",
     summary:
@@ -1468,7 +1494,7 @@ export const tools: ToolInfo[] = [
       "wilcoxon vs mann whitney",
       "pre test post test non parametric",
     ],
-    relatedSlugs: ["mann-whitney-u-test-calculator", "statistical-test-chooser", "effect-size-calculator"],
+    relatedSlugs: ["t-test-calculator", "mann-whitney-u-test-calculator", "friedman-test-calculator", "mcnemar-test-calculator", "shapiro-wilk-test-calculator"],
     featured: true,
     priority: 0.93,
     useCases: [
@@ -1505,7 +1531,7 @@ export const tools: ToolInfo[] = [
     shortName: "Kruskal-Wallis",
     category: "statistics",
     icon: "H",
-    title: "Kruskal-Wallis Test Calculator with Dunn Post Hoc",
+    title: "Kruskal-Wallis Test Calculator with Post Hoc (Dunn's Test)",
     description:
       "Compare 3+ independent groups with the Kruskal-Wallis H test. Get H, df, p value, epsilon squared, medians, mean ranks, Dunn post hoc tests, and APA text.",
     summary:
@@ -1518,7 +1544,7 @@ export const tools: ToolInfo[] = [
       "non parametric anova calculator",
       "kruskal wallis post hoc",
     ],
-    relatedSlugs: ["mann-whitney-u-test-calculator", "statistical-test-chooser", "one-way-anova-calculator"],
+    relatedSlugs: ["one-way-anova-calculator", "mann-whitney-u-test-calculator", "friedman-test-calculator", "shapiro-wilk-test-calculator", "effect-size-calculator"],
     featured: true,
     priority: 0.93,
     useCases: [
@@ -1557,7 +1583,7 @@ export const tools: ToolInfo[] = [
     shortName: "ICC",
     category: "statistics",
     icon: "ρ",
-    title: "Intraclass Correlation (ICC) Calculator with 95% CI",
+    title: "ICC Calculator: Intraclass Correlation Coefficient + 95% CI",
     description:
       "Calculate ICC(1,1), ICC(2,1), ICC(3,1) and average-measure ICCs with 95% confidence intervals and F tests, plus help choosing the right ICC and APA text.",
     summary:
@@ -1571,7 +1597,7 @@ export const tools: ToolInfo[] = [
       "which icc to use",
       "icc interpretation",
     ],
-    relatedSlugs: ["cohens-kappa-calculator", "cronbach-alpha-calculator", "statistical-test-chooser"],
+    relatedSlugs: ["cohens-kappa-calculator", "fleiss-kappa-calculator", "cronbach-alpha-calculator", "kendalls-w-calculator", "correlation-calculator"],
     featured: true,
     priority: 0.93,
     useCases: [
@@ -1610,7 +1636,7 @@ export const tools: ToolInfo[] = [
     shortName: "Sobel test",
     category: "statistics",
     icon: "ab",
-    title: "Sobel Test Calculator for Mediation Analysis",
+    title: "Sobel Test Calculator for Mediation (Sobel, Aroian, Goodman)",
     description:
       "Test a mediation (indirect) effect with the Sobel, Aroian, and Goodman tests. Enter a, b, and their standard errors to get z, p, a 95% CI, and APA text.",
     summary:
@@ -1624,7 +1650,7 @@ export const tools: ToolInfo[] = [
       "goodman test mediation",
       "how to report sobel test",
     ],
-    relatedSlugs: ["t-test-calculator", "effect-size-calculator", "statistical-test-chooser"],
+    relatedSlugs: ["linear-regression-calculator", "logistic-regression-calculator", "correlation-calculator", "ancova-calculator", "p-value-calculator"],
     featured: true,
     priority: 0.9,
     useCases: [
@@ -1663,9 +1689,9 @@ export const tools: ToolInfo[] = [
     shortName: "t-test",
     category: "statistics",
     icon: "t",
-    title: "t-Test Calculator: Independent, Paired & One-Sample",
+    title: "T-Test Calculator: Two-Sample, Paired & One-Sample (P Value)",
     description:
-      "Free t-test calculator for independent (Welch or Student), paired, and one-sample t-tests. Paste data to get t, df, p, 95% CI, Cohen's d, and APA text.",
+      "Free online t-test calculator for two-sample (Welch or Student), paired and one-sample tests. Paste data to get t, df, p value, 95% CI, Cohen's d and APA text.",
     summary:
       "Paste raw scores and get a complete t-test: group means and SDs, t, degrees of freedom, exact p value, confidence interval, Cohen's d, Levene's test, and a ready APA sentence.",
     keywords: [
@@ -1678,7 +1704,7 @@ export const tools: ToolInfo[] = [
       "two sample t test calculator",
       "t test p value calculator",
     ],
-    relatedSlugs: ["effect-size-calculator", "mann-whitney-u-test-calculator", "shapiro-wilk-test-calculator"],
+    relatedSlugs: ["mann-whitney-u-test-calculator", "effect-size-calculator", "shapiro-wilk-test-calculator", "one-way-anova-calculator", "power-analysis-calculator"],
     featured: true,
     priority: 0.96,
     useCases: [
@@ -1732,9 +1758,9 @@ export const tools: ToolInfo[] = [
     shortName: "One-way ANOVA",
     category: "statistics",
     icon: "F",
-    title: "One-Way ANOVA Calculator with Tukey HSD",
+    title: "One-Way ANOVA Calculator with Tukey HSD Post Hoc (Free)",
     description:
-      "Free one-way ANOVA calculator: paste 3+ groups to get the ANOVA table, F, p, eta squared, Levene's test, Welch's ANOVA, Tukey HSD post hoc tests, and APA text.",
+      "Free one-way ANOVA calculator with steps: paste 3+ groups to get the ANOVA table, F, p value, eta squared, Welch's ANOVA, Tukey HSD post hoc and APA text.",
     summary:
       "Compare three or more group means from raw data, with a full ANOVA source table, effect sizes, assumption checks, Tukey-Kramer pairwise comparisons, and a ready APA sentence.",
     keywords: [
@@ -1747,7 +1773,7 @@ export const tools: ToolInfo[] = [
       "f test calculator anova",
       "anova p value calculator",
     ],
-    relatedSlugs: ["t-test-calculator", "two-way-anova-calculator", "ancova-calculator", "kruskal-wallis-test-calculator", "effect-size-calculator"],
+    relatedSlugs: ["two-way-anova-calculator", "repeated-measures-anova-calculator", "kruskal-wallis-test-calculator", "ancova-calculator", "effect-size-calculator"],
     featured: true,
     priority: 0.96,
     useCases: [
@@ -1796,7 +1822,7 @@ export const tools: ToolInfo[] = [
     shortName: "Correlation",
     category: "statistics",
     icon: "r",
-    title: "Correlation Calculator: Pearson, Spearman & Kendall",
+    title: "Correlation Calculator: Pearson, Spearman & Kendall (P Value)",
     description:
       "Free correlation coefficient calculator. Paste X and Y to get Pearson r, Spearman rho, or Kendall tau with p value, 95% CI, r², scatter plot, and APA text.",
     summary:
@@ -1811,7 +1837,7 @@ export const tools: ToolInfo[] = [
       "r value calculator",
       "correlation p value calculator",
     ],
-    relatedSlugs: ["statistical-test-chooser", "effect-size-calculator", "shapiro-wilk-test-calculator"],
+    relatedSlugs: ["linear-regression-calculator", "logistic-regression-calculator", "p-value-calculator", "confidence-interval-calculator", "sobel-test-calculator"],
     featured: true,
     priority: 0.95,
     useCases: [
@@ -1855,7 +1881,7 @@ export const tools: ToolInfo[] = [
     shortName: "Regression",
     category: "statistics",
     icon: "β",
-    title: "Linear Regression Calculator: Simple & Multiple",
+    title: "Linear Regression Calculator: Simple & Multiple (APA Output)",
     description:
       "Free simple and multiple linear regression calculator. Paste data to get R², adjusted R², F, B, SE, beta, t, p, 95% CIs, VIF, residual checks, and APA text.",
     summary:
@@ -1870,7 +1896,7 @@ export const tools: ToolInfo[] = [
       "standardized beta coefficient calculator",
       "regression p value calculator",
     ],
-    relatedSlugs: ["correlation-calculator", "sobel-test-calculator", "effect-size-calculator"],
+    relatedSlugs: ["logistic-regression-calculator", "correlation-calculator", "sobel-test-calculator", "ancova-calculator", "effect-size-calculator"],
     featured: true,
     priority: 0.95,
     useCases: [
@@ -1914,7 +1940,7 @@ export const tools: ToolInfo[] = [
     shortName: "Friedman test",
     category: "statistics",
     icon: "χ²",
-    title: "Friedman Test Calculator with Post Hoc Tests",
+    title: "Friedman Test Calculator for Repeated Measures (Post Hoc)",
     description:
       "Free Friedman test calculator for 3+ repeated measures. Paste data to get χ², df, p, Kendall's W, medians, mean ranks, Bonferroni post hoc tests, and APA text.",
     summary:
@@ -1926,7 +1952,7 @@ export const tools: ToolInfo[] = [
       "friedman post hoc test",
       "how to report friedman test",
     ],
-    relatedSlugs: ["wilcoxon-signed-rank-test-calculator", "kruskal-wallis-test-calculator", "one-way-anova-calculator"],
+    relatedSlugs: ["repeated-measures-anova-calculator", "wilcoxon-signed-rank-test-calculator", "kendalls-w-calculator", "kruskal-wallis-test-calculator", "one-way-anova-calculator"],
     featured: true,
     priority: 0.9,
     useCases: [
@@ -1965,7 +1991,7 @@ export const tools: ToolInfo[] = [
     shortName: "McNemar test",
     category: "statistics",
     icon: "2×2",
-    title: "McNemar Test Calculator (Exact and Chi-Square)",
+    title: "McNemar Test Calculator for Paired 2x2 Data (Exact P Value)",
     description:
       "Free McNemar test calculator for paired yes/no data. Enter a before-after 2×2 table to get χ², exact p, continuity correction, odds ratio, and APA text.",
     summary:
@@ -1978,7 +2004,7 @@ export const tools: ToolInfo[] = [
       "before after chi square test",
       "how to report mcnemar test",
     ],
-    relatedSlugs: ["chi-square-calculator", "wilcoxon-signed-rank-test-calculator", "cohens-kappa-calculator"],
+    relatedSlugs: ["chi-square-calculator", "fishers-exact-test-calculator", "wilcoxon-signed-rank-test-calculator", "cohens-kappa-calculator", "logistic-regression-calculator"],
     featured: true,
     priority: 0.88,
     useCases: [
@@ -2017,9 +2043,9 @@ export const tools: ToolInfo[] = [
     shortName: "Power analysis",
     category: "statistics",
     icon: "1−β",
-    title: "A Priori Power Analysis Calculator (t, ANOVA, r, χ²)",
+    title: "Power Analysis Calculator: Sample Size for t-Test, ANOVA, r",
     description:
-      "Free a priori power analysis calculator: find the sample size for t-tests, ANOVA, correlation, and chi-square from effect size, alpha, and power.",
+      "Free power analysis calculator for sample size: get the N needed for t-tests, ANOVA, correlation and chi-square from effect size, alpha and power.",
     summary:
       "Justify your sample size the way supervisors expect: choose the test, set the expected effect size, alpha, and power, and get the required N, a power curve, and a methodology sentence.",
     keywords: [
@@ -2031,7 +2057,7 @@ export const tools: ToolInfo[] = [
       "sample size for anova",
       "statistical power calculator",
     ],
-    relatedSlugs: ["sample-size-calculator", "effect-size-calculator", "t-test-calculator"],
+    relatedSlugs: ["sample-size-calculator", "effect-size-calculator", "t-test-calculator", "one-way-anova-calculator", "correlation-calculator"],
     featured: true,
     priority: 0.95,
     useCases: [
@@ -2075,7 +2101,7 @@ export const tools: ToolInfo[] = [
     shortName: "p value",
     category: "statistics",
     icon: "p",
-    title: "P Value Calculator from z, t, F, Chi-Square or r",
+    title: "P Value Calculator from t, z, F, Chi-Square or r (Free)",
     description:
       "Free p value calculator: enter a z, t, F, chi-square or correlation r with its degrees of freedom to get the exact one- or two-tailed p value and APA text.",
     summary:
@@ -2088,7 +2114,7 @@ export const tools: ToolInfo[] = [
       "chi square p value calculator",
       "p value from correlation coefficient",
     ],
-    relatedSlugs: ["t-test-calculator", "chi-square-calculator", "correlation-calculator"],
+    relatedSlugs: ["t-test-calculator", "chi-square-calculator", "confidence-interval-calculator", "effect-size-calculator", "correlation-calculator"],
     featured: true,
     priority: 0.9,
     useCases: [
@@ -2131,7 +2157,7 @@ export const tools: ToolInfo[] = [
     shortName: "Confidence interval",
     category: "statistics",
     icon: "[ ]",
-    title: "Confidence Interval Calculator (Mean or Proportion)",
+    title: "Confidence Interval Calculator for a Mean or Proportion",
     description:
       "Free confidence interval calculator for a mean (t interval) or a proportion (Wilson and Wald). Get the margin of error, the interval and an APA sentence.",
     summary:
@@ -2144,7 +2170,7 @@ export const tools: ToolInfo[] = [
       "wilson score interval calculator",
       "how to calculate confidence interval",
     ],
-    relatedSlugs: ["margin-of-error-calculator", "statistics-calculator", "sample-size-calculator"],
+    relatedSlugs: ["margin-of-error-calculator", "p-value-calculator", "t-test-calculator", "sample-size-calculator", "statistics-calculator"],
     featured: true,
     priority: 0.9,
     useCases: [
@@ -2187,7 +2213,7 @@ export const tools: ToolInfo[] = [
     shortName: "Margin of error",
     category: "statistics",
     icon: "±",
-    title: "Margin of Error Calculator for Survey Results",
+    title: "Margin of Error Calculator for Surveys (Proportion or Mean)",
     description:
       "Free margin of error calculator for survey research. Enter sample size, confidence level and proportion or SD, with an optional finite population correction.",
     summary:
@@ -2199,7 +2225,7 @@ export const tools: ToolInfo[] = [
       "margin of error for sample size",
       "calculate margin of error",
     ],
-    relatedSlugs: ["sample-size-calculator", "confidence-interval-calculator", "power-analysis-calculator"],
+    relatedSlugs: ["sample-size-calculator", "confidence-interval-calculator", "power-analysis-calculator", "statistics-calculator", "likert-scale-calculator"],
     featured: true,
     priority: 0.9,
     useCases: [
@@ -2242,7 +2268,7 @@ export const tools: ToolInfo[] = [
     shortName: "Fisher's exact test",
     category: "statistics",
     icon: "2×2",
-    title: "Fisher's Exact Test Calculator (2×2 Table)",
+    title: "Fisher's Exact Test Calculator for 2x2 Tables (P Value, OR)",
     description:
       "Free Fisher's exact test calculator for a 2×2 table. Get the two-sided and one-sided exact p values, odds ratio with 95% CI and an APA sentence.",
     summary:
@@ -2255,7 +2281,7 @@ export const tools: ToolInfo[] = [
       "fisher exact vs chi square",
       "odds ratio calculator 2x2",
     ],
-    relatedSlugs: ["chi-square-calculator", "mcnemar-test-calculator", "effect-size-calculator"],
+    relatedSlugs: ["chi-square-calculator", "mcnemar-test-calculator", "logistic-regression-calculator", "p-value-calculator", "effect-size-calculator"],
     featured: true,
     priority: 0.88,
     useCases: [
@@ -2293,7 +2319,7 @@ export const tools: ToolInfo[] = [
     shortName: "Two-way ANOVA",
     category: "statistics",
     icon: "A×B",
-    title: "Two-Way ANOVA Calculator with Interaction (Type III)",
+    title: "Two-Way ANOVA Calculator with Interaction (Free, Type III)",
     description:
       "Free two-way ANOVA calculator. Paste factor A, factor B and score to get main effects, interaction, Type III SS, partial eta squared and APA text.",
     summary:
@@ -2306,7 +2332,7 @@ export const tools: ToolInfo[] = [
       "type iii sum of squares",
       "how to report two way anova apa",
     ],
-    relatedSlugs: ["one-way-anova-calculator", "repeated-measures-anova-calculator", "effect-size-calculator"],
+    relatedSlugs: ["one-way-anova-calculator", "repeated-measures-anova-calculator", "ancova-calculator", "manova-calculator", "effect-size-calculator"],
     featured: true,
     priority: 0.9,
     useCases: [
@@ -2350,7 +2376,7 @@ export const tools: ToolInfo[] = [
     shortName: "Repeated measures ANOVA",
     category: "statistics",
     icon: "RM",
-    title: "Repeated Measures ANOVA Calculator (with Sphericity)",
+    title: "Repeated Measures ANOVA Calculator with Post Hoc & Sphericity",
     description:
       "Free one-way repeated measures ANOVA calculator. Get F, Mauchly's test, Greenhouse-Geisser and Huynh-Feldt corrections, partial eta squared and post hoc tests.",
     summary:
@@ -2363,7 +2389,7 @@ export const tools: ToolInfo[] = [
       "mauchly test of sphericity",
       "how to report repeated measures anova",
     ],
-    relatedSlugs: ["friedman-test-calculator", "one-way-anova-calculator", "t-test-calculator"],
+    relatedSlugs: ["friedman-test-calculator", "one-way-anova-calculator", "two-way-anova-calculator", "t-test-calculator", "effect-size-calculator"],
     featured: true,
     priority: 0.9,
     useCases: [
@@ -2407,7 +2433,7 @@ export const tools: ToolInfo[] = [
     shortName: "Logistic regression",
     category: "statistics",
     icon: "0|1",
-    title: "Logistic Regression Calculator with Odds Ratios",
+    title: "Logistic Regression Calculator Online: Odds Ratios & R²",
     description:
       "Free binary logistic regression calculator. Paste a 0/1 outcome and predictors to get B, Wald, p, odds ratios with 95% CI, model chi-square and Nagelkerke R².",
     summary:
@@ -2420,7 +2446,7 @@ export const tools: ToolInfo[] = [
       "logistic regression spss alternative",
       "how to report logistic regression apa",
     ],
-    relatedSlugs: ["linear-regression-calculator", "chi-square-calculator", "fishers-exact-test-calculator"],
+    relatedSlugs: ["linear-regression-calculator", "chi-square-calculator", "fishers-exact-test-calculator", "mcnemar-test-calculator", "sobel-test-calculator"],
     featured: true,
     priority: 0.88,
     useCases: [
@@ -2464,7 +2490,7 @@ export const tools: ToolInfo[] = [
     shortName: "Kendall's W",
     category: "statistics",
     icon: "W",
-    title: "Kendall's W Calculator (Coefficient of Concordance)",
+    title: "Kendall's W Calculator: Coefficient of Concordance (Free)",
     description:
       "Free Kendall's W calculator: measure agreement between several raters ranking the same items, with tie correction, chi-square test, mean ranks and APA text.",
     summary:
@@ -2477,7 +2503,7 @@ export const tools: ToolInfo[] = [
       "how to interpret kendall's w",
       "delphi study consensus kendall w",
     ],
-    relatedSlugs: ["fleiss-kappa-calculator", "friedman-test-calculator", "intraclass-correlation-calculator"],
+    relatedSlugs: ["friedman-test-calculator", "fleiss-kappa-calculator", "cohens-kappa-calculator", "intraclass-correlation-calculator", "correlation-calculator"],
     featured: true,
     priority: 0.86,
     useCases: [
@@ -2521,7 +2547,7 @@ export const tools: ToolInfo[] = [
     shortName: "Fleiss' kappa",
     category: "statistics",
     icon: "κ",
-    title: "Fleiss' Kappa Calculator for Multiple Raters",
+    title: "Fleiss' Kappa Calculator Online for 3+ Raters (Free)",
     description:
       "Free Fleiss' kappa calculator for 3+ raters. Paste counts or raw ratings to get kappa, SE, z test, 95% CI, per-category kappa and Landis & Koch labels.",
     summary:
@@ -2534,7 +2560,7 @@ export const tools: ToolInfo[] = [
       "fleiss kappa interpretation",
       "how to report fleiss kappa",
     ],
-    relatedSlugs: ["cohens-kappa-calculator", "intraclass-correlation-calculator", "kendalls-w-calculator"],
+    relatedSlugs: ["cohens-kappa-calculator", "kendalls-w-calculator", "intraclass-correlation-calculator", "cronbach-alpha-calculator", "chi-square-calculator"],
     featured: true,
     priority: 0.86,
     useCases: [
@@ -2578,7 +2604,7 @@ export const tools: ToolInfo[] = [
     shortName: "ANCOVA",
     category: "statistics",
     icon: "F|x",
-    title: "ANCOVA Calculator with Adjusted Means",
+    title: "ANCOVA Calculator Online: Adjusted Means & F Test (Free)",
     description:
       "Free one-way ANCOVA calculator. Compare groups while controlling for a covariate: adjusted F test, adjusted means, homogeneity of slopes check and APA text.",
     summary:
@@ -2591,7 +2617,7 @@ export const tools: ToolInfo[] = [
       "pretest posttest ancova",
       "how to report ancova apa",
     ],
-    relatedSlugs: ["one-way-anova-calculator", "two-way-anova-calculator", "linear-regression-calculator"],
+    relatedSlugs: ["one-way-anova-calculator", "two-way-anova-calculator", "linear-regression-calculator", "manova-calculator", "repeated-measures-anova-calculator"],
     featured: true,
     priority: 0.88,
     useCases: [
@@ -2635,7 +2661,7 @@ export const tools: ToolInfo[] = [
     shortName: "MANOVA",
     category: "statistics",
     icon: "Λ",
-    title: "One-Way MANOVA Calculator (Pillai, Wilks)",
+    title: "MANOVA Calculator Online: Pillai's Trace & Wilks' Lambda",
     description:
       "Free one-way MANOVA calculator. Test group differences on several dependent variables with Pillai's trace, Wilks' lambda, Hotelling, Roy and follow-up ANOVAs.",
     summary:
@@ -2648,7 +2674,7 @@ export const tools: ToolInfo[] = [
       "multivariate analysis of variance",
       "how to report manova apa",
     ],
-    relatedSlugs: ["one-way-anova-calculator", "two-way-anova-calculator", "repeated-measures-anova-calculator"],
+    relatedSlugs: ["one-way-anova-calculator", "two-way-anova-calculator", "ancova-calculator", "factor-analysis-calculator", "repeated-measures-anova-calculator"],
     featured: true,
     priority: 0.86,
     useCases: [
@@ -2692,7 +2718,7 @@ export const tools: ToolInfo[] = [
     shortName: "Factor analysis (EFA)",
     category: "statistics",
     icon: "EFA",
-    title: "Exploratory Factor Analysis Calculator (EFA)",
+    title: "Exploratory Factor Analysis Calculator: KMO & Varimax (Free)",
     description:
       "Free exploratory factor analysis calculator: KMO, Bartlett's test, scree plot, principal axis loadings with varimax rotation, communalities and APA text.",
     summary:
@@ -2705,7 +2731,7 @@ export const tools: ToolInfo[] = [
       "varimax rotation calculator",
       "factor loadings calculator",
     ],
-    relatedSlugs: ["cronbach-alpha-calculator", "correlation-calculator", "likert-scale-calculator"],
+    relatedSlugs: ["cronbach-alpha-calculator", "manova-calculator", "correlation-calculator", "sample-size-calculator", "intraclass-correlation-calculator"],
     featured: true,
     priority: 0.88,
     useCases: [

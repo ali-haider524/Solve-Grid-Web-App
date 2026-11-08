@@ -2,7 +2,7 @@ import GuideArticle from "../../../components/GuideArticle";
 import { createStaticPageMetadata } from "../../../lib/seo";
 
 export const metadata = createStaticPageMetadata(
-  "How to Report a Correlation in APA Style",
+  "How to Report Correlation Results in APA 7 (With Examples)",
   "APA templates for Pearson r, Spearman rho, and Kendall tau: degrees of freedom, p value, 95% CI, strength and direction, plus a correlation matrix table layout.",
   "/guides/how-to-report-correlation-apa",
 );

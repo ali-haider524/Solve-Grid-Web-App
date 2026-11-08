@@ -2,7 +2,7 @@ import GuideArticle from "../../../components/GuideArticle";
 import { createStaticPageMetadata } from "../../../lib/seo";
 
 export const metadata = createStaticPageMetadata(
-  "How to Report Chi-Square in APA Style (7th ed.)",
+  "How to Report Chi-Square Results in APA 7 (With Examples)",
   "APA templates for chi-square test of independence and goodness-of-fit results: χ², df, N, p, Cramér's V, and Fisher's exact test, with worked examples.",
   "/guides/how-to-report-chi-square-apa",
 );

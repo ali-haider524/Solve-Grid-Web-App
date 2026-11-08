@@ -2,7 +2,7 @@ import GuideArticle from "../../../components/GuideArticle";
 import { createStaticPageMetadata } from "../../../lib/seo";
 
 export const metadata = createStaticPageMetadata(
-  "Likert Scale Interpretation: Weighted Mean Ranges",
+  "Likert Scale Interpretation Table: 4, 5 & 7-Point Ranges",
   "Interpret Likert weighted means with 4-, 5- and 7-point range tables, see how the interval width is calculated, and report results in a thesis.",
   "/guides/likert-scale-interpretation",
 );
@@ -55,6 +55,10 @@ export default function LikertInterpretationGuide() {
         ],
       }}
       faqs={[
+        {
+          question: "What does a 5-point Likert scale mean?",
+          answer: "Respondents pick one of five ordered options, usually Strongly disagree (1), Disagree (2), Neutral (3), Agree (4) and Strongly agree (5). The weighted mean of a statement is then read against equal ranges of 0.80: 1.00–1.80, 1.81–2.60, 2.61–3.40, 3.41–4.20 and 4.21–5.00.",
+        },
         {
           question: "How do I compute the weighted mean of a Likert statement?",
           answer:

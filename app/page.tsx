@@ -14,8 +14,8 @@ import {
 } from "../lib/tools";
 
 export const metadata = createStaticPageMetadata(
-  "SolveGrid: Free Statistics Calculators for Thesis & Survey Research",
-  "Free statistics calculators for your thesis: Slovin sample size, Cronbach's alpha, Likert weighted mean, chi-square, t-tests, ANOVA, and a test chooser.",
+  "SolveGrid: Free Statistical Tools for Thesis & Survey Research",
+  "Free statistical tools for your thesis with every step shown: Slovin sample size, Cronbach's alpha, Likert weighted mean, t-test, ANOVA, chi-square and APA text.",
   "/",
 );
 
@@ -167,7 +167,7 @@ export default function Home() {
         url: siteUrl,
         name: "Free Statistics Calculators for Thesis & Survey Research",
         description:
-          "Free statistics calculators for your thesis: Slovin sample size, Cronbach's alpha, Likert weighted mean, chi-square, t-tests, ANOVA, and a test chooser.",
+          "Free statistical tools for your thesis with every step shown: Slovin sample size, Cronbach's alpha, Likert weighted mean, t-test, ANOVA, chi-square and APA text.",
         inLanguage: "en",
         isPartOf: { "@id": `${siteUrl}/#website` },
         about: { "@id": `${siteUrl}/#organization` },

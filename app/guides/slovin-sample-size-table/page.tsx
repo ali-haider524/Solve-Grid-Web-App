@@ -2,7 +2,7 @@ import GuideArticle from "../../../components/GuideArticle";
 import { createStaticPageMetadata } from "../../../lib/seo";
 
 export const metadata = createStaticPageMetadata(
-  "Slovin Table: Sample Size for N = 50 to 100,000",
+  "Slovin's Formula Table: Sample Size for N = 50 to 100,000",
   "Ready-made Slovin's formula sample size table for populations from 50 to 100,000 at 1%, 3%, 5% and 10% margins of error, with Cochran's 95% values.",
   "/guides/slovin-sample-size-table",
 );

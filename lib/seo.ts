@@ -8,6 +8,14 @@ export function ogImageFor(path: string, alt: string) {
   return { url: `/og/${key}.png`, width: 1200, height: 630, alt };
 }
 
+// Google cuts titles at roughly 60 characters. Add "| SolveGrid" only when the whole title still fits,
+// so the keyword-rich part is never truncated. Google shows the site name above the link anyway.
+export function withBrandIfFits(title: string) {
+  if (title.includes(siteName)) return title;
+  const branded = `${title} | ${siteName}`;
+  return branded.length <= 60 ? branded : title;
+}
+
 const sharedMetadata: Pick<Metadata, "authors" | "creator" | "publisher"> = {
   authors: [{ name: siteAuthor.name, url: `${siteUrl}/about` }],
   creator: siteName,
@@ -18,10 +26,11 @@ export function createToolMetadata(slug: string): Metadata {
   const tool = getTool(slug);
   const canonicalPath = getToolPath(tool);
   const ogImage = ogImageFor(canonicalPath, `${tool.name} – SolveGrid`);
+  const serpTitle = withBrandIfFits(tool.title);
 
   return {
     ...sharedMetadata,
-    title: tool.title,
+    title: { absolute: serpTitle },
     description: tool.description,
     keywords: tool.keywords,
     alternates: {
@@ -31,14 +40,14 @@ export function createToolMetadata(slug: string): Metadata {
       type: "website",
       siteName,
       locale: "en_US",
-      title: `${tool.title} | ${siteName}`,
+      title: serpTitle,
       description: tool.description,
       url: canonicalPath,
       images: [ogImage],
     },
     twitter: {
       card: "summary_large_image",
-      title: `${tool.title} | ${siteName}`,
+      title: serpTitle,
       description: tool.description,
       images: [ogImage.url],
     },
@@ -59,12 +68,10 @@ export function createStaticPageMetadata(
   canonicalPath: string,
 ): Metadata {
   const ogImage = ogImageFor(canonicalPath, `${title} – SolveGrid`);
-  // Titles that already name the brand skip the "| SolveGrid" suffix to avoid "SolveGrid … | SolveGrid".
-  const hasBrand = title.includes(siteName);
-  const fullTitle = hasBrand ? title : `${title} | ${siteName}`;
+  const fullTitle = withBrandIfFits(title);
   return {
     ...sharedMetadata,
-    title: hasBrand ? { absolute: title } : title,
+    title: { absolute: fullTitle },
     description,
     alternates: { canonical: canonicalPath },
     openGraph: {

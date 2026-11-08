@@ -2,7 +2,7 @@ import GuideArticle from "../../../components/GuideArticle";
 import { createStaticPageMetadata } from "../../../lib/seo";
 
 export const metadata = createStaticPageMetadata(
-  "Pearson r Interpretation Table: Strength of Correlation",
+  "Pearson r Interpretation Table (Strength, Examples, APA)",
   "Interpret a Pearson correlation coefficient with a strength table, direction, significance and r², plus a worked example and an APA write-up for your thesis.",
   "/guides/pearson-r-interpretation-table",
 );
@@ -55,6 +55,14 @@ export default function PearsonInterpretationGuide() {
         ],
       }}
       faqs={[
+        {
+          question: "Is r = 0.75 a strong correlation?",
+          answer: "Yes. An r of .75 is a very strong positive correlation on most tables (.70 and above). It means r² = .56, so the two variables share about 56% of their variance.",
+        },
+        {
+          question: "Is a Pearson correlation of 0.3 significant?",
+          answer: "It depends on the sample size, not on r alone. With 30 participants, r = .30 gives p ≈ .11 (not significant); with 100 participants, p ≈ .002 (significant). Always report the p value next to r.",
+        },
         {
           question: "What is a strong Pearson correlation?",
           answer: "Values of .50 or more (positive or negative) are usually called strong, and .70 or more very strong. By Cohen's benchmarks, .10 is small, .30 medium and .50 large.",

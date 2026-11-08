@@ -2,7 +2,7 @@ import GuideArticle from "../../../components/GuideArticle";
 import { createStaticPageMetadata } from "../../../lib/seo";
 
 export const metadata = createStaticPageMetadata(
-  "Statistical Treatment of Data in a Thesis (with Examples)",
+  "Statistical Treatment of Data in Research: Examples & Formulas",
   "How to write the statistical treatment of data for Chapter 3: which tool answers each research question, the formulas, and a sample write-up you can adapt.",
   "/guides/statistical-treatment-of-data",
 );

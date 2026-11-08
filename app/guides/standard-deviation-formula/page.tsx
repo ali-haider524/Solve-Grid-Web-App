@@ -2,7 +2,7 @@ import GuideArticle from "../../../components/GuideArticle";
 import { createStaticPageMetadata } from "../../../lib/seo";
 
 export const metadata = createStaticPageMetadata(
-  "Standard Deviation Formula: Sample vs Population",
+  "Standard Deviation Formula: Sample vs Population (Example)",
   "Sample and population standard deviation formulas with a worked example, when to divide by n or n − 1, and how to report M and SD in APA.",
   "/guides/standard-deviation-formula",
 );
