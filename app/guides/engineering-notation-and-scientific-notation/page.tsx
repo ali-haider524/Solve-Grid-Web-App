@@ -1,4 +1,5 @@
 import GuideArticle from "../../../components/GuideArticle";
+import MethodNotes from "../../../components/MethodNotes";
 import { createStaticPageMetadata } from "../../../lib/seo";
 
 export const metadata = createStaticPageMetadata(
@@ -110,6 +111,48 @@ export default function EngineeringNotationGuide() {
           description: "Apply engineering-sized resistance, capacitance, current, and voltage values in practical DC circuit calculations.",
         },
       ]}
-    />
+    >
+      <MethodNotes
+        eyebrow="FULL PREFIX TABLE AND COMMON MISTAKES"
+        title="Every SI prefix in scientific notation, E notation, and the mistakes that cost marks"
+        sections={[
+          {
+            heading: "All SI prefixes and their powers of ten",
+            list: [
+              "quetta (Q) 10³⁰ · ronna (R) 10²⁷ · yotta (Y) 10²⁴ · zetta (Z) 10²¹ · exa (E) 10¹⁸ · peta (P) 10¹⁵",
+              "tera (T) 10¹² · giga (G) 10⁹ · mega (M) 10⁶ · kilo (k) 10³",
+              "milli (m) 10⁻³ · micro (µ) 10⁻⁶ · nano (n) 10⁻⁹ · pico (p) 10⁻¹²",
+              "femto (f) 10⁻¹⁵ · atto (a) 10⁻¹⁸ · zepto (z) 10⁻²¹ · yocto (y) 10⁻²⁴ · ronto (r) 10⁻²⁷ · quecto (q) 10⁻³⁰",
+              "Not engineering prefixes (not multiples of three): hecto (h) 10², deca (da) 10¹, deci (d) 10⁻¹, centi (c) 10⁻². Ronna, quetta, ronto and quecto were added in 2022.",
+            ],
+          },
+          {
+            heading: "Mega, micro and other prefixes written in scientific notation",
+            list: [
+              "3.3 MΩ = 3.3 × 10⁶ Ω = 3,300,000 Ω",
+              "2.2 µF = 2.2 × 10⁻⁶ F = 0.0000022 F",
+              "450 nm = 450 × 10⁻⁹ m = 4.5 × 10⁻⁷ m (scientific) = 450 × 10⁻⁹ m (engineering)",
+              "15 GHz = 15 × 10⁹ Hz = 1.5 × 10¹⁰ Hz",
+            ],
+          },
+          {
+            heading: "E notation on calculators, Excel and code",
+            paragraphs: [
+              "Calculators, spreadsheets and programming languages write × 10ⁿ as E or e: 4.7E-6 means 4.7 × 10⁻⁶ and 1.5E10 means 1.5 × 10¹⁰. In Excel, the number format 0.00E+00 shows scientific notation; ##0.0E+0 shows engineering notation (exponents in steps of three).",
+            ],
+          },
+          {
+            heading: "Five mistakes that cost marks",
+            list: [
+              "Mixing up M (mega, 10⁶) and m (milli, 10⁻³): 1 MΩ is a billion times 1 mΩ.",
+              "Writing K for kilo. The SI symbol is lowercase k (K is kelvin).",
+              "Typing u for µ in a final answer. Use µ, or write micro in full.",
+              "Leaving the coefficient outside the allowed range: scientific needs 1 ≤ |a| < 10; engineering needs 1 ≤ |a| < 1000.",
+              "Converting the number but forgetting the unit: 0.0047 A is 4.7 mA, not 4.7 m.",
+            ],
+          },
+      ]}
+      />
+    </GuideArticle>
   );
 }

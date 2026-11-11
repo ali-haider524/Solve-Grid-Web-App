@@ -1,4 +1,5 @@
 import GuideArticle from "../../../components/GuideArticle";
+import MethodNotes from "../../../components/MethodNotes";
 import { createStaticPageMetadata } from "../../../lib/seo";
 
 export const metadata = createStaticPageMetadata(
@@ -60,6 +61,51 @@ export default function MatrixInverseGuide() {
             "Solve coefficient systems with Gaussian elimination, Gauss-Jordan RREF, inverse, or Cramer’s rule where appropriate.",
         },
       ]}
-    />
+    >
+      <MethodNotes
+        eyebrow="WORKED EXAMPLES"
+        title="2×2 and 3×3 inverse and determinant, worked by hand"
+        sections={[
+          {
+            heading: "2×2 inverse shortcut formula",
+            formula: "A = [a b; c d],   det(A) = ad − bc,   A⁻¹ = (1 ÷ det A) × [d −b; −c a]",
+            steps: [
+              "A = [4 7; 2 6].",
+              "det(A) = 4 × 6 − 7 × 2 = 24 − 14 = 10.",
+              "Swap a and d, change the signs of b and c: [6 −7; −2 4].",
+              "Divide by 10: A⁻¹ = [0.6 −0.7; −0.2 0.4].",
+              "Check: A × A⁻¹ = [1 0; 0 1].",
+            ],
+          },
+          {
+            heading: "3×3 determinant by cofactor expansion",
+            formula: "det(A) = a₁₁C₁₁ + a₁₂C₁₂ + a₁₃C₁₃,   Cᵢⱼ = (−1)ⁱ⁺ʲ Mᵢⱼ",
+            steps: [
+              "A = [1 2 3; 0 1 4; 5 6 0].",
+              "Expand along row 1: 1 × (1·0 − 4·6) − 2 × (0·0 − 4·5) + 3 × (0·6 − 1·5).",
+              "= 1 × (−24) − 2 × (−20) + 3 × (−5) = −24 + 40 − 15 = 1.",
+              "det(A) = 1 ≠ 0, so A is invertible: A⁻¹ = [−24 18 5; 20 −15 −4; −5 4 1].",
+            ],
+          },
+          {
+            heading: "Adjugate (cofactor) formula for the inverse",
+            formula: "A⁻¹ = adj(A) ÷ det(A),   adj(A) = transpose of the cofactor matrix",
+            paragraphs: [
+              "This is how textbooks define the inverse, and it is practical for 2×2 and 3×3 matrices. For 4×4 and larger, Gauss-Jordan reduction of [A | I] is much faster and less error-prone, which is the method the matrix calculator shows.",
+            ],
+          },
+          {
+            heading: "Properties worth remembering",
+            list: [
+              "det(AB) = det(A) × det(B).",
+              "det(A⁻¹) = 1 ÷ det(A).",
+              "(AB)⁻¹ = B⁻¹A⁻¹ (the order reverses).",
+              "(Aᵀ)⁻¹ = (A⁻¹)ᵀ and det(Aᵀ) = det(A).",
+              "Swapping two rows changes the sign of the determinant; multiplying a row by k multiplies it by k.",
+            ],
+          },
+      ]}
+      />
+    </GuideArticle>
   );
 }

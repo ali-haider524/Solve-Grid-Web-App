@@ -4,6 +4,10 @@
 export const SITE_BASELINE = "2026-07-30";
 
 export const contentUpdated: Record<string, string> = {
+  "guides/matrix-inverse-and-determinant": "2026-11-11",
+  "guides/engineering-notation-and-scientific-notation": "2026-11-11",
+  "differential-equation-solver": "2026-11-11",
+  "optimization-lab": "2026-11-11",
   "guides/gaussian-elimination-for-linear-systems": "2026-11-08",
   "guides/matrix-methods-for-linear-systems": "2026-11-08",
   "guides/plot-multiple-equations": "2026-11-08",
