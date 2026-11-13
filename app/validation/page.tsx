@@ -63,6 +63,7 @@ export default function ValidationPage() {
     creator: { "@id": `${siteUrl}/#organization` },
     publisher: { "@id": `${siteUrl}/#organization` },
     isAccessibleForFree: true,
+    license: "https://creativecommons.org/licenses/by/4.0/",
     keywords: ["statistics calculator validation", "SciPy", "NumPy", "t-test", "ANOVA", "chi-square", "Cronbach's alpha", "factor analysis"],
     measurementTechnique: "Re-computation of each statistic on fixed datasets with SciPy and NumPy; agreement within 0.1% relative tolerance",
     variableMeasured: [...new Set(validationRows.map((row) => row.test))],
@@ -129,6 +130,13 @@ export default function ValidationPage() {
             </tbody>
           </table>
         </div>
+        <p>
+          These validation results are licensed under{" "}
+          <a href="https://creativecommons.org/licenses/by/4.0/" rel="license noopener" target="_blank">
+            Creative Commons Attribution 4.0 (CC BY 4.0)
+          </a>
+          . You may reuse them with credit to SolveGrid and a link to this page.
+        </p>
       </section>
     </LegalPage>
     </>
